@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CustomBeanRegistry">
+    <option name="map">
+      <map>
+        <entry key="&lt;mongo:mongo-client xmlns:mongo=&quot;http://www.springframework.org/schema/data/mongo&quot; replica-set=&quot;${mongo.hostport}&quot; id=&quot;mongo&quot;&gt;&#10;  &lt;mongo:client-options connections-per-host=&quot;${mongo.connectionsPerHost}&quot; threads-allowed-to-block-for-connection-multiplier=&quot;${mongo.threadsAllowedToBlockForConnectionMultiplier}&quot; connect-timeout=&quot;${mongo.connectTimeout}&quot; max-wait-time=&quot;${mongo.maxWaitTime}&quot; socket-timeout=&quot;${mongo.socketTimeout}&quot; ssl=&quot;false&quot; /&gt;&#10;&lt;/mongo:mongo-client&gt;">
+          <value>
+            <list>
+              <CustomBeanInfo>
+                <option name="beanName" value="mongo" />
+                <option name="beanClassName" value="org.springframework.data.mongodb.core.MongoClientFactoryBean" />
+                <option name="idAttribute" value="id" />
+              </CustomBeanInfo>
+              <CustomBeanInfo>
+                <option name="beanName" value="org.springframework.beans.factory.config.CustomEditorConfigurer#0" />
+                <option name="beanClassName" value="org.springframework.beans.factory.config.CustomEditorConfigurer" />
+              </CustomBeanInfo>
+              <CustomBeanInfo>
+                <option name="beanName" value="org.springframework.beans.factory.config.CustomEditorConfigurer#1" />
+                <option name="beanClassName" value="org.springframework.beans.factory.config.CustomEditorConfigurer" />
+              </CustomBeanInfo>
+              <CustomBeanInfo>
+                <option name="beanName" value="org.springframework.beans.factory.config.CustomEditorConfigurer#2" />
+                <option name="beanClassName" value="org.springframework.beans.factory.config.CustomEditorConfigurer" />
+              </CustomBeanInfo>
+              <CustomBeanInfo>
+                <option name="beanName" value="org.springframework.beans.factory.config.CustomEditorConfigurer#3" />
+                <option name="beanClassName" value="org.springframework.beans.factory.config.CustomEditorConfigurer" />
+              </CustomBeanInfo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
