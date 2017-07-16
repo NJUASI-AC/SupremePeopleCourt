@@ -1,5 +1,6 @@
-package dao;
+package com.edu.nju.asi.dao;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public interface MongoBaseDao<T> {
      * @param collectionName 集合名称
      * @return
      */
-    public Set<T> findAll(Map<String, Object> params, String collectionName);
+    public List<T> findAll(Map<String, Object> params, String collectionName);
 
     /**
      * 修改
@@ -41,7 +42,7 @@ public interface MongoBaseDao<T> {
      * 创建集合
      * @param collectionName　集合名称
      */
-    public void creatCollection(String collectionName);
+    public void createCollection(String collectionName);
 
     /**
      * 根据条件删除
