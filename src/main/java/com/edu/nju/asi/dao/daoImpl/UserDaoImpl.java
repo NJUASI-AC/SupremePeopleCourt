@@ -19,11 +19,6 @@ import java.util.Map;
 @Repository("userDaoImpl")
 public class UserDaoImpl implements UserDao {
 
-    public static void main(String[] args) {
-        new ClassPathXmlApplicationContext("applicationContext.xml")
-                .getBean(UserDao.class).createCollection("law");
-    }
-
     @Resource
     private MongoTemplate mongoTemplate;
 
