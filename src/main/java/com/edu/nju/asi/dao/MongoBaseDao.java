@@ -51,5 +51,9 @@ public interface MongoBaseDao<T> {
      */
     public void remove(Map<String, Object> params, String collectionName);
 
-
+    /**
+     * 查找数据库下的所有collection
+     * @return
+     */
+    public int getColletions();
 }

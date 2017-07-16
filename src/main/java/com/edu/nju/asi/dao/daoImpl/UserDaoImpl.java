@@ -53,4 +53,9 @@ public class UserDaoImpl implements UserDao {
         mongoTemplate.remove(new Query(Criteria.where("id").is(params.get("id"))),User.class,collectionName);
     }
 
+    @Override
+    public int getColletions() {
+        return mongoTemplate.getCollectionNames().size();
+    }
+
 }
