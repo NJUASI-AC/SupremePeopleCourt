@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/17 0017.
@@ -12,21 +13,23 @@ import java.time.LocalDateTime;
  * 案件基本情况
  */
 @Document
-public class CaseBasic implements Serializable{
+public class CaseBasic implements Serializable {
 
+    /**
+     * 案号
+     */
     @Id
     private String caseID;
 
     /**
      * 原告诉称段
+     * 注：还包含诉讼金额等，但暂时数据库中未包含【如：（2008）东民初字第3902号】
      */
     private String plaintiffClaim;
 
-    /**
+    /*
      * 事故详情
      */
-    private String accidentDetail;
-
     /**
      * 事故时间
      */
@@ -38,6 +41,22 @@ public class CaseBasic implements Serializable{
     private String accidentAddress;
 
     /**
+     * 机动车所有人
+     * 注：不知道是个啥，似乎是被告
+     */
+    private String defendant;
+
+    /**
+     * 受害人居住地
+     */
+    private String aggrievedAddress;
+
+    /**
+     * 受害人职业
+     */
+    private String aggrievedJob;
+
+    /**
      * 被告辩称段
      */
     private String defendantArgue;
@@ -45,7 +64,7 @@ public class CaseBasic implements Serializable{
     /**
      * 证据段
      */
-    private String evidence;
+    private List<String> evidence;
 
     /**
      * 查明事实段
@@ -55,12 +74,14 @@ public class CaseBasic implements Serializable{
     public CaseBasic() {
     }
 
-    public CaseBasic(String caseID, String plaintiffClaim, String accidentDetail, LocalDateTime accidentTime, String accidentAddress, String defendantArgue, String evidence, String fact) {
+    public CaseBasic(String caseID, String plaintiffClaim, LocalDateTime accidentTime, String accidentAddress, String defendant, String aggrievedAddress, String aggrievedJob, String defendantArgue, List<String> evidence, String fact) {
         this.caseID = caseID;
         this.plaintiffClaim = plaintiffClaim;
-        this.accidentDetail = accidentDetail;
         this.accidentTime = accidentTime;
         this.accidentAddress = accidentAddress;
+        this.defendant = defendant;
+        this.aggrievedAddress = aggrievedAddress;
+        this.aggrievedJob = aggrievedJob;
         this.defendantArgue = defendantArgue;
         this.evidence = evidence;
         this.fact = fact;
@@ -82,14 +103,6 @@ public class CaseBasic implements Serializable{
         this.plaintiffClaim = plaintiffClaim;
     }
 
-    public String getAccidentDetail() {
-        return accidentDetail;
-    }
-
-    public void setAccidentDetail(String accidentDetail) {
-        this.accidentDetail = accidentDetail;
-    }
-
     public LocalDateTime getAccidentTime() {
         return accidentTime;
     }
@@ -106,6 +119,30 @@ public class CaseBasic implements Serializable{
         this.accidentAddress = accidentAddress;
     }
 
+    public String getDefendant() {
+        return defendant;
+    }
+
+    public void setDefendant(String defendant) {
+        this.defendant = defendant;
+    }
+
+    public String getAggrievedAddress() {
+        return aggrievedAddress;
+    }
+
+    public void setAggrievedAddress(String aggrievedAddress) {
+        this.aggrievedAddress = aggrievedAddress;
+    }
+
+    public String getAggrievedJob() {
+        return aggrievedJob;
+    }
+
+    public void setAggrievedJob(String aggrievedJob) {
+        this.aggrievedJob = aggrievedJob;
+    }
+
     public String getDefendantArgue() {
         return defendantArgue;
     }
@@ -114,11 +151,11 @@ public class CaseBasic implements Serializable{
         this.defendantArgue = defendantArgue;
     }
 
-    public String getEvidence() {
+    public List<String> getEvidence() {
         return evidence;
     }
 
-    public void setEvidence(String evidence) {
+    public void setEvidence(List<String> evidence) {
         this.evidence = evidence;
     }
 
