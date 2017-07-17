@@ -8,11 +8,56 @@ import org.springframework.context.ApplicationContext;
  */
 public class DaoManager {
 
-    public final static BaseDao baseDao;
+    /**
+     *  案件基本情况Dao
+     */
+    public final static CaseBasicDao caseBasicDao;
+
+    /**
+     *  全文Dao
+     */
+    public final static FullTextDao fullTextDao;
+
+    /**
+     *  文首Dao
+     */
+    public final static HeaderDao headerDao;
+
+    /**
+     *  判决结果Dao
+     */
+    public final static JudgementResultDao judgementResultDao;
+
+    /**
+     *  诉讼参与人Dao
+     */
+    public final static LitigationParticipantsDao litigationParticipantsDao;
+
+    /**
+     *  诉讼记录Dao
+     */
+    public final static ProceedingsDao proceedingsDao;
+
+    /**
+     *  裁判分析过程Dao
+     */
+    public final static RefereeAnalysisProcessDao refereeAnalysisProcessDao;
+
+    /**
+     *  文尾Dao
+     */
+    public final static TailorDao tailorDao;
 
     static {
         ApplicationContext applicationContext = ApplicationContextHelper.getApplicationContext();
-        baseDao = applicationContext.getBean(BaseDao.class);
+        caseBasicDao = applicationContext.getBean(CaseBasicDao.class);
+        fullTextDao = applicationContext.getBean(FullTextDao.class);
+        headerDao = applicationContext.getBean(HeaderDao.class);
+        judgementResultDao = applicationContext.getBean(JudgementResultDao.class);
+        litigationParticipantsDao = applicationContext.getBean(LitigationParticipantsDao.class);
+        proceedingsDao = applicationContext.getBean(ProceedingsDao.class);
+        refereeAnalysisProcessDao = applicationContext.getBean(RefereeAnalysisProcessDao.class);
+        tailorDao = applicationContext.getBean(TailorDao.class);
     }
 
 }
