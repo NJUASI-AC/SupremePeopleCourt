@@ -15,12 +15,11 @@ import java.util.List;
 @Document
 public class RefereeAnalysisProcess implements Serializable {
 
-
     /**
      * 案号
      */
     @Id
-    private String caseNum;
+    private String caseID;
 
     /**
      * 结案方式类型
@@ -35,18 +34,18 @@ public class RefereeAnalysisProcess implements Serializable {
     public RefereeAnalysisProcess() {
     }
 
-    public RefereeAnalysisProcess(String caseNum, String closeCaseType, List<LegalArticle> legalArticles) {
-        this.caseNum = caseNum;
+    public RefereeAnalysisProcess(String caseID, String closeCaseType, List<LegalArticle> legalArticles) {
+        this.caseID = caseID;
         this.closeCaseType = closeCaseType;
         this.legalArticles = legalArticles;
     }
 
-    public String getCaseNum() {
-        return caseNum;
+    public String getCaseID() {
+        return caseID;
     }
 
-    public void setCaseNum(String caseNum) {
-        this.caseNum = caseNum;
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
     }
 
     public String getCloseCaseType() {

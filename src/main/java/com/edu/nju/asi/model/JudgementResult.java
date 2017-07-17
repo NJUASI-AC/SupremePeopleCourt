@@ -15,8 +15,11 @@ import java.util.List;
 @Document
 public class JudgementResult implements Serializable{
 
+    /**
+     * 案号
+     */
     @Id
-    private String caseNum;
+    private String caseID;
 
     /**
      * 裁判结果
@@ -67,8 +70,8 @@ public class JudgementResult implements Serializable{
     public JudgementResult() {
     }
 
-    public JudgementResult(String caseNum, String caseSettlement, String compensationOrder, List<String> specificRefereeSection, List<LitigationCost> litigationCostList, boolean isReview, String upTo, int upPeriod, boolean hasConsultJurisdictionObjection) {
-        this.caseNum = caseNum;
+    public JudgementResult(String caseID, String caseSettlement, String compensationOrder, List<String> specificRefereeSection, List<LitigationCost> litigationCostList, boolean isReview, String upTo, int upPeriod, boolean hasConsultJurisdictionObjection) {
+        this.caseID = caseID;
 //        this.caseSettlement = caseSettlement;
 //        this.compensationOrder = compensationOrder;
 //        this.specificRefereeSection = specificRefereeSection;
@@ -79,17 +82,17 @@ public class JudgementResult implements Serializable{
 //        this.hasConsultJurisdictionObjection = hasConsultJurisdictionObjection;
     }
 
-    public JudgementResult(String caseNum, String result) {
-        this.caseNum = caseNum;
+    public JudgementResult(String caseID, String result) {
+        this.caseID = caseID;
         this.result = result;
     }
 
-    public String getCaseNum() {
-        return caseNum;
+    public String getCaseID() {
+        return caseID;
     }
 
-    public void setCaseNum(String caseNum) {
-        this.caseNum = caseNum;
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
     }
 
 //    public String getCaseSettlement() {

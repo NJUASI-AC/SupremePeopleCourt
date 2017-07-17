@@ -19,7 +19,7 @@ public class LitigationParticipants implements Serializable {
      * 案号
      */
     @Id
-    private String caseNum;
+    private String caseID;
 
     /**
      * 当事人
@@ -29,17 +29,17 @@ public class LitigationParticipants implements Serializable {
     public LitigationParticipants() {
     }
 
-    public LitigationParticipants(String caseNum, List<LitigationParticipant> litigants) {
-        this.caseNum = caseNum;
+    public LitigationParticipants(String caseID, List<LitigationParticipant> litigants) {
+        this.caseID = caseID;
         this.litigants = litigants;
     }
 
-    public String getCaseNum() {
-        return caseNum;
+    public String getCaseID() {
+        return caseID;
     }
 
-    public void setCaseNum(String caseNum) {
-        this.caseNum = caseNum;
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
     }
 
     public List<LitigationParticipant> getLitigants() {

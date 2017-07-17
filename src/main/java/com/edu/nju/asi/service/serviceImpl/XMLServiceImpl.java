@@ -1,5 +1,6 @@
 package com.edu.nju.asi.service.serviceImpl;
 
+import com.edu.nju.asi.InfoCarrier.Case;
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.*;
 import com.edu.nju.asi.InfoCarrier.Entry;
@@ -28,10 +29,6 @@ import java.util.List;
 @Service("XMLService")
 public class XMLServiceImpl implements XMLService {
 
-    public static void main(String[] args) {
-        new XMLServiceImpl().uploadOffline("D:\\SummerCampus\\SupremePeopleCourt\\src\\main\\resources\\document\\234.xml");
-    }
-
     Document document;
 
     public XMLServiceImpl() {
@@ -39,7 +36,7 @@ public class XMLServiceImpl implements XMLService {
     }
 
     @Override
-    public void uploadOffline(String url) {
+    public Case uploadOffline(String url) {
         SAXReader reader = new SAXReader();
         try {
             document = reader.read(url);
@@ -47,11 +44,11 @@ public class XMLServiceImpl implements XMLService {
             e.printStackTrace();
         }
 
-        String caseNum = findSingleStrValue("AH");
+        String caseID = findSingleStrValue("AH");
 
         //全文
         String text = findSingleStrValue("QW");
-        FullText fullText = new FullText(caseNum, text);
+        FullText fullText = new FullText(caseID, text);
 //        DaoManager.baseDao.insert(fullText, "fullText");
 
         //文首
@@ -63,8 +60,8 @@ public class XMLServiceImpl implements XMLService {
         CaseType natureOfCase = CaseType.getEnum(findSingleStrValue("AJXZ"));
         DocumentType documentType = DocumentType.getEnum(findSingleStrValue("WSZL"));
         TrialProcedure trialProcedure = TrialProcedure.getEnum(findSingleStrValue("SPCX"));
-        Header header = new Header(caseNum, handlingCourt, courtLevel, administrativeDivision, nameOfDocument
-                , filingYear, natureOfCase, documentType, trialProcedure);
+        Header header = new Header(caseID, handlingCourt, courtLevel, administrativeDivision, nameOfDocument,
+                filingYear, natureOfCase, documentType, trialProcedure);
 
 
         //诉讼参与人全集
@@ -103,9 +100,14 @@ public class XMLServiceImpl implements XMLService {
             }
             litigants.add(participant);
         }
-        LitigationParticipants litigationParticipants = new LitigationParticipants(caseNum, litigants);
-
+        LitigationParticipants litigationParticipants = new LitigationParticipants(caseID, litigants);
 //        DaoManager.litigationParticipantsDao.insert(litigationParticipants);
+
+        //诉讼记录
+        String records = findSingleStrValue("SSJL");
+        String actionCause = findSingleStrValue("AY");
+        String actionCode = findSingleStrValue("AYDM");
+        Proceedings proceedings = new Proceedings(caseID, records, actionCause, actionCode);
 
 
         //案件基本情况
@@ -117,8 +119,7 @@ public class XMLServiceImpl implements XMLService {
         for (Node node : evidenceNodes){
             evidence.add(node.valueOf("@value"));
         }
-
-        CaseBasic caseBasic = new CaseBasic(caseNum, plaintiffClaim, defendantArgue, evidence, fact);
+        CaseBasic caseBasic = new CaseBasic(caseID, plaintiffClaim, defendantArgue, evidence, fact);
 
         //裁判分析过程
         String closeCaseType = findSingleStrValue("JAFSLX");
@@ -143,12 +144,11 @@ public class XMLServiceImpl implements XMLService {
             }
             legalArticles.add(new LegalArticle(lawName, entries));
         }
-
-        RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess(caseNum, closeCaseType, legalArticles);
+        RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, closeCaseType, legalArticles);
 
         //裁判结果
         String result = findSingleStrValue("CPJG");
-        JudgementResult judgementResult = new JudgementResult(caseNum, result);
+        JudgementResult judgementResult = new JudgementResult(caseID, result);
 
 
         //插入数据库
@@ -158,12 +158,14 @@ public class XMLServiceImpl implements XMLService {
         DaoManager.caseBasicDao.insert(caseBasic);
         DaoManager.refereeAnalysisProcessDao.insert(refereeAnalysisProcess);
         DaoManager.judgementResultDao.insert(judgementResult);
+
+        return new Case(fullText, header, litigationParticipants, proceedings, caseBasic, refereeAnalysisProcess, judgementResult, new Tailor());
     }
 
     @Override
-    public boolean uploadOnline(MultipartFile uploadedFile) throws IOException {
+    public Case uploadOnline(MultipartFile uploadedFile) throws IOException {
         if (uploadedFile.isEmpty()) {
-            return false;
+            return null;
         }
 
         // 先转储文件再解析，最后删掉源文件
@@ -171,9 +173,10 @@ public class XMLServiceImpl implements XMLService {
         File thisFile = new File(thisPath);
 
         uploadedFile.transferTo(thisFile);
-        uploadOffline(thisPath);
+        Case wanted = uploadOffline(thisPath);
+
         thisFile.delete();
-        return true;
+        return wanted;
     }
 
     private String findSingleStrValue(String node) {

@@ -15,8 +15,11 @@ import java.util.Map;
 @Document
 public class Tailor implements Serializable{
 
+//    /**
+//     * 案号
+//     */
 //    @Id
-//    private String caseNum;
+//    private String caseID;
 //
 //    /**
 //     * 审判员
@@ -28,21 +31,21 @@ public class Tailor implements Serializable{
 //     */
 //    private String judgeTime;
 //
-//    public Tailor() {
-//    }
-//
+    public Tailor() {
+    }
+
 //    public Tailor(String caseID, Map<String, String> judges, String judgeTime) {
-//        this.caseNum = caseID;
+//        this.caseID = caseID;
 //        this.judges = judges;
 //        this.judgeTime = judgeTime;
 //    }
 //
-//    public String getCaseNum() {
-//        return caseNum;
+//    public String getCaseID() {
+//        return caseID;
 //    }
 //
-//    public void setCaseNum(String caseNum) {
-//        this.caseNum = caseNum;
+//    public void setCaseID(String caseNum) {
+//        this.caseID = caseNum;
 //    }
 //
 //    public Map<String, String> getJudges() {

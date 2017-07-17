@@ -18,7 +18,7 @@ public class Proceedings implements Serializable {
      * 案号
      */
     @Id
-    private String caseNum;
+    private String caseID;
 
     /**
      * 诉讼记录
@@ -73,8 +73,8 @@ public class Proceedings implements Serializable {
     public Proceedings() {
     }
 
-    public Proceedings(String caseNum, String actionCause, boolean isCourtHearing, String trialInformation, String actionCode, LocalDate filingDate, String caseApplicationProcedure, String caseSources, LocalDate handleDate, boolean isEasyTransfer) {
-        this.caseNum = caseNum;
+    public Proceedings(String caseID, String actionCause, boolean isCourtHearing, String trialInformation, String actionCode, LocalDate filingDate, String caseApplicationProcedure, String caseSources, LocalDate handleDate, boolean isEasyTransfer) {
+        this.caseID = caseID;
         this.actionCause = actionCause;
 //        this.isCourtHearing = isCourtHearing;
 //        this.trialInformation = trialInformation;
@@ -86,19 +86,20 @@ public class Proceedings implements Serializable {
 //        this.isEasyTransfer = isEasyTransfer;
     }
 
-    public Proceedings(String caseNum, String records, String actionCause, String actionCode) {
-        this.caseNum = caseNum;
+
+    public Proceedings(String caseID, String records, String actionCause, String actionCode) {
+        this.caseID = caseID;
         this.records = records;
         this.actionCause = actionCause;
         this.actionCode = actionCode;
     }
 
-    public String getCaseNum() {
-        return caseNum;
+    public String getCaseID() {
+        return caseID;
     }
 
-    public void setCaseNum(String caseNum) {
-        this.caseNum = caseNum;
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
     }
 
     public String getActionCause() {

@@ -11,8 +11,11 @@ import java.io.Serializable;
 @Document
 public class FullText implements Serializable{
 
+    /**
+     * 案号
+     */
     @Id
-    private String caseNum;
+    private String caseID;
 
     /**
      * 全文
@@ -22,17 +25,17 @@ public class FullText implements Serializable{
     public FullText() {
     }
 
-    public FullText(String caseNum, String text) {
-        this.caseNum = caseNum;
+    public FullText(String caseID, String text) {
+        this.caseID = caseID;
         this.text = text;
     }
 
-    public String getCaseNum() {
-        return caseNum;
+    public String getCaseID() {
+        return caseID;
     }
 
-    public void setCaseNum(String caseNum) {
-        this.caseNum = caseNum;
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
     }
 
     public String getText() {
