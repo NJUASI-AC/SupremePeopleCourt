@@ -1,6 +1,7 @@
 package com.edu.nju.asi.model;
 
 import com.edu.nju.asi.utilities.enums.Gender;
+import com.edu.nju.asi.utilities.enums.LitigantType;
 import com.edu.nju.asi.utilities.enums.PartiesType;
 
 import java.io.Serializable;
@@ -15,6 +16,11 @@ public class LitigationParticipant implements Serializable {
      * 诉讼参与人名称
      */
     private String name;
+
+    /**
+     * 当事人类别
+     */
+    private LitigantType litigantType;
 
     /**
      * 当事人类型
@@ -70,11 +76,19 @@ public class LitigationParticipant implements Serializable {
         this.gender = gender;
         this.nation = nation;
         this.birth = birth;
-        this.degree = degree;
-        this.post = post;
+//        this.degree = degree;
+//        this.post = post;
         this.nationality = nationality;
-        this.hasAppearInCourt = hasAppearInCourt;
+//        this.hasAppearInCourt = hasAppearInCourt;
         this.isRemarriage = isRemarriage;
+    }
+
+    public LitigantType getLitigantType() {
+        return litigantType;
+    }
+
+    public void setLitigantType(LitigantType litigantType) {
+        this.litigantType = litigantType;
     }
 
     public String getName() {

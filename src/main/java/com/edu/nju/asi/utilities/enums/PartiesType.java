@@ -25,4 +25,13 @@ public enum PartiesType {
         return repre;
     }
 
+    public static PartiesType getEnum(String str){
+        for (PartiesType nowEnum : PartiesType.values()) {
+            if (nowEnum.getRepre().equals(str)){
+                return nowEnum;
+            }
+        }
+        return null;
+    }
+
 }

@@ -1,16 +1,16 @@
 package com.edu.nju.asi.utilities.enums;
 
 /**
- * Created by Byron Dong on 2017/7/17.
+ * Created by Administrator on 2017/7/17 0017.
  */
-public enum Gender {
+public enum  LitigantType {
 
-    MALE("男"),
-    FEMALE("女");
+    PLAINTIFF("原告"),
+    DEFENDANT("被告");
 
     private String repre;
 
-    Gender(String repre) {
+    LitigantType(String repre) {
         this.repre = repre;
     }
 
@@ -25,8 +25,8 @@ public enum Gender {
         return repre;
     }
 
-    public static Gender getEnum(String str){
-        for (Gender nowEnum : Gender.values()) {
+    public static LitigantType getEnum(String str){
+        for (LitigantType nowEnum : LitigantType.values()) {
             if (nowEnum.getRepre().equals(str)){
                 return nowEnum;
             }
