@@ -1,7 +1,7 @@
 package com.edu.nju.asi.model;
 
 import com.edu.nju.asi.utilities.enums.Gender;
-import com.edu.nju.asi.utilities.enums.IdentityType;
+import com.edu.nju.asi.utilities.enums.LitigantType;
 import com.edu.nju.asi.utilities.enums.PartiesType;
 
 import java.io.Serializable;
@@ -18,9 +18,9 @@ public class LitigationParticipant implements Serializable {
     private String name;
 
     /**
-     * 诉讼身份
+     * 当事人类别
      */
-    private IdentityType identityType;
+    private LitigantType litigantType;
 
     /**
      * 当事人类型
@@ -70,9 +70,8 @@ public class LitigationParticipant implements Serializable {
     public LitigationParticipant() {
     }
 
-    public LitigationParticipant(String name, IdentityType identityType, PartiesType partiesType, Gender gender, String nation, LocalDate birth, String degree, String post, String nationality, boolean hasAppearInCourt, boolean isRemarriage) {
+    public LitigationParticipant(String name, PartiesType partiesType, Gender gender, String nation, LocalDate birth, String degree, String post, String nationality, boolean hasAppearInCourt, boolean isRemarriage) {
         this.name = name;
-        this.identityType = identityType;
         this.partiesType = partiesType;
         this.gender = gender;
         this.nation = nation;
@@ -84,20 +83,20 @@ public class LitigationParticipant implements Serializable {
         this.isRemarriage = isRemarriage;
     }
 
+    public LitigantType getLitigantType() {
+        return litigantType;
+    }
+
+    public void setLitigantType(LitigantType litigantType) {
+        this.litigantType = litigantType;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public IdentityType getIdentityType() {
-        return identityType;
-    }
-
-    public void setIdentityType(IdentityType identityType) {
-        this.identityType = identityType;
     }
 
     public PartiesType getPartiesType() {

@@ -25,4 +25,13 @@ public enum DocumentName {
     public String getRepre() {
         return repre;
     }
+
+    public static DocumentName getEnum(String str){
+        for (DocumentName nowEnum : DocumentName.values()) {
+            if (nowEnum.getRepre().equals(str)){
+                return nowEnum;
+            }
+        }
+        return null;
+    }
 }

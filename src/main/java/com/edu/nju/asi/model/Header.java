@@ -8,7 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -47,7 +46,7 @@ public class Header implements Serializable {
     /**
      * 立案年度
      */
-    private LocalDate filingYear;
+    private int filingYear;
 
     /**
      * 案件性质
@@ -67,7 +66,7 @@ public class Header implements Serializable {
     public Header() {
     }
 
-    public Header(String caseID, String handlingCourt, String courtLevel, String administrativeDivision, DocumentName nameOfDocument, LocalDate filingYear, CaseType natureOfCase, DocumentType documentType, TrialProcedure trialProcedure) {
+    public Header(String caseID, String handlingCourt, String courtLevel, String administrativeDivision, DocumentName nameOfDocument, int filingYear, CaseType natureOfCase, DocumentType documentType, TrialProcedure trialProcedure) {
         this.caseID = caseID;
         this.handlingCourt = handlingCourt;
         this.courtLevel = courtLevel;
@@ -119,11 +118,11 @@ public class Header implements Serializable {
         this.nameOfDocument = nameOfDocument;
     }
 
-    public LocalDate getFilingYear() {
+    public int getFilingYear() {
         return filingYear;
     }
 
-    public void setFilingYear(LocalDate filingYear) {
+    public void setFilingYear(int filingYear) {
         this.filingYear = filingYear;
     }
 

@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * Created by Byron Dong on 2017/7/17.
+ *
+ * 诉讼参与人
  */
 @Document
 public class LitigationParticipants implements Serializable {
@@ -19,22 +21,16 @@ public class LitigationParticipants implements Serializable {
     private String caseNum;
 
     /**
-     * 原告
+     * 当事人
      */
-    private List<LitigationParticipant> plaintiffs;
-
-    /**
-     * 被告
-     */
-    private List<LitigationParticipant> defendants;
+    private List<LitigationParticipant> litigants;
 
     public LitigationParticipants() {
     }
 
-    public LitigationParticipants(String caseNum, List<LitigationParticipant> plaintiffs, List<LitigationParticipant> defendants) {
+    public LitigationParticipants(String caseNum, List<LitigationParticipant> litigants) {
         this.caseNum = caseNum;
-        this.plaintiffs = plaintiffs;
-        this.defendants = defendants;
+        this.litigants = litigants;
     }
 
     public String getCaseNum() {
@@ -45,19 +41,11 @@ public class LitigationParticipants implements Serializable {
         this.caseNum = caseNum;
     }
 
-    public List<LitigationParticipant> getPlaintiffs() {
-        return plaintiffs;
+    public List<LitigationParticipant> getLitigants() {
+        return litigants;
     }
 
-    public void setPlaintiffs(List<LitigationParticipant> plaintiffs) {
-        this.plaintiffs = plaintiffs;
-    }
-
-    public List<LitigationParticipant> getDefendants() {
-        return defendants;
-    }
-
-    public void setDefendants(List<LitigationParticipant> defendants) {
-        this.defendants = defendants;
+    public void setLitigants(List<LitigationParticipant> litigants) {
+        this.litigants = litigants;
     }
 }

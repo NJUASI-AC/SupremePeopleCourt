@@ -23,4 +23,13 @@ public enum CaseType {
     public String getRepre() {
         return repre;
     }
+
+    public static CaseType getEnum(String str){
+        for (CaseType nowEnum : CaseType.values()) {
+            if (nowEnum.getRepre().equals(str)){
+                return nowEnum;
+            }
+        }
+        return null;
+    }
 }

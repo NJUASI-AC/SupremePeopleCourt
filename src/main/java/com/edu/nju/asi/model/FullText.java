@@ -14,14 +14,14 @@ public class FullText implements Serializable{
     @Id
     private String caseNum;
 
-    private String fullText;
+    private String text;
 
     public FullText() {
     }
 
-    public FullText(String caseNum, String fullText) {
+    public FullText(String caseNum, String text) {
         this.caseNum = caseNum;
-        this.fullText = fullText;
+        this.text = text;
     }
 
     public String getCaseNum() {
@@ -32,11 +32,11 @@ public class FullText implements Serializable{
         this.caseNum = caseNum;
     }
 
-    public String getFullText() {
-        return fullText;
+    public String getText() {
+        return text;
     }
 
-    public void setFullText(String fullText) {
-        this.fullText = fullText;
+    public void setText(String text) {
+        this.text = text;
     }
 }

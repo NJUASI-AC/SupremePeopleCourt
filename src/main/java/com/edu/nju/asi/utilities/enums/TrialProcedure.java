@@ -26,4 +26,13 @@ public enum TrialProcedure {
         return repre;
     }
 
+    public static TrialProcedure getEnum(String str){
+        for (TrialProcedure nowEnum : TrialProcedure.values()) {
+            if (nowEnum.getRepre().equals(str)){
+                return nowEnum;
+            }
+        }
+        return null;
+    }
+
 }
