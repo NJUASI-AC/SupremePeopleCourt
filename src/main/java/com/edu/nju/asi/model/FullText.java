@@ -3,11 +3,13 @@ package com.edu.nju.asi.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/7/17 0017.
  */
 @Document
-public class FullText {
+public class FullText implements Serializable{
 
     @Id
     private String caseNum;

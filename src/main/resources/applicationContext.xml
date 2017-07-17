@@ -28,7 +28,14 @@
 	<bean id="packagesToScan" class="org.springframework.beans.factory.config.ListFactoryBean">
 		<property name="sourceList">
 			<list>
-				<value>com.edu.nju.asi.model.User</value>
+				<value>com.edu.nju.asi.model.CaseBasic</value>
+				<value>com.edu.nju.asi.model.Header</value>
+				<value>com.edu.nju.asi.model.JudgementResult</value>
+				<value>com.edu.nju.asi.model.LitigationParticipants</value>
+				<value>com.edu.nju.asi.model.Proceedings</value>
+				<value>com.edu.nju.asi.model.RefereeAnalysisProcess</value>
+				<value>com.edu.nju.asi.model.Tailor</value>
+				<value>com.edu.nju.asi.model.FullText</value>
 			</list>
 		</property>
 	</bean>
