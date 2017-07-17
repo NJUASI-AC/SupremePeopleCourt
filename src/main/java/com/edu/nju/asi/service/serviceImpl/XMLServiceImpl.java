@@ -66,85 +66,101 @@ public class XMLServiceImpl implements XMLService {
 
         //诉讼参与人全集
         List<LitigationParticipant> litigants = new ArrayList<>();
-        for (Iterator<Element> litigantElements = document.getRootElement().element("SSCYRQJ").elementIterator("SSCYR"); litigantElements.hasNext();){
-            Element litigant = litigantElements.next();
+        Element litigantsElement = document.getRootElement().element("SSCYRQJ");
+        if (litigantsElement != null) {
+            Iterator<Element> litigantElementsIterator = document.getRootElement().element("SSCYRQJ").elementIterator("SSCYR");
+            while (litigantElementsIterator.hasNext()) {
+                Element litigant = litigantElementsIterator.next();
 
-            Element name = litigant.element("SSCYRMC");
-            Element litigantType = litigant.element("SSSF");
-            Element gender = litigant.element("XB");
-            Element nation = litigant.element("MZ");
-            Element degree = litigant.element("WHCD");
-            Element post = litigant.element("DWZWFZ");
-            Element remarriage = litigant.element("DSRSFZH");
-            Element birth = litigant.element("CSRQ");
+                Element name = litigant.element("SSCYRMC");
+                Element litigantType = litigant.element("SSSF");
+                Element gender = litigant.element("XB");
+                Element nation = litigant.element("MZ");
+                Element degree = litigant.element("WHCD");
+                Element post = litigant.element("DWZWFZ");
+                Element remarriage = litigant.element("DSRSFZH");
+                Element birth = litigant.element("CSRQ");
 
-            LitigationParticipant participant = new LitigationParticipant();
-            if (name != null) participant.setName(name.valueOf("@value"));
-            if (litigantType != null) participant.setLitigantType(LitigantType.getEnum(litigantType.valueOf("@value")));
-            if (gender != null) participant.setGender(Gender.getEnum(gender.valueOf("@value")));
-            if (nation != null) participant.setNation(nation.valueOf("@value"));
-            if (degree != null) participant.setDegree(degree.valueOf("@value"));
-            if (post != null) participant.setPost(post.element("ZW").valueOf("@value"));
-            if (remarriage != null){
-                if(remarriage.equals("是"))
-                    participant.setRemarriage(true);
+                LitigationParticipant participant = new LitigationParticipant();
+                if (name != null) participant.setName(name.valueOf("@value"));
+                if (litigantType != null) participant.setLitigantType(LitigantType.getEnum(litigantType.valueOf("@value")));
+                if (gender != null) participant.setGender(Gender.getEnum(gender.valueOf("@value")));
+                if (nation != null) participant.setNation(nation.valueOf("@value"));
+                if (degree != null) participant.setDegree(degree.valueOf("@value"));
+                if (post != null) participant.setPost(post.element("ZW").valueOf("@value"));
+                if (remarriage != null){
+                    if(remarriage.equals("是"))
+                        participant.setRemarriage(true);
+                }
+                if (birth != null){
+                    System.out.println(birth.getPath());
+
+                    String year = birth.element("Year").valueOf("@value");
+                    String month = birth.element("Month").valueOf("@value");
+                    String day = birth.element("Day").valueOf("@value");
+
+                    participant.setBirth(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
+                }
+                litigants.add(participant);
             }
-            if (birth != null){
-                System.out.println(birth.getPath());
-
-                String year = birth.element("Year").valueOf("@value");
-                String month = birth.element("Month").valueOf("@value");
-                String day = birth.element("Day").valueOf("@value");
-
-                participant.setBirth(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
-            }
-            litigants.add(participant);
         }
         LitigationParticipants litigationParticipants = new LitigationParticipants(caseID, litigants);
 //        DaoManager.litigationParticipantsDao.insert(litigationParticipants);
 
         //诉讼记录
+        Proceedings proceedings = null;
         String records = findSingleStrValue("SSJL");
-        String actionCause = findSingleStrValue("AY");
-        String actionCode = findSingleStrValue("AYDM");
-        Proceedings proceedings = new Proceedings(caseID, records, actionCause, actionCode);
+        if (records != null) {
+            String actionCause = findSingleStrValue("AY");
+            String actionCode = findSingleStrValue("AYDM");
+            proceedings = new Proceedings(caseID, records, actionCause, actionCode);
+        }
 
 
         //案件基本情况
-        String plaintiffClaim = findSingleStrValue("YGSCD");
-        String defendantArgue = findSingleStrValue("BGBCD");
-        String fact = findSingleStrValue("CMSSD");
-        List<Node> evidenceNodes = document.selectNodes("//ZJD");
-        List<String> evidence = new ArrayList<>();
-        for (Node node : evidenceNodes){
-            evidence.add(node.valueOf("@value"));
+        CaseBasic caseBasic = null;
+        Element basicElement = document.getRootElement().element("AJJBQK");
+        if (basicElement != null) {
+            // TODO 被告称诉段不是都有，比如 婚姻无效纠纷/(2016)津0115民初3692号民事判决书（一审民事案件用）.doc.xml
+            String plaintiffClaim = findSingleStrValue("YGSCD");
+            String defendantArgue = findSingleStrValue("BGBCD");
+            String fact = findSingleStrValue("CMSSD");
+            List<Node> evidenceNodes = document.selectNodes("//ZJD");
+            List<String> evidence = new ArrayList<>();
+            for (Node node : evidenceNodes){
+                evidence.add(node.valueOf("@value"));
+            }
+            caseBasic = new CaseBasic(caseID, plaintiffClaim, defendantArgue, evidence, fact);
         }
-        CaseBasic caseBasic = new CaseBasic(caseID, plaintiffClaim, defendantArgue, evidence, fact);
 
         //裁判分析过程
-        String closeCaseType = findSingleStrValue("JAFSLX");
-        List<LegalArticle> legalArticles = new ArrayList<>();
-        Element cpfxgc = document.getRootElement().element("CPFXGC");
-        for (Iterator<Element> laws = cpfxgc.elementIterator("FLFTMC"); laws.hasNext();){
-            Element law = laws.next();
-            String lawName = law.valueOf("@value");
-            System.out.println(lawName);
-            List<Entry> entries = new ArrayList<>();
-            for (Iterator<Element> items = law.elementIterator("TM"); items.hasNext();){
-                Element item = items.next();
-                String entryName = item.valueOf("@value");
-                List<String> k_entries = new ArrayList<>();
-                for(Iterator<Element> k_items = item.elementIterator("KM"); k_items.hasNext();){
-                    Element k_item = k_items.next();
-                    String k_itemName = k_item.valueOf("@value");
-                    k_entries.add(k_itemName);
+        RefereeAnalysisProcess refereeAnalysisProcess = null;
+        Element analysisElement = document.getRootElement().element("CPFXGC");
+        if (analysisElement != null) {
+            String closeCaseType = findSingleStrValue("JAFSLX");
+            List<LegalArticle> legalArticles = new ArrayList<>();
+            Element cpfxgc = document.getRootElement().element("CPFXGC");
+            for (Iterator<Element> laws = cpfxgc.elementIterator("FLFTMC"); laws.hasNext();){
+                Element law = laws.next();
+                String lawName = law.valueOf("@value");
+                System.out.println(lawName);
+                List<Entry> entries = new ArrayList<>();
+                for (Iterator<Element> items = law.elementIterator("TM"); items.hasNext();){
+                    Element item = items.next();
+                    String entryName = item.valueOf("@value");
+                    List<String> k_entries = new ArrayList<>();
+                    for(Iterator<Element> k_items = item.elementIterator("KM"); k_items.hasNext();){
+                        Element k_item = k_items.next();
+                        String k_itemName = k_item.valueOf("@value");
+                        k_entries.add(k_itemName);
+                    }
+                    Entry entry = new Entry(entryName, k_entries);
+                    entries.add(entry);
                 }
-                Entry entry = new Entry(entryName, k_entries);
-                entries.add(entry);
+                legalArticles.add(new LegalArticle(lawName, entries));
             }
-            legalArticles.add(new LegalArticle(lawName, entries));
+            refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, closeCaseType, legalArticles);
         }
-        RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, closeCaseType, legalArticles);
 
         //裁判结果
         String result = findSingleStrValue("CPJG");
@@ -152,6 +168,7 @@ public class XMLServiceImpl implements XMLService {
 
 
         //插入数据库
+        // TODO 金玉 默认赋值为空时不能直接插入数据库？
         DaoManager.fullTextDao.insert(fullText);
         DaoManager.headerDao.insert(header);
         DaoManager.litigationParticipantsDao.insert(litigationParticipants);
@@ -175,7 +192,8 @@ public class XMLServiceImpl implements XMLService {
         uploadedFile.transferTo(thisFile);
         Case wanted = uploadOffline(thisPath);
 
-        thisFile.delete();
+        boolean deleteResult = thisFile.delete();
+        System.out.println(deleteResult);
         return wanted;
     }
 

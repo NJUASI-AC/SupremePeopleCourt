@@ -46,14 +46,18 @@
                 <h3>Upload xml file at here:</h3>
 
                 <div style="margin: 20px">
-                    <a href="javascript:" class="file">选择文件
-                        <input type="file" accept="text/xml" id="file">
-                    </a>
-                    <p id="filename">文件名</p>
+                    <form method="post" action="/upload" enctype="multipart/form-data">
+                        <input type="file" name="file" />
+                        <input type="submit" />点按上传
+                    </form>
+                    <%--<a href="javascript:" class="file">选择文件--%>
+                        <%--<input type="file" accept="text/xml" id="file">--%>
+                    <%--</a>--%>
+                    <%--<p id="filename">文件名</p>--%>
                 </div>
-                <div style="margin: 20px">
-                    <button id="upload">UPLOAD</button>
-                </div>
+                <%--<div style="margin: 20px">--%>
+                    <%--<button id="upload">UPLOAD</button>--%>
+                <%--</div>--%>
             </article>
         </section>
 

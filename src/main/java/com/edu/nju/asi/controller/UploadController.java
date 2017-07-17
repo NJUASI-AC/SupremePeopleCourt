@@ -1,5 +1,6 @@
 package com.edu.nju.asi.controller;
 
+import com.edu.nju.asi.InfoCarrier.Case;
 import com.edu.nju.asi.service.XMLService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,12 +39,24 @@ public class UploadController {
             }
         }
 
+        ModelAndView mv = new ModelAndView();
+        Case wantedCase = null;
         try {
-            xmlService.uploadOnline(uploadedFile);
+            wantedCase = xmlService.uploadOnline(uploadedFile);
         } catch (IOException e) {
             e.printStackTrace();
+            mv.addObject("errorCode", -1);
+            mv.setViewName("errorPage");
         }
 
-        return new ModelAndView();
+        if (wantedCase == null) {
+            mv.addObject("errorCode", 0);
+            mv.setViewName("errorPage");
+        }
+        else {
+            mv.addObject("case", wantedCase);
+            mv.setViewName("info");
+        }
+        return mv;
     }
 }

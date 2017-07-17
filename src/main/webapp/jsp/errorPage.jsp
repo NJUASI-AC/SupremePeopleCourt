@@ -5,6 +5,12 @@
   Time: 下午8:00
   To change this template use File | Settings | File Templates.
 --%>
+
+<%-- 错误码：
+    -1； IO错误
+    0；  返回null值
+--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
