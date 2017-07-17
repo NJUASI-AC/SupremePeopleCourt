@@ -1,6 +1,6 @@
 package com.edu.nju.asi.model;
 
-import com.edu.nju.asi.model.InfoCarrier.LitigationCost;
+import com.edu.nju.asi.InfoCarrier.LitigationCost;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

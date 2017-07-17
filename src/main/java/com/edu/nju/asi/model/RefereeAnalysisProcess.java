@@ -1,6 +1,6 @@
 package com.edu.nju.asi.model;
 
-import com.edu.nju.asi.model.InfoCarrier.LegalArticle;
+import com.edu.nju.asi.InfoCarrier.LegalArticle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

@@ -2,9 +2,9 @@ package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.*;
-import com.edu.nju.asi.model.InfoCarrier.Entry;
-import com.edu.nju.asi.model.InfoCarrier.LegalArticle;
-import com.edu.nju.asi.model.InfoCarrier.LitigationParticipant;
+import com.edu.nju.asi.InfoCarrier.Entry;
+import com.edu.nju.asi.InfoCarrier.LegalArticle;
+import com.edu.nju.asi.InfoCarrier.LitigationParticipant;
 import com.edu.nju.asi.service.XMLService;
 import com.edu.nju.asi.utilities.enums.*;
 import org.dom4j.Document;

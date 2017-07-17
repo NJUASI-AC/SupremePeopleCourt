@@ -48,8 +48,8 @@ public class DaoManager {
      */
 //    public final static TailorDao tailorDao;
 
-    public DaoManager() {
-    }
+//    private DaoManager() {
+//    }
 
     static {
         ApplicationContext applicationContext = ApplicationContextHelper.getApplicationContext();
