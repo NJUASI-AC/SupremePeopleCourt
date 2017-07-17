@@ -1,5 +1,6 @@
 package com.edu.nju.asi.service.serviceImpl;
 
+import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.*;
 import com.edu.nju.asi.model.InfoCarrier.Entry;
 import com.edu.nju.asi.model.InfoCarrier.LegalArticle;
@@ -147,6 +148,14 @@ public class XMLServiceImpl implements XMLService {
         String result = findSingleStrValue("CPJG");
         JudgementResult judgementResult = new JudgementResult(caseNum, result);
 
+
+        //插入数据库
+        DaoManager.fullTextDao.insert(fullText);
+        DaoManager.headerDao.insert(header);
+        DaoManager.litigationParticipantsDao.insert(litigationParticipants);
+        DaoManager.caseBasicDao.insert(caseBasic);
+        DaoManager.refereeAnalysisProcessDao.insert(refereeAnalysisProcess);
+        DaoManager.judgementResultDao.insert(judgementResult);
     }
 
     @Override

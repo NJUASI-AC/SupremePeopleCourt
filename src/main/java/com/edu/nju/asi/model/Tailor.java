@@ -1,11 +1,8 @@
 package com.edu.nju.asi.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2017/7/17 0017.

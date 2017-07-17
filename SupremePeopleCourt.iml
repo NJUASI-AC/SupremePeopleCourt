@@ -26,7 +26,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -65,5 +65,7 @@
     <orderEntry type="library" name="Maven: org.mongodb:bson:3.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:3.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.4.2" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:jstl:${javax.servlet.jstl}" level="project" />
+    <orderEntry type="library" name="Maven: taglibs:standard:${taglibs.standard}" level="project" />
   </component>
 </module>
