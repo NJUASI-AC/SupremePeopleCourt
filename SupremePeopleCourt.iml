@@ -21,6 +21,7 @@
           <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/mongodb.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/springmvc.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/spc-servlet.xml</file>
         </fileset>
       </configuration>
     </facet>

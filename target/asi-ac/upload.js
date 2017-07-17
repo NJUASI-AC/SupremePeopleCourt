@@ -13,10 +13,10 @@ $().ready(function () {
         let file = $("#file").val();
         if(file == "")
             alert("No File!");
-        $.ajaxFileUpload({
+        $.ajax({
             url: "/upload",
             type: "POST",
-            fileElementId: "file",
+            data: file,
             dataType: "json",
             success: function () {
                 alert("success")
