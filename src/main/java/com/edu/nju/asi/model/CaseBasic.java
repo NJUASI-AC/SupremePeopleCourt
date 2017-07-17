@@ -33,28 +33,28 @@ public class CaseBasic implements Serializable {
     /**
      * 事故时间
      */
-    private LocalDateTime accidentTime;
+//    private LocalDateTime accidentTime;
 
     /**
      * 事故地点
      */
-    private String accidentAddress;
+//    private String accidentAddress;
 
     /**
      * 机动车所有人
      * 注：不知道是个啥，似乎是被告
      */
-    private String defendant;
+//    private String defendant;
 
     /**
      * 受害人居住地
      */
-    private String aggrievedAddress;
+//    private String aggrievedAddress;
 
     /**
      * 受害人职业
      */
-    private String aggrievedJob;
+//    private String aggrievedJob;
 
     /**
      * 被告辩称段
@@ -77,11 +77,19 @@ public class CaseBasic implements Serializable {
     public CaseBasic(String caseID, String plaintiffClaim, LocalDateTime accidentTime, String accidentAddress, String defendant, String aggrievedAddress, String aggrievedJob, String defendantArgue, List<String> evidence, String fact) {
         this.caseID = caseID;
         this.plaintiffClaim = plaintiffClaim;
-        this.accidentTime = accidentTime;
-        this.accidentAddress = accidentAddress;
-        this.defendant = defendant;
-        this.aggrievedAddress = aggrievedAddress;
-        this.aggrievedJob = aggrievedJob;
+//        this.accidentTime = accidentTime;
+//        this.accidentAddress = accidentAddress;
+//        this.defendant = defendant;
+//        this.aggrievedAddress = aggrievedAddress;
+//        this.aggrievedJob = aggrievedJob;
+        this.defendantArgue = defendantArgue;
+        this.evidence = evidence;
+        this.fact = fact;
+    }
+
+    public CaseBasic(String caseID, String plaintiffClaim, String defendantArgue, List<String> evidence, String fact) {
+        this.caseID = caseID;
+        this.plaintiffClaim = plaintiffClaim;
         this.defendantArgue = defendantArgue;
         this.evidence = evidence;
         this.fact = fact;
@@ -103,45 +111,45 @@ public class CaseBasic implements Serializable {
         this.plaintiffClaim = plaintiffClaim;
     }
 
-    public LocalDateTime getAccidentTime() {
-        return accidentTime;
-    }
-
-    public void setAccidentTime(LocalDateTime accidentTime) {
-        this.accidentTime = accidentTime;
-    }
-
-    public String getAccidentAddress() {
-        return accidentAddress;
-    }
-
-    public void setAccidentAddress(String accidentAddress) {
-        this.accidentAddress = accidentAddress;
-    }
-
-    public String getDefendant() {
-        return defendant;
-    }
-
-    public void setDefendant(String defendant) {
-        this.defendant = defendant;
-    }
-
-    public String getAggrievedAddress() {
-        return aggrievedAddress;
-    }
-
-    public void setAggrievedAddress(String aggrievedAddress) {
-        this.aggrievedAddress = aggrievedAddress;
-    }
-
-    public String getAggrievedJob() {
-        return aggrievedJob;
-    }
-
-    public void setAggrievedJob(String aggrievedJob) {
-        this.aggrievedJob = aggrievedJob;
-    }
+//    public LocalDateTime getAccidentTime() {
+//        return accidentTime;
+//    }
+//
+//    public void setAccidentTime(LocalDateTime accidentTime) {
+//        this.accidentTime = accidentTime;
+//    }
+//
+//    public String getAccidentAddress() {
+//        return accidentAddress;
+//    }
+//
+//    public void setAccidentAddress(String accidentAddress) {
+//        this.accidentAddress = accidentAddress;
+//    }
+//
+//    public String getDefendant() {
+//        return defendant;
+//    }
+//
+//    public void setDefendant(String defendant) {
+//        this.defendant = defendant;
+//    }
+//
+//    public String getAggrievedAddress() {
+//        return aggrievedAddress;
+//    }
+//
+//    public void setAggrievedAddress(String aggrievedAddress) {
+//        this.aggrievedAddress = aggrievedAddress;
+//    }
+//
+//    public String getAggrievedJob() {
+//        return aggrievedJob;
+//    }
+//
+//    public void setAggrievedJob(String aggrievedJob) {
+//        this.aggrievedJob = aggrievedJob;
+//    }
 
     public String getDefendantArgue() {
         return defendantArgue;

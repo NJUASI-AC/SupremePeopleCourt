@@ -1,4 +1,4 @@
-package com.edu.nju.asi.model;
+package com.edu.nju.asi.model.InfoCarrier;
 
 import com.edu.nju.asi.utilities.enums.LitigationType;
 

@@ -46,7 +46,7 @@ public class DaoManager {
     /**
      *  文尾Dao
      */
-    public final static TailorDao tailorDao;
+//    public final static TailorDao tailorDao;
 
     public DaoManager() {
     }
@@ -60,7 +60,7 @@ public class DaoManager {
         litigationParticipantsDao = applicationContext.getBean(LitigationParticipantsDao.class);
         proceedingsDao = applicationContext.getBean(ProceedingsDao.class);
         refereeAnalysisProcessDao = applicationContext.getBean(RefereeAnalysisProcessDao.class);
-        tailorDao = applicationContext.getBean(TailorDao.class);
+//        tailorDao = applicationContext.getBean(TailorDao.class);
     }
 
 }

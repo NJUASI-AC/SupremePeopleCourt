@@ -31,12 +31,12 @@ public class Header implements Serializable {
     /**
      * 法院级别
      */
-    private String courtLevel;
+//    private String courtLevel;
 
     /**
      * 行政区划（省）
      */
-    private String administrativeDivision;
+//    private String administrativeDivision;
 
     /**
      * 文书名称
@@ -46,17 +46,17 @@ public class Header implements Serializable {
     /**
      * 立案年度
      */
-    private int filingYear;
+//    private int filingYear;
 
     /**
      * 案件性质
      */
-    private CaseType natureOfCase;
+//    private CaseType natureOfCase;
 
     /**
      * 文书种类
      */
-    private DocumentType documentType;
+//    private DocumentType documentType;
 
     /**
      * 审判程序
@@ -69,12 +69,19 @@ public class Header implements Serializable {
     public Header(String caseID, String handlingCourt, String courtLevel, String administrativeDivision, DocumentName nameOfDocument, int filingYear, CaseType natureOfCase, DocumentType documentType, TrialProcedure trialProcedure) {
         this.caseID = caseID;
         this.handlingCourt = handlingCourt;
-        this.courtLevel = courtLevel;
-        this.administrativeDivision = administrativeDivision;
+//        this.courtLevel = courtLevel;
+//        this.administrativeDivision = administrativeDivision;
         this.nameOfDocument = nameOfDocument;
-        this.filingYear = filingYear;
-        this.natureOfCase = natureOfCase;
-        this.documentType = documentType;
+//        this.filingYear = filingYear;
+//        this.natureOfCase = natureOfCase;
+//        this.documentType = documentType;
+        this.trialProcedure = trialProcedure;
+    }
+
+    public Header(String caseID, String handlingCourt, DocumentName nameOfDocument, TrialProcedure trialProcedure) {
+        this.caseID = caseID;
+        this.handlingCourt = handlingCourt;
+        this.nameOfDocument = nameOfDocument;
         this.trialProcedure = trialProcedure;
     }
 
@@ -94,21 +101,21 @@ public class Header implements Serializable {
         this.handlingCourt = handlingCourt;
     }
 
-    public String getCourtLevel() {
-        return courtLevel;
-    }
-
-    public void setCourtLevel(String courtLevel) {
-        this.courtLevel = courtLevel;
-    }
-
-    public String getAdministrativeDivision() {
-        return administrativeDivision;
-    }
-
-    public void setAdministrativeDivision(String administrativeDivision) {
-        this.administrativeDivision = administrativeDivision;
-    }
+//    public String getCourtLevel() {
+//        return courtLevel;
+//    }
+//
+//    public void setCourtLevel(String courtLevel) {
+//        this.courtLevel = courtLevel;
+//    }
+//
+//    public String getAdministrativeDivision() {
+//        return administrativeDivision;
+//    }
+//
+//    public void setAdministrativeDivision(String administrativeDivision) {
+//        this.administrativeDivision = administrativeDivision;
+//    }
 
     public DocumentName getNameOfDocument() {
         return nameOfDocument;
@@ -118,29 +125,29 @@ public class Header implements Serializable {
         this.nameOfDocument = nameOfDocument;
     }
 
-    public int getFilingYear() {
-        return filingYear;
-    }
-
-    public void setFilingYear(int filingYear) {
-        this.filingYear = filingYear;
-    }
-
-    public CaseType getNatureOfCase() {
-        return natureOfCase;
-    }
-
-    public void setNatureOfCase(CaseType natureOfCase) {
-        this.natureOfCase = natureOfCase;
-    }
-
-    public DocumentType getDocumentType() {
-        return documentType;
-    }
-
-    public void setDocumentType(DocumentType documentType) {
-        this.documentType = documentType;
-    }
+//    public int getFilingYear() {
+//        return filingYear;
+//    }
+//
+//    public void setFilingYear(int filingYear) {
+//        this.filingYear = filingYear;
+//    }
+//
+//    public CaseType getNatureOfCase() {
+//        return natureOfCase;
+//    }
+//
+//    public void setNatureOfCase(CaseType natureOfCase) {
+//        this.natureOfCase = natureOfCase;
+//    }
+//
+//    public DocumentType getDocumentType() {
+//        return documentType;
+//    }
+//
+//    public void setDocumentType(DocumentType documentType) {
+//        this.documentType = documentType;
+//    }
 
     public TrialProcedure getTrialProcedure() {
         return trialProcedure;
