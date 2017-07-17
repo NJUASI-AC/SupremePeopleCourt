@@ -1,5 +1,7 @@
 package com.edu.nju.asi.controller;
 
+import com.edu.nju.asi.service.XMLService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class UploadController {
+
+    @Autowired
+    XMLService xmlService;
 
     /**
      * 上传文件并可视化显示分析结果
