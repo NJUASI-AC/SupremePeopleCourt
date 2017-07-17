@@ -76,10 +76,10 @@ public class LitigationParticipant implements Serializable {
         this.gender = gender;
         this.nation = nation;
         this.birth = birth;
-//        this.degree = degree;
-//        this.post = post;
+        this.degree = degree;
+        this.post = post;
         this.nationality = nationality;
-//        this.hasAppearInCourt = hasAppearInCourt;
+        this.hasAppearInCourt = hasAppearInCourt;
         this.isRemarriage = isRemarriage;
     }
 

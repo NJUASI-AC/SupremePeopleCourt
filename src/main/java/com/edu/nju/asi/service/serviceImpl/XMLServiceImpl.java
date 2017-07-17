@@ -22,7 +22,7 @@ import java.util.List;
 public class XMLServiceImpl implements XMLService {
 
     public static void main(String[] args) {
-        new XMLServiceImpl().uploadOffline("D:\\SummerCampus\\SupremePeopleCourt\\src\\main\\resources\\document\\123.xml");
+        new XMLServiceImpl().uploadOffline("D:\\byron\\SupremePeopleCourt\\src\\main\\resources\\document\\123.xml");
     }
 
     Document document;
@@ -96,9 +96,9 @@ public class XMLServiceImpl implements XMLService {
 
         LitigationParticipants litigationParticipants = new LitigationParticipants(caseNum, litigants);
 
-//        DaoManager.baseDao.insert(litigationParticipants, "participants");
+        DaoManager.litigationParticipantsDao.insert(litigationParticipants);
 
-        System.out.println(fullText.getFullText());
+        System.out.println(fullText.getText());
     }
 
     private String findSingleStrValue(String node) {

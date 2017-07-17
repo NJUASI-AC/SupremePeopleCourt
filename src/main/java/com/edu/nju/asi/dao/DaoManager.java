@@ -48,6 +48,9 @@ public class DaoManager {
      */
     public final static TailorDao tailorDao;
 
+    public DaoManager() {
+    }
+
     static {
         ApplicationContext applicationContext = ApplicationContextHelper.getApplicationContext();
         caseBasicDao = applicationContext.getBean(CaseBasicDao.class);
