@@ -1,6 +1,7 @@
 package com.edu.nju.asi.dao.daoImpl;
 
 import com.edu.nju.asi.dao.UserDao;
+import com.edu.nju.asi.model.Address;
 import com.edu.nju.asi.model.User;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,6 +11,9 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import javax.xml.ws.soap.Addressing;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -23,12 +27,18 @@ public class UserDaoImpl implements UserDao {
     public static void main(String[] args) {
         UserDao userDao = new ClassPathXmlApplicationContext("applicationContext.xml").getBean(UserDao.class);
 //        userDao.createCollection("law");
-//        userDao.insert(new User("47756", "dong", 12, "123"), "law");
+        Map<String, String> name = new TreeMap<>();
+        name.put("asdf", "1234");
+        name.put("qqwer", "qwer");
+
+        Address address = new Address("qwer", 134);
+
+//        userDao.insert(new User(address, name,"123",LocalDate.of(1970,1,1)), "law");
 
         Map<String, Object> map = new TreeMap<>();
-        map.put("address", "47756");
+        map.put("password", "47756");
         User user = userDao.findOne(map, "law");
-        System.out.println(user.getAge());
+        System.out.println(user.localDate);
     }
 
     @Resource
@@ -41,7 +51,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findOne(Map<String,Object> params, String collectionName) {
-        return mongoTemplate.findOne(new Query(Criteria.where("address").is(params.get("address"))), User.class,collectionName);
+        return mongoTemplate.findOne(new Query(Criteria.where("_id").is(new Address("qwer", 134))), User.class,collectionName);
     }
 
     @Override
