@@ -1,4 +1,4 @@
-package com.edu.nju.asi.util;
+package com.edu.nju.asi.utilities;
 
 /**
  * Created by Administrator on 2017/7/17 0017.
