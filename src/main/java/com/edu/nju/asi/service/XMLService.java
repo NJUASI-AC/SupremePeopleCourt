@@ -2,6 +2,8 @@ package com.edu.nju.asi.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * Created by Administrator on 2017/7/17 0017.
  */
@@ -16,6 +18,6 @@ public interface XMLService {
     /**
      * @param uploadedFile 要上传的XML文件
      */
-    void upload(MultipartFile uploadedFile);
+    boolean uploadOnline(MultipartFile uploadedFile) throws IOException;
 
 }

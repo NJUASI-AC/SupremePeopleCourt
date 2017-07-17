@@ -15,6 +15,8 @@ import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -88,7 +90,7 @@ public class XMLServiceImpl implements XMLService {
             if (post != null) participant.setPost(post.element("ZW").valueOf("@value"));
             if (remarriage != null){
                 if(remarriage.equals("是"))
-                participant.setRemarriage(true);
+                    participant.setRemarriage(true);
             }
             if (birth != null){
                 System.out.println(birth.getPath());
@@ -159,8 +161,19 @@ public class XMLServiceImpl implements XMLService {
     }
 
     @Override
-    public void upload(MultipartFile uploadedFile) {
+    public boolean uploadOnline(MultipartFile uploadedFile) throws IOException {
+        if (uploadedFile.isEmpty()) {
+            return false;
+        }
 
+        // 先转储文件再解析，最后删掉源文件
+        String thisPath = uploadedFile.getName();
+        File thisFile = new File(thisPath);
+
+        uploadedFile.transferTo(thisFile);
+        uploadOffline(thisPath);
+        thisFile.delete();
+        return true;
     }
 
     private String findSingleStrValue(String node) {

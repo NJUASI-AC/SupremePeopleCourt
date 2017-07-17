@@ -1,30 +1,33 @@
-<!doctype html>
+<%--
+  Created by IntelliJ IDEA.
+  User: cuihua
+  Date: 2017/7/17
+  Time: 下午8:01
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>ASI-AC-upload</title>
-    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <title>ASI-AC</title>
+    <link rel="stylesheet" href="../css/styles.css" type="text/css" />
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <script src="jquery.js"></script>
-    <script src="upload.js"></script>
-    <script src="ajaxfileupload.js"></script>
 </head>
 <body>
 <div id="container">
     <header>
         <div class="width">
             <h1>Supreme People Court<span>-AC</span></h1>
-            <h2>Nanjing University</h2>
+            <h2>Nanjing University&nbsp;南京大学</h2>
         </div>
     </header>
     <nav>
         <div class="width">
             <ul>
-                <li class=""><a href="index.html">Home</a></li>
-                <li class="start selected"><a href="upload.html">Upload</a></li>
+                <li class="start selected"><a href="index.html">Home</a></li>
+                <li class=""><a href="upload.html">Upload</a></li>
                 <li class="end"><a href="contact.html">Contact</a></li>
             </ul>
         </div>
@@ -34,19 +37,33 @@
     <div id="body" class="width">
         <section id="content">
             <article>
+                <h2>Introduction</h2>
                 <div class="article-info">Posted on <time datetime="2017-07-16">16 July</time> by <a href="#" rel="author">TygaGu</a></div>
 
-                <h3>Upload xml file at here:</h3>
+                <p>This website has been used in:</p>
 
-                <div style="margin: 20px">
-                    <a href="javascript:;" class="file">选择文件
-                        <input type="file" accept="text/xml" id="file">
-                    </a>
-                    <p id="filename">filename</p>
-                </div>
-                <div style="margin: 20px">
-                    <button id="upload">UPLOAD</button>
-                </div>
+
+                <ul class="styledlist">
+                    <li>Firefox</li>
+                    <li>Opera</li>
+                    <li>IE</li>
+                    <li>Safari</li>
+                    <li>Chrome</li>
+                </ul>
+
+                <a href="#" class="button">Read more</a>
+                <a href="#" class="button">Comments</a>
+            </article>
+
+            <article class="expanded">
+
+                <h2>Other</h2>
+                <div class="article-info">Posted on <time datetime="2017-07-16">16 July</time> by <a href="#" rel="author">TygaGu</a></div>
+
+                <h3>SomeInfo</h3>
+
+                <a href="#" class="button">Read more</a>
+                <a href="#" class="button">Comments</a>
             </article>
         </section>
 
@@ -55,9 +72,9 @@
                 <li>
                     <h4>Categories</h4>
                     <ul>
-                        <li><a href="index.html">主页</a></li>
-                        <li><a href="upload.html">上传案件</a></li>
-                        <li><a href="contact.html">联系我们</a></li>
+                        <li><a href="../jsp/index.jsp">主页</a></li>
+                        <li><a href="../jsp/upload.jsp">上传案件</a></li>
+                        <li><a href="../jsp/contact.jsp">联系我们</a></li>
                     </ul>
                 </li>
 
@@ -123,7 +140,7 @@
             <div class="clear"></div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; ASI-AC 2017. <a href="index.html">Supreme People Court</a> by Tyga</p>
+            <p>&copy; ASI-AC 2017. <a href="/">Supreme People Court</a> by Tyga</p>
         </div>
     </footer>
 </div>

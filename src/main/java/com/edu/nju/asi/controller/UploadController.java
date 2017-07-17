@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * Created by cuihua on 2017/7/17.
@@ -25,7 +27,22 @@ public class UploadController {
      */
     @PostMapping(value = "upload")
     public ModelAndView upload(@RequestParam("file") MultipartFile uploadedFile, HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("Connect!!!");
 
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            try {
+                response.sendRedirect("/welcome");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        try {
+            xmlService.uploadOnline(uploadedFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return new ModelAndView();
     }
