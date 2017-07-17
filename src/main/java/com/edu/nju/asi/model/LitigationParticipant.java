@@ -12,54 +12,59 @@ import java.time.LocalDate;
 public class LitigationParticipant implements Serializable {
 
     /**
-     *  诉讼参与人名称
-     * */
+     * 诉讼参与人名称
+     */
     private String name;
 
     /**
-     *  当事人类型
-     * */
+     * 当事人类型
+     */
     private PartiesType partiesType;
 
     /**
-     *  性别
-     * */
+     * 性别
+     */
     private Gender gender;
 
     /**
-     *  民族
-     * */
+     * 民族
+     */
     private String nation;
 
     /**
-     *  出生日期
-     * */
+     * 出生日期
+     */
     private LocalDate birth;
 
     /**
-     *  文化程度
-     * */
+     * 文化程度
+     */
     private String degree;
 
     /**
-     *  职务
-     * */
+     * 职务
+     */
     private String post;
 
     /**
-     *  国籍
-     * */
+     * 国籍
+     */
     private String nationality;
 
     /**
-     *  是否再婚
-     * */
+     * 到庭情况
+     */
+    private boolean hasAppearInCourt;
+
+    /**
+     * 是否再婚
+     */
     private boolean isRemarriage;
 
     public LitigationParticipant() {
     }
 
-    public LitigationParticipant(String name, PartiesType partiesType, Gender gender, String nation, LocalDate birth, String degree, String post, String nationality, boolean isRemarriage) {
+    public LitigationParticipant(String name, PartiesType partiesType, Gender gender, String nation, LocalDate birth, String degree, String post, String nationality, boolean hasAppearInCourt, boolean isRemarriage) {
         this.name = name;
         this.partiesType = partiesType;
         this.gender = gender;
@@ -68,6 +73,7 @@ public class LitigationParticipant implements Serializable {
         this.degree = degree;
         this.post = post;
         this.nationality = nationality;
+        this.hasAppearInCourt = hasAppearInCourt;
         this.isRemarriage = isRemarriage;
     }
 
@@ -133,6 +139,14 @@ public class LitigationParticipant implements Serializable {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    public boolean isHasAppearInCourt() {
+        return hasAppearInCourt;
+    }
+
+    public void setHasAppearInCourt(boolean hasAppearInCourt) {
+        this.hasAppearInCourt = hasAppearInCourt;
     }
 
     public boolean isRemarriage() {

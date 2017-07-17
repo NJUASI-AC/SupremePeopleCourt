@@ -4,30 +4,32 @@ import java.io.Serializable;
 
 /**
  * Created by Byron Dong on 2017/7/17.
+ *
+ * 涉及法律
  */
 public class LegalArticles  implements Serializable{
 
     /**
-     *  法律名称
-     * */
+     * 法律名称
+     */
     private String lawName;
 
     /**
-     *  法条名称
-     * */
-    private String legalName;
+     * 条目
+     */
+    private String legalEntry;
 
     /**
-     *  法条条目
-     * */
+     * 款目
+     */
     private String entry;
 
     public LegalArticles() {
     }
 
-    public LegalArticles(String lawName, String legalName, String entry) {
+    public LegalArticles(String lawName, String legalEntry, String entry) {
         this.lawName = lawName;
-        this.legalName = legalName;
+        this.legalEntry = legalEntry;
         this.entry = entry;
     }
 
@@ -39,12 +41,12 @@ public class LegalArticles  implements Serializable{
         this.lawName = lawName;
     }
 
-    public String getLegalName() {
-        return legalName;
+    public String getLegalEntry() {
+        return legalEntry;
     }
 
-    public void setLegalName(String legalName) {
-        this.legalName = legalName;
+    public void setLegalEntry(String legalEntry) {
+        this.legalEntry = legalEntry;
     }
 
     public String getEntry() {

@@ -20,55 +20,55 @@ public class Header implements Serializable {
 
     /**
      *  案号
-     * */
+     */
     @Id
-    private String caseNum;
+    private String caseID;
 
     /**
-     *  经办法院
-     * */
+     * 经办法院
+     */
     private String handlingCourt;
 
     /**
-     *  法院级别
-     * */
+     * 法院级别
+     */
     private String courtLevel;
 
     /**
-     *  行政区划（省）
-     * */
+     * 行政区划（省）
+     */
     private String administrativeDivision;
 
     /**
-     *  文书名称
-     * */
+     * 文书名称
+     */
     private DocumentName nameOfDocument;
 
     /**
-     *  立案年度
-     * */
+     * 立案年度
+     */
     private LocalDate filingYear;
 
     /**
-     *  案件性质
-     * */
+     * 案件性质
+     */
     private CaseType natureOfCase;
 
     /**
-     *  文书种类
-     * */
+     * 文书种类
+     */
     private DocumentType documentType;
 
     /**
-     *  审判程序
-     * */
+     * 审判程序
+     */
     private TrialProcedure trialProcedure;
 
     public Header() {
     }
 
-    public Header(String caseNum, String handlingCourt, String courtLevel, String administrativeDivision, DocumentName nameOfDocument, LocalDate filingYear, CaseType natureOfCase, DocumentType documentType, TrialProcedure trialProcedure) {
-        this.caseNum = caseNum;
+    public Header(String caseID, String handlingCourt, String courtLevel, String administrativeDivision, DocumentName nameOfDocument, LocalDate filingYear, CaseType natureOfCase, DocumentType documentType, TrialProcedure trialProcedure) {
+        this.caseID = caseID;
         this.handlingCourt = handlingCourt;
         this.courtLevel = courtLevel;
         this.administrativeDivision = administrativeDivision;
@@ -79,12 +79,12 @@ public class Header implements Serializable {
         this.trialProcedure = trialProcedure;
     }
 
-    public String getCaseNum() {
-        return caseNum;
+    public String getCaseID() {
+        return caseID;
     }
 
-    public void setCaseNum(String caseNum) {
-        this.caseNum = caseNum;
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
     }
 
     public String getHandlingCourt() {

@@ -13,19 +13,19 @@ import java.util.List;
 public class LitigationParticipants implements Serializable {
 
     /**
-     *  案号
-     * */
+     * 案号
+     */
     @Id
     private String caseNum;
 
     /**
-     *  原告
-     * */
+     * 原告
+     */
     private List<LitigationParticipant> plaintiffs;
 
     /**
-     *  被告
-     * */
+     * 被告
+     */
     private List<LitigationParticipant> defendants;
 
     public LitigationParticipants() {

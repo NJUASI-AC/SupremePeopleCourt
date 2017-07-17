@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/7/17 0017.
+ *
+ * 诉讼费承担
  */
 public class LitigationCost implements Serializable{
 
@@ -21,6 +23,7 @@ public class LitigationCost implements Serializable{
 
     /**
      * 诉讼费种类
+     * 注：还包含承担人列表，但暂时数据库中未包含【如：（2008）东民初字第3902号】
      */
     private LitigationType litigationType;
 

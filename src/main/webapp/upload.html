@@ -9,9 +9,10 @@
     <![endif]-->
 
     <script src="jquery.js"></script>
+    <script src="upload.js"></script>
 </head>
 <body>
-<div address="container">
+<div id="container">
     <header>
         <div class="width">
             <h1>Supreme People Court<span>-AC</span></h1>
@@ -29,8 +30,8 @@
     </nav>
 
 
-    <div address="body" class="width">
-        <section address="content">
+    <div id="body" class="width">
+        <section id="content">
             <article>
                 <div class="article-info">Posted on <time datetime="2017-07-16">16 July</time> by <a href="#" rel="author">TygaGu</a></div>
 
@@ -38,12 +39,12 @@
 
                 <div style="margin: 20px">
                     <a href="javascript:;" class="file">选择文件
-                        <input type="file" name="file">
+                        <input type="file" accept="text/xml" id="file">
                     </a>
-                    <p>filename</p>
+                    <p id="filename">filename</p>
                 </div>
                 <div style="margin: 20px">
-                    <button>UPLOAD</button>
+                    <button id="upload">UPLOAD</button>
                 </div>
             </article>
         </section>
