@@ -10,7 +10,18 @@ $().ready(function () {
     })
 
     $("#upload").click(function () {
-
+        let file = $("#file").val();
+        if(file == "")
+            alert("No File!");
+        $.ajaxFileUpload({
+            url: "/upload",
+            type: "POST",
+            fileElementId: "file",
+            dataType: "json",
+            success: function () {
+                alert("success")
+            }
+        })
     })
 
 })

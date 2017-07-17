@@ -2,6 +2,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoIterable;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -9,6 +10,7 @@ import org.junit.Test;
  * Created by Administrator on 2017/7/16 0016.
  */
 public class TestMongodb {
+    @Ignore
     @Test
     public void testMongodb(){
         try{
