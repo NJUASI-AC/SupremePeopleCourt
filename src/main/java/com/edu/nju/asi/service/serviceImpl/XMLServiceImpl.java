@@ -11,6 +11,8 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/7/17 0017.
  */
+@Service("XMLService")
 public class XMLServiceImpl implements XMLService {
 
     public static void main(String[] args) {
@@ -143,6 +146,11 @@ public class XMLServiceImpl implements XMLService {
         //裁判结果
         String result = findSingleStrValue("CPJG");
         JudgementResult judgementResult = new JudgementResult(caseNum, result);
+
+    }
+
+    @Override
+    public void upload(MultipartFile uploadedFile) {
 
     }
 

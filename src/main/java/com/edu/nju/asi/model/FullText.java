@@ -14,6 +14,9 @@ public class FullText implements Serializable{
     @Id
     private String caseNum;
 
+    /**
+     * 全文
+     */
     private String text;
 
     public FullText() {

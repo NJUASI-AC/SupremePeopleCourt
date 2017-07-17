@@ -28,9 +28,9 @@ public class Header implements Serializable {
      */
     private String handlingCourt;
 
-    /**
-     * 法院级别
-     */
+//    /**
+//     * 法院级别
+//     */
 //    private String courtLevel;
 
     /**
