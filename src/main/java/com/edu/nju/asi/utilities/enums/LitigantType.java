@@ -6,7 +6,8 @@ package com.edu.nju.asi.utilities.enums;
 public enum  LitigantType {
 
     PLAINTIFF("原告"),
-    DEFENDANT("被告");
+    DEFENDANT("被告"),
+    AGENT("委托代理人");
 
     private String repre;
 

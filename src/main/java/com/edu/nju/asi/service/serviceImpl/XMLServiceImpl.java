@@ -1,6 +1,7 @@
 package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.model.*;
+import com.edu.nju.asi.model.InfoCarrier.Entry;
 import com.edu.nju.asi.model.InfoCarrier.LegalArticle;
 import com.edu.nju.asi.model.InfoCarrier.LitigationParticipant;
 import com.edu.nju.asi.service.XMLService;
@@ -22,7 +23,7 @@ import java.util.List;
 public class XMLServiceImpl implements XMLService {
 
     public static void main(String[] args) {
-        new XMLServiceImpl().uploadOffline("D:\\SummerCampus\\SupremePeopleCourt\\src\\main\\resources\\document\\123.xml");
+        new XMLServiceImpl().uploadOffline("D:\\SummerCampus\\SupremePeopleCourt\\src\\main\\resources\\document\\234.xml");
     }
 
     Document document;
@@ -61,38 +62,41 @@ public class XMLServiceImpl implements XMLService {
 
 
         //诉讼参与人全集
-        List<Node> participantsName = document.selectNodes("//SSCYRMC");
-        List<Node> participantsType = document.selectNodes("//DSRLB");
-        List<Node> genders = document.selectNodes("//XB");
-        List<Node> nations = document.selectNodes("//MZ");
-        List<Node> years = document.selectNodes("//CSRQ/Year");
-        List<Node> months = document.selectNodes("//CSRQ/Month");
-        List<Node> days = document.selectNodes("//CSRQ/Day");
-        List<Node> degrees = document.selectNodes("//WHCD");
-//        List<Node> posts = document.selectNodes("//ZW");
-        List<Node> remarriage = document.selectNodes("//DSRSFZH");
-
         List<LitigationParticipant> litigants = new ArrayList<>();
-        for (int i = 0; i < participantsName.size(); i++) {
-            LitigationParticipant participant = new LitigationParticipant();
-            participant.setName(participantsName.get(i).valueOf("@value"));
-            participant.setLitigantType(LitigantType.getEnum(participantsType.get(i).valueOf("@value")));
-            participant.setGender(Gender.getEnum(genders.get(i).valueOf("@value")));
-            participant.setNation(nations.get(i).valueOf("@value"));
-            participant.setBirth(LocalDate.of(Integer.valueOf(years.get(i).valueOf("@value"))
-                    , Integer.valueOf(months.get(i).valueOf("@value")), Integer.valueOf(days.get(i).valueOf("@value"))));
-            participant.setDegree(degrees.size() == 0 ? "未提及": degrees.get(i).valueOf("@value"));
-//            participant.setPost(posts.size() == 0 ? "未提及": posts.get(i).valueOf("@value"));
-            //TODO post应该从element去找
-            if (remarriage.get(i).valueOf("@value").equals("是")) {
-                participant.setRemarriage(true);
-            } else {
-                participant.setRemarriage(false);
-            }
+        for (Iterator<Element> litigantElements = document.getRootElement().element("SSCYRQJ").elementIterator("SSCYR"); litigantElements.hasNext();){
+            Element litigant = litigantElements.next();
 
+            Element name = litigant.element("SSCYRMC");
+            Element litigantType = litigant.element("SSSF");
+            Element gender = litigant.element("XB");
+            Element nation = litigant.element("MZ");
+            Element degree = litigant.element("WHCD");
+            Element post = litigant.element("DWZWFZ");
+            Element remarriage = litigant.element("DSRSFZH");
+            Element birth = litigant.element("CSRQ");
+
+            LitigationParticipant participant = new LitigationParticipant();
+            if (name != null) participant.setName(name.valueOf("@value"));
+            if (litigantType != null) participant.setLitigantType(LitigantType.getEnum(litigantType.valueOf("@value")));
+            if (gender != null) participant.setGender(Gender.getEnum(gender.valueOf("@value")));
+            if (nation != null) participant.setNation(nation.valueOf("@value"));
+            if (degree != null) participant.setDegree(degree.valueOf("@value"));
+            if (post != null) participant.setPost(post.element("ZW").valueOf("@value"));
+            if (remarriage != null){
+                if(remarriage.equals("是"))
+                participant.setRemarriage(true);
+            }
+            if (birth != null){
+                System.out.println(birth.getPath());
+
+                String year = birth.element("Year").valueOf("@value");
+                String month = birth.element("Month").valueOf("@value");
+                String day = birth.element("Day").valueOf("@value");
+
+                participant.setBirth(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
+            }
             litigants.add(participant);
         }
-
         LitigationParticipants litigationParticipants = new LitigationParticipants(caseNum, litigants);
 
 //        DaoManager.litigationParticipantsDao.insert(litigationParticipants);
@@ -113,24 +117,31 @@ public class XMLServiceImpl implements XMLService {
         //裁判分析过程
         String closeCaseType = findSingleStrValue("JAFSLX");
         List<LegalArticle> legalArticles = new ArrayList<>();
-
         Element cpfxgc = document.getRootElement().element("CPFXGC");
-        for (Iterator<Element> it = cpfxgc.elementIterator("FLFTMC"); it.hasNext();){
-            Element element = it.next();
-            LegalArticle legalArticle = new LegalArticle();
-            String lawName = element.attributeValue("value");
+        for (Iterator<Element> laws = cpfxgc.elementIterator("FLFTMC"); laws.hasNext();){
+            Element law = laws.next();
+            String lawName = law.valueOf("@value");
             System.out.println(lawName);
-
-
-            legalArticles.add(legalArticle);
+            List<Entry> entries = new ArrayList<>();
+            for (Iterator<Element> items = law.elementIterator("TM"); items.hasNext();){
+                Element item = items.next();
+                String entryName = item.valueOf("@value");
+                List<String> k_entries = new ArrayList<>();
+                for(Iterator<Element> k_items = item.elementIterator("KM"); k_items.hasNext();){
+                    Element k_item = k_items.next();
+                    String k_itemName = k_item.valueOf("@value");
+                    k_entries.add(k_itemName);
+                }
+                Entry entry = new Entry(entryName, k_entries);
+                entries.add(entry);
+            }
+            legalArticles.add(new LegalArticle(lawName, entries));
         }
-
 
         RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess(caseNum, closeCaseType, legalArticles);
 
         //裁判结果
         String result = findSingleStrValue("CPJG");
-
         JudgementResult judgementResult = new JudgementResult(caseNum, result);
 
     }

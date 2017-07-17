@@ -23,8 +23,9 @@ public class LegalArticle implements Serializable{
     public LegalArticle() {
     }
 
-    public LegalArticle(String lawName) {
+    public LegalArticle(String lawName, List<Entry> legalEntry) {
         this.lawName = lawName;
+        this.legalEntry = legalEntry;
     }
 
     public String getLawName() {

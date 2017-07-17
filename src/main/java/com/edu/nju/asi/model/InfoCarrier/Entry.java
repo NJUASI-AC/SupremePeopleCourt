@@ -1,5 +1,6 @@
 package com.edu.nju.asi.model.InfoCarrier;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  *
  * 条目
  */
-public class Entry {
+public class Entry implements Serializable{
 
     /**
      * 条目名称
@@ -17,5 +18,13 @@ public class Entry {
     /**
      * 款目
      */
-    List<String> entries;
+    private List<String> entries;
+
+    public Entry() {
+    }
+
+    public Entry(String name, List<String> entries) {
+        this.name = name;
+        this.entries = entries;
+    }
 }
