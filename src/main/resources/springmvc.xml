@@ -3,13 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	 http://www.springframework.org/schema/context
 	 http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	 http://www.springframework.org/schema/mvc
-	 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+	 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 
     <!-- 注册用于支持基于注解的控制器请求处理方法的bean对象，激活@Controller模式 -->
@@ -18,9 +17,16 @@
     <context:component-scan base-package="com.edu.nju.asi.controller"/>
 
 
-    <!-- task任务扫描注解，用于日常定期更新 -->
-    <!--<task:annotation-driven/>-->
-    <!--<context:component-scan base-package="com.edu.nju.asi.task"/>-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <!--<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>-->
+            <!--<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>-->
+            <!--<bean class="org.springframework.http.converter.FormHttpMessageConverter"/>-->
+            <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>-->
+            <!--</list>-->
+        </property>
+    </bean>
 
     <!--</bean>-->
      <!--&lt;!&ndash;声明一个拦截器 &ndash;&gt;-->
@@ -54,8 +60,7 @@
     <!-- don't handle the static resource -->
     <mvc:default-servlet-handler/>
 
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>

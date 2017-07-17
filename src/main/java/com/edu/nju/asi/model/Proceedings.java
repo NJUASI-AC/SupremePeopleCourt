@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 /**
  * Created by Byron Dong on 2017/7/17.
+ *
+ * 诉讼记录
  */
 @Document
 public class Proceedings implements Serializable {
