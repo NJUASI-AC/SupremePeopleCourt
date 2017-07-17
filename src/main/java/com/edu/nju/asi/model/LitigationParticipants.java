@@ -16,7 +16,7 @@ public class LitigationParticipants implements Serializable {
      *  案号
      * */
     @Id
-    private String caseNumber;
+    private String caseNum;
 
     /**
      *  原告
@@ -31,18 +31,18 @@ public class LitigationParticipants implements Serializable {
     public LitigationParticipants() {
     }
 
-    public LitigationParticipants(String caseNumber, List<LitigationParticipant> plaintiffs, List<LitigationParticipant> defendants) {
-        this.caseNumber = caseNumber;
+    public LitigationParticipants(String caseNum, List<LitigationParticipant> plaintiffs, List<LitigationParticipant> defendants) {
+        this.caseNum = caseNum;
         this.plaintiffs = plaintiffs;
         this.defendants = defendants;
     }
 
-    public String getCaseNumber() {
-        return caseNumber;
+    public String getCaseNum() {
+        return caseNum;
     }
 
-    public void setCaseNumber(String caseNumber) {
-        this.caseNumber = caseNumber;
+    public void setCaseNum(String caseNum) {
+        this.caseNum = caseNum;
     }
 
     public List<LitigationParticipant> getPlaintiffs() {

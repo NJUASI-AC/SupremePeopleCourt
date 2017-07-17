@@ -12,6 +12,8 @@ import java.time.LocalDate;
 
 /**
  * Created by Byron Dong on 2017/7/17.
+ *
+ * 文首
  */
 @Document
 public class Header implements Serializable {
@@ -20,7 +22,7 @@ public class Header implements Serializable {
      *  案号
      * */
     @Id
-    private String caseNumber;
+    private String caseNum;
 
     /**
      *  经办法院
@@ -65,8 +67,8 @@ public class Header implements Serializable {
     public Header() {
     }
 
-    public Header(String caseNumber, String handlingCourt, String courtLevel, String administrativeDivision, DocumentName nameOfDocument, LocalDate filingYear, CaseType natureOfCase, DocumentType documentType, TrialProcedure trialProcedure) {
-        this.caseNumber = caseNumber;
+    public Header(String caseNum, String handlingCourt, String courtLevel, String administrativeDivision, DocumentName nameOfDocument, LocalDate filingYear, CaseType natureOfCase, DocumentType documentType, TrialProcedure trialProcedure) {
+        this.caseNum = caseNum;
         this.handlingCourt = handlingCourt;
         this.courtLevel = courtLevel;
         this.administrativeDivision = administrativeDivision;
@@ -77,12 +79,12 @@ public class Header implements Serializable {
         this.trialProcedure = trialProcedure;
     }
 
-    public String getCaseNumber() {
-        return caseNumber;
+    public String getCaseNum() {
+        return caseNum;
     }
 
-    public void setCaseNumber(String caseNumber) {
-        this.caseNumber = caseNumber;
+    public void setCaseNum(String caseNum) {
+        this.caseNum = caseNum;
     }
 
     public String getHandlingCourt() {
