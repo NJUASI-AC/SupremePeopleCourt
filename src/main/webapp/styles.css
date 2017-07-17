@@ -508,3 +508,10 @@ footer .footer-bottom p {
 footer .footer-bottom p, footer .footer-bottom p a {
 	color: #666;
 }
+
+.seperator{
+	margin: 10px auto;
+	height: 1px;
+	position: relative;
+	display: block;
+}
