@@ -19,6 +19,11 @@ public class Proceedings implements Serializable {
     private String caseNum;
 
     /**
+     * 诉讼记录
+     */
+    private String records;
+
+    /**
      * 案由
      */
     private String actionCause;
@@ -26,12 +31,12 @@ public class Proceedings implements Serializable {
     /**
      * 开庭审理
      */
-    private boolean isCourtHearing;
+//    private boolean isCourtHearing;
 
     /**
      * 开庭审理信息
      */
-    private String trialInformation;
+//    private String trialInformation;
 
     /**
      * 案由代码
@@ -41,27 +46,27 @@ public class Proceedings implements Serializable {
     /**
      * 立案日期
      */
-    private LocalDate FilingDate;
+//    private LocalDate FilingDate;
 
     /**
      * （一审）案件适用程序
      */
-    private String caseApplicationProcedure;
+//    private String caseApplicationProcedure;
 
     /**
      * 案件来源
      */
-    private String  caseSources;
+//    private String  caseSources;
 
     /**
      * 受理日期
      */
-    private LocalDate handleDate;
+//    private LocalDate handleDate;
 
     /**
      * 简易转普通
      */
-    private boolean isEasyTransfer;
+//    private boolean isEasyTransfer;
 
     public Proceedings() {
     }
@@ -69,14 +74,21 @@ public class Proceedings implements Serializable {
     public Proceedings(String caseNum, String actionCause, boolean isCourtHearing, String trialInformation, String actionCode, LocalDate filingDate, String caseApplicationProcedure, String caseSources, LocalDate handleDate, boolean isEasyTransfer) {
         this.caseNum = caseNum;
         this.actionCause = actionCause;
-        this.isCourtHearing = isCourtHearing;
-        this.trialInformation = trialInformation;
+//        this.isCourtHearing = isCourtHearing;
+//        this.trialInformation = trialInformation;
         this.actionCode = actionCode;
-        FilingDate = filingDate;
-        this.caseApplicationProcedure = caseApplicationProcedure;
-        this.caseSources = caseSources;
-        this.handleDate = handleDate;
-        this.isEasyTransfer = isEasyTransfer;
+//        FilingDate = filingDate;
+//        this.caseApplicationProcedure = caseApplicationProcedure;
+//        this.caseSources = caseSources;
+//        this.handleDate = handleDate;
+//        this.isEasyTransfer = isEasyTransfer;
+    }
+
+    public Proceedings(String caseNum, String records, String actionCause, String actionCode) {
+        this.caseNum = caseNum;
+        this.records = records;
+        this.actionCause = actionCause;
+        this.actionCode = actionCode;
     }
 
     public String getCaseNum() {
@@ -95,21 +107,21 @@ public class Proceedings implements Serializable {
         this.actionCause = actionCause;
     }
 
-    public boolean isCourtHearing() {
-        return isCourtHearing;
-    }
-
-    public void setCourtHearing(boolean courtHearing) {
-        isCourtHearing = courtHearing;
-    }
-
-    public String getTrialInformation() {
-        return trialInformation;
-    }
-
-    public void setTrialInformation(String trialInformation) {
-        this.trialInformation = trialInformation;
-    }
+//    public boolean isCourtHearing() {
+//        return isCourtHearing;
+//    }
+//
+//    public void setCourtHearing(boolean courtHearing) {
+//        isCourtHearing = courtHearing;
+//    }
+//
+//    public String getTrialInformation() {
+//        return trialInformation;
+//    }
+//
+//    public void setTrialInformation(String trialInformation) {
+//        this.trialInformation = trialInformation;
+//    }
 
     public String getActionCode() {
         return actionCode;
@@ -119,43 +131,43 @@ public class Proceedings implements Serializable {
         this.actionCode = actionCode;
     }
 
-    public LocalDate getFilingDate() {
-        return FilingDate;
-    }
-
-    public void setFilingDate(LocalDate filingDate) {
-        FilingDate = filingDate;
-    }
-
-    public String getCaseApplicationProcedure() {
-        return caseApplicationProcedure;
-    }
-
-    public void setCaseApplicationProcedure(String caseApplicationProcedure) {
-        this.caseApplicationProcedure = caseApplicationProcedure;
-    }
-
-    public String getCaseSources() {
-        return caseSources;
-    }
-
-    public void setCaseSources(String caseSources) {
-        this.caseSources = caseSources;
-    }
-
-    public LocalDate getHandleDate() {
-        return handleDate;
-    }
-
-    public void setHandleDate(LocalDate handleDate) {
-        this.handleDate = handleDate;
-    }
-
-    public boolean isEasyTransfer() {
-        return isEasyTransfer;
-    }
-
-    public void setEasyTransfer(boolean easyTransfer) {
-        isEasyTransfer = easyTransfer;
-    }
+//    public LocalDate getFilingDate() {
+//        return FilingDate;
+//    }
+//
+//    public void setFilingDate(LocalDate filingDate) {
+//        FilingDate = filingDate;
+//    }
+//
+//    public String getCaseApplicationProcedure() {
+//        return caseApplicationProcedure;
+//    }
+//
+//    public void setCaseApplicationProcedure(String caseApplicationProcedure) {
+//        this.caseApplicationProcedure = caseApplicationProcedure;
+//    }
+//
+//    public String getCaseSources() {
+//        return caseSources;
+//    }
+//
+//    public void setCaseSources(String caseSources) {
+//        this.caseSources = caseSources;
+//    }
+//
+//    public LocalDate getHandleDate() {
+//        return handleDate;
+//    }
+//
+//    public void setHandleDate(LocalDate handleDate) {
+//        this.handleDate = handleDate;
+//    }
+//
+//    public boolean isEasyTransfer() {
+//        return isEasyTransfer;
+//    }
+//
+//    public void setEasyTransfer(boolean easyTransfer) {
+//        isEasyTransfer = easyTransfer;
+//    }
 }
