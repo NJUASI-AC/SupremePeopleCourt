@@ -18,23 +18,12 @@
     <context:component-scan base-package="com.edu.nju.asi.controller"/>
 
 
-    <!--&lt;!&ndash; task任务扫描注解，用于日常定期更新 &ndash;&gt;-->
+    <!-- task任务扫描注解，用于日常定期更新 -->
     <!--<task:annotation-driven/>-->
     <!--<context:component-scan base-package="com.edu.nju.asi.task"/>-->
 
-    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
-        <!--<property name="messageConverters">-->
-            <!--&lt;!&ndash;<list>&ndash;&gt;-->
-                <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>-->
-                <!--&lt;!&ndash;<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<bean class="org.springframework.http.converter.FormHttpMessageConverter"/>&ndash;&gt;-->
-                <!--&lt;!&ndash;<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>&ndash;&gt;-->
-            <!--&lt;!&ndash;</list>&ndash;&gt;-->
-        <!--</property>-->
-
     <!--</bean>-->
-    <!-- 声明一个拦截器 -->
+     <!--&lt;!&ndash;声明一个拦截器 &ndash;&gt;-->
     <!--<mvc:interceptors>-->
     <!--&lt;!&ndash; 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 &ndash;&gt;-->
     <!--<bean class="org.wx.weixiao.interceptor.URLDecodeInterceptor"/>-->
@@ -51,26 +40,12 @@
         <!--</property>-->
     <!--</bean>-->
 
-    <!--<baddressn id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
+
+    <!-- 配置前端数据格式化Formatter -->
+    <!--<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">-->
         <!--<property name="formatters">-->
             <!--<set>-->
                 <!--<bean class="com.edu.nju.asi.utilities.spring.LocalDateFormatter">-->
-                <!--</bean>-->
-                <!--<bean class="com.edu.nju.asi.utilities.spring.TraceBackCriteriaFormatter">-->
-                <!--</bean>-->
-                <!--<bean class="com.edu.nju.asi.utilities.spring.StockComparisionCriteriaFormatter">-->
-                <!--</bean>-->
-                <!--<bean class="com.edu.nju.asi.utilities.spring.StocksSortCriteriaFormatter">-->
-                <!--</bean>-->
-                <!--<bean class="com.edu.nju.asi.utilities.spring.IndustryTypeFormatter">-->
-                <!--</bean>-->
-                <!--<bean class="com.edu.nju.asi.utilities.spring.AreaTypeFormatter">-->
-                <!--</bean>-->
-                <!--<bean class="com.edu.nju.asi.utilities.spring.StrategyFormatter">-->
-                <!--</bean>-->
-                <!--<bean class="com.edu.nju.asi.utilities.spring.UserFormatter">-->
-                <!--</bean>-->
-                <!--<bean class="com.edu.nju.asi.utilities.spring.OptimizationCriteriaFormatter">-->
                 <!--</bean>-->
             <!--</set>-->
         <!--</property>-->
