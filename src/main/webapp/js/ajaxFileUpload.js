@@ -6,10 +6,10 @@ jQuery.extend({
 
         if (window.ActiveXObject) {
             let io = document.createElement('<iframe id="' + frameId + '" name="' + frameId + '" />');
-            if (typeof uri == 'boolean') {
+            if (typeof uri === 'boolean') {
                 io.src = 'javascript:false';
             }
-            else if (typeof uri == 'string') {
+            else if (typeof uri === 'string') {
                 io.src = uri;
             }
         }
@@ -24,7 +24,7 @@ jQuery.extend({
 
         document.body.appendChild(io);
 
-        return io
+        return io;
     },
     createUploadForm: function (id, fileElementId) {
         //create form
@@ -62,7 +62,7 @@ jQuery.extend({
         let id = new Date().getTime();
         let form = jQuery.createUploadForm(id, s.fileElementId);
         if (s.data) form = jQuery.addOtherRequestsToForm(form, s.data);
-        let io = jQuery.createUploadIframe(id, s.secureuri);
+        // let io = jQuery.createUploadIframe(id, s.secureuri);
         let frameId = 'jUploadFrame' + id;
         let formId = 'jUploadForm' + id;
         // Watch for a new set of requests
@@ -89,13 +89,13 @@ jQuery.extend({
             } catch (e) {
                 jQuery.handleError(s, xml, null, e);
             }
-            if (xml || isTimeout == "timeout") {
+            if (xml || isTimeout === "timeout") {
                 requestDone = true;
                 let status;
                 try {
-                    status = isTimeout != "timeout" ? "success" : "error";
+                    status = isTimeout !== "timeout" ? "success" : "error";
                     // Make sure that the request was successful or notmodified
-                    if (status != "error") {
+                    if (status !== "error") {
                         // process the data (runs the xml through httpData regardless of callback)
                         let data = jQuery.uploadHttpData(xml, s.dataType);
                         // If a local callback was specified, fire it and pass it the data
@@ -180,12 +180,12 @@ jQuery.extend({
 
     uploadHttpData: function (r, type) {
         let data = !type;
-        data = type == "xml" || data ? r.responseXML : r.responseText;
+        data = type === "xml" || data ? r.responseXML : r.responseText;
         // If the type is "script", eval it in global context
-        if (type == "script")
+        if (type === "script")
             jQuery.globalEval(data);
         // Get the JavaScript object, if JSON is used.
-        if (type == "json") {
+        if (type === "json") {
             // If you add mimetype in your response,
             // you have to delete the '<pre></pre>' tag.
             // The pre tag in Chrome has attribute, so have to use regex to remove
@@ -194,9 +194,10 @@ jQuery.extend({
             let am = rx.exec(data);
             //this is the desired data extracted
             data = (am) ? am[1] : "";    //the only submatch or empty
+            eval("data = " + data);
         }
         // evaluate scripts within html
-        if (type == "html")
+        if (type === "html")
             jQuery("<div>").html(data).evalScripts();
         //alert($('param', data).each(function(){alert($(this).attr('value'));}));
         return data;
