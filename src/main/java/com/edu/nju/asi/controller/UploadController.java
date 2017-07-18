@@ -2,6 +2,7 @@ package com.edu.nju.asi.controller;
 
 import com.edu.nju.asi.InfoCarrier.Case;
 import com.edu.nju.asi.service.XMLService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,7 @@ public class UploadController {
             try {
                 response.sendRedirect("/welcome");
             } catch (IOException e) {
-                e.printStackTrace();
+                Logger.getLogger(UploadController.class.getName()).error(e.getMessage());
             }
         }
 
@@ -44,7 +45,7 @@ public class UploadController {
         try {
             wantedCase = xmlService.uploadOnline(uploadedFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.getLogger(UploadController.class.getName()).error(e.getMessage());
             mv.addObject("errorCode", -1);
             mv.setViewName("errorPage");
         }

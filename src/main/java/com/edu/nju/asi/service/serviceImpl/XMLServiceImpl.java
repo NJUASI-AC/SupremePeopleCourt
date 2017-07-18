@@ -12,6 +12,7 @@ import com.edu.nju.asi.utilities.enums.DocumentName;
 import com.edu.nju.asi.utilities.enums.Gender;
 import com.edu.nju.asi.utilities.enums.LitigantType;
 import com.edu.nju.asi.utilities.enums.TrialProcedure;
+import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -78,7 +79,7 @@ public class XMLServiceImpl implements XMLService {
         try {
             document = reader.read(new File(url));
         } catch (DocumentException e) {
-            e.printStackTrace();
+            Logger.getLogger(XMLServiceImpl.class).error(e.getMessage()+"--指定url的文件不存在");
         }
 
         File file = new File(url);

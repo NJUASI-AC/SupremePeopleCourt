@@ -4,9 +4,9 @@
 $().ready(function () {
     $("#file").change(function(){
         let filepath = $(this).val();
-        alert(filepath);
+        console.log(filepath);
         let filename = filepath.substr(filepath.lastIndexOf("\\")+1);
-        alert(filename);
+        console.log(filename);
         $("#filename").text("文件名：" + filename);
 
     });
@@ -14,7 +14,7 @@ $().ready(function () {
     $("#upload").click(function () {
         let file = $("#file").val();
         if(file === "") {
-            alert("No File!");
+            console.log("No File!");
         }
         $.ajaxFileUpload({
             type: "post",
@@ -23,7 +23,7 @@ $().ready(function () {
             fileElementId: "file",
             contentType: "application/json;charset=UTF-8",
             success: function () {
-                alert("success")
+                console.log("success")
             }
         });
 
