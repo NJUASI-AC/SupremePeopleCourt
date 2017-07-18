@@ -4,6 +4,7 @@ import com.edu.nju.asi.InfoCarrier.*;
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.*;
 import com.edu.nju.asi.service.XMLService;
+import com.edu.nju.asi.utilities.NumberConvert;
 import com.edu.nju.asi.utilities.enums.DocumentName;
 import com.edu.nju.asi.utilities.enums.Gender;
 import com.edu.nju.asi.utilities.enums.LitigantType;
@@ -61,7 +62,7 @@ public class XMLServiceImpl implements XMLService {
         Case wanted = parseXML(thisPath);
 
         boolean deleteResult = thisFile.delete();
-        System.out.println(deleteResult);
+        
         return wanted;
     }
 
@@ -72,7 +73,7 @@ public class XMLServiceImpl implements XMLService {
     public Case parseXML(String url) {
         SAXReader reader = new SAXReader();
         try {
-            document = reader.read(url);
+            document = reader.read(new File(url));
         } catch (DocumentException e) {
             e.printStackTrace();
         }
@@ -134,13 +135,19 @@ public class XMLServiceImpl implements XMLService {
                         participant.setRemarriage(true);
                 }
                 if (birth != null){
-                    System.out.println(birth.getPath());
+                    NumberConvert numberConvert = new NumberConvert();
 
-                    String year = birth.element("Year").valueOf("@value");
-                    String month = birth.element("Month").valueOf("@value");
-                    String day = birth.element("Day").valueOf("@value");
+                    String year = numberConvert.convert(birth.element("Year").valueOf("@value"));
+                    String month = numberConvert.convert(birth.element("Month").valueOf("@value"));
+                    String day = numberConvert.convert(birth.element("Day").valueOf("@value"));
 
-                    participant.setBirth(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
+                    if(day.length()>=3){
+                        day = day.substring(day.length()-2,day.length());
+                    }
+
+                    if(!year.equals("")&&!month.equals("")&&!day.equals("")) {
+                        participant.setBirth(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
+                    }
                 }
                 litigants.add(participant);
             }
@@ -174,7 +181,11 @@ public class XMLServiceImpl implements XMLService {
 
             Node plaintiffClaim = findSingleNode("YGSCD");
             Node defendantArgue = findSingleNode("BGBCD");
-            Node fact = findSingleNode("CMSSD");
+            List<Node> factNodes = document.selectNodes("//CMSSD");
+            List<String> facts = new ArrayList<>();
+            for(Node node : factNodes){
+                facts.add(node.valueOf("@value"));
+            }
             List<Node> evidenceNodes = document.selectNodes("//ZJD");
             List<String> evidence = new ArrayList<>();
             for (Node node : evidenceNodes){
@@ -184,7 +195,7 @@ public class XMLServiceImpl implements XMLService {
             caseBasic.setCaseID(caseID);
             if(plaintiffClaim != null) {caseBasic.setPlaintiffClaim(plaintiffClaim.valueOf("@value"));}
             if(defendantArgue != null) {caseBasic.setDefendantArgue(defendantArgue.valueOf("@value"));}
-            if(fact != null) {caseBasic.setFact(fact.valueOf("@value"));}
+            if(facts.size() != 0) {caseBasic.setFacts(facts);}
             if(evidence.size() != 0) {caseBasic.setEvidence(evidence);}
         }
 
@@ -198,7 +209,7 @@ public class XMLServiceImpl implements XMLService {
             for (Iterator<Element> laws = cpfxgc.elementIterator("FLFTMC"); laws.hasNext();){
                 Element law = laws.next();
                 String lawName = law.valueOf("@value");
-                System.out.println(lawName);
+                
                 List<Entry> entries = new ArrayList<>();
                 for (Iterator<Element> items = law.elementIterator("TM"); items.hasNext();){
                     Element item = items.next();

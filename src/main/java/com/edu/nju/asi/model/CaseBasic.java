@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -70,7 +69,7 @@ public class CaseBasic implements Serializable {
     /**
      * 查明事实段
      */
-    private String fact;
+    private List<String> facts;
 
     public CaseBasic() {
     }
@@ -107,11 +106,11 @@ public class CaseBasic implements Serializable {
         this.evidence = evidence;
     }
 
-    public String getFact() {
-        return fact;
+    public List<String> getFacts() {
+        return facts;
     }
 
-    public void setFact(String fact) {
-        this.fact = fact;
+    public void setFacts(List<String> facts) {
+        this.facts = facts;
     }
 }
