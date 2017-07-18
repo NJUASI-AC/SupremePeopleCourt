@@ -36,11 +36,44 @@ public class XMLServiceImpl implements XMLService {
     Document document;
 
     public XMLServiceImpl() {
-//        this.document = document;
     }
 
     @Override
-    public Case uploadOffline(String url) {
+    public void uploadOffline(String url) {
+        Case caseParsed = parseXML(url);
+
+        //插入数据库
+        if (caseParsed.getFullText() != null) {DaoManager.fullTextDao.insert(caseParsed.getFullText());}
+        if (caseParsed.getHeader() != null) {DaoManager.headerDao.insert(caseParsed.getHeader());}
+        if (caseParsed.getLitigationParticipants() != null) {DaoManager.litigationParticipantsDao.insert(caseParsed.getLitigationParticipants());}
+        if (caseParsed.getCaseBasic() != null) {DaoManager.caseBasicDao.insert(caseParsed.getCaseBasic());}
+        if (caseParsed.getRefereeAnalysisProcess() != null) {DaoManager.refereeAnalysisProcessDao.insert(caseParsed.getRefereeAnalysisProcess());}
+        if (caseParsed.getJudgementResult() != null) {DaoManager.judgementResultDao.insert(caseParsed.getJudgementResult());}
+    }
+
+    @Override
+    public Case uploadOnline(MultipartFile uploadedFile) throws IOException {
+        if (uploadedFile.isEmpty()) {
+            return null;
+        }
+
+        // 先转储文件再解析，最后删掉源文件
+        String thisPath = uploadedFile.getName();
+        File thisFile = new File(thisPath);
+
+        uploadedFile.transferTo(thisFile);
+        Case wanted = parseXML(thisPath);
+
+        boolean deleteResult = thisFile.delete();
+        System.out.println(deleteResult);
+        return wanted;
+    }
+
+    private Node findSingleNode(String node) {
+        return document.selectSingleNode("//" + node);
+    }
+
+    public Case parseXML(String url) {
         SAXReader reader = new SAXReader();
         try {
             document = reader.read(url);
@@ -198,36 +231,6 @@ public class XMLServiceImpl implements XMLService {
         JudgementResult judgementResult = null;
         if(result != null){judgementResult = new JudgementResult(caseID, result.valueOf("@value"));}
 
-        //插入数据库
-        if (fullText != null) {DaoManager.fullTextDao.insert(fullText);}
-        if (header != null) {DaoManager.headerDao.insert(header);}
-        if (litigationParticipants != null) {DaoManager.litigationParticipantsDao.insert(litigationParticipants);}
-        if (caseBasic != null) {DaoManager.caseBasicDao.insert(caseBasic);}
-        if (refereeAnalysisProcess != null) {DaoManager.refereeAnalysisProcessDao.insert(refereeAnalysisProcess);}
-        if (judgementResult != null) {DaoManager.judgementResultDao.insert(judgementResult);}
-
         return new Case(fullText, header, litigationParticipants, proceedings, caseBasic, refereeAnalysisProcess, judgementResult, new Tailor());
-    }
-
-    @Override
-    public Case uploadOnline(MultipartFile uploadedFile) throws IOException {
-        if (uploadedFile.isEmpty()) {
-            return null;
-        }
-
-        // 先转储文件再解析，最后删掉源文件
-        String thisPath = uploadedFile.getName();
-        File thisFile = new File(thisPath);
-
-        uploadedFile.transferTo(thisFile);
-        Case wanted = uploadOffline(thisPath);
-
-        boolean deleteResult = thisFile.delete();
-        System.out.println(deleteResult);
-        return wanted;
-    }
-
-    private Node findSingleNode(String node) {
-        return document.selectSingleNode("//" + node);
     }
 }

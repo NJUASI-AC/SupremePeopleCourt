@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Byron Dong on 2017/7/17.
  */
@@ -39,5 +41,24 @@ public class LitigationParticipantsDaoImpl implements LitigationParticipantsDao 
     public LitigationParticipants find(String caseNum) {
         Query query = new Query(Criteria.where("caseNum").is(caseNum));
         return mongoTemplate.findOne(query, LitigationParticipants.class, collectionName);
+    }
+
+    /**
+     * 批量插入数据
+     *
+     * @param litigationParticipants info列表
+     * @return CaseBasic
+     */
+    @Override
+    public void insertAll(List<LitigationParticipants> litigationParticipants) {
+        mongoTemplate.insert(litigationParticipants, collectionName);
+    }
+
+    /**
+     * 删除集合
+     */
+    @Override
+    public void dropCollection() {
+        mongoTemplate.dropCollection(collectionName);
     }
 }

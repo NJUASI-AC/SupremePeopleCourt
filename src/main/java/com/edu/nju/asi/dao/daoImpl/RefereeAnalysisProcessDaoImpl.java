@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Byron Dong on 2017/7/17.
  */
@@ -39,5 +41,24 @@ public class RefereeAnalysisProcessDaoImpl implements RefereeAnalysisProcessDao 
     public RefereeAnalysisProcess find(String caseNum) {
         Query query = new Query(Criteria.where("caseNum").is(caseNum));
         return mongoTemplate.findOne(query, RefereeAnalysisProcess.class, collectionName);
+    }
+
+    /**
+     * 批量插入数据
+     *
+     * @param refereeAnalysisProcesses info列表
+     * @return CaseBasic
+     */
+    @Override
+    public void insertAll(List<RefereeAnalysisProcess> refereeAnalysisProcesses) {
+        mongoTemplate.insert(refereeAnalysisProcesses, collectionName);
+    }
+
+    /**
+     * 删除集合
+     */
+    @Override
+    public void dropCollection() {
+        mongoTemplate.dropCollection(collectionName);
     }
 }

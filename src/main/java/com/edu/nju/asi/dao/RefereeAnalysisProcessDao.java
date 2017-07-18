@@ -2,6 +2,8 @@ package com.edu.nju.asi.dao;
 
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 
+import java.util.List;
+
 /**
  * Created by Byron Dong on 2017/7/17.
  */
@@ -19,5 +21,17 @@ public interface RefereeAnalysisProcessDao {
      * @return CaseBasic
      */
     RefereeAnalysisProcess find(String caseNum);
+
+    /**
+     * 批量插入数据
+     * @param refereeAnalysisProcesses info列表
+     * @return CaseBasic
+     */
+    void insertAll(List<RefereeAnalysisProcess> refereeAnalysisProcesses);
+
+    /**
+     * 删除集合
+     */
+    void dropCollection();
 
 }
