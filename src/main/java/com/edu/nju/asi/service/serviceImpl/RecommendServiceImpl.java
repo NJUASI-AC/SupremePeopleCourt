@@ -81,7 +81,7 @@ public class RecommendServiceImpl implements RecommendService {
         List<Entry> legalEntry;
         List<String> entries;
         RefereeAnalysisProcess refereeAnalysisProcess;
-        CaseID caseID;
+        String caseID;
         String actionCause;
         String record;
 

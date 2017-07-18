@@ -15,7 +15,7 @@ import java.util.List;
 @Document
 public class RefereeAnalysisProcess implements Serializable {
 
-    public RefereeAnalysisProcess(CaseID caseID, String closeCaseType, List<LegalArticle> legalArticles) {
+    public RefereeAnalysisProcess(String caseID, String closeCaseType, List<LegalArticle> legalArticles) {
         this.caseID = caseID;
         this.closeCaseType = closeCaseType;
         this.legalArticles = legalArticles;
