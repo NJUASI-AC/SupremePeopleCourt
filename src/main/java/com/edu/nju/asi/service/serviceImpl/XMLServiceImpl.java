@@ -11,7 +11,6 @@ import com.edu.nju.asi.utilities.enums.DocumentName;
 import com.edu.nju.asi.utilities.enums.Gender;
 import com.edu.nju.asi.utilities.enums.LitigantType;
 import com.edu.nju.asi.utilities.enums.TrialProcedure;
-import com.sun.istack.internal.NotNull;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -81,7 +80,6 @@ public class XMLServiceImpl implements XMLService {
             e.printStackTrace();
         }
 
-        @NotNull
         String caseID = findSingleNode("AH").valueOf("@value");
 
         //全文
@@ -131,7 +129,7 @@ public class XMLServiceImpl implements XMLService {
                 if (degree != null) participant.setDegree(degree.valueOf("@value"));
                 if (post != null) participant.setPost(post.element("ZW").valueOf("@value"));
                 if (remarriage != null){
-                    if(remarriage.equals("是"))
+                    if(remarriage.valueOf("@value").equals("是"))
                         participant.setRemarriage(true);
                 }
                 if (birth != null){
