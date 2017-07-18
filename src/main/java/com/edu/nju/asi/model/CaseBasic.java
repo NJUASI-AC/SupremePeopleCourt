@@ -69,12 +69,12 @@ public class CaseBasic implements Serializable {
     /**
      * 查明事实段
      */
-    private String fact;
+    private List<String> facts;
 
     public CaseBasic() {
     }
 
-    public CaseBasic(String caseID, String plaintiffClaim, LocalDateTime accidentTime, String accidentAddress, String defendant, String aggrievedAddress, String aggrievedJob, String defendantArgue, List<String> evidence, String fact) {
+    public CaseBasic(String caseID, String plaintiffClaim, LocalDateTime accidentTime, String accidentAddress, String defendant, String aggrievedAddress, String aggrievedJob, String defendantArgue, List<String> evidence, List<String> facts) {
         this.caseID = caseID;
         this.plaintiffClaim = plaintiffClaim;
 //        this.accidentTime = accidentTime;
@@ -84,15 +84,15 @@ public class CaseBasic implements Serializable {
 //        this.aggrievedJob = aggrievedJob;
         this.defendantArgue = defendantArgue;
         this.evidence = evidence;
-        this.fact = fact;
+        this.facts = facts;
     }
 
-    public CaseBasic(String caseID, String plaintiffClaim, String defendantArgue, List<String> evidence, String fact) {
+    public CaseBasic(String caseID, String plaintiffClaim, String defendantArgue, List<String> evidence, List<String> facts) {
         this.caseID = caseID;
         this.plaintiffClaim = plaintiffClaim;
         this.defendantArgue = defendantArgue;
         this.evidence = evidence;
-        this.fact = fact;
+        this.facts = facts;
     }
 
     public String getCaseID() {
@@ -167,11 +167,11 @@ public class CaseBasic implements Serializable {
         this.evidence = evidence;
     }
 
-    public String getFact() {
-        return fact;
+    public List<String> getFacts() {
+        return facts;
     }
 
-    public void setFact(String fact) {
-        this.fact = fact;
+    public void setFacts(List<String> facts) {
+        this.facts = facts;
     }
 }
