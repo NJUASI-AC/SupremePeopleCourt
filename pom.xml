@@ -136,16 +136,20 @@
             <version>3.4.2</version>
         </dependency>
 
+        <!-- jstl -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>${javax.servlet.jstl}</version>
+            <version>1.2</version>
         </dependency>
+
+        <!-- standard -->
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
-            <version>${taglibs.standard}</version>
+            <version>1.1.2</version>
         </dependency>
+
     </dependencies>
 
 
