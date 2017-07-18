@@ -17,10 +17,10 @@ public interface FullTextDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案件名称
      * @return CaseBasic
      */
-    FullText find(String caseNum);
+    FullText find(String caseID);
 
     /**
      * 批量插入数据

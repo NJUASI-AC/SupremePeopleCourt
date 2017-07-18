@@ -81,7 +81,8 @@ public class XMLServiceImpl implements XMLService {
             e.printStackTrace();
         }
 
-        String caseID = url.substring(url.indexOf("("),url.indexOf("号")+1);
+        File file = new File(url);
+        String caseID = file.getName().substring(0, file.getName().indexOf("."));
 
         //全文
         FullText fullText = null;
@@ -92,6 +93,8 @@ public class XMLServiceImpl implements XMLService {
         //文首
         Header header = null;
 
+        String caseNum = file.getName().substring(0, file.getName().indexOf("号"));
+        assert caseNum != null : "案号为空";
         Node handlingCourt = findSingleNode("JBFY");
         Node nameOfDocument = findSingleNode("WSMC");
         Node trialProcedure = findSingleNode("SPCX");
@@ -99,6 +102,7 @@ public class XMLServiceImpl implements XMLService {
         if(handlingCourt!=null || nameOfDocument!=null || trialProcedure!=null){
             header = new Header();
             header.setCaseID(caseID);
+            header.setCaseNum(caseNum);
             if(handlingCourt != null) {header.setHandlingCourt(handlingCourt.valueOf("@value"));}
             if(nameOfDocument != null) {header.setNameOfDocument(DocumentName.getEnum(nameOfDocument.valueOf("@value")));}
             if(trialProcedure != null) {header.setTrialProcedure(TrialProcedure.getEnum(trialProcedure.valueOf("@value")));}

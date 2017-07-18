@@ -16,7 +16,7 @@ import java.util.List;
 public class JudgementResult implements Serializable{
 
     /**
-     * 案号
+     * 案件ID（文件名唯一）
      */
     @Id
     private String caseID;

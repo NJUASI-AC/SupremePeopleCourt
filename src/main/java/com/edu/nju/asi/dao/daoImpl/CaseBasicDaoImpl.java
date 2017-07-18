@@ -36,12 +36,12 @@ public class CaseBasicDaoImpl implements CaseBasicDao {
     /**
      * 根据条件查找一个
      *
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
     @Override
-    public CaseBasic find(String caseNum) {
-        Query query = new Query(Criteria.where("caseNum").is(caseNum));
+    public CaseBasic find(String caseID) {
+        Query query = new Query(Criteria.where("caseID").is(caseID));
         return mongoTemplate.findOne(query, CaseBasic.class, collectionName);
     }
 

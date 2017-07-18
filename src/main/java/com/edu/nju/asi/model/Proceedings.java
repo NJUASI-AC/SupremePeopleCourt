@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Proceedings implements Serializable {
 
     /**
-     * 案号
+     * 案件ID（文件名唯一）
      */
     @Id
     private String caseID;
@@ -89,22 +89,6 @@ public class Proceedings implements Serializable {
         this.actionCause = actionCause;
     }
 
-//    public boolean isCourtHearing() {
-//        return isCourtHearing;
-//    }
-//
-//    public void setCourtHearing(boolean courtHearing) {
-//        isCourtHearing = courtHearing;
-//    }
-//
-//    public String getTrialInformation() {
-//        return trialInformation;
-//    }
-//
-//    public void setTrialInformation(String trialInformation) {
-//        this.trialInformation = trialInformation;
-//    }
-
     public String getActionCode() {
         return actionCode;
     }
@@ -113,43 +97,4 @@ public class Proceedings implements Serializable {
         this.actionCode = actionCode;
     }
 
-//    public LocalDate getFilingDate() {
-//        return FilingDate;
-//    }
-//
-//    public void setFilingDate(LocalDate filingDate) {
-//        FilingDate = filingDate;
-//    }
-//
-//    public String getCaseApplicationProcedure() {
-//        return caseApplicationProcedure;
-//    }
-//
-//    public void setCaseApplicationProcedure(String caseApplicationProcedure) {
-//        this.caseApplicationProcedure = caseApplicationProcedure;
-//    }
-//
-//    public String getCaseSources() {
-//        return caseSources;
-//    }
-//
-//    public void setCaseSources(String caseSources) {
-//        this.caseSources = caseSources;
-//    }
-//
-//    public LocalDate getHandleDate() {
-//        return handleDate;
-//    }
-//
-//    public void setHandleDate(LocalDate handleDate) {
-//        this.handleDate = handleDate;
-//    }
-//
-//    public boolean isEasyTransfer() {
-//        return isEasyTransfer;
-//    }
-//
-//    public void setEasyTransfer(boolean easyTransfer) {
-//        isEasyTransfer = easyTransfer;
-//    }
 }

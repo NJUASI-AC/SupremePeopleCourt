@@ -17,10 +17,10 @@ public interface CaseBasicDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案件ID
      * @return CaseBasic
      */
-    CaseBasic find(String caseNum);
+    CaseBasic find(String caseID);
 
     /**
      * 批量插入数据

@@ -16,7 +16,7 @@ import java.util.List;
 public class LitigationParticipants implements Serializable {
 
     /**
-     * 案号
+     * 案件ID（文件名唯一）
      */
     @Id
     private String caseID;

@@ -34,12 +34,12 @@ public class JudgementResultDaoImpl implements JudgementResultDao {
     /**
      * 根据条件查找一个
      *
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
     @Override
-    public JudgementResult find(String caseNum) {
-        Query query = new Query(Criteria.where("caseNum").is(caseNum));
+    public JudgementResult find(String caseID) {
+        Query query = new Query(Criteria.where("caseID").is(caseID));
         return mongoTemplate.findOne(query, JudgementResult.class, collectionName);
     }
 

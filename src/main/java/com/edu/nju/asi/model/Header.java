@@ -18,10 +18,15 @@ import java.io.Serializable;
 public class Header implements Serializable {
 
     /**
-     *  案号
+     * 案件ID（文件名唯一）
      */
     @Id
     private String caseID;
+
+    /**
+     * 案号
+     */
+    private String caseNum;
 
     /**
      * 经办法院
@@ -74,6 +79,14 @@ public class Header implements Serializable {
         this.caseID = caseID;
     }
 
+    public String getCaseNum() {
+        return caseNum;
+    }
+
+    public void setCaseNum(String caseNum) {
+        this.caseNum = caseNum;
+    }
+
     public String getHandlingCourt() {
         return handlingCourt;
     }
@@ -82,22 +95,6 @@ public class Header implements Serializable {
         this.handlingCourt = handlingCourt;
     }
 
-//    public String getCourtLevel() {
-//        return courtLevel;
-//    }
-//
-//    public void setCourtLevel(String courtLevel) {
-//        this.courtLevel = courtLevel;
-//    }
-//
-//    public String getAdministrativeDivision() {
-//        return administrativeDivision;
-//    }
-//
-//    public void setAdministrativeDivision(String administrativeDivision) {
-//        this.administrativeDivision = administrativeDivision;
-//    }
-
     public DocumentName getNameOfDocument() {
         return nameOfDocument;
     }
@@ -105,30 +102,6 @@ public class Header implements Serializable {
     public void setNameOfDocument(DocumentName nameOfDocument) {
         this.nameOfDocument = nameOfDocument;
     }
-
-//    public int getFilingYear() {
-//        return filingYear;
-//    }
-//
-//    public void setFilingYear(int filingYear) {
-//        this.filingYear = filingYear;
-//    }
-//
-//    public CaseType getNatureOfCase() {
-//        return natureOfCase;
-//    }
-//
-//    public void setNatureOfCase(CaseType natureOfCase) {
-//        this.natureOfCase = natureOfCase;
-//    }
-//
-//    public DocumentType getDocumentType() {
-//        return documentType;
-//    }
-//
-//    public void setDocumentType(DocumentType documentType) {
-//        this.documentType = documentType;
-//    }
 
     public TrialProcedure getTrialProcedure() {
         return trialProcedure;

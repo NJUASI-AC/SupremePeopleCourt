@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class FullText implements Serializable{
 
     /**
-     * 案号
+     * 案件ID（文件名唯一）
      */
     @Id
     private String caseID;
