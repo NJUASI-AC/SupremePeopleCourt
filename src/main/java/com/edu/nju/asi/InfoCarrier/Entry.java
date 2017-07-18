@@ -10,6 +10,11 @@ import java.util.List;
  */
 public class Entry implements Serializable{
 
+    public Entry(String name, List<String> entries) {
+        this.name = name;
+        this.entries = entries;
+    }
+
     /**
      * 条目名称
      */
