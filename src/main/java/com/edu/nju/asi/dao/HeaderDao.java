@@ -1,5 +1,6 @@
 package com.edu.nju.asi.dao;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.model.Header;
 
 import java.util.List;
@@ -17,10 +18,10 @@ public interface HeaderDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
-    Header find(String caseNum);
+    Header find(CaseID caseID);
 
     /**
      * 批量插入数据

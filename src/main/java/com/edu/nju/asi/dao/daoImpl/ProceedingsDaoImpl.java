@@ -1,5 +1,7 @@
 package com.edu.nju.asi.dao.daoImpl;
 
+import com.edu.nju.asi.InfoCarrier.Case;
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.dao.ProceedingsDao;
 import com.edu.nju.asi.model.Proceedings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +36,12 @@ public class ProceedingsDaoImpl implements ProceedingsDao {
     /**
      * 根据条件查找一个
      *
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
     @Override
-    public Proceedings find(String caseNum) {
-        Query query = new Query(Criteria.where("caseNum").is(caseNum));
+    public Proceedings find(CaseID caseID) {
+        Query query = new Query(Criteria.where("caseID").is(caseID));
         return mongoTemplate.findOne(query, Proceedings.class, collectionName);
     }
 

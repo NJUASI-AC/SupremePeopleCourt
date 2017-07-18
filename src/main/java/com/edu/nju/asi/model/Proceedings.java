@@ -1,5 +1,6 @@
 package com.edu.nju.asi.model;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,7 +19,7 @@ public class Proceedings implements Serializable {
      * 案号
      */
     @Id
-    private String caseID;
+    private CaseID caseID;
 
     /**
      * 诉讼记录
@@ -73,11 +74,11 @@ public class Proceedings implements Serializable {
     public Proceedings() {
     }
 
-    public String getCaseID() {
+    public CaseID getCaseID() {
         return caseID;
     }
 
-    public void setCaseID(String caseID) {
+    public void setCaseID(CaseID caseID) {
         this.caseID = caseID;
     }
 
@@ -89,22 +90,6 @@ public class Proceedings implements Serializable {
         this.actionCause = actionCause;
     }
 
-//    public boolean isCourtHearing() {
-//        return isCourtHearing;
-//    }
-//
-//    public void setCourtHearing(boolean courtHearing) {
-//        isCourtHearing = courtHearing;
-//    }
-//
-//    public String getTrialInformation() {
-//        return trialInformation;
-//    }
-//
-//    public void setTrialInformation(String trialInformation) {
-//        this.trialInformation = trialInformation;
-//    }
-
     public String getActionCode() {
         return actionCode;
     }
@@ -113,43 +98,4 @@ public class Proceedings implements Serializable {
         this.actionCode = actionCode;
     }
 
-//    public LocalDate getFilingDate() {
-//        return FilingDate;
-//    }
-//
-//    public void setFilingDate(LocalDate filingDate) {
-//        FilingDate = filingDate;
-//    }
-//
-//    public String getCaseApplicationProcedure() {
-//        return caseApplicationProcedure;
-//    }
-//
-//    public void setCaseApplicationProcedure(String caseApplicationProcedure) {
-//        this.caseApplicationProcedure = caseApplicationProcedure;
-//    }
-//
-//    public String getCaseSources() {
-//        return caseSources;
-//    }
-//
-//    public void setCaseSources(String caseSources) {
-//        this.caseSources = caseSources;
-//    }
-//
-//    public LocalDate getHandleDate() {
-//        return handleDate;
-//    }
-//
-//    public void setHandleDate(LocalDate handleDate) {
-//        this.handleDate = handleDate;
-//    }
-//
-//    public boolean isEasyTransfer() {
-//        return isEasyTransfer;
-//    }
-//
-//    public void setEasyTransfer(boolean easyTransfer) {
-//        isEasyTransfer = easyTransfer;
-//    }
 }

@@ -1,5 +1,6 @@
 package com.edu.nju.asi.dao.daoImpl;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.dao.RefereeAnalysisProcessDao;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,12 @@ public class RefereeAnalysisProcessDaoImpl implements RefereeAnalysisProcessDao 
     /**
      * 根据条件查找一个
      *
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
     @Override
-    public RefereeAnalysisProcess find(String caseNum) {
-        Query query = new Query(Criteria.where("caseNum").is(caseNum));
+    public RefereeAnalysisProcess find(CaseID caseID) {
+        Query query = new Query(Criteria.where("caseID").is(caseID));
         return mongoTemplate.findOne(query, RefereeAnalysisProcess.class, collectionName);
     }
 

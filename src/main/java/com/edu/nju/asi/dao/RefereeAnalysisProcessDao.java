@@ -1,5 +1,6 @@
 package com.edu.nju.asi.dao;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 
 import java.util.List;
@@ -17,10 +18,10 @@ public interface RefereeAnalysisProcessDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
-    RefereeAnalysisProcess find(String caseNum);
+    RefereeAnalysisProcess find(CaseID caseID);
 
     /**
      * 批量插入数据

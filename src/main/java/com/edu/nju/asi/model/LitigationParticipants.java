@@ -1,5 +1,6 @@
 package com.edu.nju.asi.model;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.InfoCarrier.LitigationParticipant;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,7 +20,7 @@ public class LitigationParticipants implements Serializable {
      * 案号
      */
     @Id
-    private String caseID;
+    private CaseID caseID;
 
     /**
      * 当事人
@@ -29,16 +30,16 @@ public class LitigationParticipants implements Serializable {
     public LitigationParticipants() {
     }
 
-    public LitigationParticipants(String caseID, List<LitigationParticipant> litigants) {
+    public LitigationParticipants(CaseID caseID, List<LitigationParticipant> litigants) {
         this.caseID = caseID;
         this.litigants = litigants;
     }
 
-    public String getCaseID() {
+    public CaseID getCaseID() {
         return caseID;
     }
 
-    public void setCaseID(String caseID) {
+    public void setCaseID(CaseID caseID) {
         this.caseID = caseID;
     }
 

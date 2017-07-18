@@ -1,5 +1,6 @@
 package com.edu.nju.asi.model;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.utilities.enums.CaseType;
 import com.edu.nju.asi.utilities.enums.DocumentName;
 import com.edu.nju.asi.utilities.enums.DocumentType;
@@ -21,7 +22,7 @@ public class Header implements Serializable {
      *  案号
      */
     @Id
-    private String caseID;
+    private CaseID caseID;
 
     /**
      * 经办法院
@@ -37,11 +38,6 @@ public class Header implements Serializable {
      * 行政区划（省）
      */
 //    private String administrativeDivision;
-
-    /**
-     * 文书名称
-     */
-    private DocumentName nameOfDocument;
 
     /**
      * 立案年度
@@ -66,11 +62,11 @@ public class Header implements Serializable {
     public Header() {
     }
 
-    public String getCaseID() {
+    public CaseID getCaseID() {
         return caseID;
     }
 
-    public void setCaseID(String caseID) {
+    public void setCaseID(CaseID caseID) {
         this.caseID = caseID;
     }
 
@@ -81,54 +77,6 @@ public class Header implements Serializable {
     public void setHandlingCourt(String handlingCourt) {
         this.handlingCourt = handlingCourt;
     }
-
-//    public String getCourtLevel() {
-//        return courtLevel;
-//    }
-//
-//    public void setCourtLevel(String courtLevel) {
-//        this.courtLevel = courtLevel;
-//    }
-//
-//    public String getAdministrativeDivision() {
-//        return administrativeDivision;
-//    }
-//
-//    public void setAdministrativeDivision(String administrativeDivision) {
-//        this.administrativeDivision = administrativeDivision;
-//    }
-
-    public DocumentName getNameOfDocument() {
-        return nameOfDocument;
-    }
-
-    public void setNameOfDocument(DocumentName nameOfDocument) {
-        this.nameOfDocument = nameOfDocument;
-    }
-
-//    public int getFilingYear() {
-//        return filingYear;
-//    }
-//
-//    public void setFilingYear(int filingYear) {
-//        this.filingYear = filingYear;
-//    }
-//
-//    public CaseType getNatureOfCase() {
-//        return natureOfCase;
-//    }
-//
-//    public void setNatureOfCase(CaseType natureOfCase) {
-//        this.natureOfCase = natureOfCase;
-//    }
-//
-//    public DocumentType getDocumentType() {
-//        return documentType;
-//    }
-//
-//    public void setDocumentType(DocumentType documentType) {
-//        this.documentType = documentType;
-//    }
 
     public TrialProcedure getTrialProcedure() {
         return trialProcedure;

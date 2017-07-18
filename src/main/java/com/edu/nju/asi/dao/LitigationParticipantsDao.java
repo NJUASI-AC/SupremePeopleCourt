@@ -1,5 +1,6 @@
 package com.edu.nju.asi.dao;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.model.JudgementResult;
 import com.edu.nju.asi.model.LitigationParticipants;
 
@@ -18,10 +19,10 @@ public interface LitigationParticipantsDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
-    LitigationParticipants find(String caseNum);
+    LitigationParticipants find(CaseID caseID);
 
     /**
      * 批量插入数据

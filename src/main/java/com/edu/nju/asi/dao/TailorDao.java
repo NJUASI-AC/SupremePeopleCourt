@@ -1,5 +1,6 @@
 package com.edu.nju.asi.dao;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.model.Tailor;
 
 /**
@@ -15,9 +16,9 @@ public interface TailorDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
-    Tailor find(String caseNum);
+    Tailor find(CaseID caseID);
 
 }

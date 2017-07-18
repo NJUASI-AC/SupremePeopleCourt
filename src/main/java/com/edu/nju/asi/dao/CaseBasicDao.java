@@ -1,5 +1,6 @@
 package com.edu.nju.asi.dao;
 
+import com.edu.nju.asi.InfoCarrier.CaseID;
 import com.edu.nju.asi.model.CaseBasic;
 
 import java.util.List;
@@ -17,10 +18,10 @@ public interface CaseBasicDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
-    CaseBasic find(String caseNum);
+    CaseBasic find(CaseID caseID);
 
     /**
      * 批量插入数据

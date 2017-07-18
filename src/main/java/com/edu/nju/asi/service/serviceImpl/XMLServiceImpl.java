@@ -1,9 +1,6 @@
 package com.edu.nju.asi.service.serviceImpl;
 
-import com.edu.nju.asi.InfoCarrier.Case;
-import com.edu.nju.asi.InfoCarrier.Entry;
-import com.edu.nju.asi.InfoCarrier.LegalArticle;
-import com.edu.nju.asi.InfoCarrier.LitigationParticipant;
+import com.edu.nju.asi.InfoCarrier.*;
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.*;
 import com.edu.nju.asi.service.XMLService;
@@ -80,7 +77,11 @@ public class XMLServiceImpl implements XMLService {
             e.printStackTrace();
         }
 
-        String caseID = findSingleNode("AH").valueOf("@value");
+
+        String caseNum = url.substring(url.indexOf("("), url.indexOf("号"));
+        Node nameOfDocument = findSingleNode("WSMC");
+        assert nameOfDocument != null : "案件名称为null";
+        CaseID caseID = new CaseID(caseNum, DocumentName.getEnum(nameOfDocument.valueOf("@value")));
 
         //全文
         FullText fullText = null;
@@ -92,14 +93,14 @@ public class XMLServiceImpl implements XMLService {
         Header header = null;
 
         Node handlingCourt = findSingleNode("JBFY");
-        Node nameOfDocument = findSingleNode("WSMC");
+
         Node trialProcedure = findSingleNode("SPCX");
 
         if(handlingCourt!=null || nameOfDocument!=null || trialProcedure!=null){
             header = new Header();
             header.setCaseID(caseID);
             if(handlingCourt != null) {header.setHandlingCourt(handlingCourt.valueOf("@value"));}
-            if(nameOfDocument != null) {header.setNameOfDocument(DocumentName.getEnum(nameOfDocument.valueOf("@value")));}
+
             if(trialProcedure != null) {header.setTrialProcedure(TrialProcedure.getEnum(trialProcedure.valueOf("@value")));}
         }
 
