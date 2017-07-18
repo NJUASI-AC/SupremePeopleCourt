@@ -17,9 +17,8 @@ import java.util.List;
  */
 public class RecommendCase {
 
-    public RecommendCase(String caseID, DocumentName nameOfDocument, String records, String actionCause, List<String> evidence, List<String> fact, RefereeAnalysisProcess refereeAnalysisProcess) {
+    public RecommendCase(String caseID, String records, String actionCause, List<String> evidence, List<String> fact, RefereeAnalysisProcess refereeAnalysisProcess) {
         this.caseID = caseID;
-        this.nameOfDocument = nameOfDocument;
         this.records = records;
         this.actionCause = actionCause;
         this.evidence = evidence;
@@ -34,10 +33,6 @@ public class RecommendCase {
     @Id
     private String caseID;
 
-    /**
-     * 文书名称
-     */
-    private DocumentName nameOfDocument;
 
     /**
      * 诉讼记录
@@ -73,14 +68,6 @@ public class RecommendCase {
 
     public void setCaseID(String caseID) {
         this.caseID = caseID;
-    }
-
-    public DocumentName getNameOfDocument() {
-        return nameOfDocument;
-    }
-
-    public void setNameOfDocument(DocumentName nameOfDocument) {
-        this.nameOfDocument = nameOfDocument;
     }
 
     public String getRecords() {
