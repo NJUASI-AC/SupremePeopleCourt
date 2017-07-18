@@ -66,25 +66,6 @@ public class Header implements Serializable {
     public Header() {
     }
 
-    public Header(String caseID, String handlingCourt, String courtLevel, String administrativeDivision, DocumentName nameOfDocument, int filingYear, CaseType natureOfCase, DocumentType documentType, TrialProcedure trialProcedure) {
-        this.caseID = caseID;
-        this.handlingCourt = handlingCourt;
-//        this.courtLevel = courtLevel;
-//        this.administrativeDivision = administrativeDivision;
-        this.nameOfDocument = nameOfDocument;
-//        this.filingYear = filingYear;
-//        this.natureOfCase = natureOfCase;
-//        this.documentType = documentType;
-        this.trialProcedure = trialProcedure;
-    }
-
-    public Header(String caseID, String handlingCourt, DocumentName nameOfDocument, TrialProcedure trialProcedure) {
-        this.caseID = caseID;
-        this.handlingCourt = handlingCourt;
-        this.nameOfDocument = nameOfDocument;
-        this.trialProcedure = trialProcedure;
-    }
-
     public String getCaseID() {
         return caseID;
     }

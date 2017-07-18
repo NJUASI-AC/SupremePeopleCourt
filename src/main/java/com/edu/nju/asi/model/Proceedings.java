@@ -73,27 +73,6 @@ public class Proceedings implements Serializable {
     public Proceedings() {
     }
 
-    public Proceedings(String caseID, String actionCause, boolean isCourtHearing, String trialInformation, String actionCode, LocalDate filingDate, String caseApplicationProcedure, String caseSources, LocalDate handleDate, boolean isEasyTransfer) {
-        this.caseID = caseID;
-        this.actionCause = actionCause;
-//        this.isCourtHearing = isCourtHearing;
-//        this.trialInformation = trialInformation;
-        this.actionCode = actionCode;
-//        FilingDate = filingDate;
-//        this.caseApplicationProcedure = caseApplicationProcedure;
-//        this.caseSources = caseSources;
-//        this.handleDate = handleDate;
-//        this.isEasyTransfer = isEasyTransfer;
-    }
-
-
-    public Proceedings(String caseID, String records, String actionCause, String actionCode) {
-        this.caseID = caseID;
-        this.records = records;
-        this.actionCause = actionCause;
-        this.actionCode = actionCode;
-    }
-
     public String getCaseID() {
         return caseID;
     }

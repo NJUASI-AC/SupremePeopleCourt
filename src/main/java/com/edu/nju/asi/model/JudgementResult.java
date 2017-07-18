@@ -70,18 +70,6 @@ public class JudgementResult implements Serializable{
     public JudgementResult() {
     }
 
-    public JudgementResult(String caseID, String caseSettlement, String compensationOrder, List<String> specificRefereeSection, List<LitigationCost> litigationCostList, boolean isReview, String upTo, int upPeriod, boolean hasConsultJurisdictionObjection) {
-        this.caseID = caseID;
-//        this.caseSettlement = caseSettlement;
-//        this.compensationOrder = compensationOrder;
-//        this.specificRefereeSection = specificRefereeSection;
-//        this.litigationCostList = litigationCostList;
-//        this.isReview = isReview;
-//        this.upTo = upTo;
-//        this.upPeriod = upPeriod;
-//        this.hasConsultJurisdictionObjection = hasConsultJurisdictionObjection;
-    }
-
     public JudgementResult(String caseID, String result) {
         this.caseID = caseID;
         this.result = result;

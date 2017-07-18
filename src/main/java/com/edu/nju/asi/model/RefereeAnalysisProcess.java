@@ -34,12 +34,6 @@ public class RefereeAnalysisProcess implements Serializable {
     public RefereeAnalysisProcess() {
     }
 
-    public RefereeAnalysisProcess(String caseID, String closeCaseType, List<LegalArticle> legalArticles) {
-        this.caseID = caseID;
-        this.closeCaseType = closeCaseType;
-        this.legalArticles = legalArticles;
-    }
-
     public String getCaseID() {
         return caseID;
     }

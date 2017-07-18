@@ -1,13 +1,17 @@
 package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.InfoCarrier.Case;
-import com.edu.nju.asi.dao.DaoManager;
-import com.edu.nju.asi.model.*;
 import com.edu.nju.asi.InfoCarrier.Entry;
 import com.edu.nju.asi.InfoCarrier.LegalArticle;
 import com.edu.nju.asi.InfoCarrier.LitigationParticipant;
+import com.edu.nju.asi.dao.DaoManager;
+import com.edu.nju.asi.model.*;
 import com.edu.nju.asi.service.XMLService;
-import com.edu.nju.asi.utilities.enums.*;
+import com.edu.nju.asi.utilities.enums.DocumentName;
+import com.edu.nju.asi.utilities.enums.Gender;
+import com.edu.nju.asi.utilities.enums.LitigantType;
+import com.edu.nju.asi.utilities.enums.TrialProcedure;
+import com.sun.istack.internal.NotNull;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -44,24 +48,29 @@ public class XMLServiceImpl implements XMLService {
             e.printStackTrace();
         }
 
-        String caseID = findSingleStrValue("AH");
+        @NotNull
+        String caseID = findSingleNode("AH").valueOf("@value");
 
         //全文
-        String text = findSingleStrValue("QW");
-        FullText fullText = new FullText(caseID, text);
-//        DaoManager.baseDao.insert(fullText, "fullText");
+        FullText fullText = null;
+        Node text = findSingleNode("QW");
+        if (text != null){fullText = new FullText(caseID, text.valueOf("@value"));}
+
 
         //文首
-        String handlingCourt = findSingleStrValue("JBFY");
-        String courtLevel = findSingleStrValue("FYJB");
-        String administrativeDivision = findSingleStrValue("XZQH_P");
-        DocumentName nameOfDocument = DocumentName.getEnum(findSingleStrValue("WSMC"));
-        int filingYear = Integer.valueOf(findSingleStrValue("LAND"));
-        CaseType natureOfCase = CaseType.getEnum(findSingleStrValue("AJXZ"));
-        DocumentType documentType = DocumentType.getEnum(findSingleStrValue("WSZL"));
-        TrialProcedure trialProcedure = TrialProcedure.getEnum(findSingleStrValue("SPCX"));
-        Header header = new Header(caseID, handlingCourt, courtLevel, administrativeDivision, nameOfDocument,
-                filingYear, natureOfCase, documentType, trialProcedure);
+        Header header = null;
+
+        Node handlingCourt = findSingleNode("JBFY");
+        Node nameOfDocument = findSingleNode("WSMC");
+        Node trialProcedure = findSingleNode("SPCX");
+
+        if(handlingCourt!=null || nameOfDocument!=null || trialProcedure!=null){
+            header = new Header();
+            header.setCaseID(caseID);
+            if(handlingCourt != null) {header.setHandlingCourt(handlingCourt.valueOf("@value"));}
+            if(nameOfDocument != null) {header.setNameOfDocument(DocumentName.getEnum(nameOfDocument.valueOf("@value")));}
+            if(trialProcedure != null) {header.setTrialProcedure(TrialProcedure.getEnum(trialProcedure.valueOf("@value")));}
+        }
 
 
         //诉讼参与人全集
@@ -104,16 +113,23 @@ public class XMLServiceImpl implements XMLService {
                 litigants.add(participant);
             }
         }
-        LitigationParticipants litigationParticipants = new LitigationParticipants(caseID, litigants);
-//        DaoManager.litigationParticipantsDao.insert(litigationParticipants);
+
+        LitigationParticipants litigationParticipants = null;
+        if(litigants.size() > 0){
+            litigationParticipants = new LitigationParticipants(caseID, litigants);
+        }
 
         //诉讼记录
         Proceedings proceedings = null;
-        String records = findSingleStrValue("SSJL");
-        if (records != null) {
-            String actionCause = findSingleStrValue("AY");
-            String actionCode = findSingleStrValue("AYDM");
-            proceedings = new Proceedings(caseID, records, actionCause, actionCode);
+        if (document.getRootElement().element("SSJL") != null) {
+            proceedings = new Proceedings();
+
+            Node actionCause = findSingleNode("AY");
+            Node actionCode = findSingleNode("AYDM");
+
+            proceedings.setCaseID(caseID);
+            if(actionCause != null) {proceedings.setActionCause(actionCause.valueOf("@value"));}
+            if(actionCode != null) {proceedings.setActionCode(actionCode.valueOf("@value"));}
         }
 
 
@@ -122,22 +138,29 @@ public class XMLServiceImpl implements XMLService {
         Element basicElement = document.getRootElement().element("AJJBQK");
         if (basicElement != null) {
             // TODO 被告称诉段不是都有，比如 婚姻无效纠纷/(2016)津0115民初3692号民事判决书（一审民事案件用）.doc.xml
-            String plaintiffClaim = findSingleStrValue("YGSCD");
-            String defendantArgue = findSingleStrValue("BGBCD");
-            String fact = findSingleStrValue("CMSSD");
+            caseBasic = new CaseBasic();
+
+            Node plaintiffClaim = findSingleNode("YGSCD");
+            Node defendantArgue = findSingleNode("BGBCD");
+            Node fact = findSingleNode("CMSSD");
             List<Node> evidenceNodes = document.selectNodes("//ZJD");
             List<String> evidence = new ArrayList<>();
             for (Node node : evidenceNodes){
                 evidence.add(node.valueOf("@value"));
             }
-            caseBasic = new CaseBasic(caseID, plaintiffClaim, defendantArgue, evidence, fact);
+
+            caseBasic.setCaseID(caseID);
+            if(plaintiffClaim != null) {caseBasic.setPlaintiffClaim(plaintiffClaim.valueOf("@value"));}
+            if(defendantArgue != null) {caseBasic.setDefendantArgue(defendantArgue.valueOf("@value"));}
+            if(fact != null) {caseBasic.setFact(fact.valueOf("@value"));}
+            if(evidence.size() != 0) {caseBasic.setEvidence(evidence);}
         }
 
         //裁判分析过程
         RefereeAnalysisProcess refereeAnalysisProcess = null;
         Element analysisElement = document.getRootElement().element("CPFXGC");
         if (analysisElement != null) {
-            String closeCaseType = findSingleStrValue("JAFSLX");
+            Node closeCaseType = findSingleNode("JAFSLX");
             List<LegalArticle> legalArticles = new ArrayList<>();
             Element cpfxgc = document.getRootElement().element("CPFXGC");
             for (Iterator<Element> laws = cpfxgc.elementIterator("FLFTMC"); laws.hasNext();){
@@ -147,34 +170,41 @@ public class XMLServiceImpl implements XMLService {
                 List<Entry> entries = new ArrayList<>();
                 for (Iterator<Element> items = law.elementIterator("TM"); items.hasNext();){
                     Element item = items.next();
-                    String entryName = item.valueOf("@value");
                     List<String> k_entries = new ArrayList<>();
                     for(Iterator<Element> k_items = item.elementIterator("KM"); k_items.hasNext();){
                         Element k_item = k_items.next();
                         String k_itemName = k_item.valueOf("@value");
                         k_entries.add(k_itemName);
                     }
-                    Entry entry = new Entry(entryName, k_entries);
+
+                    Entry entry = new Entry();
+                    entry.setName(item.valueOf("@value"));
+                    if(k_entries.size() != 0) {entry.setEntries(k_entries);}
+
                     entries.add(entry);
                 }
                 legalArticles.add(new LegalArticle(lawName, entries));
             }
-            refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, closeCaseType, legalArticles);
+
+            refereeAnalysisProcess = new RefereeAnalysisProcess();
+            refereeAnalysisProcess.setCaseID(caseID);
+            if(closeCaseType != null) {refereeAnalysisProcess.setCloseCaseType(closeCaseType.valueOf("@value"));}
+            if(legalArticles.size() != 0) {refereeAnalysisProcess.setLegalArticles(legalArticles);}
+
         }
 
         //裁判结果
-        String result = findSingleStrValue("CPJG");
-        JudgementResult judgementResult = new JudgementResult(caseID, result);
-
+        Node result = findSingleNode("CPJG");
+        JudgementResult judgementResult = null;
+        if(result != null){judgementResult = new JudgementResult(caseID, result.valueOf("@value"));}
 
         //插入数据库
-        // TODO 金玉 默认赋值为空时不能直接插入数据库？
-        DaoManager.fullTextDao.insert(fullText);
-        DaoManager.headerDao.insert(header);
-        DaoManager.litigationParticipantsDao.insert(litigationParticipants);
-        DaoManager.caseBasicDao.insert(caseBasic);
-        DaoManager.refereeAnalysisProcessDao.insert(refereeAnalysisProcess);
-        DaoManager.judgementResultDao.insert(judgementResult);
+        if (fullText != null) {DaoManager.fullTextDao.insert(fullText);}
+        if (header != null) {DaoManager.headerDao.insert(header);}
+        if (litigationParticipants != null) {DaoManager.litigationParticipantsDao.insert(litigationParticipants);}
+        if (caseBasic != null) {DaoManager.caseBasicDao.insert(caseBasic);}
+        if (refereeAnalysisProcess != null) {DaoManager.refereeAnalysisProcessDao.insert(refereeAnalysisProcess);}
+        if (judgementResult != null) {DaoManager.judgementResultDao.insert(judgementResult);}
 
         return new Case(fullText, header, litigationParticipants, proceedings, caseBasic, refereeAnalysisProcess, judgementResult, new Tailor());
     }
@@ -197,7 +227,7 @@ public class XMLServiceImpl implements XMLService {
         return wanted;
     }
 
-    private String findSingleStrValue(String node) {
-        return document.selectSingleNode("//" + node).valueOf("@value");
+    private Node findSingleNode(String node) {
+        return document.selectSingleNode("//" + node);
     }
 }
