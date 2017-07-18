@@ -96,7 +96,7 @@ public class XMLServiceImpl implements XMLService {
                 if (degree != null) participant.setDegree(degree.valueOf("@value"));
                 if (post != null) participant.setPost(post.element("ZW").valueOf("@value"));
                 if (remarriage != null){
-                    if(remarriage.equals("是"))
+                    if(remarriage.valueOf("@value").equals("是"))
                         participant.setRemarriage(true);
                 }
                 if (birth != null){
