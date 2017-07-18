@@ -1,11 +1,9 @@
 package com.edu.nju.asi.model;
 
-import com.edu.nju.asi.InfoCarrier.CaseID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -19,7 +17,7 @@ public class Proceedings implements Serializable {
      * 案件ID（文件名唯一）
      */
     @Id
-    private CaseID caseID;
+    private String caseID;
 
     /**
      * 诉讼记录
@@ -74,11 +72,11 @@ public class Proceedings implements Serializable {
     public Proceedings() {
     }
 
-    public CaseID getCaseID() {
+    public String getCaseID() {
         return caseID;
     }
 
-    public void setCaseID(CaseID caseID) {
+    public void setCaseID(String caseID) {
         this.caseID = caseID;
     }
 

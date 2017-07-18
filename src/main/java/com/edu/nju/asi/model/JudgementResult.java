@@ -1,12 +1,9 @@
 package com.edu.nju.asi.model;
 
-import com.edu.nju.asi.InfoCarrier.CaseID;
-import com.edu.nju.asi.InfoCarrier.LitigationCost;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/17 0017.
@@ -20,7 +17,7 @@ public class JudgementResult implements Serializable{
      * 案件ID（文件名唯一）
      */
     @Id
-    private CaseID caseID;
+    private String caseID;
 
     /**
      * 裁判结果
@@ -71,16 +68,16 @@ public class JudgementResult implements Serializable{
     public JudgementResult() {
     }
 
-    public JudgementResult(CaseID caseID, String result) {
+    public JudgementResult(String caseID, String result) {
         this.caseID = caseID;
         this.result = result;
     }
 
-    public CaseID getCaseID() {
+    public String getCaseID() {
         return caseID;
     }
 
-    public void setCaseID(CaseID caseID) {
+    public void setCaseID(String caseID) {
         this.caseID = caseID;
     }
 

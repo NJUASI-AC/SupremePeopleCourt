@@ -1,6 +1,5 @@
 package com.edu.nju.asi.model;
 
-import com.edu.nju.asi.InfoCarrier.CaseID;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,7 +15,7 @@ public class FullText implements Serializable{
      * 案件ID（文件名唯一）
      */
     @Id
-    private CaseID caseID;
+    private String caseID;
 
     /**
      * 全文
@@ -26,16 +25,16 @@ public class FullText implements Serializable{
     public FullText() {
     }
 
-    public FullText(CaseID caseID, String text) {
+    public FullText(String caseID, String text) {
         this.caseID = caseID;
         this.text = text;
     }
 
-    public CaseID getCaseID() {
+    public String getCaseID() {
         return caseID;
     }
 
-    public void setCaseID(CaseID caseID) {
+    public void setCaseID(String caseID) {
         this.caseID = caseID;
     }
 
