@@ -60,10 +60,49 @@ public class RecommendServiceImpl implements RecommendService {
         theWeight += nameSimilar(newCase.getCaseID(), theCase.getCaseID(), weights[0]);
         //诉讼记录的相似度
         theWeight += recordSimilar(newCase.getRecords(), theCase.getRecords(), weights[1]);
-        //诉讼记录的相似度
-        theWeight += recordSimilar(newCase.getRecords(), theCase.getRecords(), weights[1]);
+        //证据段的相似度
+        theWeight += listSimilar(newCase.getEvidence(), theCase.getEvidence(), weights[2]);
+        //查明事实段的相似度
+        theWeight += listSimilar(newCase.getFact(), theCase.getFact(), weights[3]);
+        //裁决过程的相似度
+        theWeight += refereeAnalysisProcessSimilar(newCase.getRefereeAnalysisProcess(), theCase.getRefereeAnalysisProcess(), weights[4]);
         return new RecommendWeight(theCase.getCaseID(), theWeight);
     }
+    /**
+     * 用于计算两个案件处理过程之间的相似度
+     *
+     * @return 计算出来的权重
+     */
+    private double refereeAnalysisProcessSimilar(RefereeAnalysisProcess refereeAnalysisProcess1, RefereeAnalysisProcess refereeAnalysisProcess2, int baseWeight) {
+        double weightOfLegal = 0;
+        try {
+            List<LegalArticle> legals1=refereeAnalysisProcess1.getLegalArticles();
+            List<LegalArticle> legals2=refereeAnalysisProcess2.getLegalArticles();
+            if (legals1 == null || legals2 == null) {
+                weightOfLegal += baseWeight * 0.1;
+            } else {
+                List<String> legals = new ArrayList<>();
+                for (int i = 0; i < legals1.size(); i++) {
+                    String legal = legals1.get(i).getLawName();
+                    List<Entry> entries = legals1.get(i).getLegalEntry();
+                    if (entries != null) {
+                        for (int j = 0; j < entries.size(); j++) {
+                            legal += entries.get(j).getName();
+                        }
+                    }
+                }
+                for (int j = 0; j < legals2.size(); j++) {
+                    //这里我认为应该每一条进行对比之后最大的那一条即为案件
+
+                }
+            }
+        } catch (Exception e) {
+            weightOfLegal += baseWeight * 0.1;
+        }
+        return weightOfLegal;
+    }
+
+
 
     /**
      * 用于计算文件名的相似度 系数
@@ -88,45 +127,66 @@ public class RecommendServiceImpl implements RecommendService {
             cardSimilar(str1, str2);
             weightOfName += baseWeight * 0.3 * cardSimilar(str1, str2);
         } catch (Exception e) {
-            weightOfName += baseWeight * 0.3 * 0.2;
+            weightOfName += baseWeight * 0.3 * 0.1;
         }
         return weightOfName;
     }
 
     /**
-     * 用于计算文件名的相似度 系数
+     * 用于计算诉讼记录的相似度 系数
      *
      * @return 计算出来的权重
      */
     private double recordSimilar(String record1, String record2, double baseWeight) {
         double weightOfRecord = 0;
         try {
-            if (record1 == null || record2 == null){
-                weightOfRecord += baseWeight * 0.1;
-            }else {
-                weightOfRecord += cardSimilar(record1, record2);
-            }
-        }catch (Exception e){
+            weightOfRecord += cardSimilar(record1, record2) * baseWeight;
+        } catch (Exception e) {
             weightOfRecord = 0 + baseWeight * 0.1;
         }
         return weightOfRecord;
     }
 
     /**
-     * 用于计算两个字符串 jaccard的相似度 系数
-     *  比较相同的字符占总字符的个数
+     * 用于计算list的相似度 系数
+     *
      * @return 计算出来的权重
      */
-    private double cardSimilar(String str1, String str2){
-        int similar = 0 ;
-        for ( int i = 0; i < str1.length() ; i++){
-            for ( int j = 0; j < str2.length(); j++ ){
-                if(str1.charAt(i) == str2.charAt(j)){
+    private double listSimilar(List<String> list1, List<String> list2, double baseWeight) {
+        double weightOfList = 0;
+        try {
+            if (list1 == null || list2 == null) {
+                weightOfList += baseWeight * 0.1;  //如果不存在就给一点点权重
+            } else {
+                for (int i = 0; i < list1.size(); i++) {
+
+                }
+                for (int j = 0; j < list2.size(); j++) {
+
+                }
+            }
+        } catch (Exception e) {
+            weightOfList += baseWeight * 0.1;
+        }
+        return weightOfList;
+    }
+
+    /**
+     * 用于计算两个字符串 jaccard的相似度 系数
+     * 比较相同的字符占总字符的个数
+     *
+     * @return 计算出来的权重
+     */
+    private double cardSimilar(String str1, String str2) {
+        int similar = 0;
+        for (int i = 0; i < str1.length(); i++) {
+            for (int j = 0; j < str2.length(); j++) {
+                if (str1.charAt(i) == str2.charAt(j)) {
                     similar++;
                 }
             }
         }
-        return 1.0*similar/(str1.length()+str2.length()-similar);
+        return 1.0 * similar / (str1.length() + str2.length() - similar);
     }
 
     /**

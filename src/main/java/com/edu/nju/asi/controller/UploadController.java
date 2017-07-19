@@ -56,6 +56,7 @@ public class UploadController {
         }
         else {
             mv.addObject("caseInfo", wantedCase);
+
             mv.setViewName("info");
         }
         return mv;

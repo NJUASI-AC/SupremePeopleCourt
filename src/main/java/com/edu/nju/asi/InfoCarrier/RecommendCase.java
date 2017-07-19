@@ -36,10 +36,29 @@ public class RecommendCase {
     }
 
 
+    //todo dongjinyu
+    /**
+     * 经办法院
+     */
+    private String handlingCourt;
+
+    /**
+     *  案由名称
+     */
+//    private String caseID;
+
+    /**
+     * 文书名称
+     */
+    private DocumentName nameOfDocument;
+
+
+
+
+
     /**
      *  案号
      */
-    @Id
     private String caseID;
 
 
@@ -62,7 +81,6 @@ public class RecommendCase {
     /**
      * 查明事实段
      */
-
     private List<String> fact;
 
     /**

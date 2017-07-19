@@ -1,29 +1,50 @@
 package com.edu.nju.asi.InfoCarrier;
 
+import com.edu.nju.asi.utilities.enums.DocumentName;
 import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 /**
  * Created by 61990 on 2017/7/18.
  */
 public class RecommendWeight {
+
+    public RecommendWeight(String caseID, List<Double> weight, String handlingCourt, String actionCause, DocumentName nameOfDocument) {
+        this.caseID = caseID;
+        this.weight = weight;
+        this.handlingCourt = handlingCourt;
+        this.actionCause = actionCause;
+        this.nameOfDocument = nameOfDocument;
+    }
+
+
     /**
      *  案号
      */
-    @Id
     private String caseID;
 
     /**
      *  权重
      */
-    private double weight;
+    private List<Double> weight;
 
     /**
-     *  构造器
+     * 经办法院
      */
-    public RecommendWeight(String caseID, double weight) {
-        this.caseID = caseID;
-        this.weight = weight;
-    }
+    private String handlingCourt;
+
+    /**
+     * 案由
+     */
+    private String actionCause;
+
+    /**
+     * 文书名称
+     */
+    private DocumentName nameOfDocument;
+
+
 
     public String getCaseID() {
         return caseID;
@@ -33,11 +54,35 @@ public class RecommendWeight {
         this.caseID = caseID;
     }
 
-    public double getWeight() {
+    public List<Double> getWeight() {
         return weight;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(List<Double> weight) {
         this.weight = weight;
+    }
+
+    public String getHandlingCourt() {
+        return handlingCourt;
+    }
+
+    public void setHandlingCourt(String handlingCourt) {
+        this.handlingCourt = handlingCourt;
+    }
+
+    public String getActionCause() {
+        return actionCause;
+    }
+
+    public void setActionCause(String actionCause) {
+        this.actionCause = actionCause;
+    }
+
+    public DocumentName getNameOfDocument() {
+        return nameOfDocument;
+    }
+
+    public void setNameOfDocument(DocumentName nameOfDocument) {
+        this.nameOfDocument = nameOfDocument;
     }
 }
