@@ -3,6 +3,7 @@ package com.edu.nju.asi.dao;
 import com.edu.nju.asi.model.CaseBasic;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -21,6 +22,13 @@ public interface CaseBasicDao {
      * @return CaseBasic
      */
     CaseBasic find(String caseID);
+
+    /**
+     * 根据条件查找一个
+     * @param codeIDs 案件ID集合
+     * @return  List<CaseBasic>
+     */
+    List<CaseBasic> findAll(Set<String> codeIDs);
 
     /**
      * 批量插入数据

@@ -3,6 +3,7 @@ package com.edu.nju.asi.dao;
 import com.edu.nju.asi.model.Proceedings;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -21,6 +22,13 @@ public interface ProceedingsDao {
      * @return CaseBasic
      */
     Proceedings find(String caseID);
+
+    /**
+     * 根据条件查找一个
+     * @param actionCode 案件名称
+     * @return  Map<String, Proceedings>
+     */
+    Map<String, Proceedings> findAll(String actionCode);
 
     /**
      * 批量插入数据
