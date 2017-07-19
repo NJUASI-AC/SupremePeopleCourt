@@ -20,9 +20,9 @@ public class RecommendWeight {
     /**
      *  构造器
      */
-    public RecommendWeight(String caseID) {
+    public RecommendWeight(String caseID, double weight) {
         this.caseID = caseID;
-        this.weight = 0;
+        this.weight = weight;
     }
 
     public String getCaseID() {

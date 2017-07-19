@@ -80,6 +80,7 @@ public class Proceedings implements Serializable {
         this.caseID = caseID;
     }
 
+
     public String getActionCause() {
         return actionCause;
     }

@@ -32,7 +32,7 @@ public class RecommendServiceImplTest {
     public void after() throws Exception {
     }
 
-    @Ignore
+//    @Ignore
     @Test
     public void testRecommend() throws Exception {
         List<String> evidence = new ArrayList<>();
@@ -47,7 +47,7 @@ public class RecommendServiceImplTest {
         legalEntry.add(new Entry("十二", entries));
         legalArticles.add(new LegalArticle("中国共和国婚姻法",legalEntry));
         RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess("（2008）南民初字第5793号", "判决",legalArticles );
-        myCase = new RecommendCase("（2008）南民初字第5793号","原告曲晓英与被告黄东撤销婚姻纠纷一案，本院受理后，依法由审判员董巧云独任审判，公开开庭进行了审理。原告曲晓英及其委托代理人杨玉立，被告黄东到庭参加诉讼。本案现已审理终结。", "撤销婚姻纠纷", evidence, facts, refereeAnalysisProcess);
+        myCase = new RecommendCase("（2008）南民初字第5793号","原告曲晓英与被告黄东撤销婚姻纠纷一案，本院受理后，依法由审判员董巧云独任审判，公开开庭进行了审理。原告曲晓英及其委托代理人杨玉立，被告黄东到庭参加诉讼。本案现已审理终结。", "9019", evidence, facts, refereeAnalysisProcess);
 
 //        recommendService.recommend(myCase);
 

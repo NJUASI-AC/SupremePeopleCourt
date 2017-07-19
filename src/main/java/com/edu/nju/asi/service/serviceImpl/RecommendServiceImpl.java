@@ -1,6 +1,8 @@
 package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.InfoCarrier.*;
+import com.edu.nju.asi.dao.ProceedingsDao;
+import com.edu.nju.asi.dao.daoImpl.ProceedingsDaoImpl;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.utilities.enums.DocumentName;
@@ -16,7 +18,12 @@ import java.util.List;
 public class RecommendServiceImpl implements RecommendService {
 
     private List<RecommendWeight> recommendWeights = new ArrayList<>();
+    private ProceedingsDao proceedingsDao = new ProceedingsDaoImpl();
+
+    //推荐案例的数目
     private int recommendNum = 5;
+    //各个比较值的权重
+    private int weights[] = {10, 15, 30, 10, 20};
 
     public RecommendServiceImpl() {
     }
@@ -26,12 +33,18 @@ public class RecommendServiceImpl implements RecommendService {
      * @return 推荐的案例列表
      */
     @Override
+    public List<RecommendWeight> recommend(Case newCase) {
+        RecommendCase myCase = new RecommendCase(newCase);
+        return recommend(myCase);
+    }
+
+    @Override
     public List<RecommendWeight> recommend(RecommendCase newCase) {
-        List<RecommendCase> recommendCases = getDates();
-        RecommendWeight weight;
-        for (RecommendCase myCase : recommendCases) {
-            weight = calculateWeight(newCase, myCase);
-            addRecommend(weight);
+        List<RecommendCase> recommendCases = getAllData(newCase);
+        RecommendWeight recommendWeight;
+        for (RecommendCase theCase : recommendCases) {
+            recommendWeight = calculateWeight(newCase, theCase);
+            addRecommend(recommendWeight);
         }
         return recommendWeights;
     }
@@ -41,8 +54,89 @@ public class RecommendServiceImpl implements RecommendService {
      *
      * @return 计算出来的权重
      */
-    private RecommendWeight calculateWeight(RecommendCase newCase, RecommendCase myCase) {
-        return null;
+    private RecommendWeight calculateWeight(RecommendCase newCase, RecommendCase theCase) {
+        double theWeight = 0;
+        //文件名的相似度
+        theWeight += nameSimilar(newCase.getCaseID(), theCase.getCaseID(), weights[0]);
+        //诉讼记录的相似度
+        theWeight += recordSimilar(newCase.getRecords(), theCase.getRecords(), weights[1]);
+        //诉讼记录的相似度
+        theWeight += recordSimilar(newCase.getRecords(), theCase.getRecords(), weights[1]);
+        return new RecommendWeight(theCase.getCaseID(), theWeight);
+    }
+
+    /**
+     * 用于计算文件名的相似度 系数
+     *
+     * @return 计算出来的权重
+     */
+    private double nameSimilar(String name1, String name2, double baseWeight) {
+        double weightOfName = 0;
+        try {
+            String str1 = name1.split("号")[0];
+            String str2 = name2.split("号")[0];
+            if (str1.equals(str2)) {
+                weightOfName += baseWeight * 0.7;
+            }
+        } catch (Exception e) {
+            weightOfName += baseWeight * 0.7 * 0.3;  //如果解析出错则分配一点权重
+        }
+
+        try {
+            String str1 = name1.split("（")[1].split("）")[0];
+            String str2 = name1.split("（")[1].split("）")[0];
+            cardSimilar(str1, str2);
+            weightOfName += baseWeight * 0.3 * cardSimilar(str1, str2);
+        } catch (Exception e) {
+            weightOfName += baseWeight * 0.3 * 0.2;
+        }
+        return weightOfName;
+    }
+
+    /**
+     * 用于计算文件名的相似度 系数
+     *
+     * @return 计算出来的权重
+     */
+    private double recordSimilar(String record1, String record2, double baseWeight) {
+        double weightOfRecord = 0;
+        try {
+            if (record1 == null || record2 == null){
+                weightOfRecord += baseWeight * 0.1;
+            }else {
+                weightOfRecord += cardSimilar(record1, record2);
+            }
+        }catch (Exception e){
+            weightOfRecord = 0 + baseWeight * 0.1;
+        }
+        return weightOfRecord;
+    }
+
+    /**
+     * 用于计算两个字符串 jaccard的相似度 系数
+     *  比较相同的字符占总字符的个数
+     * @return 计算出来的权重
+     */
+    private double cardSimilar(String str1, String str2){
+        int similar = 0 ;
+        for ( int i = 0; i < str1.length() ; i++){
+            for ( int j = 0; j < str2.length(); j++ ){
+                if(str1.charAt(i) == str2.charAt(j)){
+                    similar++;
+                }
+            }
+        }
+        return 1.0*similar/(str1.length()+str2.length()-similar);
+    }
+
+    /**
+     * 从数据库里面获得所有需要的数据
+     *
+     * @return 计算出来的权重
+     */
+    private List<RecommendCase> getAllData(RecommendCase newCase) {
+        //proceedingsDao.findAll(newCase.getActionCode());
+        return getDataStub();
     }
 
     /**
@@ -60,8 +154,11 @@ public class RecommendServiceImpl implements RecommendService {
                     recommendWeights.add(i, weight);
                 }
             }
-            if (recommendWeights.size() > 5) {
-                recommendWeights = recommendWeights.subList(0, 5);
+            if (recommendWeights.get(recommendWeights.size() - 1).getWeight() >= weight.getWeight()) {
+                recommendWeights.add(weight);
+            }
+            if (recommendWeights.size() > recommendNum) {
+                recommendWeights = recommendWeights.subList(0, recommendNum);
             }
         }
     }
@@ -71,7 +168,7 @@ public class RecommendServiceImpl implements RecommendService {
      *
      * @return 所以的数据
      */
-    private List<RecommendCase> getDates() {
+    private List<RecommendCase> getDataStub() {
         List<RecommendCase> recommendCases = new ArrayList<>();
 
         List<String> evidence;
@@ -95,11 +192,11 @@ public class RecommendServiceImpl implements RecommendService {
         legalEntry.add(new Entry("九十二", entries));
         legalArticles.add(new LegalArticle("中华人民共和国民事诉讼法", legalEntry));
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "裁决", legalArticles);
-        actionCause = "撤销婚姻纠纷";
+        actionCause = "9019";
         record = "原告刘二庆，男，1951年1月12日出生，汉族，住天津市南开区向阳路云阳北里1-1-212号。身份证号120106195101126512法定代理人刘翠正，女，1954年2月3日出生，汉族，住天津市红桥区芥园大堤一条胡同38号。身份证号120106195402036545被告孙振华，女，1961年1月8日出生，汉族，住天津市南开区怡园里3-2-103号。身份证号120104196101082929本院在审理原告刘二庆与被告孙振华撤销婚姻纠纷一案中，原告刘二庆于2010年6月28日向本院提出财产保全申请，要求对原告刘二庆名下坐落于天津市南开区芥园西道怡园里3-2-103号房屋实施财产保全，案外人刘庆三以其名下坐落于天津市南开区芥园西道怡园里3-5-201号房屋及担保金100000元作为担保。";
         recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
 
-        caseID ="（2010）南民初字第4871-1号";
+        caseID = "（2010）南民初字第4871-1号";
         evidence = new ArrayList<>();
         evidence.add("");
         facts = new ArrayList<>();
@@ -110,7 +207,7 @@ public class RecommendServiceImpl implements RecommendService {
         legalEntry.add(new Entry("一百三十一", entries));
         legalArticles.add(new LegalArticle("中华人民共和国民事诉讼法", legalEntry));
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "裁决", legalArticles);
-        actionCause = "撤销婚姻纠纷";
+        actionCause = "9019";
         record = "原告刘二庆，男，1951年1月12日出生，汉族，住天津市南开区向阳路云阳北里1-1-212号。身份证号120106195101126512法定代理人刘翠正，女，1954年2月3日出生，汉族，住天津市红桥区芥园大堤一条胡同38号。身份证号120106195402036545被告孙振华，女，1961年1月8日出生，汉族，住天津市南开区怡园里3-2-103号。身份证号120104196101082929本院在审理原告刘二庆与被告孙振华撤销婚姻纠纷一案中，原告刘二庆于2010年7月20日向本院提出撤诉申请。";
         recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
 
@@ -126,11 +223,11 @@ public class RecommendServiceImpl implements RecommendService {
         legalEntry.add(new Entry("", entries));
         legalArticles.add(new LegalArticle("", legalEntry));
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "判决", legalArticles);
-        actionCause = "婚姻无效纠纷";
+        actionCause = "9018";
         record = "冯艳英与郝伟东婚姻无效纠纷一案，本院受理后，依法组成合议庭（或依法由审判员独任审判），开庭进行了审理。原告冯艳英，，被告郝伟东，到庭参加诉讼。本案现以审理终结。";
         recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
 
-        caseID ="(2016)津0115民初6408号";
+        caseID = "(2016)津0115民初6408号";
         evidence = new ArrayList<>();
         evidence.add("");
         facts = new ArrayList<>();
@@ -143,7 +240,7 @@ public class RecommendServiceImpl implements RecommendService {
         legalEntry.add(new Entry("十", entries));
         legalArticles.add(new LegalArticle("中华人民共和国婚姻法", legalEntry));
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "判决", legalArticles);
-        actionCause = "婚姻无效纠纷";
+        actionCause = "9018";
         record = "原告郝淑舫与被告郑宝利婚姻无效纠纷一案，本院于2016年7月25日立案后，依法适用简易程序公开开庭进行了审理。原告与被告均到庭参加了诉讼。本案现已审理终结。";
         recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
 
@@ -160,9 +257,9 @@ public class RecommendServiceImpl implements RecommendService {
         legalArticles.add(new LegalArticle("中华人民共和国民事诉讼法", legalEntry));
         legalArticles.add(new LegalArticle("中华人民共和国婚姻法", legalEntry));
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "判决", legalArticles);
-        actionCause = "婚姻无效纠纷";
+        actionCause = "9018";
         record = "原告孙立超与被告张丹丹婚约财产纠纷一案，本院于2007年4月24日立案受理后，依法组成合议庭，不公开开庭进行了审理，原告孙立超到庭参加诉讼。被告张丹丹经公告送达起诉状副本、应诉通知书、举证通知书和开庭传票，无正当理由拒绝到庭参加诉讼。本案现已审理终结。";
-        recommendCases.add(new RecommendCase(caseID,  record, actionCause, evidence, facts, refereeAnalysisProcess));
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
 
         return recommendCases;
     }

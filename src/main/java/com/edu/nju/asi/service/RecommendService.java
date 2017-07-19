@@ -11,7 +11,13 @@ import java.util.List;
  */
 public interface RecommendService {
     /**
-     * @param newCase 解析上传的文件的case
+     * @param newCase 解析上传的文件的 简易case
+     * @return 推荐的案例列表
+     */
+    List<RecommendWeight> recommend(Case newCase);
+
+    /**
+     * @param newCase 解析上传的文件的 case
      * @return 推荐的案例列表
      */
     List<RecommendWeight> recommend(RecommendCase newCase);
