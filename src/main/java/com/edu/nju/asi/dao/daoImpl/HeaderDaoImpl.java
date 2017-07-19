@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -41,6 +44,25 @@ public class HeaderDaoImpl implements HeaderDao {
     public Header find(String caseID) {
         Query query = new Query(Criteria.where("caseID").is(caseID));
         return mongoTemplate.findOne(query, Header.class, collectionName);
+    }
+
+    /**
+     * 根据条件查找一个
+     *
+     * @param caseIDs 案件ID集合
+     * @return Map<String,Header>
+     */
+    @Override
+    public Map<String, Header> findAll(Set<String> caseIDs) {
+        Map<String, Header> headers = new HashMap<>();
+        for(String caseID: caseIDs){
+            Query query = new Query(Criteria.where("caseID").is(caseID));
+            Header header = mongoTemplate.findOne(query, Header.class);
+            if(header!=null) {
+                headers.put(caseID, mongoTemplate.findOne(query, Header.class));
+            }
+        }
+        return headers;
     }
 
     /**

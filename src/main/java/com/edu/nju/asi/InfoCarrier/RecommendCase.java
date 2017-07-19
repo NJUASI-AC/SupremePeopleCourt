@@ -18,12 +18,10 @@ import java.util.List;
 public class RecommendCase {
 
 
-
     /**
-     *  案号
+     * 案号
      */
     private String caseID;
-
 
     /**
      * 诉讼记录
@@ -40,7 +38,6 @@ public class RecommendCase {
      */
     private List<String> evidence;
 
-
     /**
      * 查明事实段
      */
@@ -51,8 +48,6 @@ public class RecommendCase {
      */
     private RefereeAnalysisProcess refereeAnalysisProcess;
 
-
-    //todo dongjinyu
     /**
      * 经办法院
      */
@@ -79,6 +74,7 @@ public class RecommendCase {
         this.actionCause = actionCause;
         this.nameOfDocument = nameOfDocument;
     }
+
     public RecommendCase(Case newCase) {
         this.caseID = newCase.getCaseBasic().getCaseID();
         this.records = newCase.getProceedings().getRecords();
@@ -87,24 +83,29 @@ public class RecommendCase {
         this.fact = newCase.getCaseBasic().getFacts();
         this.refereeAnalysisProcess = newCase.getRefereeAnalysisProcess();
         this.handlingCourt = newCase.getHeader().getHandlingCourt();
-        this.actionCause =  newCase.getProceedings().getActionCause();
+        this.actionCause = newCase.getProceedings().getActionCause();
         this.nameOfDocument = newCase.getHeader().getNameOfDocument();
     }
 
-    //TODO djy 你这个也要改一下
-    public RecommendCase(CaseBasic caseBasic, Proceedings proceedings, RefereeAnalysisProcess refereeAnalysisProcess) {
+    public RecommendCase(CaseBasic caseBasic, Proceedings proceedings, RefereeAnalysisProcess refereeAnalysisProcess, Header header) {
 
         this.caseID = proceedings.getCaseID();
         this.records = proceedings.getRecords();
         this.actionCode = proceedings.getActionCode();
+        this.actionCause = proceedings.getActionCause();
+
         if (caseBasic != null) {
             this.evidence = caseBasic.getEvidence();
             this.fact = caseBasic.getFacts();
         }
 
+        if (header != null) {
+            this.handlingCourt = header.getHandlingCourt();
+            this.nameOfDocument = header.getNameOfDocument();
+        }
+
         this.refereeAnalysisProcess = refereeAnalysisProcess;
     }
-
 
     public String getCaseID() {
         return caseID;
@@ -177,6 +178,5 @@ public class RecommendCase {
     public void setNameOfDocument(DocumentName nameOfDocument) {
         this.nameOfDocument = nameOfDocument;
     }
-
 
 }
