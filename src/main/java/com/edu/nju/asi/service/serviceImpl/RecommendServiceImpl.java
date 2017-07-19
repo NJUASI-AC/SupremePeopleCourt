@@ -76,9 +76,8 @@ public class RecommendServiceImpl implements RecommendService {
      */
     private double refereeAnalysisProcessSimilar(RefereeAnalysisProcess refereeAnalysisProcess1, RefereeAnalysisProcess refereeAnalysisProcess2, int baseWeight) {
         double weightOfLegal = 0;
-        try {
+            try {
             if (refereeAnalysisProcess1 == null || refereeAnalysisProcess2 == null) {
-                weightOfLegal += baseWeight * 0.1;
                 return weightOfLegal;
             }
             List<LegalArticle> legals1 = refereeAnalysisProcess1.getLegalArticles();
@@ -103,7 +102,7 @@ public class RecommendServiceImpl implements RecommendService {
 
 
         } catch (Exception e) {
-            weightOfLegal += baseWeight * 0.1;
+
         }
         return weightOfLegal;
     }
@@ -133,7 +132,7 @@ public class RecommendServiceImpl implements RecommendService {
                 weightOfName += baseWeight * 0.7;
             }
         } catch (Exception e) {
-            weightOfName += baseWeight * 0.7 * 0.3;  //如果解析出错则分配一点权重
+
         }
 
         try {
@@ -142,7 +141,7 @@ public class RecommendServiceImpl implements RecommendService {
             cardSimilar(str1, str2);
             weightOfName += baseWeight * 0.3 * cardSimilar(str1, str2);
         } catch (Exception e) {
-            weightOfName += baseWeight * 0.3 * 0.1;
+
         }
         return weightOfName;
     }
@@ -157,7 +156,7 @@ public class RecommendServiceImpl implements RecommendService {
         try {
             weightOfRecord += cardSimilar(record1, record2) * baseWeight;
         } catch (Exception e) {
-            weightOfRecord = 0 + baseWeight * 0.1;
+
         }
         return weightOfRecord;
     }
@@ -171,7 +170,7 @@ public class RecommendServiceImpl implements RecommendService {
         double weightOfList = 0;
         try {
             if (list1 == null || list2 == null) {
-                return weightOfList = baseWeight * 0.1;
+                return weightOfList;
             }
             double weight;
             for (int i = 0; i < list1.size(); i++) {
@@ -184,7 +183,7 @@ public class RecommendServiceImpl implements RecommendService {
 
             }
         } catch (Exception e) {
-            weightOfList += baseWeight * 0.1;
+
         }
         return weightOfList;
     }
