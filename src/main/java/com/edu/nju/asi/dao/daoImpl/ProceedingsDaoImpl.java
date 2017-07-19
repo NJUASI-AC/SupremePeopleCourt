@@ -8,7 +8,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -41,6 +43,23 @@ public class ProceedingsDaoImpl implements ProceedingsDao {
     public Proceedings find(String caseID) {
         Query query = new Query(Criteria.where("caseID").is(caseID));
         return mongoTemplate.findOne(query, Proceedings.class, collectionName);
+    }
+
+    /**
+     * 根据条件查找一个
+     *
+     * @param actionCode 案件名称
+     * @return Map<String, Proceedings>
+     */
+    @Override
+    public Map<String, Proceedings> findAll(String actionCode) {
+        Query query = new Query(Criteria.where("actionCode").is(actionCode));
+        List<Proceedings> proceedingsList = mongoTemplate.find(query, Proceedings.class);
+        Map<String, Proceedings> map = new HashMap<>();
+        for(Proceedings proceedings:proceedingsList){
+            map.put(proceedings.getCaseID(), proceedings);
+        }
+        return map;
     }
 
     /**
