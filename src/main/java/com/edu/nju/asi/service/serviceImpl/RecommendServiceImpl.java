@@ -213,8 +213,8 @@ public class RecommendServiceImpl implements RecommendService {
      * @return 计算出来的权重
      */
     private List<RecommendCase> getAllData(RecommendCase newCase) {
-//        return DaoManager.dataManagerDao.getRecommendCase(newCase.getActionCode());
-        return getDataStub();
+        return DaoManager.dataManagerDao.getRecommendCase(newCase.getActionCode());
+//        return getDataStub();
     }
 
     /**

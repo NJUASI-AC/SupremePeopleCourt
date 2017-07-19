@@ -518,6 +518,7 @@ footer .footer-bottom p, footer .footer-bottom p a {
 .single-info td{
     text-align: left;
     padding: 3px 0;
+    border-bottom: 0px;
 }
 .single-info{
     padding: 5px;
@@ -527,6 +528,7 @@ footer .footer-bottom p, footer .footer-bottom p a {
     box-shadow: 0 0 1px rgba(0,0,0,0.4);
     width: 100%;
     height: auto;
+    padding: 10px;
     margin-bottom: 20px;
     transition: all ease 0.3s;
     position: relative;
