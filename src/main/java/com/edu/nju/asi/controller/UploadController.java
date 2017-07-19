@@ -55,7 +55,7 @@ public class UploadController {
             mv.setViewName("errorPage");
         }
         else {
-            mv.addObject("case", wantedCase);
+            mv.addObject("caseInfo", wantedCase);
             mv.setViewName("info");
         }
         return mv;

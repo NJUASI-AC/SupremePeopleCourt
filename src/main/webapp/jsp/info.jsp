@@ -38,7 +38,7 @@
         <section id="content">
             <article>
                 <div>
-                    <h2>原告马某与被告惠某某离婚纠纷的一审民事判决书</h2>
+                    <h2>${caseInfo.header.caseID}</h2>
                 </div>
 
                 <div class="seperator" style="background-color: #535354; width: 100%;"></div>
@@ -100,12 +100,11 @@
                 <li>
                     <h4>Case Information</h4>
                     <ul>
-                        <li>案号：<span>（2017）陕0525民初259号</span></li>
-                        <li>法院：<span>陕西省澄城县人民法院</span></li>
-                        <li>时间：<span>2017年06月13日</span></li>
-                        <li>案由：<span>离婚纠纷</span></li>
-                        <li>类型：<span>判决书</span></li>
-                        <li>程序：<span>一审</span></li>
+                        <li>案号：<span>${caseInfo.header.caseID}</span></li>
+                        <li>法院：<span>${caseInfo.header.handlingCourt}</span></li>
+                        <li>案由：<span>${caseInfo.proceedings.actionCause}</span></li>
+                        <li>类型：<span>${caseInfo.header.nameOfDocument.repre}</span></li>
+                        <li>程序：<span>${caseInfo.header.trialProcedure.repre}</span></li>
                     </ul>
                 </li>
 
@@ -185,4 +184,10 @@
     </footer>
 </div>
 </body>
+
+<script>
+    var name='${caseInfo.fullText.text}';
+    alert(name);
+
+</script>
 </html>
