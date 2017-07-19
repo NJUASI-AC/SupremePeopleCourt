@@ -11,11 +11,6 @@ import java.io.IOException;
 public interface XMLService {
 
     /**
-     * 离线上传文件（用于数据库训练数据）
-     */
-    void uploadOffline(String url);
-
-    /**
      * @param uploadedFile 要上传的XML文件
      * @return 处理后可可视化查看的案件信息，若上传失败则返回null
      */

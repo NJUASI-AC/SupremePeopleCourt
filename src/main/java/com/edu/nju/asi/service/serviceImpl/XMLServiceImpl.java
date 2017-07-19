@@ -40,33 +40,21 @@ public class XMLServiceImpl implements XMLService {
     }
 
     @Override
-    public void uploadOffline(String url) {
-        Case caseParsed = parseXML(url);
-
-        //插入数据库
-        if (caseParsed.getFullText() != null) {DaoManager.fullTextDao.insert(caseParsed.getFullText());}
-        if (caseParsed.getHeader() != null) {DaoManager.headerDao.insert(caseParsed.getHeader());}
-        if (caseParsed.getLitigationParticipants() != null) {DaoManager.litigationParticipantsDao.insert(caseParsed.getLitigationParticipants());}
-        if (caseParsed.getCaseBasic() != null) {DaoManager.caseBasicDao.insert(caseParsed.getCaseBasic());}
-        if (caseParsed.getRefereeAnalysisProcess() != null) {DaoManager.refereeAnalysisProcessDao.insert(caseParsed.getRefereeAnalysisProcess());}
-        if (caseParsed.getJudgementResult() != null) {DaoManager.judgementResultDao.insert(caseParsed.getJudgementResult());}
-    }
-
-    @Override
     public Case uploadOnline(MultipartFile uploadedFile) throws IOException {
         if (uploadedFile.isEmpty()) {
             return null;
         }
 
         // 先转储文件再解析，最后删掉源文件
-        String thisPath = uploadedFile.getName();
+        String thisPath = uploadedFile.getOriginalFilename();
         File thisFile = new File(thisPath);
 
         uploadedFile.transferTo(thisFile);
         Case wanted = parseXML(thisPath);
 
         boolean deleteResult = thisFile.delete();
-        
+        assert deleteResult == true : "上传的文件未被删除";
+
         return wanted;
     }
 
@@ -83,6 +71,7 @@ public class XMLServiceImpl implements XMLService {
         }
 
         File file = new File(url);
+        System.out.println(url);
         String caseID = file.getName().substring(0, file.getName().indexOf("."));
 
         //全文
