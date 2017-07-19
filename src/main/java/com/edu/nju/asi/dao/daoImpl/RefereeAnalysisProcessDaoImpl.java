@@ -54,7 +54,7 @@ public class RefereeAnalysisProcessDaoImpl implements RefereeAnalysisProcessDao 
         Map<String, RefereeAnalysisProcess> refereeAnalysisProcesses = new HashMap<>();
         for(String caseID: caseIDs){
             Query query = new Query(Criteria.where("caseID").is(caseID));
-            RefereeAnalysisProcess refereeAnalysisProcess = mongoTemplate.findOne(query, RefereeAnalysisProcess.class);
+            RefereeAnalysisProcess refereeAnalysisProcess = mongoTemplate.findOne(query, RefereeAnalysisProcess.class, collectionName);
             if(refereeAnalysisProcess!=null) {
                 refereeAnalysisProcesses.put(caseID,refereeAnalysisProcess);
             }

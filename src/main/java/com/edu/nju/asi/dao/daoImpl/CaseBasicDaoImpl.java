@@ -56,9 +56,9 @@ public class CaseBasicDaoImpl implements CaseBasicDao {
         Map<String,CaseBasic> caseBasics = new HashMap<>();
         for(String caseID: caseIDS){
             Query query = new Query(Criteria.where("caseID").is(caseID));
-            CaseBasic caseBasic = mongoTemplate.findOne(query, CaseBasic.class);
+            CaseBasic caseBasic = mongoTemplate.findOne(query, CaseBasic.class, collectionName);
             if(caseBasic!=null) {
-                caseBasics.put(caseID, mongoTemplate.findOne(query, CaseBasic.class));
+                caseBasics.put(caseID, caseBasic);
             }
         }
         return caseBasics;

@@ -57,9 +57,9 @@ public class HeaderDaoImpl implements HeaderDao {
         Map<String, Header> headers = new HashMap<>();
         for(String caseID: caseIDs){
             Query query = new Query(Criteria.where("caseID").is(caseID));
-            Header header = mongoTemplate.findOne(query, Header.class);
+            Header header = mongoTemplate.findOne(query, Header.class, collectionName);
             if(header!=null) {
-                headers.put(caseID, mongoTemplate.findOne(query, Header.class));
+                headers.put(caseID, header);
             }
         }
         return headers;
