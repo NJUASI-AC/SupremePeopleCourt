@@ -10,6 +10,9 @@ public class ApplicationContextHelper {
 
     private static ApplicationContext applicationContext;
 
+    private ApplicationContextHelper() {
+    }
+
     public static ApplicationContext getApplicationContext(){
         if(applicationContext == null) {
             applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");

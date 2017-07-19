@@ -43,13 +43,8 @@ public class DaoManager {
      */
     public final static RefereeAnalysisProcessDao refereeAnalysisProcessDao;
 
-    /**
-     *  文尾Dao
-     */
-//    public final static TailorDao tailorDao;
-
-//    private DaoManager() {
-//    }
+    private DaoManager() {
+    }
 
     static {
         ApplicationContext applicationContext = ApplicationContextHelper.getApplicationContext();
@@ -60,7 +55,6 @@ public class DaoManager {
         litigationParticipantsDao = applicationContext.getBean(LitigationParticipantsDao.class);
         proceedingsDao = applicationContext.getBean(ProceedingsDao.class);
         refereeAnalysisProcessDao = applicationContext.getBean(RefereeAnalysisProcessDao.class);
-//        tailorDao = applicationContext.getBean(TailorDao.class);
     }
 
 }
