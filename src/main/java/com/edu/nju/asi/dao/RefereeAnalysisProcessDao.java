@@ -3,6 +3,7 @@ package com.edu.nju.asi.dao;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -26,9 +27,9 @@ public interface RefereeAnalysisProcessDao {
     /**
      * 根据条件查找一个
      * @param codeIDs 案件ID集合
-     * @return  List<RefereeAnalysisProcess>
+     * @return  Map<String, RefereeAnalysisProcess>
      */
-    List<RefereeAnalysisProcess> findAll(Set<String> codeIDs);
+    Map<String, RefereeAnalysisProcess> findAll(Set<String> codeIDs);
 
     /**
      * 批量插入数据

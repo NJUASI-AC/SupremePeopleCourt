@@ -3,6 +3,7 @@ package com.edu.nju.asi.dao;
 import com.edu.nju.asi.model.CaseBasic;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -26,9 +27,9 @@ public interface CaseBasicDao {
     /**
      * 根据条件查找一个
      * @param codeIDs 案件ID集合
-     * @return  List<CaseBasic>
+     * @return   Map<String,CaseBasic>
      */
-    List<CaseBasic> findAll(Set<String> codeIDs);
+    Map<String,CaseBasic> findAll(Set<String> codeIDs);
 
     /**
      * 批量插入数据

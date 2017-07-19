@@ -8,9 +8,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -49,16 +47,19 @@ public class RefereeAnalysisProcessDaoImpl implements RefereeAnalysisProcessDao 
      * 根据条件查找一个
      *
      * @param caseIDs 案件ID集合
-     * @return List<RefereeAnalysisProcess>
+     * @return Map<String, RefereeAnalysisProcess>
      */
     @Override
-    public List<RefereeAnalysisProcess> findAll(Set<String> caseIDs) {
-        List<RefereeAnalysisProcess> list = new ArrayList<>();
+    public Map<String, RefereeAnalysisProcess> findAll(Set<String> caseIDs) {
+        Map<String, RefereeAnalysisProcess> refereeAnalysisProcesses = new HashMap<>();
         for(String caseID: caseIDs){
             Query query = new Query(Criteria.where("caseID").is(caseID));
-            list.add(mongoTemplate.findOne(query, RefereeAnalysisProcess.class));
+            RefereeAnalysisProcess refereeAnalysisProcess = mongoTemplate.findOne(query, RefereeAnalysisProcess.class);
+            if(refereeAnalysisProcess!=null) {
+                refereeAnalysisProcesses.put(caseID,refereeAnalysisProcess);
+            }
         }
-        return list;
+        return refereeAnalysisProcesses;
     }
 
     /**

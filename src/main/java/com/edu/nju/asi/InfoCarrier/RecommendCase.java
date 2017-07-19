@@ -17,18 +17,8 @@ import java.util.List;
  */
 public class RecommendCase {
 
-    public RecommendCase(String caseID, String records, String actionCause, List<String> evidence, List<String> fact, RefereeAnalysisProcess refereeAnalysisProcess) {
-        this.caseID = caseID;
-        this.records = records;
-        this.actionCause = actionCause;
-        this.evidence = evidence;
-        this.fact = fact;
-        this.refereeAnalysisProcess = refereeAnalysisProcess;
-    }
-
-
     /**
-     *  案号
+     * 案号
      */
     @Id
     private String caseID;
@@ -61,6 +51,28 @@ public class RecommendCase {
      */
     private RefereeAnalysisProcess refereeAnalysisProcess;
 
+    public RecommendCase(CaseBasic caseBasic, Proceedings proceedings, RefereeAnalysisProcess refereeAnalysisProcess) {
+
+        this.caseID = proceedings.getCaseID();
+        this.records = proceedings.getRecords();
+        this.actionCause = proceedings.getActionCause();
+
+        if (caseBasic != null) {
+            this.evidence = caseBasic.getEvidence();
+            this.fact = caseBasic.getFacts();
+        }
+
+        this.refereeAnalysisProcess = refereeAnalysisProcess;
+    }
+
+    public RecommendCase(String caseID, String records, String actionCause, List<String> evidence, List<String> fact, RefereeAnalysisProcess refereeAnalysisProcess) {
+        this.caseID = caseID;
+        this.records = records;
+        this.actionCause = actionCause;
+        this.evidence = evidence;
+        this.fact = fact;
+        this.refereeAnalysisProcess = refereeAnalysisProcess;
+    }
 
     public String getCaseID() {
         return caseID;
@@ -109,6 +121,5 @@ public class RecommendCase {
     public void setRefereeAnalysisProcess(RefereeAnalysisProcess refereeAnalysisProcess) {
         this.refereeAnalysisProcess = refereeAnalysisProcess;
     }
-
 
 }

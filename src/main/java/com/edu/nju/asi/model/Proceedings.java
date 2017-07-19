@@ -96,4 +96,11 @@ public class Proceedings implements Serializable {
         this.actionCode = actionCode;
     }
 
+    public String getRecords() {
+        return records;
+    }
+
+    public void setRecords(String records) {
+        this.records = records;
+    }
 }

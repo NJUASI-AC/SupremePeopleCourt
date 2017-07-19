@@ -9,9 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -51,14 +49,17 @@ public class CaseBasicDaoImpl implements CaseBasicDao {
      * 根据条件查找一个
      *
      * @param caseIDS 案件ID集合
-     * @return List<CaseBasic>
+     * @return  Map<String,CaseBasic>
      */
     @Override
-    public List<CaseBasic> findAll(Set<String> caseIDS) {
-        List<CaseBasic> caseBasics = new ArrayList<>();
+    public Map<String,CaseBasic> findAll(Set<String> caseIDS) {
+        Map<String,CaseBasic> caseBasics = new HashMap<>();
         for(String caseID: caseIDS){
             Query query = new Query(Criteria.where("caseID").is(caseID));
-            caseBasics.add(mongoTemplate.findOne(query, CaseBasic.class));
+            CaseBasic caseBasic = mongoTemplate.findOne(query, CaseBasic.class);
+            if(caseBasic!=null) {
+                caseBasics.put(caseID, mongoTemplate.findOne(query, CaseBasic.class));
+            }
         }
         return caseBasics;
     }

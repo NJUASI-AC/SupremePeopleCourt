@@ -49,6 +49,16 @@ public class Case {
      */
     private Tailor tailor;
 
+    public Case(FullText fullText, Header header, LitigationParticipants litigationParticipants, Proceedings proceedings, CaseBasic caseBasic, RefereeAnalysisProcess refereeAnalysisProcess, JudgementResult judgementResult) {
+        this.fullText = fullText;
+        this.header = header;
+        this.litigationParticipants = litigationParticipants;
+        this.proceedings = proceedings;
+        this.caseBasic = caseBasic;
+        this.refereeAnalysisProcess = refereeAnalysisProcess;
+        this.judgementResult = judgementResult;
+    }
+
     public Case(FullText fullText, Header header, LitigationParticipants litigationParticipants, Proceedings proceedings, CaseBasic caseBasic, RefereeAnalysisProcess refereeAnalysisProcess, JudgementResult judgementResult, Tailor tailor) {
         this.fullText = fullText;
         this.header = header;
