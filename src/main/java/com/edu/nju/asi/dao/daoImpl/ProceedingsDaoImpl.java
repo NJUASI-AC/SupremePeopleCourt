@@ -54,7 +54,7 @@ public class ProceedingsDaoImpl implements ProceedingsDao {
     @Override
     public Map<String, Proceedings> findAll(String actionCode) {
         Query query = new Query(Criteria.where("actionCode").is(actionCode));
-        List<Proceedings> proceedingsList = mongoTemplate.find(query, Proceedings.class);
+        List<Proceedings> proceedingsList = mongoTemplate.find(query, Proceedings.class, collectionName);
         Map<String, Proceedings> map = new HashMap<>();
         for(Proceedings proceedings:proceedingsList){
             map.put(proceedings.getCaseID(), proceedings);
