@@ -65,7 +65,7 @@ public class RecommendServiceImpl implements RecommendService {
         //查明事实段的相似度
         theWeight += listSimilar(newCase.getFact(), theCase.getFact(), weights[3]);
         //裁决过程的相似度
-//        theWeight += refereeAnalysisProcessSimilar(newCase.getRefereeAnalysisProcess(), theCase.getRefereeAnalysisProcess(), weights[4]);
+        theWeight += refereeAnalysisProcessSimilar(newCase.getRefereeAnalysisProcess(), theCase.getRefereeAnalysisProcess(), weights[4]);
         return new RecommendWeight(theCase.getCaseID(), theWeight,theCase.getHandlingCourt(),theCase.getActionCause(),theCase.getNameOfDocument());
     }
     /**
@@ -73,35 +73,43 @@ public class RecommendServiceImpl implements RecommendService {
      *
      * @return 计算出来的权重
      */
-//    private double refereeAnalysisProcessSimilar(RefereeAnalysisProcess refereeAnalysisProcess1, RefereeAnalysisProcess refereeAnalysisProcess2, int baseWeight) {
-//        double weightOfLegal = 0;
-//        try {
-//            List<LegalArticle> legals1=refereeAnalysisProcess1.getLegalArticles();
-//            List<LegalArticle> legals2=refereeAnalysisProcess2.getLegalArticles();
-//            if (legals1 == null || legals2 == null) {
-//                weightOfLegal += baseWeight * 0.1;
-//            } else {
-//                List<String> legals = new ArrayList<>();
-//                for (int i = 0; i < legals1.size(); i++) {
-//                    String legal = legals1.get(i).getLawName();
-//                    List<Entry> entries = legals1.get(i).getLegalEntry();
-//                    if (entries != null) {
-//                        for (int j = 0; j < entries.size(); j++) {
-//                            legal += entries.get(j).getName();
-//                        }
-//                    }
-//                }
-//                for (int j = 0; j < legals2.size(); j++) {
-//
-//
-//                }
-//            }
-//        } catch (Exception e) {
-//            weightOfLegal += baseWeight * 0.1;
-//        }
-//        return weightOfLegal;
-//    }
+    private double refereeAnalysisProcessSimilar(RefereeAnalysisProcess refereeAnalysisProcess1, RefereeAnalysisProcess refereeAnalysisProcess2, int baseWeight) {
+        double weightOfLegal = 0;
+        try {
+            List<LegalArticle> legals1=refereeAnalysisProcess1.getLegalArticles();
+            List<LegalArticle> legals2=refereeAnalysisProcess2.getLegalArticles();
+            if (legals1 == null || legals2 == null) {
+                weightOfLegal += baseWeight * 0.1;
+            } else {
+                List<String> laws1 = new ArrayList<>();
+                List<String> laws2 = new ArrayList<>();
+                for (int i = 0; i < legals1.size(); i++) {
+                    String legal1 = legals1.get(i).getLawName();
+                    legal1 += lawToString(legals1.get(i).getLegalEntry());
+                    laws1.add(legal1);
+                }
+                for (int j = 0; j < legals2.size(); j++) {
+                    String legal2 = legals2.get(j).getLawName();
+                    legal2 += lawToString(legals2.get(j).getLegalEntry());
+                    laws2.add(legal2);
+                }
+                weightOfLegal += listSimilar(laws1,laws2,baseWeight);
+            }
+        } catch (Exception e) {
+            weightOfLegal += baseWeight * 0.1;
+        }
+        return weightOfLegal;
+    }
 
+    private String lawToString(List<Entry> entries ){
+        String str="";
+        if (entries != null) {
+            for (int j = 0; j < entries.size(); j++) {
+                str += entries.get(j).getName();
+            }
+        }
+        return str;
+    }
 
 
     /**
@@ -158,11 +166,14 @@ public class RecommendServiceImpl implements RecommendService {
             if (list1 == null || list2 == null) {
                 weightOfList += baseWeight * 0.1;  //如果不存在就给一点点权重
             } else {
+                double weight = 0;
                 for (int i = 0; i < list1.size(); i++) {
-
-                }
-                for (int j = 0; j < list2.size(); j++) {
-
+                    for (int j = 0; j < list2.size(); j++) {
+                        weight = cardSimilar(list1.get(i),list2.get(j));
+                        if (weight>weightOfList){
+                            weightOfList=weight;
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
