@@ -14,6 +14,11 @@ public class DaoManager {
     public final static CaseBasicDao caseBasicDao;
 
     /**
+     *  分析需要Dao
+     */
+    public final static DataManagerDao dataManagerDao;
+
+    /**
      *  全文Dao
      */
     public final static FullTextDao fullTextDao;
@@ -49,6 +54,7 @@ public class DaoManager {
     static {
         ApplicationContext applicationContext = ApplicationContextHelper.getApplicationContext();
         caseBasicDao = applicationContext.getBean(CaseBasicDao.class);
+        dataManagerDao = applicationContext.getBean(DataManagerDao.class);
         fullTextDao = applicationContext.getBean(FullTextDao.class);
         headerDao = applicationContext.getBean(HeaderDao.class);
         judgementResultDao = applicationContext.getBean(JudgementResultDao.class);
