@@ -150,15 +150,23 @@ span.required {
 	color: #ff0000;
 }
 
+.filename {
+	border-bottom: 1px solid #000;
+	height: 30px;
+	width: 500px;
+	display: inline-block;
+	overflow: scroll;
+}
+
 .file {
 	position: relative;
 	display: inline-block;
-	background: #D0EEFF;
-	border: 1px solid #99D3F5;
+	background: #FFECEC;
+	border: 1px solid #FF5151;
 	border-radius: 4px;
 	padding: 4px 12px;
 	overflow: hidden;
-	color: #1E88C7;
+	color: #4D0000;
 	text-decoration: none;
 	text-indent: 0;
 	line-height: 20px;
@@ -171,16 +179,20 @@ span.required {
 	opacity: 0;
 }
 .file:hover {
-	background: #AADFFD;
-	border-color: #78C3F3;
-	color: #004974;
+	background: #FFD2D2;
+	border-color: #FF5151;
+	color: #4D0000;
 	text-decoration: none;
 }
 
 h1 {
 	color: #000;
-	font-size: 35px;
-	font-family: 'Pontano Sans', Arial, sans-serif;
+	font-size: 40px;
+	font-family: 'Microsoft Sans Serif', Arial, sans-serif;
+}
+
+body h1 span{
+	color: red;
 }
 
 h2 {
