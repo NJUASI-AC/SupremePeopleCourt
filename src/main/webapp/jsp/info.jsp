@@ -40,7 +40,7 @@
         <section id="content">
             <article>
                 <div>
-                    <h2>${caseInfo.header.caseID}</h2>
+                    <h3>${caseInfo.header.caseID}</h3>
                 </div>
 
                 <div class="seperator" style="background-color: #535354; width: 100%;"></div>
@@ -50,6 +50,7 @@
                     ${fn:replace(caseInfo.fullText.text,vEnter,'<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;')}
                 </div>
             </article>
+
         </section>
 
         <aside class="sidebar">
@@ -118,7 +119,44 @@
 
         </aside>
         <div class="clear"></div>
+
+        <div>
+            <h2>推荐案例</h2>
+            <div class="seperator" style="width: 100%;background-color: black"></div>
+            <c:choose>
+                <c:when test="${analyseInfo.size()!=0}">
+                    <div>
+                        <c:forEach var="item" items="${analyseInfo}">
+                            <h4>${item.caseID}</h4>
+                            <table style="width: 100%;padding: 3px; text-align: center;" align="center">
+                                <tr>
+                                    <td>相似度</td>
+                                    <td>${item.weight}</td>
+                                    <td>法院</td>
+                                    <td>${item.handlingCourt}</td>
+                                </tr>
+                                <tr>
+                                    <td>案由</td>
+                                    <td>${item.nameOfDocument.repre}</td>
+                                    <td>类型</td>
+                                    <td>${item.actionCause}</td>
+                                </tr>
+                            </table>
+                        </c:forEach>
+                    </div>
+
+                </c:when>
+                <c:when test="${list.size()==0}">
+                    <div>
+                        未搜索到推荐案例
+                    </div>
+                </c:when>
+            </c:choose>
+        </div>
     </div>
+
+
+
     <footer>
         <div class="footer-content width">
             <ul>
@@ -153,7 +191,6 @@
 </body>
 
 <script>
-
 
 </script>
 </html>
