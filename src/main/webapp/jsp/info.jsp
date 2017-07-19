@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: cuihua
@@ -43,54 +45,9 @@
 
                 <div class="seperator" style="background-color: #535354; width: 100%;"></div>
                 <div>
-                    <div>
-                        <p>原告马某，女，汉族。</p>
-                        <p>被告惠某某，男，汉族。</p>
-                    </div>
-                    <div>
-                        <p>原告马某与被告惠某某离婚纠纷一案，本院于2017年03月03日立案后，依法适用普通程序进行了审理。</p>
-                    </div>
-                    <div>
-                        <p>原告马某到庭参加诉讼，被告惠某某经公告后未到庭应诉，本案现已审理终结。</p>
-                        <p>原告马某诉称:2011年3月原告马某与被告惠某某在新安县打工认识，并确立了恋爱关系，双方父母按农村风俗习惯为原、被告举办了婚礼，2012年5月12日生一女马嘉欣，2012年11月19日在新安县民政大厅补办结婚登记。</p>
-                        <p>因婚前对被告了解很少，婚姻基础不牢固，性格与爱好不相同，导致婚姻痛苦。</p>
-                        <p>被告个性强，脾气暴躁，对家庭不尽职责，没有尽到做丈夫和父亲的义务，婚后经常处于冷战状态，2013年元月被告离家出走，分居至今，夫妻关系名存实亡，感情彻底破裂，请求解除原告与被告的婚姻关系，婚生女马嘉欣由原告抚养，被告承担孩子的抚养费每月800元。</p>
-                        <p>被告惠某某既未答辩也未出庭应诉。</p>
-                    </div>
-
-                    <div>
-                        <p>本院查明以下法律事实:2011年3月原告马某与被告惠某某在新安县打工认识，并确立了恋爱关系，2011年10月1日双方父母按农村风俗习惯为原告马某与被告惠某某举办了婚礼，2012年5月12日原告与被告二人生育一女，取名马嘉欣，现随原告马某生活。</p>
-                        <p>2012年11月19日原告与被告在河南省新安县民政大厅补办结婚登记。</p>
-                        <p>后原告马某与被告惠某某因生活琐事发生纠纷。</p>
-
-                    </div>
-
-                    <div>
-                        <p>本院认为:原告马某与被告惠某某婚前系自由恋爱，婚后虽因生活琐事发生纠纷，原告马某与被告惠某某婚姻基础较好，原告马某与被告惠某某二人夫妻感情尚未完全破裂，原告马某诉讼被告惠某某离婚纠纷，因原告马某未能提供与被告惠某某何时分居的证据，应承担举证不力的责任。</p>
-                        <p>原告马某请求离婚的诉讼请求不予支持。</p>
-
-                    </div>
-
-                    <div>
-                        <p>故依据《中华人民共和国婚姻法》第三十二条  《中华人民共和国民事诉讼法》第一百四十四条  之规定，判决如下:</p>
-                        <p>驳回原告马某的诉讼请求。</p>
-                        <p>案件受理费300元，由原告马某负担。</p>
-                    </div>
-
-                    <div>
-                        <p>如不服本判决，可以在判决书送达之日起十五日内，向本院递交上诉状，并按照对方当事人的人数提出副本，上诉于渭南市中级人民法院。</p>
-
-                    </div>
-
-                    <div>
-                        <p>审判长杨富明</p>
-                        <p>审判员李淑侠</p>
-                        <p>审判员王建宏</p>
-                        <p>二〇一七年六月十三日</p>
-                        <p>书记员石煜萍</p>
-
-                    </div>
-
+                    <%request.setAttribute("vEnter", "\r\n");%>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    ${fn:replace(caseInfo.fullText.text,vEnter,'<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;')}
                 </div>
             </article>
         </section>
@@ -100,11 +57,21 @@
                 <li>
                     <h4>Case Information</h4>
                     <ul>
-                        <li>案号：<span>${caseInfo.header.caseID}</span></li>
+                        <li>案号：<span>${caseInfo.header.caseNum}</span></li>
                         <li>法院：<span>${caseInfo.header.handlingCourt}</span></li>
                         <li>案由：<span>${caseInfo.proceedings.actionCause}</span></li>
                         <li>类型：<span>${caseInfo.header.nameOfDocument.repre}</span></li>
                         <li>程序：<span>${caseInfo.header.trialProcedure.repre}</span></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <h4>Litigation Participants</h4>
+                    <ul>
+                        <c:forEach var="item" items="${caseInfo.litigationParticipants.litigants}">
+                                <li>${item.litigantType.repre}：
+                                    <span>${item.name}</span></li>
+                        </c:forEach>
                     </ul>
                 </li>
 
@@ -186,8 +153,7 @@
 </body>
 
 <script>
-    var name='${caseInfo.fullText.text}';
-    alert(name);
+
 
 </script>
 </html>
