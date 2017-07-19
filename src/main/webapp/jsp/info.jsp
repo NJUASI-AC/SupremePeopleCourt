@@ -127,21 +127,23 @@
                 <c:when test="${analyseInfo.size()!=0}">
                     <div>
                         <c:forEach var="item" items="${analyseInfo}">
-                            <h4>${item.caseID}</h4>
-                            <table style="width: 100%;padding: 3px; text-align: center;" align="center">
-                                <tr>
-                                    <td>相似度</td>
-                                    <td>${item.weight}</td>
-                                    <td>法院</td>
-                                    <td>${item.handlingCourt}</td>
-                                </tr>
-                                <tr>
-                                    <td>案由</td>
-                                    <td>${item.nameOfDocument.repre}</td>
-                                    <td>类型</td>
-                                    <td>${item.actionCause}</td>
-                                </tr>
-                            </table>
+                            <div class="recommend-single-wrap">
+                                <h4>${item.caseID}</h4>
+                                <table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">
+                                    <tr>
+                                        <td>相似度</td>
+                                        <td>${item.weight}</td>
+                                        <td>法院</td>
+                                        <td>${item.handlingCourt}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>案由</td>
+                                        <td>${item.actionCause}</td>
+                                        <td>类型</td>
+                                        <td>${item.nameOfDocument.repre}</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </c:forEach>
                     </div>
 

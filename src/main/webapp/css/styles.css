@@ -515,3 +515,25 @@ footer .footer-bottom p, footer .footer-bottom p a {
 	position: relative;
 	display: block;
 }
+.single-info td{
+    text-align: left;
+    padding: 3px 0;
+}
+.single-info{
+    padding: 5px;
+}
+.recommend-single-wrap{
+    background-color: #ffffff;
+    box-shadow: 0 0 1px rgba(0,0,0,0.4);
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    transition: all ease 0.3s;
+    position: relative;
+    top:0;
+    overflow: hidden;
+}
+.recommend-single-wrap:hover{
+    box-shadow: 0 0 50px rgba(100,100,100,0.3);
+    top: -3px;
+}
