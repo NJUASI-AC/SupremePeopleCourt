@@ -31,11 +31,12 @@ public class DataManagerDaoImpl implements DataManagerDao {
         if(!map.isEmpty()) {
             Map<String, CaseBasic> caseBasics = DaoManager.caseBasicDao.findAll(map.keySet());
             Map<String, RefereeAnalysisProcess> refereeAnalysisProcesses = DaoManager.refereeAnalysisProcessDao.findAll(map.keySet());
+            Map<String, Header> headers=  DaoManager.headerDao.findAll(map.keySet());
 
             for (String caseID : map.keySet()) {
                 CaseBasic caseBasic = caseBasics.get(caseID);
                 RefereeAnalysisProcess refereeAnalysisProcess = refereeAnalysisProcesses.get(caseID);
-                recommendCases.add(new RecommendCase(caseBasic, map.get(caseID), refereeAnalysisProcess));
+                recommendCases.add(new RecommendCase(caseBasic, map.get(caseID), refereeAnalysisProcess,headers.get(caseID)));
             }
         }
         return recommendCases;
