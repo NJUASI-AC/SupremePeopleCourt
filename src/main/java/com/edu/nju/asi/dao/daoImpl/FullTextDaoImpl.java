@@ -34,12 +34,12 @@ public class FullTextDaoImpl implements FullTextDao {
     /**
      * 根据条件查找一个
      *
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
     @Override
-    public FullText find(String caseNum) {
-        Query query = new Query(Criteria.where("caseNum").is(caseNum));
+    public FullText find(String caseID) {
+        Query query = new Query(Criteria.where("caseID").is(caseID));
         return mongoTemplate.findOne(query, FullText.class, collectionName);
     }
 

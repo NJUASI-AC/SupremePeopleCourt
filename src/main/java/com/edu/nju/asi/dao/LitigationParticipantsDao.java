@@ -18,10 +18,10 @@ public interface LitigationParticipantsDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案件名称
      * @return CaseBasic
      */
-    LitigationParticipants find(String caseNum);
+    LitigationParticipants find(String caseID);
 
     /**
      * 批量插入数据

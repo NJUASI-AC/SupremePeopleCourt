@@ -15,9 +15,9 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <script src="../js/jquery.js"></script>
+    <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../js/upload.js"></script>
-    <script src="../js/ajaxfileupload.js"></script>
+    <script src="../js/ajaxfileupload.ajaxFileUpload.js"></script>
 </head>
 <body>
 <div id="container">

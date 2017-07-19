@@ -34,12 +34,12 @@ public class ProceedingsDaoImpl implements ProceedingsDao {
     /**
      * 根据条件查找一个
      *
-     * @param caseNum 案号
+     * @param caseID 案号
      * @return CaseBasic
      */
     @Override
-    public Proceedings find(String caseNum) {
-        Query query = new Query(Criteria.where("caseNum").is(caseNum));
+    public Proceedings find(String caseID) {
+        Query query = new Query(Criteria.where("caseID").is(caseID));
         return mongoTemplate.findOne(query, Proceedings.class, collectionName);
     }
 

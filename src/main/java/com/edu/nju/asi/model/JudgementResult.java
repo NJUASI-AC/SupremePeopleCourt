@@ -1,11 +1,9 @@
 package com.edu.nju.asi.model;
 
-import com.edu.nju.asi.InfoCarrier.LitigationCost;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/17 0017.
@@ -16,7 +14,7 @@ import java.util.List;
 public class JudgementResult implements Serializable{
 
     /**
-     * 案号
+     * 案件ID（文件名唯一）
      */
     @Id
     private String caseID;
@@ -83,67 +81,4 @@ public class JudgementResult implements Serializable{
         this.caseID = caseID;
     }
 
-//    public String getCaseSettlement() {
-//        return caseSettlement;
-//    }
-//
-//    public void setCaseSettlement(String caseSettlement) {
-//        this.caseSettlement = caseSettlement;
-//    }
-//
-//    public String getCompensationOrder() {
-//        return compensationOrder;
-//    }
-//
-//    public void setCompensationOrder(String compensationOrder) {
-//        this.compensationOrder = compensationOrder;
-//    }
-//
-//    public List<String> getSpecificRefereeSection() {
-//        return specificRefereeSection;
-//    }
-//
-//    public void setSpecificRefereeSection(List<String> specificRefereeSection) {
-//        this.specificRefereeSection = specificRefereeSection;
-//    }
-//
-//    public List<LitigationCost> getLitigationCostList() {
-//        return litigationCostList;
-//    }
-//
-//    public void setLitigationCostList(List<LitigationCost> litigationCostList) {
-//        this.litigationCostList = litigationCostList;
-//    }
-//
-//    public boolean isReview() {
-//        return isReview;
-//    }
-//
-//    public void setReview(boolean review) {
-//        this.isReview = review;
-//    }
-//
-//    public String getUpTo() {
-//        return upTo;
-//    }
-//
-//    public void setUpTo(String upTo) {
-//        this.upTo = upTo;
-//    }
-//
-//    public int getUpPeriod() {
-//        return upPeriod;
-//    }
-//
-//    public void setUpPeriod(int upPeriod) {
-//        this.upPeriod = upPeriod;
-//    }
-//
-//    public boolean isHasConsultJurisdictionObjection() {
-//        return hasConsultJurisdictionObjection;
-//    }
-//
-//    public void setHasConsultJurisdictionObjection(boolean hasConsultJurisdictionObjection) {
-//        this.hasConsultJurisdictionObjection = hasConsultJurisdictionObjection;
-//    }
 }

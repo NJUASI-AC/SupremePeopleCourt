@@ -15,9 +15,9 @@ public interface TailorDao {
 
     /**
      * 根据条件查找一个
-     * @param caseNum 案号
+     * @param caseID 案件名称
      * @return CaseBasic
      */
-    Tailor find(String caseNum);
+    Tailor find(String caseID);
 
 }

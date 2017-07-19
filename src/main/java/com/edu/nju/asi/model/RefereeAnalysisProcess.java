@@ -15,8 +15,14 @@ import java.util.List;
 @Document
 public class RefereeAnalysisProcess implements Serializable {
 
+    public RefereeAnalysisProcess(String caseID, String closeCaseType, List<LegalArticle> legalArticles) {
+        this.caseID = caseID;
+        this.closeCaseType = closeCaseType;
+        this.legalArticles = legalArticles;
+    }
+
     /**
-     * 案号
+     * 案件ID（文件名唯一）
      */
     @Id
     private String caseID;
