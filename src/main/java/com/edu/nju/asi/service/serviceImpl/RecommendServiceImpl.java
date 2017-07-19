@@ -76,24 +76,29 @@ public class RecommendServiceImpl implements RecommendService {
     private double refereeAnalysisProcessSimilar(RefereeAnalysisProcess refereeAnalysisProcess1, RefereeAnalysisProcess refereeAnalysisProcess2, int baseWeight) {
         double weightOfLegal = 0;
         try {
-            List<LegalArticle> legals1=refereeAnalysisProcess1.getLegalArticles();
-            List<LegalArticle> legals2=refereeAnalysisProcess2.getLegalArticles();
-            if (legals1 == null || legals2 == null) {
+
+            if (refereeAnalysisProcess1 == null || refereeAnalysisProcess1 == null) {
                 weightOfLegal += baseWeight * 0.1;
             } else {
-                List<String> laws1 = new ArrayList<>();
-                List<String> laws2 = new ArrayList<>();
-                for (int i = 0; i < legals1.size(); i++) {
-                    String legal1 = legals1.get(i).getLawName();
-                    legal1 += lawToString(legals1.get(i).getLegalEntry());
-                    laws1.add(legal1);
+                List<LegalArticle> legals1=refereeAnalysisProcess1.getLegalArticles();
+                List<LegalArticle> legals2=refereeAnalysisProcess2.getLegalArticles();
+                if  (legals1 == null || legals2 == null) {
+                    weightOfLegal += baseWeight * 0.1;
+                } else {
+                    List<String> laws1 = new ArrayList<>();
+                    List<String> laws2 = new ArrayList<>();
+                    for (int i = 0; i < legals1.size(); i++) {
+                        String legal1 = legals1.get(i).getLawName();
+                        legal1 += lawToString(legals1.get(i).getLegalEntry());
+                        laws1.add(legal1);
+                    }
+                    for (int j = 0; j < legals2.size(); j++) {
+                        String legal2 = legals2.get(j).getLawName();
+                        legal2 += lawToString(legals2.get(j).getLegalEntry());
+                        laws2.add(legal2);
+                    }
+                    weightOfLegal += listSimilar(laws1, laws2, baseWeight);
                 }
-                for (int j = 0; j < legals2.size(); j++) {
-                    String legal2 = legals2.get(j).getLawName();
-                    legal2 += lawToString(legals2.get(j).getLegalEntry());
-                    laws2.add(legal2);
-                }
-                weightOfLegal += listSimilar(laws1,laws2,baseWeight);
             }
         } catch (Exception e) {
             weightOfLegal += baseWeight * 0.1;
