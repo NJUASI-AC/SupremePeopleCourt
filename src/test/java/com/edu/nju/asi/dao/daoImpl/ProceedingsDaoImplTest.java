@@ -4,6 +4,7 @@ import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.dao.ProceedingsDao;
 import com.edu.nju.asi.model.Proceedings;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Map;
@@ -22,12 +23,14 @@ public class ProceedingsDaoImplTest {
         proceedingsDao = DaoManager.proceedingsDao;
     }
 
+    @Ignore
     @Test
     public void find() throws Exception {
         System.out.println(proceedingsDao.find("(2009)南民初字第0229号民事裁定书（准许或不准许撤诉用）").getActionCause());
 
     }
 
+    @Ignore
     @Test
     public void findAll() throws Exception {
         long start = System.currentTimeMillis();
