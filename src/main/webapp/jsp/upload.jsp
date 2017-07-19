@@ -16,8 +16,6 @@
     <![endif]-->
 
     <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/upload.js"></script>
-    <script src="../js/ajaxfileupload.ajaxFileUpload.js"></script>
 </head>
 <body>
 <div id="container">
@@ -30,83 +28,35 @@
     <nav>
         <div class="width">
             <ul>
-                <li><a href="../jsp/index.jsp">主页</a></li>
-                <li><a href="../jsp/upload.jsp">上传案件</a></li>
+                <li class="start selected"><a href="../jsp/upload.jsp">上传案件</a></li>
                 <li><a href="../jsp/contact.jsp">联系我们</a></li>
             </ul>
         </div>
     </nav>
 
 
-    <div id="body" class="width">
-        <section id="content">
-            <article>
-                <div class="article-info">Posted on <time datetime="2017-07-16">16 July</time> by <a href="#" rel="author">TygaGu</a></div>
-
-                <h3>Upload xml file at here:</h3>
-
-                <div style="margin: 20px">
-                    <form method="post" action="/upload" enctype="multipart/form-data">
-                        <input type="file" name="file" />
-                        <input type="submit" />点按上传
-                    </form>
-                    <%--<a href="javascript:" class="file">选择文件--%>
-                        <%--<input type="file" accept="text/xml" id="file">--%>
-                    <%--</a>--%>
-                    <%--<p id="filename">文件名</p>--%>
-                </div>
-                <%--<div style="margin: 20px">--%>
-                    <%--<button id="upload">UPLOAD</button>--%>
-                <%--</div>--%>
-            </article>
-        </section>
-
-        <aside class="sidebar">
-            <ul>
-                <li>
-                    <h4>Categories</h4>
-                    <ul>
-                        <li><a href="../jsp/index.jsp">主页</a></li>
-                        <li><a href="../jsp/upload.jsp">上传案件</a></li>
-                        <li><a href="../jsp/contact.jsp">联系我们</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <h4>About us</h4>
-                    <ul>
-                        <li class="text">
-                            <p style="margin: 0;">ASI-AC<a href="contact.html" class="readmore">Read More &raquo;</a></p>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <h4>Search site</h4>
-                    <ul>
-                        <li class="text">
-                            <form method="get" class="searchform" action="#" >
-                                <p>
-                                    <input type="text" size="32" value="" name="search" class="s" />
-                                </p>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <h4>Helpful Links</h4>
-                    <ul>
-                        <li><a href="http://wenshu.court.gov.cn" title="web hosting">中国裁判文书网</a></li>
-                        <li><a href="http://baike.baidu.com/link?url=0Ty6udmTRGaKZWVruL-W_YqaqqSxVVEe7OC4rKZJr4TQu4y1sf16qk-8h3YRND9hPkO-iXoE3UqjPfYc6Ag9xmh9uRBOU29NjKPvJ0Oe5eJB2iBmaNijyakI8sHO0WZ8" title="web hosting">裁判文书</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-
-        </aside>
+    <div id="body" class="width" style="height: 450px">
+        <div style="margin: 20px; text-align: center">
+            <form method="post" action="/upload" enctype="multipart/form-data">
+                <a href="javascript:" class="file">选择文件
+                    <input type="file" accept="text/xml" name="file" id="file"/>
+                </a>
+                <p id="filename">文件名</p>
+                <a href="javascript:" class="file">上传
+                    <input type="submit"/>
+                </a>
+            </form>
+            <script type="text/javascript">
+                $("#file").change(function(){
+                    let filepath = $(this).val();
+                    let filename = filepath.substr(filepath.lastIndexOf("\\")+1);
+                    $("#filename").text("文件名：" + filename);
+                });
+            </script>
+        </div>
         <div class="clear"></div>
     </div>
+
     <footer>
         <div class="footer-content width">
             <ul>
