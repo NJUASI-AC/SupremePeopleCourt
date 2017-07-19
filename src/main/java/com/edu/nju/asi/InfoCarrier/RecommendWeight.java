@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class RecommendWeight {
 
-    public RecommendWeight(String caseID, List<Double> weight, String handlingCourt, String actionCause, DocumentName nameOfDocument) {
+    public RecommendWeight(String caseID, double weight, String handlingCourt, String actionCause, DocumentName nameOfDocument) {
         this.caseID = caseID;
         this.weight = weight;
         this.handlingCourt = handlingCourt;
@@ -27,7 +27,7 @@ public class RecommendWeight {
     /**
      *  权重
      */
-    private List<Double> weight;
+    private double weight;
 
     /**
      * 经办法院
@@ -54,11 +54,11 @@ public class RecommendWeight {
         this.caseID = caseID;
     }
 
-    public List<Double> getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(List<Double> weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 

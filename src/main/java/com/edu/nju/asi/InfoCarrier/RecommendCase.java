@@ -17,43 +17,6 @@ import java.util.List;
  */
 public class RecommendCase {
 
-    public RecommendCase(String caseID, String records, String actionCode, List<String> evidence, List<String> fact, RefereeAnalysisProcess refereeAnalysisProcess) {
-        this.caseID = caseID;
-        this.records = records;
-        this.actionCode = actionCode;
-        this.evidence = evidence;
-        this.fact = fact;
-        this.refereeAnalysisProcess = refereeAnalysisProcess;
-    }
-
-    public RecommendCase(Case newCase) {
-        this.caseID = newCase.getCaseBasic().getCaseID();
-        this.records = newCase.getProceedings().getRecords();
-        this.actionCode = newCase.getProceedings().getActionCode();
-        this.evidence = newCase.getCaseBasic().getEvidence();
-        this.fact = newCase.getCaseBasic().getFacts();
-        this.refereeAnalysisProcess = newCase.getRefereeAnalysisProcess();
-    }
-
-
-    //todo dongjinyu
-    /**
-     * 经办法院
-     */
-    private String handlingCourt;
-
-    /**
-     *  案由名称
-     */
-//    private String caseID;
-
-    /**
-     * 文书名称
-     */
-    private DocumentName nameOfDocument;
-
-
-
 
 
     /**
@@ -88,12 +51,52 @@ public class RecommendCase {
      */
     private RefereeAnalysisProcess refereeAnalysisProcess;
 
+
+    //todo dongjinyu
+    /**
+     * 经办法院
+     */
+    private String handlingCourt;
+
+    /**
+     * 案由
+     */
+    private String actionCause;
+
+    /**
+     * 文书名称
+     */
+    private DocumentName nameOfDocument;
+
+    public RecommendCase(String caseID, String records, String actionCode, List<String> evidence, List<String> fact, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, String actionCause, DocumentName nameOfDocument) {
+        this.caseID = caseID;
+        this.records = records;
+        this.actionCode = actionCode;
+        this.evidence = evidence;
+        this.fact = fact;
+        this.refereeAnalysisProcess = refereeAnalysisProcess;
+        this.handlingCourt = handlingCourt;
+        this.actionCause = actionCause;
+        this.nameOfDocument = nameOfDocument;
+    }
+    public RecommendCase(Case newCase) {
+        this.caseID = newCase.getCaseBasic().getCaseID();
+        this.records = newCase.getProceedings().getRecords();
+        this.actionCode = newCase.getProceedings().getActionCode();
+        this.evidence = newCase.getCaseBasic().getEvidence();
+        this.fact = newCase.getCaseBasic().getFacts();
+        this.refereeAnalysisProcess = newCase.getRefereeAnalysisProcess();
+        this.handlingCourt = newCase.getHeader().getHandlingCourt();
+        this.actionCause =  newCase.getProceedings().getActionCause();
+        this.nameOfDocument = newCase.getHeader().getNameOfDocument();
+    }
+
+    //TODO djy 你这个也要改一下
     public RecommendCase(CaseBasic caseBasic, Proceedings proceedings, RefereeAnalysisProcess refereeAnalysisProcess) {
 
         this.caseID = proceedings.getCaseID();
         this.records = proceedings.getRecords();
         this.actionCode = proceedings.getActionCode();
-
         if (caseBasic != null) {
             this.evidence = caseBasic.getEvidence();
             this.fact = caseBasic.getFacts();
@@ -149,6 +152,30 @@ public class RecommendCase {
 
     public void setRefereeAnalysisProcess(RefereeAnalysisProcess refereeAnalysisProcess) {
         this.refereeAnalysisProcess = refereeAnalysisProcess;
+    }
+
+    public String getHandlingCourt() {
+        return handlingCourt;
+    }
+
+    public void setHandlingCourt(String handlingCourt) {
+        this.handlingCourt = handlingCourt;
+    }
+
+    public String getActionCause() {
+        return actionCause;
+    }
+
+    public void setActionCause(String actionCause) {
+        this.actionCause = actionCause;
+    }
+
+    public DocumentName getNameOfDocument() {
+        return nameOfDocument;
+    }
+
+    public void setNameOfDocument(DocumentName nameOfDocument) {
+        this.nameOfDocument = nameOfDocument;
     }
 
 

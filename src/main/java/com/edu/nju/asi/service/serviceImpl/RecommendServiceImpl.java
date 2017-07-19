@@ -66,7 +66,7 @@ public class RecommendServiceImpl implements RecommendService {
         theWeight += listSimilar(newCase.getFact(), theCase.getFact(), weights[3]);
         //裁决过程的相似度
         theWeight += refereeAnalysisProcessSimilar(newCase.getRefereeAnalysisProcess(), theCase.getRefereeAnalysisProcess(), weights[4]);
-        return new RecommendWeight(theCase.getCaseID(), theWeight);
+        return new RecommendWeight(theCase.getCaseID(), theWeight,theCase.getHandlingCourt(),theCase.getActionCause(),theCase.getNameOfDocument());
     }
     /**
      * 用于计算两个案件处理过程之间的相似度
@@ -254,7 +254,7 @@ public class RecommendServiceImpl implements RecommendService {
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "裁决", legalArticles);
         actionCause = "9019";
         record = "原告刘二庆，男，1951年1月12日出生，汉族，住天津市南开区向阳路云阳北里1-1-212号。身份证号120106195101126512法定代理人刘翠正，女，1954年2月3日出生，汉族，住天津市红桥区芥园大堤一条胡同38号。身份证号120106195402036545被告孙振华，女，1961年1月8日出生，汉族，住天津市南开区怡园里3-2-103号。身份证号120104196101082929本院在审理原告刘二庆与被告孙振华撤销婚姻纠纷一案中，原告刘二庆于2010年6月28日向本院提出财产保全申请，要求对原告刘二庆名下坐落于天津市南开区芥园西道怡园里3-2-103号房屋实施财产保全，案外人刘庆三以其名下坐落于天津市南开区芥园西道怡园里3-5-201号房屋及担保金100000元作为担保。";
-        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess,"","",DocumentName.CIVIL_JUDGMENT));
 
         caseID = "（2010）南民初字第4871-1号";
         evidence = new ArrayList<>();
@@ -269,7 +269,7 @@ public class RecommendServiceImpl implements RecommendService {
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "裁决", legalArticles);
         actionCause = "9019";
         record = "原告刘二庆，男，1951年1月12日出生，汉族，住天津市南开区向阳路云阳北里1-1-212号。身份证号120106195101126512法定代理人刘翠正，女，1954年2月3日出生，汉族，住天津市红桥区芥园大堤一条胡同38号。身份证号120106195402036545被告孙振华，女，1961年1月8日出生，汉族，住天津市南开区怡园里3-2-103号。身份证号120104196101082929本院在审理原告刘二庆与被告孙振华撤销婚姻纠纷一案中，原告刘二庆于2010年7月20日向本院提出撤诉申请。";
-        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess,"","",DocumentName.CIVIL_JUDGMENT));
 
         caseID = "(2003)东民初字第1179号";
         evidence = new ArrayList<>();
@@ -285,7 +285,7 @@ public class RecommendServiceImpl implements RecommendService {
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "判决", legalArticles);
         actionCause = "9018";
         record = "冯艳英与郝伟东婚姻无效纠纷一案，本院受理后，依法组成合议庭（或依法由审判员独任审判），开庭进行了审理。原告冯艳英，，被告郝伟东，到庭参加诉讼。本案现以审理终结。";
-        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess,"","",DocumentName.CIVIL_JUDGMENT));
 
         caseID = "(2016)津0115民初6408号";
         evidence = new ArrayList<>();
@@ -302,7 +302,7 @@ public class RecommendServiceImpl implements RecommendService {
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "判决", legalArticles);
         actionCause = "9018";
         record = "原告郝淑舫与被告郑宝利婚姻无效纠纷一案，本院于2016年7月25日立案后，依法适用简易程序公开开庭进行了审理。原告与被告均到庭参加了诉讼。本案现已审理终结。";
-        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess,"","",DocumentName.CIVIL_JUDGMENT));
 
         caseID = "（2007）蓟民初字第2267号";
         evidence = new ArrayList<>();
@@ -319,7 +319,7 @@ public class RecommendServiceImpl implements RecommendService {
         refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "判决", legalArticles);
         actionCause = "9018";
         record = "原告孙立超与被告张丹丹婚约财产纠纷一案，本院于2007年4月24日立案受理后，依法组成合议庭，不公开开庭进行了审理，原告孙立超到庭参加诉讼。被告张丹丹经公告送达起诉状副本、应诉通知书、举证通知书和开庭传票，无正当理由拒绝到庭参加诉讼。本案现已审理终结。";
-        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess));
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess,"","",DocumentName.CIVIL_JUDGMENT));
 
         return recommendCases;
     }
