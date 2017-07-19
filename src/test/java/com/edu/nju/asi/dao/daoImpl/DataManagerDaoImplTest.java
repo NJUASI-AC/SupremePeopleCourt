@@ -3,6 +3,7 @@ package com.edu.nju.asi.dao.daoImpl;
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.dao.DataManagerDao;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -19,6 +20,7 @@ public class DataManagerDaoImplTest {
         dataManagerDao = DaoManager.dataManagerDao;
     }
 
+    @Ignore
     @Test
     public void getRecommendCase() throws Exception {
         dataManagerDao.getRecommendCase("9018");
