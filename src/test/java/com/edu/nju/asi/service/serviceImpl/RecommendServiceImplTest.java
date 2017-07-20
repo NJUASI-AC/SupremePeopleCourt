@@ -32,7 +32,7 @@ public class RecommendServiceImplTest {
     public void after() throws Exception {
     }
 
-//    @Ignore
+    @Ignore
     @Test
     public void testRecommend() throws Exception {
         List<String> evidence = new ArrayList<>();
