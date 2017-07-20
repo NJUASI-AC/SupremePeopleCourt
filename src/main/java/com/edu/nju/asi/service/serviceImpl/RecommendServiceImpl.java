@@ -185,7 +185,7 @@ public class RecommendServiceImpl implements RecommendService {
         } catch (Exception e) {
 
         }
-        return weightOfList;
+        return weightOfList * baseWeight;
     }
 
     /**
@@ -213,8 +213,8 @@ public class RecommendServiceImpl implements RecommendService {
      * @return 计算出来的权重
      */
     private List<RecommendCase> getAllData(RecommendCase newCase) {
-//        return DaoManager.dataManagerDao.getRecommendCase(newCase.getActionCode());
-        return getDataStub();
+        return DaoManager.dataManagerDao.getRecommendCase(newCase.getActionCode());
+//        return getDataStub();
     }
 
     /**
@@ -259,50 +259,66 @@ public class RecommendServiceImpl implements RecommendService {
         String actionCause;
         String record;
 
-//        caseID = "（2010）南民初字第4871号";
-//        evidence = new ArrayList<>();
-//        evidence.add("");
-//        facts = new ArrayList<>();
-//        legalArticles = new ArrayList<>();
-//        legalEntry = new ArrayList<>();
-//        entries = new ArrayList<>();
-//        legalEntry.add(new Entry("九十二", entries));
-//        legalArticles.add(new LegalArticle("中华人民共和国民事诉讼法", legalEntry));
-//        refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "裁决", legalArticles);
-//        actionCause = "9019";
-//        record = "原告刘二庆，男，1951年1月12日出生，汉族，住天津市南开区向阳路云阳北里1-1-212号。身份证号120106195101126512法定代理人刘翠正，女，1954年2月3日出生，汉族，住天津市红桥区芥园大堤一条胡同38号。身份证号120106195402036545被告孙振华，女，1961年1月8日出生，汉族，住天津市南开区怡园里3-2-103号。身份证号120104196101082929本院在审理原告刘二庆与被告孙振华撤销婚姻纠纷一案中，原告刘二庆于2010年6月28日向本院提出财产保全申请，要求对原告刘二庆名下坐落于天津市南开区芥园西道怡园里3-2-103号房屋实施财产保全，案外人刘庆三以其名下坐落于天津市南开区芥园西道怡园里3-5-201号房屋及担保金100000元作为担保。";
-//        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess, "2222", "11111", DocumentName.CIVIL_JUDGMENT));
-//
-//        caseID = "（2010）南民初字第4871-1号";
-//        evidence = new ArrayList<>();
-//        evidence.add("");
-//        facts = new ArrayList<>();
-//        legalArticles = new ArrayList<>();
-//        legalEntry = new ArrayList<>();
-//        entries = new ArrayList<>();
-//        entries.add("第一款");
-//        legalEntry.add(new Entry("一百三十一", entries));
-//        legalArticles.add(new LegalArticle("中华人民共和国民事诉讼法", legalEntry));
-//        refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "裁决", legalArticles);
-//        actionCause = "9019";
-//        record = "原告刘二庆，男，1951年1月12日出生，汉族，住天津市南开区向阳路云阳北里1-1-212号。身份证号120106195101126512法定代理人刘翠正，女，1954年2月3日出生，汉族，住天津市红桥区芥园大堤一条胡同38号。身份证号120106195402036545被告孙振华，女，1961年1月8日出生，汉族，住天津市南开区怡园里3-2-103号。身份证号120104196101082929本院在审理原告刘二庆与被告孙振华撤销婚姻纠纷一案中，原告刘二庆于2010年7月20日向本院提出撤诉申请。";
-//        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess, "1111123", "22222", DocumentName.CIVIL_JUDGMENT));
-//
-//        caseID = "(2003)东民初字第1179号";
-//        evidence = new ArrayList<>();
-//        evidence.add("");
-//        facts = new ArrayList<>();
-//        fact = "";
-//        facts.add(fact);
-//        legalArticles = new ArrayList<>();
-//        legalEntry = new ArrayList<>();
-//        entries = new ArrayList<>();
-//        legalEntry.add(new Entry("", entries));
-//        legalArticles.add(new LegalArticle("", legalEntry));
-//        refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "判决", legalArticles);
-//        actionCause = "9018";
-//        record = "冯艳英与郝伟东婚姻无效纠纷一案，本院受理后，依法组成合议庭（或依法由审判员独任审判），开庭进行了审理。原告冯艳英，，被告郝伟东，到庭参加诉讼。本案现以审理终结。";
-//        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess, "132", "2313", DocumentName.CIVIL_JUDGMENT));
+
+        evidence = new ArrayList<>();
+        evidence.add("以上事实有双方当事人当庭陈述及证据材料佐证在案，本院予以确认。");
+        facts = new ArrayList<>();
+        fact = "经审理查明，原告原系山东师范大学硕士研究生，被告原系山东大学硕士研究生。2006年3月，原、被告共同选修组合优化的课程，该课程在被告所在的山东大学上课，故双方相识。此后，被告多次向原告示爱，但均遭拒绝。2006年4月底，被告偷拍原告更衣时的照片，以将照片散播至互联网上及毁容相要挟，迫使原告于2008年2月13日与被告在中华人民共和国驻新加坡共和国大使馆登记结婚，婚后双方未同居生活，无子女及共同财产、债权债务等纠纷。庭审中，原告同意撤回要求被告赔偿精神损害抚慰金10000元的诉讼请求，被告则要求原告再给其一次和好的机会。案经调解未果。";
+        facts.add(fact);
+        legalArticles = new ArrayList<>();
+        legalEntry = new ArrayList<>();
+        entries = new ArrayList<>();
+        legalEntry.add(new Entry("十一", entries));
+        legalEntry.add(new Entry("十二", entries));
+        legalArticles.add(new LegalArticle("中国共和国婚姻法",legalEntry));
+        refereeAnalysisProcess = new RefereeAnalysisProcess("（2008）南民初字第5793号", "判决",legalArticles );
+        RecommendCase myCase = new RecommendCase("（2008）南民初字第5793号","原告曲晓英与被告黄东撤销婚姻纠纷一案，本院受理后，依法由审判员董巧云独任审判，公开开庭进行了审理。原告曲晓英及其委托代理人杨玉立，被告黄东到庭参加诉讼。本案现已审理终结。", "9019", evidence, facts, refereeAnalysisProcess,"12","13",DocumentName.CIVIL_JUDGMENT);
+        recommendCases.add(myCase);
+
+        caseID = "（2010）南民初字第4871号";
+        evidence = new ArrayList<>();
+        evidence.add("");
+        facts = new ArrayList<>();
+        legalArticles = new ArrayList<>();
+        legalEntry = new ArrayList<>();
+        entries = new ArrayList<>();
+        legalEntry.add(new Entry("九十二", entries));
+        legalArticles.add(new LegalArticle("中华人民共和国民事诉讼法", legalEntry));
+        refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "裁决", legalArticles);
+        actionCause = "9019";
+        record = "原告刘二庆，男，1951年1月12日出生，汉族，住天津市南开区向阳路云阳北里1-1-212号。身份证号120106195101126512法定代理人刘翠正，女，1954年2月3日出生，汉族，住天津市红桥区芥园大堤一条胡同38号。身份证号120106195402036545被告孙振华，女，1961年1月8日出生，汉族，住天津市南开区怡园里3-2-103号。身份证号120104196101082929本院在审理原告刘二庆与被告孙振华撤销婚姻纠纷一案中，原告刘二庆于2010年6月28日向本院提出财产保全申请，要求对原告刘二庆名下坐落于天津市南开区芥园西道怡园里3-2-103号房屋实施财产保全，案外人刘庆三以其名下坐落于天津市南开区芥园西道怡园里3-5-201号房屋及担保金100000元作为担保。";
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess, "2222", "11111", DocumentName.CIVIL_JUDGMENT));
+
+        caseID = "（2010）南民初字第4871-1号";
+        evidence = new ArrayList<>();
+        evidence.add("");
+        facts = new ArrayList<>();
+        legalArticles = new ArrayList<>();
+        legalEntry = new ArrayList<>();
+        entries = new ArrayList<>();
+        entries.add("第一款");
+        legalEntry.add(new Entry("一百三十一", entries));
+        legalArticles.add(new LegalArticle("中华人民共和国民事诉讼法", legalEntry));
+        refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "裁决", legalArticles);
+        actionCause = "9019";
+        record = "原告刘二庆，男，1951年1月12日出生，汉族，住天津市南开区向阳路云阳北里1-1-212号。身份证号120106195101126512法定代理人刘翠正，女，1954年2月3日出生，汉族，住天津市红桥区芥园大堤一条胡同38号。身份证号120106195402036545被告孙振华，女，1961年1月8日出生，汉族，住天津市南开区怡园里3-2-103号。身份证号120104196101082929本院在审理原告刘二庆与被告孙振华撤销婚姻纠纷一案中，原告刘二庆于2010年7月20日向本院提出撤诉申请。";
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess, "1111123", "22222", DocumentName.CIVIL_JUDGMENT));
+
+        caseID = "(2003)东民初字第1179号";
+        evidence = new ArrayList<>();
+        evidence.add("");
+        facts = new ArrayList<>();
+        fact = "";
+        facts.add(fact);
+        legalArticles = new ArrayList<>();
+        legalEntry = new ArrayList<>();
+        entries = new ArrayList<>();
+        legalEntry.add(new Entry("", entries));
+        legalArticles.add(new LegalArticle("", legalEntry));
+        refereeAnalysisProcess = new RefereeAnalysisProcess(caseID, "判决", legalArticles);
+        actionCause = "9018";
+        record = "冯艳英与郝伟东婚姻无效纠纷一案，本院受理后，依法组成合议庭（或依法由审判员独任审判），开庭进行了审理。原告冯艳英，，被告郝伟东，到庭参加诉讼。本案现以审理终结。";
+        recommendCases.add(new RecommendCase(caseID, record, actionCause, evidence, facts, refereeAnalysisProcess, "132", "2313", DocumentName.CIVIL_JUDGMENT));
 
         caseID = "(2016)津0115民初6408号";
         evidence = new ArrayList<>();

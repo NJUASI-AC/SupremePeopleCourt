@@ -20,28 +20,20 @@
 <body>
 <div id="container">
     <header>
-        <div class="width">
-            <h1>Supreme People Court<span>-AC</span></h1>
+        <div class="width" style="text-align: center; margin-top: 8%">
+            <img src="../img/国徽.jpg" style="height: 60px; width: 60px"/>
+            <h1>司法案例推荐</h1>
             <h2>Nanjing University</h2>
         </div>
     </header>
-    <nav>
-        <div class="width">
-            <ul>
-                <li class="start selected"><a href="../jsp/upload.jsp">上传案件</a></li>
-                <li><a href="../jsp/contact.jsp">联系我们</a></li>
-            </ul>
-        </div>
-    </nav>
 
-
-    <div id="body" class="width" style="height: 450px">
-        <div style="margin: 20px; text-align: center">
+    <div id="body" class="width">
+        <div style="margin: 50px; text-align: center">
             <form method="post" action="/upload" enctype="multipart/form-data">
-                <a href="javascript:" class="file">选择文件
+                <p class="filename" id="filename">&nbsp;</p>
+                <a href="javascript:" class="file">+
                     <input type="file" accept="text/xml" name="file" id="file"/>
                 </a>
-                <p id="filename">文件名</p>
                 <a href="javascript:" class="file">上传
                     <input type="submit"/>
                 </a>
@@ -50,14 +42,14 @@
                 $("#file").change(function(){
                     let filepath = $(this).val();
                     let filename = filepath.substr(filepath.lastIndexOf("\\")+1);
-                    $("#filename").text("文件名：" + filename);
+                    $("#filename").text(filename);
                 });
             </script>
         </div>
         <div class="clear"></div>
     </div>
 
-    <footer>
+    <footer style="position: absolute; bottom: 0; left: 0; right: 0">
         <div class="footer-content width">
             <ul>
                 <li><h4>Product Owner</h4></li>

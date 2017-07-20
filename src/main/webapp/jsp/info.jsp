@@ -131,7 +131,7 @@
                                 <h4>${item.caseID}</h4>
                                 <table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">
                                     <tr>
-                                        <td>相似度</td>
+                                        <td>指数</td>
                                         <td>${item.weight}</td>
                                         <td>法院</td>
                                         <td>${item.handlingCourt}</td>
