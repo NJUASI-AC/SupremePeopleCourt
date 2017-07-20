@@ -48,10 +48,11 @@ public class UploadController {
         ModelAndView mv = new ModelAndView();
         Case wantedCase = null;
         List<RecommendWeight> weight = null;
-
+        List<Case> detailMessages=null;
         try {
             wantedCase = xmlService.uploadOnline(uploadedFile);
             weight = recommendService.recommend(wantedCase);
+            detailMessages = recommendService.getWholeMessage(weight);
         } catch (IOException e) {
             Logger.getLogger(UploadController.class.getName()).error(e.getMessage());
             mv.addObject("errorCode", -1);

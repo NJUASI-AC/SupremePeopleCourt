@@ -9,6 +9,7 @@ import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.utilities.enums.DocumentName;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,15 @@ public class RecommendServiceImpl implements RecommendService {
     }
 
     @Override
+    public List<Case> getWholeMessage(List<RecommendWeight> weights){
+        List<String> caseIDs = new ArrayList<>();
+        for(RecommendWeight weight : weights) {
+            caseIDs.add(weight.getCaseID());
+        }
+        return DaoManager.dataManagerDao.getCase(caseIDs);
+    }
+
+    @Override
     public List<RecommendWeight> recommend(RecommendCase newCase) {
         List<RecommendCase> recommendCases = getAllData(newCase);
         RecommendWeight recommendWeight;
@@ -66,6 +76,9 @@ public class RecommendServiceImpl implements RecommendService {
         theWeight += listSimilar(newCase.getFact(), theCase.getFact(), weights[3]);
         //裁决过程的相似度
         theWeight += refereeAnalysisProcessSimilar(newCase.getRefereeAnalysisProcess(), theCase.getRefereeAnalysisProcess(), weights[4]);
+
+        theWeight = (int) (theWeight * 10) * 1.0 / 10;
+
         return new RecommendWeight(theCase.getCaseID(), theWeight, theCase.getHandlingCourt(), theCase.getActionCause(), theCase.getNameOfDocument());
     }
 
@@ -76,7 +89,7 @@ public class RecommendServiceImpl implements RecommendService {
      */
     private double refereeAnalysisProcessSimilar(RefereeAnalysisProcess refereeAnalysisProcess1, RefereeAnalysisProcess refereeAnalysisProcess2, int baseWeight) {
         double weightOfLegal = 0;
-            try {
+        try {
             if (refereeAnalysisProcess1 == null || refereeAnalysisProcess2 == null) {
                 return weightOfLegal;
             }
@@ -213,8 +226,8 @@ public class RecommendServiceImpl implements RecommendService {
      * @return 计算出来的权重
      */
     private List<RecommendCase> getAllData(RecommendCase newCase) {
-        return DaoManager.dataManagerDao.getRecommendCase(newCase.getActionCode());
-//        return getDataStub();
+//        return DaoManager.dataManagerDao.getRecommendCase(newCase.getActionCode());
+        return getDataStub();
     }
 
     /**
@@ -223,8 +236,7 @@ public class RecommendServiceImpl implements RecommendService {
     private void addRecommend(RecommendWeight weight) {
         if (recommendWeights.size() == 0) {
             recommendWeights.add(weight);
-        }
-        else {
+        } else {
             for (int i = 0; i < recommendWeights.size(); i++) {
                 if (recommendWeights.get(i).getWeight() < weight.getWeight()) {
                     recommendWeights.add(i, weight);
@@ -270,9 +282,9 @@ public class RecommendServiceImpl implements RecommendService {
         entries = new ArrayList<>();
         legalEntry.add(new Entry("十一", entries));
         legalEntry.add(new Entry("十二", entries));
-        legalArticles.add(new LegalArticle("中国共和国婚姻法",legalEntry));
-        refereeAnalysisProcess = new RefereeAnalysisProcess("（2008）南民初字第5793号", "判决",legalArticles );
-        RecommendCase myCase = new RecommendCase("（2008）南民初字第5793号","原告曲晓英与被告黄东撤销婚姻纠纷一案，本院受理后，依法由审判员董巧云独任审判，公开开庭进行了审理。原告曲晓英及其委托代理人杨玉立，被告黄东到庭参加诉讼。本案现已审理终结。", "9019", evidence, facts, refereeAnalysisProcess,"12","13",DocumentName.CIVIL_JUDGMENT);
+        legalArticles.add(new LegalArticle("中国共和国婚姻法", legalEntry));
+        refereeAnalysisProcess = new RefereeAnalysisProcess("（2008）南民初字第5793号", "判决", legalArticles);
+        RecommendCase myCase = new RecommendCase("（2008）南民初字第5793号", "原告曲晓英与被告黄东撤销婚姻纠纷一案，本院受理后，依法由审判员董巧云独任审判，公开开庭进行了审理。原告曲晓英及其委托代理人杨玉立，被告黄东到庭参加诉讼。本案现已审理终结。", "9019", evidence, facts, refereeAnalysisProcess, "12", "13", DocumentName.CIVIL_JUDGMENT);
         recommendCases.add(myCase);
 
         caseID = "（2010）南民初字第4871号";

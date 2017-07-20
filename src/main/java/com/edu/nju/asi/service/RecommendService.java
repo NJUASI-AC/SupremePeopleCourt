@@ -22,4 +22,9 @@ public interface RecommendService {
      */
     List<RecommendWeight> recommend(RecommendCase newCase);
 
+    /**
+     * @param caseID 需要全部推荐信息的case
+     */
+    List<Case> getWholeMessage(List<RecommendWeight> weights);
+
 }
