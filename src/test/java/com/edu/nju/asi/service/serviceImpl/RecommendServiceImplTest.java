@@ -1,8 +1,10 @@
 package com.edu.nju.asi.service.serviceImpl;
 
+import com.edu.nju.asi.InfoCarrier.Case;
 import com.edu.nju.asi.InfoCarrier.Entry;
 import com.edu.nju.asi.InfoCarrier.LegalArticle;
 import com.edu.nju.asi.InfoCarrier.RecommendCase;
+import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.utilities.enums.DocumentName;
@@ -44,13 +46,22 @@ public class RecommendServiceImplTest {
         List<String> entries = new ArrayList<>();
         legalEntry.add(new Entry("十一", entries));
         legalEntry.add(new Entry("十二", entries));
-        legalArticles.add(new LegalArticle("中国共和国婚姻法",legalEntry));
-        RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess("（2008）南民初字第5793号", "判决",legalArticles );
-        myCase = new RecommendCase("（2008）南民初字第5793号","原告曲晓英与被告黄东撤销婚姻纠纷一案，本院受理后，依法由审判员董巧云独任审判，公开开庭进行了审理。原告曲晓英及其委托代理人杨玉立，被告黄东到庭参加诉讼。本案现已审理终结。", "9019", evidence, facts, refereeAnalysisProcess,"12","13",DocumentName.CIVIL_JUDGMENT);
+        legalArticles.add(new LegalArticle("中国共和国婚姻法", legalEntry));
+        RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess("（2008）南民初字第5793号", "判决", legalArticles);
+        myCase = new RecommendCase("（2008）南民初字第5793号", "原告曲晓英与被告黄东撤销婚姻纠纷一案，本院受理后，依法由审判员董巧云独任审判，公开开庭进行了审理。原告曲晓英及其委托代理人杨玉立，被告黄东到庭参加诉讼。本案现已审理终结。", "9019", evidence, facts, refereeAnalysisProcess, "12", "13", DocumentName.CIVIL_JUDGMENT);
 
         recommendService.recommend(myCase);
 
-        assert myCase!=null;
+        assert myCase != null;
+    }
+
+    @Test
+    public void testGetAll() {
+        List<String> caseIDs = new ArrayList<>();
+        caseIDs.add("(2016)津0225民初1440号民事裁定书（准许或不准许撤诉用）.doc");
+        List<Case> caseList = DaoManager.dataManagerDao.getCase(caseIDs);
+
+        assert caseList != null;
     }
 
 }
