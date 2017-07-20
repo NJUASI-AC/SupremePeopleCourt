@@ -29,9 +29,7 @@
     <nav>
         <div class="width">
             <ul>
-                <li class="start selected"><a href="index.html">Home</a></li>
-                <li class=""><a href="upload.html">Upload</a></li>
-                <li class="end"><a href="contact.html">Contact</a></li>
+                <li class=""><a href="../jsp/upload.jsp">Upload</a></li>
             </ul>
         </div>
     </nav>
@@ -74,37 +72,6 @@
                                 <li>${item.litigantType.repre}：
                                     <span>${item.name}</span></li>
                         </c:forEach>
-                    </ul>
-                </li>
-
-                <li>
-                    <h4>Categories</h4>
-                    <ul>
-                        <li><a href="../jsp/index.jsp">主页</a></li>
-                        <li><a href="../jsp/upload.jsp">上传案件</a></li>
-                        <li><a href="../jsp/contact.jsp">联系我们</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <h4>About us</h4>
-                    <ul>
-                        <li class="text">
-                            <p style="margin: 0;">ASI-AC<a href="contact.html" class="readmore">Read More &raquo;</a></p>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <h4>Search site</h4>
-                    <ul>
-                        <li class="text">
-                            <form method="get" class="searchform" action="#" >
-                                <p>
-                                    <input type="text" size="32" value="" name="search" class="s" />
-                                </p>
-                            </form>
-                        </li>
                     </ul>
                 </li>
 
