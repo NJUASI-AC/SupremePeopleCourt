@@ -127,23 +127,33 @@
             <c:choose>
                 <c:when test="${analyseInfo.size()!=0}">
                     <div>
-                        <c:forEach var="item" items="${analyseInfo}">
-                            <div class="recommend-single-wrap">
-                                <h4>${item.caseID}</h4>
+                        <c:forEach step="1" begin="0" end="4" var="i">
+                            <div class="recommend-single-wrap" onclick="showDetail(${i})">
+                                <h4>${analyseInfo.get(i).caseID}</h4>
                                 <table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">
                                     <tr>
                                         <td>指数</td>
-                                        <td>${item.weight}</td>
+                                        <td>${analyseInfo.get(i).weight}</td>
                                         <td>法院</td>
-                                        <td>${item.handlingCourt}</td>
+                                        <td>${analyseInfo.get(i).handlingCourt}</td>
                                     </tr>
                                     <tr>
                                         <td>案由</td>
-                                        <td>${item.actionCause}</td>
+                                        <td>${analyseInfo.get(i).actionCause}</td>
                                         <td>类型</td>
-                                        <td>${item.nameOfDocument.repre}</td>
+                                        <td>${analyseInfo.get(i).nameOfDocument.repre}</td>
                                     </tr>
                                 </table>
+                            </div>
+                            <div style="display: none" name="details" value="0">
+                                <p>${detail.get(i).caseBasic.plaintiffClaim}</p>
+                                <p>${detail.get(i).caseBasic.defendantArgue}</p>
+                                <c:forEach var="item" items="${detail.get(i).caseBasic.evidence}">
+                                    <p>${item}</p>
+                                </c:forEach>
+                                <c:forEach var="item2" items="${detail.get(i).caseBasic.facts}">
+                                    <p>${item2}</p>
+                                </c:forEach>
                             </div>
                         </c:forEach>
                     </div>
@@ -194,6 +204,22 @@
 </body>
 
 <script>
+    function showDetail(i) {
+        var details=document.getElementsByName('details');
+        for(var j=0;j<5;j++){
+            if(j==i){
+                if(details[j].value==1){
+                    details[j].style='display:none';
+                    details[j].value=0;
+                }else{
+                    details[j].style='display:';
+                    details[j].value=1;
+                }
+            }else{
+                details[j].style='display:none';
+            }
+        }
 
+    }
 </script>
 </html>

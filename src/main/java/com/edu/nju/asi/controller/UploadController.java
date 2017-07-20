@@ -69,7 +69,7 @@ public class UploadController {
         else {
             mv.addObject("caseInfo", wantedCase);
             mv.addObject("analyseInfo", weight);
-
+            mv.addObject("detail",detailMessages);
             mv.setViewName("info");
         }
 
