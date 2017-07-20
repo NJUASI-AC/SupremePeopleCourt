@@ -23,7 +23,7 @@ public class RecommendServiceImpl implements RecommendService {
     //推荐案例的数目
     private int recommendNum = 5;
     //各个比较值的权重
-    private int weights[] = {10, 15, 30, 10, 20};
+    private int weights[] = {10, 20, 30, 10, 30};
 
     public RecommendServiceImpl() {
     }
