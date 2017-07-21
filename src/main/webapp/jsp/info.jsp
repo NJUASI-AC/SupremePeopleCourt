@@ -10,10 +10,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>ASI-AC</title>
-    <link rel="stylesheet" href="../css/styles.css" type="text/css" />
-    <link rel="stylesheet" href="../css/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="../css/styles.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -69,8 +69,8 @@
                     <h4>Litigation Participants</h4>
                     <ul>
                         <c:forEach var="item" items="${caseInfo.litigationParticipants.litigants}">
-                                <li>${item.litigantType.repre}：
-                                    <span>${item.name}</span></li>
+                            <li>${item.litigantType.repre}：
+                                <span>${item.name}</span></li>
                         </c:forEach>
                     </ul>
                 </li>
@@ -79,7 +79,9 @@
                     <h4>Helpful Links</h4>
                     <ul>
                         <li><a href="http://wenshu.court.gov.cn" title="web hosting">中国裁判文书网</a></li>
-                        <li><a href="http://baike.baidu.com/link?url=0Ty6udmTRGaKZWVruL-W_YqaqqSxVVEe7OC4rKZJr4TQu4y1sf16qk-8h3YRND9hPkO-iXoE3UqjPfYc6Ag9xmh9uRBOU29NjKPvJ0Oe5eJB2iBmaNijyakI8sHO0WZ8" title="web hosting">裁判文书</a></li>
+                        <li>
+                            <a href="http://baike.baidu.com/link?url=0Ty6udmTRGaKZWVruL-W_YqaqqSxVVEe7OC4rKZJr4TQu4y1sf16qk-8h3YRND9hPkO-iXoE3UqjPfYc6Ag9xmh9uRBOU29NjKPvJ0Oe5eJB2iBmaNijyakI8sHO0WZ8"
+                               title="web hosting">裁判文书</a></li>
                     </ul>
                 </li>
 
@@ -90,52 +92,51 @@
 
         <div>
             <h3>推荐案例</h3>
-            <button onclick="reqRecommendation()">墙裂推荐</button>
-            <%--<div class="seperator" style="width: 100%;background-color: black"></div>--%>
+            <div class="seperator" style="width: 100%;background-color: black"></div>
+            <div id="list"></div>
             <%--<c:choose>--%>
-                <%--<c:when test="${analyseInfo.size()!=0}">--%>
-                    <%--<div>--%>
-                        <%--<c:forEach step="1" begin="0" end="4" var="i">--%>
-                            <%--<div class="recommend-single-wrap" onclick="showDetail(${i})">--%>
-                                <%--<h4 style="color: #00A0EB">${analyseInfo.get(i).caseID}</h4>--%>
-                                <%--<table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">--%>
-                                    <%--<tr>--%>
-                                        <%--<td>指数</td>--%>
-                                        <%--<td>${analyseInfo.get(i).weight}</td>--%>
-                                        <%--<td>法院</td>--%>
-                                        <%--<td>${analyseInfo.get(i).handlingCourt}</td>--%>
-                                    <%--</tr>--%>
-                                    <%--<tr>--%>
-                                        <%--<td>案由</td>--%>
-                                        <%--<td>${analyseInfo.get(i).actionCause}</td>--%>
-                                        <%--<td>类型</td>--%>
-                                        <%--<td>${analyseInfo.get(i).nameOfDocument.repre}</td>--%>
-                                    <%--</tr>--%>
-                                <%--</table>--%>
-                            <%--</div>--%>
-                            <%--<div style="display: none" name="details" value="0">--%>
-                                <%--<p>${detail.get(i).caseBasic.plaintiffClaim}</p>--%>
-                                <%--<p>${detail.get(i).caseBasic.defendantArgue}</p>--%>
-                                <%--<c:forEach var="item" items="${detail.get(i).caseBasic.evidence}">--%>
-                                    <%--<p>${item}</p>--%>
-                                <%--</c:forEach>--%>
-                                <%--<c:forEach var="item2" items="${detail.get(i).caseBasic.facts}">--%>
-                                    <%--<p>${item2}</p>--%>
-                                <%--</c:forEach>--%>
-                            <%--</div>--%>
-                        <%--</c:forEach>--%>
-                    <%--</div>--%>
+            <%--<c:when test="${analyseInfo.size()!=0}">--%>
+            <%--<div>--%>
+            <%--<c:forEach step="1" begin="0" end="4" let="i">--%>
+            <%--<div class="recommend-single-wrap" onclick="showDetail(${i})">--%>
+            <%--<h4 style="color: #00A0EB">${analyseInfo.get(i).caseID}</h4>--%>
+            <%--<table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">--%>
+            <%--<tr>--%>
+            <%--<td>指数</td>--%>
+            <%--<td>${analyseInfo.get(i).weight}</td>--%>
+            <%--<td>法院</td>--%>
+            <%--<td>${analyseInfo.get(i).handlingCourt}</td>--%>
+            <%--</tr>--%>
+            <%--<tr>--%>
+            <%--<td>案由</td>--%>
+            <%--<td>${analyseInfo.get(i).actionCause}</td>--%>
+            <%--<td>类型</td>--%>
+            <%--<td>${analyseInfo.get(i).nameOfDocument.repre}</td>--%>
+            <%--</tr>--%>
+            <%--</table>--%>
+            <%--</div>--%>
+            <%--<div style="display: none" name="details" value="0">--%>
+            <%--<p>${detail.get(i).caseBasic.plaintiffClaim}</p>--%>
+            <%--<p>${detail.get(i).caseBasic.defendantArgue}</p>--%>
+            <%--<c:forEach let="item" items="${detail.get(i).caseBasic.evidence}">--%>
+            <%--<p>${item}</p>--%>
+            <%--</c:forEach>--%>
+            <%--<c:forEach let="item2" items="${detail.get(i).caseBasic.facts}">--%>
+            <%--<p>${item2}</p>--%>
+            <%--</c:forEach>--%>
+            <%--</div>--%>
+            <%--</c:forEach>--%>
+            <%--</div>--%>
 
-                <%--</c:when>--%>
-                <%--<c:when test="${list.size()==0}">--%>
-                    <%--<div>--%>
-                        <%--未搜索到推荐案例--%>
-                    <%--</div>--%>
-                <%--</c:when>--%>
+            <%--</c:when>--%>
+            <%--<c:when test="${list.size()==0}">--%>
+            <%--<div>--%>
+            <%--未搜索到推荐案例--%>
+            <%--</div>--%>
+            <%--</c:when>--%>
             <%--</c:choose>--%>
         </div>
     </div>
-
 
 
     <footer>
@@ -173,26 +174,11 @@
 
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script>
-    function showDetail(i) {
-        var details=document.getElementsByName('details');
-        for(var j=0;j<5;j++){
-            if(j==i){
-                if(details[j].value==1){
-                    details[j].style='display:none';
-                    details[j].value=0;
-                }else{
-                    details[j].style='display:';
-                    details[j].value=1;
-                }
-            }else{
-                details[j].style='display:none';
-            }
-        }
-
-    }
+    $(document).ready(function(){
+        reqRecommendation()
+    });
 
     function reqRecommendation() {
-        alert("biubiubiu");
 
         $.ajax({
             type: "get",
@@ -205,25 +191,60 @@
 
             success: function (result) {
                 // 动态加入推荐案例信息
-                alert("---------SUCCESS----------");
 
-                var array = result.split(";");
-                var size = eval("(" + array[0] + ")");
-                var weight = eval("(" + array[1] + ")");
-                var detailMessages = eval("(" + array[2] + ")");
-
-                for (var i = 0; i < detailMessages.length; i++) {
-                    alert(weight[i]["caseID"] + "\n" + weight[i]["weight"] + "\n" + weight[i]["handlingCourt"] + "\n" +
-                        weight[i]["actionCause"] + "\n" + weight[i]["nameOfDocument"]);
-                    alert(detailMessages[i]["header"]["caseID"] + "\n" + detailMessages[i]["header"]["caseID"])
+                let array = result.split(";");
+                let size = eval("(" + array[0] + ")");
+                let weight = eval("(" + array[1] + ")");
+                let detailMessages = eval("(" + array[2] + ")");
+                $("#list").empty();
+                for (let i = 0; i < detailMessages.length; i++) {
+                    $("#list").append("<div class='recommend-single-wrap' name='cases' onclick='showDetail("+i+")'>" +
+                        "<h4 style='color: #00A0EB'>" + weight[i]["caseID"] + "</h4>" +
+                        "<table style='width: 100%;padding: 3px; text-align: center;' align='center' class='single-info'>" +
+                        "<tr>" +
+                        "<td>指数</td>" +
+                        "<td>" + weight[i]["weight"] + "</td>" +
+                        "<td>法院</td>" +
+                        "<td>" + weight[i]["handlingCourt"] + "</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                        "<td>案由</td>" +
+                        "<td>" + weight[i]["actionCause"] + "</td>" +
+                        "<td>类型</td>" +
+                        "<td>" + weight[i]["nameOfDocument"] + "</td>" +
+                        "</tr>" +
+                        "</table>" +
+                        "</div>" +
+                        "<div style='display:none' name='details' value='0'>" +
+                        "<p>" +detailMessages[i]["caseBasic"]["plaintiffClaim"]+ "</p>" +
+                        "<p>" +detailMessages[i]["caseBasic"]["defendantArgue"]+ "</p>" +
+                        "<p>" +detailMessages[i]["caseBasic"]["evidence"]+ "</p>" +
+                        "<p>" +detailMessages[i]["caseBasic"]["facts"]+ "</p>" +
+                        "</div>");
                 }
-
-
             },
             error: function (result) {
                 console.log("错误" + result);
             }
         });
+    }
+
+
+    function showDetail(i) {
+        let details = document.getElementsByName('details');
+        for (let j = 0; j < 5; j++) {
+            if (j == i) {
+                if (details[j].value == 1) {
+                    details[j].style = 'display:none';
+                    details[j].value = 0;
+                } else {
+                    details[j].style = 'display:';
+                    details[j].value = 1;
+                }
+            } else {
+                details[j].style = 'display:none';
+            }
+        }
 
     }
 </script>
