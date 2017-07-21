@@ -11,12 +11,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>ASI-AC-upload</title>
     <link rel="stylesheet" href="../css/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../css/sweet-alert.css" type="text/css" />
     <link rel="stylesheet" href="../css/normalize.css" type="text/css" />
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/sweet-alert.js"></script>
 </head>
 <body>
 <div id="container">
@@ -30,8 +32,8 @@
 
     <div id="body" class="width">
         <div style="margin: 50px; text-align: center">
-            <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return toValid()">
-                <p class="filename" id="filename">&nbsp;</p>
+            <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return NoFile()">
+                <input class="filename" id="filename"/>
                 <a href="javascript:" class="file">+
                     <input type="file" accept="text/xml" name="file" id="file"/>
                 </a>
@@ -43,8 +45,16 @@
                 $("#file").change(function(){
                     let filepath = $(this).val();
                     let filename = filepath.substr(filepath.lastIndexOf("\\")+1);
-                    $("#filename").text(filename);
+                    $("#filename").val(filename);
                 });
+                function NoFile() {
+                    let filename = $("#file").val();
+                    if(filename === ""){
+                        swal("Oops...", "No File!", "error");
+                        return false;
+                    }
+                    return true;
+                }
             </script>
         </div>
         <div class="clear"></div>
@@ -82,15 +92,4 @@
     </footer>
 </div>
 </body>
-<script>
-    function toValid() {
-        var val = document.getElementById("file").value;
-        if(val==''){
-            alert("请添加上传！");
-            return false;
-        }else{
-            return true;
-        }
-    }
-</script>
 </html>
