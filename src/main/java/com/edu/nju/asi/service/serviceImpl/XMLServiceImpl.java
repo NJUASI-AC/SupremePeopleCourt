@@ -151,13 +151,15 @@ public class XMLServiceImpl implements XMLService {
 
         //诉讼记录
         Proceedings proceedings = null;
-        if (document.getRootElement().element("SSJL") != null) {
+        Node records = document.getRootElement().element("SSJL");
+        if (records != null) {
             proceedings = new Proceedings();
 
             Node actionCause = findSingleNode("AY");
             Node actionCode = findSingleNode("AYDM");
 
             proceedings.setCaseID(caseID);
+            proceedings.setRecords(records.valueOf("@value"));
             if(actionCause != null) {proceedings.setActionCause(actionCause.valueOf("@value"));}
             if(actionCode != null) {proceedings.setActionCode(actionCode.valueOf("@value"));}
         }
