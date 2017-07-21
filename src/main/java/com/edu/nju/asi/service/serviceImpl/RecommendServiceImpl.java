@@ -2,14 +2,11 @@ package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.InfoCarrier.*;
 import com.edu.nju.asi.dao.DaoManager;
-import com.edu.nju.asi.dao.ProceedingsDao;
-import com.edu.nju.asi.dao.daoImpl.ProceedingsDaoImpl;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.utilities.enums.DocumentName;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,8 +50,8 @@ public class RecommendServiceImpl implements RecommendService {
         List<RecommendCase> recommendCases = getAllData(newCase);
         RecommendWeight recommendWeight;
         for (RecommendCase theCase : recommendCases) {
-            recommendWeight = calculateWeight(newCase, theCase);
-            addRecommend(recommendWeight);
+                recommendWeight = calculateWeight(newCase, theCase);
+                addRecommend(recommendWeight);
         }
         return recommendWeights;
     }
@@ -96,7 +93,6 @@ public class RecommendServiceImpl implements RecommendService {
             List<LegalArticle> legals1 = refereeAnalysisProcess1.getLegalArticles();
             List<LegalArticle> legals2 = refereeAnalysisProcess2.getLegalArticles();
             if (legals1 == null || legals2 == null) {
-                weightOfLegal += baseWeight * 0.1;
                 return weightOfLegal;
             }
             List<String> laws1 = new ArrayList<>();
