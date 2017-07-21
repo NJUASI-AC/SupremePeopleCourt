@@ -30,8 +30,8 @@
 
     <div id="body" class="width">
         <div style="margin: 50px; text-align: center">
-            <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return toValid()">
-                <p class="filename" id="filename">&nbsp;</p>
+            <form method="post" action="/upload" enctype="multipart/form-data">
+                <input class="filename" id="filename">&nbsp;</input>
                 <a href="javascript:" class="file">+
                     <input type="file" accept="text/xml" name="file" id="file"/>
                 </a>
@@ -43,7 +43,7 @@
                 $("#file").change(function(){
                     let filepath = $(this).val();
                     let filename = filepath.substr(filepath.lastIndexOf("\\")+1);
-                    $("#filename").text(filename);
+                    $("#filename").val(filename);
                 });
             </script>
         </div>
@@ -82,15 +82,4 @@
     </footer>
 </div>
 </body>
-<script>
-    function toValid() {
-        var val = document.getElementById("file").value;
-        if(val==''){
-            alert("请添加上传！");
-            return false;
-        }else{
-            return true;
-        }
-    }
-</script>
 </html>

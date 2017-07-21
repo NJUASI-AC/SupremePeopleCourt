@@ -151,7 +151,7 @@ span.required {
 }
 
 .filename {
-	border-bottom: 1px solid #000;
+	/*border-bottom: 1px solid #000;*/
 	height: 30px;
 	width: 500px;
 	display: inline-block;
