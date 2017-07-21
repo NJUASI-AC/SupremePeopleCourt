@@ -90,48 +90,49 @@
 
         <div>
             <h3>推荐案例</h3>
-            <div class="seperator" style="width: 100%;background-color: black"></div>
-            <c:choose>
-                <c:when test="${analyseInfo.size()!=0}">
-                    <div>
-                        <c:forEach step="1" begin="0" end="4" var="i">
-                            <div class="recommend-single-wrap" onclick="showDetail(${i})">
-                                <h4 style="color: #00A0EB">${analyseInfo.get(i).caseID}</h4>
-                                <table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">
-                                    <tr>
-                                        <td>指数</td>
-                                        <td>${analyseInfo.get(i).weight}</td>
-                                        <td>法院</td>
-                                        <td>${analyseInfo.get(i).handlingCourt}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>案由</td>
-                                        <td>${analyseInfo.get(i).actionCause}</td>
-                                        <td>类型</td>
-                                        <td>${analyseInfo.get(i).nameOfDocument.repre}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div style="display: none" name="details" value="0">
-                                <p>${detail.get(i).caseBasic.plaintiffClaim}</p>
-                                <p>${detail.get(i).caseBasic.defendantArgue}</p>
-                                <c:forEach var="item" items="${detail.get(i).caseBasic.evidence}">
-                                    <p>${item}</p>
-                                </c:forEach>
-                                <c:forEach var="item2" items="${detail.get(i).caseBasic.facts}">
-                                    <p>${item2}</p>
-                                </c:forEach>
-                            </div>
-                        </c:forEach>
-                    </div>
+            <button onclick="reqRecommendation()">墙裂推荐</button>
+            <%--<div class="seperator" style="width: 100%;background-color: black"></div>--%>
+            <%--<c:choose>--%>
+                <%--<c:when test="${analyseInfo.size()!=0}">--%>
+                    <%--<div>--%>
+                        <%--<c:forEach step="1" begin="0" end="4" var="i">--%>
+                            <%--<div class="recommend-single-wrap" onclick="showDetail(${i})">--%>
+                                <%--<h4 style="color: #00A0EB">${analyseInfo.get(i).caseID}</h4>--%>
+                                <%--<table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">--%>
+                                    <%--<tr>--%>
+                                        <%--<td>指数</td>--%>
+                                        <%--<td>${analyseInfo.get(i).weight}</td>--%>
+                                        <%--<td>法院</td>--%>
+                                        <%--<td>${analyseInfo.get(i).handlingCourt}</td>--%>
+                                    <%--</tr>--%>
+                                    <%--<tr>--%>
+                                        <%--<td>案由</td>--%>
+                                        <%--<td>${analyseInfo.get(i).actionCause}</td>--%>
+                                        <%--<td>类型</td>--%>
+                                        <%--<td>${analyseInfo.get(i).nameOfDocument.repre}</td>--%>
+                                    <%--</tr>--%>
+                                <%--</table>--%>
+                            <%--</div>--%>
+                            <%--<div style="display: none" name="details" value="0">--%>
+                                <%--<p>${detail.get(i).caseBasic.plaintiffClaim}</p>--%>
+                                <%--<p>${detail.get(i).caseBasic.defendantArgue}</p>--%>
+                                <%--<c:forEach var="item" items="${detail.get(i).caseBasic.evidence}">--%>
+                                    <%--<p>${item}</p>--%>
+                                <%--</c:forEach>--%>
+                                <%--<c:forEach var="item2" items="${detail.get(i).caseBasic.facts}">--%>
+                                    <%--<p>${item2}</p>--%>
+                                <%--</c:forEach>--%>
+                            <%--</div>--%>
+                        <%--</c:forEach>--%>
+                    <%--</div>--%>
 
-                </c:when>
-                <c:when test="${list.size()==0}">
-                    <div>
-                        未搜索到推荐案例
-                    </div>
-                </c:when>
-            </c:choose>
+                <%--</c:when>--%>
+                <%--<c:when test="${list.size()==0}">--%>
+                    <%--<div>--%>
+                        <%--未搜索到推荐案例--%>
+                    <%--</div>--%>
+                <%--</c:when>--%>
+            <%--</c:choose>--%>
         </div>
     </div>
 
@@ -170,6 +171,7 @@
 </div>
 </body>
 
+<script src="../js/jquery-3.2.1.min.js"></script>
 <script>
     function showDetail(i) {
         var details=document.getElementsByName('details');
@@ -186,6 +188,42 @@
                 details[j].style='display:none';
             }
         }
+
+    }
+
+    function reqRecommendation() {
+        alert("biubiubiu");
+
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/reqRecommendation",
+            contentType: "charset=UTF-8",
+            data: {
+                "caseID": "${caseInfo.fullText.caseID}"
+            },
+
+            success: function (result) {
+                // 动态加入推荐案例信息
+                alert("---------SUCCESS----------");
+
+                var array = result.split(";");
+                var size = eval("(" + array[0] + ")");
+                var weight = eval("(" + array[1] + ")");
+                var detailMessages = eval("(" + array[2] + ")");
+
+                for (var i = 0; i < detailMessages.length; i++) {
+                    alert(weight[i]["caseID"] + "\n" + weight[i]["weight"] + "\n" + weight[i]["handlingCourt"] + "\n" +
+                        weight[i]["actionCause"] + "\n" + weight[i]["nameOfDocument"]);
+                    alert(detailMessages[i]["header"]["caseID"] + "\n" + detailMessages[i]["header"]["caseID"])
+                }
+
+
+            },
+            error: function (result) {
+                console.log("错误" + result);
+            }
+        });
 
     }
 </script>

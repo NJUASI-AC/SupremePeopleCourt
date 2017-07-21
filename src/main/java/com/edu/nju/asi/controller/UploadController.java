@@ -1,15 +1,17 @@
 package com.edu.nju.asi.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.edu.nju.asi.InfoCarrier.Case;
-import com.edu.nju.asi.InfoCarrier.RecommendCase;
 import com.edu.nju.asi.InfoCarrier.RecommendWeight;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.service.XMLService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +31,7 @@ public class UploadController {
     XMLService xmlService;
     @Autowired
     RecommendService recommendService;
+
     /**
      * 上传文件并可视化显示分析结果
      */
@@ -47,12 +50,8 @@ public class UploadController {
 
         ModelAndView mv = new ModelAndView();
         Case wantedCase = null;
-        List<RecommendWeight> weight = null;
-        List<Case> detailMessages=null;
         try {
             wantedCase = xmlService.uploadOnline(uploadedFile);
-            weight = recommendService.recommend(wantedCase);
-            detailMessages = recommendService.getWholeMessage(weight);
         } catch (IOException e) {
             Logger.getLogger(UploadController.class.getName()).error(e.getMessage());
             mv.addObject("errorCode", -1);
@@ -60,19 +59,37 @@ public class UploadController {
         }
 
 
-
-
         if (wantedCase == null) {
             mv.addObject("errorCode", 0);
             mv.setViewName("errorPage");
-        }
-        else {
+        } else {
             mv.addObject("caseInfo", wantedCase);
-            mv.addObject("analyseInfo", weight);
-            mv.addObject("detail",detailMessages);
             mv.setViewName("info");
         }
 
         return mv;
+    }
+
+
+    /**
+     * 异步展示案例的推荐
+     * @param caseID 上传的案例ID，要查看对其的推荐
+     * @return 推荐案例的JSON字符串
+     */
+    @GetMapping(value = "reqRecommendation", produces = "text/html;charset=UTF-8")
+    public @ResponseBody
+    String reqRecommendation(@RequestParam("caseID") String caseID) {
+
+        List<RecommendWeight> weight = recommendService.recommend(caseID);
+        List<Case> detailMessages = recommendService.getWholeMessage(weight);
+
+        StringBuffer result = new StringBuffer();
+        if (detailMessages != null) {
+            result.append(detailMessages.size()).append(";");
+            result.append(JSON.toJSONString(weight)).append(";");
+            result.append(JSON.toJSONString(detailMessages)).append(";");
+        }
+
+        return result.toString();
     }
 }
