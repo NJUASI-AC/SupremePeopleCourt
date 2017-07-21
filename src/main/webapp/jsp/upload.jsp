@@ -33,7 +33,9 @@
     <div id="body" class="width">
         <div style="margin: 50px; text-align: center">
             <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return NoFile()">
-                <input class="filename" id="filename"/>
+                <a href="/" class="filename">
+                    <input id="filename" style="width: 100%; height: 100%"/>
+                </a>
                 <a href="javascript:" class="file">+
                     <input type="file" accept="text/xml" name="file" id="file"/>
                 </a>

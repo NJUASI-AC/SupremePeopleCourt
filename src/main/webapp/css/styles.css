@@ -177,6 +177,8 @@ span.required {
 	right: 0;
 	top: 0;
 	opacity: 0;
+	height: 100px;
+	width: 100px;
 }
 .file:hover {
 	background: #FFD2D2;
