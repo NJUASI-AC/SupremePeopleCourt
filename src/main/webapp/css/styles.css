@@ -155,7 +155,7 @@ span.required {
 	height: 30px;
 	width: 500px;
 	display: inline-block;
-	overflow: scroll;
+	overflow: hidden;
 }
 
 .file {
