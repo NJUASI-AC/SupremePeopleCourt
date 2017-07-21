@@ -188,5 +188,39 @@
         }
 
     }
+
+    function reqRecommendation() {
+        alert("biubiubiu");
+        var info = {caseInfo:${caseInfo.fullText.caseID}};
+
+        $.ajax({
+            type: "get",
+            async: true,
+            url: "/reqRecommendation",
+            data: info,
+
+            success: function (result) {
+                // 动态加入推荐案例信息
+                alert("---------SUCCESS----------");
+
+                var array = result.split(";");
+                var size = eval("(" + array[0] + ")");
+                var weight = eval("(" + array[1] + ")");
+                var detailMessages = eval("(" + array[2] + ")");
+
+                for (var i = 0; i < detailMessages.length; i++) {
+                    alert(weight[i]["caseID"] + "\n" + weight[i]["weight"] + "\n" + weight[i]["handlingCourt"] + "\n" +
+                        weight[i]["actionCause"] + "\n" + weight[i]["nameOfDocument"]);
+                    alert(detailMessages[i]["header"]["caseID"] + "\n" + detailMessages[i]["header"]["caseID"])
+                }
+
+
+            },
+            error: function (result) {
+                console.log("错误" + result);
+            }
+        });
+
+    }
 </script>
 </html>
