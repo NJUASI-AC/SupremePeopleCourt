@@ -11,19 +11,13 @@ import java.util.List;
  */
 public interface RecommendService {
     /**
-     * @param newCase 解析上传的文件的 简易case
+     * @param caseID 要寻求推荐案例的原案例ID
      * @return 推荐的案例列表
      */
-    List<RecommendWeight> recommend(Case newCase);
+    List<RecommendWeight> recommend(String caseID);
 
     /**
-     * @param newCase 解析上传的文件的 case
-     * @return 推荐的案例列表
-     */
-    List<RecommendWeight> recommend(RecommendCase newCase);
-
-    /**
-     * @param caseID 需要全部推荐信息的case
+     * @param weights 需要全部推荐信息的case
      */
     List<Case> getWholeMessage(List<RecommendWeight> weights);
 

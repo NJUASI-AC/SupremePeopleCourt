@@ -1,22 +1,20 @@
 package com.edu.nju.asi.service.serviceImpl;
 
-import com.edu.nju.asi.InfoCarrier.Case;
-import com.edu.nju.asi.InfoCarrier.Entry;
-import com.edu.nju.asi.InfoCarrier.LegalArticle;
-import com.edu.nju.asi.InfoCarrier.RecommendCase;
+import com.edu.nju.asi.InfoCarrier.*;
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.utilities.enums.DocumentName;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by 61990 on 2017/7/18.
@@ -49,9 +47,13 @@ public class RecommendServiceImplTest {
         RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess("(2001)南民初字第5905号民事判决书（一审民事案件用）", "判决", legalArticles);
         myCase = new RecommendCase("(2001)南民初字第5905号民事判决书（一审民事案件用）", "原告陈建强与被告孙莉变更抚养关系纠纷一案，本院受理后，依法由审判员兰鸿月独任审判，公开开庭进行了审理。原、被告到庭参加诉讼。本案现已审理终结。", "9026", evidence, facts, refereeAnalysisProcess, "12", "13", DocumentName.CIVIL_JUDGMENT);
 
-        recommendService.recommend(myCase);
-
-        assert myCase != null;
+        try {
+            Method method = RecommendServiceImpl.class.getDeclaredMethod("recommend", RecommendCase.class);
+            method.setAccessible(true);
+            List<RecommendWeight> result = (List<RecommendWeight>) method.invoke(RecommendServiceImpl.class.newInstance(), myCase);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            Logger.getLogger(RecommendServiceImpl.class).error(e.getMessage());
+        }
     }
 
     @Ignore

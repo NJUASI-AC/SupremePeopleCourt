@@ -45,17 +45,12 @@ public class XMLServiceImpl implements XMLService {
             return null;
         }
 
-        // 先转储文件再解析，最后删掉源文件
+        // 先转储文件再解析，推荐完了之后再删除
         String thisPath = uploadedFile.getOriginalFilename();
         File thisFile = new File(thisPath);
 
         uploadedFile.transferTo(thisFile);
-        Case wanted = parseXML(thisPath);
-
-        boolean deleteResult = thisFile.delete();
-        assert deleteResult == true : "上传的文件未被删除";
-
-        return wanted;
+        return parseXML(thisPath);
     }
 
     private Node findSingleNode(String node) {

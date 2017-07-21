@@ -73,15 +73,15 @@ public class UploadController {
 
     /**
      * 异步展示案例的推荐
-     * @param wantedCase 上传的案例，js通过JSON传回
+     * @param caseID 上传的案例ID，要查看对其的推荐
      * @return 推荐案例的JSON字符串
      */
-    @GetMapping("reqRecommendation")
+    @GetMapping(value = "reqRecommendation", produces = "text/html;charset=UTF-8")
     public @ResponseBody
-    String reqRecommendation(@RequestParam("caseInfo") Case wantedCase) {
+    String reqRecommendation(@RequestParam("caseID") String caseID) {
         System.out.println("zxcvbnmnbvcxcvbnm,");
 
-        List<RecommendWeight> weight = recommendService.recommend(wantedCase);
+        List<RecommendWeight> weight = recommendService.recommend(caseID);
         List<Case> detailMessages = recommendService.getWholeMessage(weight);
 
         StringBuffer result = new StringBuffer();

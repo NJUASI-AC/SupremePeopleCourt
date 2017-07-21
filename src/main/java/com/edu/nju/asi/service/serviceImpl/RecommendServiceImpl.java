@@ -4,9 +4,12 @@ import com.edu.nju.asi.InfoCarrier.*;
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
+import com.edu.nju.asi.service.XMLService;
 import com.edu.nju.asi.utilities.enums.DocumentName;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +18,10 @@ import java.util.List;
  */
 @Service("RecommendService")
 public class RecommendServiceImpl implements RecommendService {
+
+    @Autowired
+    XMLService xmlService;
+
 
     private List<RecommendWeight> recommendWeights = new ArrayList<>();
 
@@ -26,14 +33,25 @@ public class RecommendServiceImpl implements RecommendService {
     public RecommendServiceImpl() {
     }
 
-    /**
-     * @param newCase 解析上传的文件的case
-     * @return 推荐的案例列表
-     */
+
     @Override
-    public List<RecommendWeight> recommend(Case newCase) {
-        RecommendCase myCase = new RecommendCase(newCase);
-        return recommend(myCase);
+    public List<RecommendWeight> recommend(String caseID) {
+        File parentFile = new File(System.getProperty("user.dir"));
+        for (String nowFilePath: parentFile.list()) {
+            // 转储的文件名与要查看的文件名匹配
+            if (nowFilePath.substring(0, nowFilePath.indexOf(".")).equals(caseID)) {
+
+                RecommendCase recommendCase = new RecommendCase(xmlService.parseXML(nowFilePath));
+
+                // 删除上传的文件
+                boolean deleteResult = new File(nowFilePath).delete();
+                assert deleteResult: "上传的文件未被删除";
+
+                return recommend(recommendCase);
+            }
+
+        }
+        return null;
     }
 
     @Override
@@ -45,8 +63,7 @@ public class RecommendServiceImpl implements RecommendService {
         return DaoManager.dataManagerDao.getCase(caseIDs);
     }
 
-    @Override
-    public List<RecommendWeight> recommend(RecommendCase newCase) {
+    private List<RecommendWeight> recommend(RecommendCase newCase) {
         List<RecommendCase> recommendCases = getAllData(newCase);
         RecommendWeight recommendWeight;
         for (RecommendCase theCase : recommendCases) {
@@ -226,7 +243,7 @@ public class RecommendServiceImpl implements RecommendService {
     }
 
     /**
-     * 用于筛选是否可以进入topFive
+     * 用于筛选是否可以进入top 5
      */
     private void addRecommend(RecommendWeight weight) {
         if (recommendWeights.size() == 0) {
