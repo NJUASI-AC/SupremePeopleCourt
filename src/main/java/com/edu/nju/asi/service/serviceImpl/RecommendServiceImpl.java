@@ -49,7 +49,6 @@ public class RecommendServiceImpl implements RecommendService {
 
                 return recommend(recommendCase);
             }
-
         }
         return null;
     }

@@ -79,7 +79,6 @@ public class UploadController {
     @GetMapping(value = "reqRecommendation", produces = "text/html;charset=UTF-8")
     public @ResponseBody
     String reqRecommendation(@RequestParam("caseID") String caseID) {
-        System.out.println("zxcvbnmnbvcxcvbnm,");
 
         List<RecommendWeight> weight = recommendService.recommend(caseID);
         List<Case> detailMessages = recommendService.getWholeMessage(weight);
