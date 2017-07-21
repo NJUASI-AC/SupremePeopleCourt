@@ -30,7 +30,7 @@
 
     <div id="body" class="width">
         <div style="margin: 50px; text-align: center">
-            <form method="post" action="/upload" enctype="multipart/form-data">
+            <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return toValid()">
                 <p class="filename" id="filename">&nbsp;</p>
                 <a href="javascript:" class="file">+
                     <input type="file" accept="text/xml" name="file" id="file"/>
@@ -82,4 +82,15 @@
     </footer>
 </div>
 </body>
+<script>
+    function toValid() {
+        var val = document.getElementById("file").value;
+        if(val==''){
+            alert("请添加上传！");
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
 </html>
