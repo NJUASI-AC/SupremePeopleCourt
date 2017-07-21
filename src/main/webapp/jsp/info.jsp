@@ -89,14 +89,14 @@
         <div class="clear"></div>
 
         <div>
-            <h2>推荐案例</h2>
+            <h3>推荐案例</h3>
             <div class="seperator" style="width: 100%;background-color: black"></div>
             <c:choose>
                 <c:when test="${analyseInfo.size()!=0}">
                     <div>
                         <c:forEach step="1" begin="0" end="4" var="i">
                             <div class="recommend-single-wrap" onclick="showDetail(${i})">
-                                <h4>${analyseInfo.get(i).caseID}</h4>
+                                <h4 style="color: #00A0EB">${analyseInfo.get(i).caseID}</h4>
                                 <table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">
                                     <tr>
                                         <td>指数</td>
