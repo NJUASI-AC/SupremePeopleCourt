@@ -168,7 +168,9 @@ public class XMLServiceImpl implements XMLService {
             List<LegalArticle> legalArticles = new ArrayList<>();
             for (Iterator<Element> laws = analysisElement.elementIterator("FLFTFZ"); laws.hasNext(); ) {
                 Element law = laws.next();
-                String lawName = law.element("MC").valueOf("@value");
+                Element lawNameElement = law.element("MC");
+                if(lawNameElement == null) continue;
+                String lawName = lawNameElement.valueOf("@value");
                 List<T_Entry> t_entries = new ArrayList<>();
                 for (Iterator<Element> t_items = law.elementIterator("T"); t_items.hasNext(); ) {
                     Element t_item = t_items.next();
