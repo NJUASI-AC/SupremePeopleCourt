@@ -63,7 +63,7 @@ public class XMLServiceImpl implements XMLService {
 
         //先从文首中拿到CaseID
         String qw = root.valueOf("@value");
-        String caseID = qw.substring(findFirstLetter(qw), qw.indexOf('院', qw.indexOf('院')+1)+1);
+        String caseID = qw.substring(findFirstLetter(qw), qw.indexOf('号')+1);
 
 
         //全文
