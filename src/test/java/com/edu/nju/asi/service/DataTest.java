@@ -43,7 +43,7 @@ public class DataTest {
     @Ignore
     @Test
     public void saveData() throws Exception {
-        List<String> urls = getUrl("C:\\Users\\Byron Dong\\Desktop\\暑期实践\\裁判文书\\天津文书\\");
+        List<String> urls = getUrl("C:\\Users\\Byron Dong\\Desktop\\暑期实践\\1组\\测试集\\");
         List<CaseBasic> caseBasics = new ArrayList<>();
         List<FullText> fullTexts = new ArrayList<>();
         List<Header> headers = new ArrayList<>();
@@ -112,6 +112,7 @@ public class DataTest {
                 proceedings.clear();
                 refereeAnalysisProcesses.clear();
             }
+            System.out.println(count);
             count++;
         }
 

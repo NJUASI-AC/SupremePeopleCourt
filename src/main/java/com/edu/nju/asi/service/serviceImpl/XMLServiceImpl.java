@@ -49,6 +49,7 @@ public class XMLServiceImpl implements XMLService {
     }
 
     public Case parseXML(String url) {
+        System.out.println(url+"--------"+"parse");
         SAXReader reader = new SAXReader();
         try {
             document = reader.read(new File(url));
@@ -62,8 +63,7 @@ public class XMLServiceImpl implements XMLService {
         Element root = document.getRootElement().element("QW");
 
         //先从文首中拿到CaseID
-        String qw = root.valueOf("@value");
-        String caseID = qw.substring(findFirstLetter(qw), qw.indexOf('号')+1);
+        String caseID = file.getName().split("\\.")[0];
 
 
         //全文
@@ -113,12 +113,12 @@ public class XMLServiceImpl implements XMLService {
         }
 
         //诉讼记录
-        Proceedings proceedings = new Proceedings();
-        proceedings.setCaseID(caseID);
+        Proceedings proceedings = null;
 
         Element records = root.element("SSJL");
         if (records != null) {
             proceedings = new Proceedings();
+            proceedings.setCaseID(caseID);
             //起诉主案由
             Element mainActionCause = records.element("QSZAY");
             if(mainActionCause != null){
