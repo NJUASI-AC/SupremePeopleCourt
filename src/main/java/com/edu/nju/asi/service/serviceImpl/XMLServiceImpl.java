@@ -162,50 +162,53 @@ public class XMLServiceImpl implements XMLService {
 
         //裁判分析过程
         RefereeAnalysisProcess refereeAnalysisProcess = null;
-        Element analysisElement = root.element("CPFXGC").element("FLFTYY");
-        if (analysisElement != null) {
+        Element cpfxgc = root.element("CPFXGC");
+        if (cpfxgc != null){
+            Element analysisElement = cpfxgc.element("FLFTYY");
+            if (analysisElement != null) {
 
-            List<LegalArticle> legalArticles = new ArrayList<>();
-            for (Iterator<Element> laws = analysisElement.elementIterator("FLFTFZ"); laws.hasNext(); ) {
-                Element law = laws.next();
-                Element lawNameElement = law.element("MC");
-                if(lawNameElement == null) continue;
-                String lawName = lawNameElement.valueOf("@value");
-                List<T_Entry> t_entries = new ArrayList<>();
-                for (Iterator<Element> t_items = law.elementIterator("T"); t_items.hasNext(); ) {
-                    Element t_item = t_items.next();
-                    List<K_Entry> k_entries = new ArrayList<>();
-                    for (Iterator<Element> k_items = t_item.elementIterator("K"); k_items.hasNext(); ) {
-                        Element k_item = k_items.next();
-                        List<String> x_entries = new ArrayList<>();
-                        for(Iterator<Element> x_items = k_item.elementIterator("X"); x_items.hasNext(); ){
-                            x_entries.add(x_items.next().valueOf("@value"));
+                List<LegalArticle> legalArticles = new ArrayList<>();
+                for (Iterator<Element> laws = analysisElement.elementIterator("FLFTFZ"); laws.hasNext(); ) {
+                    Element law = laws.next();
+                    Element lawNameElement = law.element("MC");
+                    if(lawNameElement == null) continue;
+                    String lawName = lawNameElement.valueOf("@value");
+                    List<T_Entry> t_entries = new ArrayList<>();
+                    for (Iterator<Element> t_items = law.elementIterator("T"); t_items.hasNext(); ) {
+                        Element t_item = t_items.next();
+                        List<K_Entry> k_entries = new ArrayList<>();
+                        for (Iterator<Element> k_items = t_item.elementIterator("K"); k_items.hasNext(); ) {
+                            Element k_item = k_items.next();
+                            List<String> x_entries = new ArrayList<>();
+                            for(Iterator<Element> x_items = k_item.elementIterator("X"); x_items.hasNext(); ){
+                                x_entries.add(x_items.next().valueOf("@value"));
+                            }
+
+                            K_Entry k_entry = new K_Entry();
+                            k_entry.setName(k_item.valueOf("@value"));
+                            if(x_entries.size() != 0) k_entry.setX_entries(x_entries);
+                            k_entries.add(k_entry);
                         }
 
-                        K_Entry k_entry = new K_Entry();
-                        k_entry.setName(k_item.valueOf("@value"));
-                        if(x_entries.size() != 0) k_entry.setX_entries(x_entries);
-                        k_entries.add(k_entry);
-                    }
+                        T_Entry t_entry = new T_Entry();
+                        t_entry.setName(t_item.valueOf("@value"));
+                        if (k_entries.size() != 0) {
+                            t_entry.setK_entries(k_entries);
+                        }
 
-                    T_Entry t_entry = new T_Entry();
-                    t_entry.setName(t_item.valueOf("@value"));
-                    if (k_entries.size() != 0) {
-                        t_entry.setK_entries(k_entries);
+                        t_entries.add(t_entry);
                     }
-
-                    t_entries.add(t_entry);
+                    legalArticles.add(new LegalArticle(lawName, t_entries));
                 }
-                legalArticles.add(new LegalArticle(lawName, t_entries));
+
+                refereeAnalysisProcess = new RefereeAnalysisProcess();
+                refereeAnalysisProcess.setCaseID(caseID);
+
+                if (legalArticles.size() != 0) {
+                    refereeAnalysisProcess.setLegalArticles(legalArticles);
+                }
+
             }
-
-            refereeAnalysisProcess = new RefereeAnalysisProcess();
-            refereeAnalysisProcess.setCaseID(caseID);
-
-            if (legalArticles.size() != 0) {
-                refereeAnalysisProcess.setLegalArticles(legalArticles);
-            }
-
         }
 
         //判决结果
