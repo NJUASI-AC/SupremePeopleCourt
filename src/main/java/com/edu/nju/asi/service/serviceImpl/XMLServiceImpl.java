@@ -62,12 +62,9 @@ public class XMLServiceImpl implements XMLService {
         Element root = document.getRootElement().element("QW");
 
         //先从文首中拿到CaseID
-        String caseID = "";
-        Node caseNum = findSingleNode("AH");
-        assert caseNum != null : "案号为空了";
-        Node nameOfDocument = findSingleNode("WSMC");
-        assert nameOfDocument != null;
-        caseID = caseNum.valueOf("@value") + nameOfDocument.valueOf("@value");
+        String qw = root.valueOf("@value");
+        String caseID = qw.substring(0, qw.indexOf('。'));
+
 
         //全文
         FullText fullText = null;
@@ -78,10 +75,13 @@ public class XMLServiceImpl implements XMLService {
 
 
         //文首
-        Header header = new Header();;
+        Header header = new Header();
 
         Node handlingCourt = findSingleNode("JBFY");
         Node trialProcedure = findSingleNode("SPCX");
+        Node caseNum = findSingleNode("AH");
+        Node nameOfDocument = findSingleNode("WSMC");
+
 
         header.setCaseID(caseID);
         header.setCaseNum(caseNum.valueOf("@value"));
@@ -93,6 +93,9 @@ public class XMLServiceImpl implements XMLService {
         if (trialProcedure != null) {
             header.setTrialProcedure(TrialProcedure.getEnum(trialProcedure.valueOf("@value")));
         }
+        if (caseNum != null) header.setCaseNum(caseNum.valueOf("@value"));
+        if (nameOfDocument != null) header.setNameOfDocument(DocumentName.getEnum(nameOfDocument.valueOf("@value")));
+
 
         //当事人
         Element participants = root.element("DSR");
