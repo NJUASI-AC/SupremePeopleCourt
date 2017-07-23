@@ -126,17 +126,20 @@ public class XMLServiceImpl implements XMLService {
             }
 
             //其它起诉案由
-            Iterator<Element> extraActionCauses = records.element("QTQSAY").elementIterator("QSAY");
-            if(extraActionCauses != null){
-                List<ActionCause> extraCauses = new ArrayList<>();
-                while(extraActionCauses.hasNext()){
-                    Element extraActionCause = extraActionCauses.next();
-                    ActionCause actionCause = new ActionCause();
-                    actionCause.setActionName(extraActionCause.element("WZZM").valueOf("@value"));
-                    actionCause.setActionCode(extraActionCause.element("ZMDM").valueOf("@value"));
-                    extraCauses.add(actionCause);
+            Element extra = records.element("QTQSAY");
+            if(extra != null){
+                Iterator<Element> extraActionCauses = extra.elementIterator("QSAY");
+                if(extraActionCauses != null){
+                    List<ActionCause> extraCauses = new ArrayList<>();
+                    while(extraActionCauses.hasNext()){
+                        Element extraActionCause = extraActionCauses.next();
+                        ActionCause actionCause = new ActionCause();
+                        actionCause.setActionName(extraActionCause.element("WZZM").valueOf("@value"));
+                        actionCause.setActionCode(extraActionCause.element("ZMDM").valueOf("@value"));
+                        extraCauses.add(actionCause);
+                    }
+                    proceedings.setExtraActionCause(extraCauses);
                 }
-                proceedings.setExtraActionCause(extraCauses);
             }
         }
 
