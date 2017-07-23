@@ -5,8 +5,8 @@ package com.edu.nju.asi.utilities.enums;
  */
 public enum PartiesType {
 
-    NATURAL_PERSON("自然人"),
-    LEGAL_PERSON("法人");
+    RESPOND("应诉方"),
+    PROSECUTION("起诉方");
 
     private String repre;
 

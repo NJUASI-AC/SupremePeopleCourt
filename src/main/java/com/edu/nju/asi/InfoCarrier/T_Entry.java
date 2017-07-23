@@ -8,12 +8,7 @@ import java.util.List;
  *
  * 条目
  */
-public class Entry implements Serializable{
-
-    public Entry(String name, List<String> entries) {
-        this.name = name;
-        this.entries = entries;
-    }
+public class T_Entry implements Serializable{
 
     /**
      * 条目名称
@@ -23,9 +18,9 @@ public class Entry implements Serializable{
     /**
      * 款目
      */
-    private List<String> entries;
+    private List<K_Entry> k_entries;
 
-    public Entry() {
+    public T_Entry() {
     }
 
     public String getName() {
@@ -36,11 +31,16 @@ public class Entry implements Serializable{
         this.name = name;
     }
 
-    public List<String> getEntries() {
-        return entries;
+    public List<K_Entry> getK_entries() {
+        return k_entries;
     }
 
-    public void setEntries(List<String> entries) {
-        this.entries = entries;
+    public void setK_entries(List<K_Entry> k_entries) {
+        this.k_entries = k_entries;
+    }
+
+    public T_Entry(String name, List<K_Entry> k_entries) {
+        this.name = name;
+        this.k_entries = k_entries;
     }
 }

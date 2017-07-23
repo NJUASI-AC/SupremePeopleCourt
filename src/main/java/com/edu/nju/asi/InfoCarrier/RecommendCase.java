@@ -78,14 +78,8 @@ public class RecommendCase {
     public RecommendCase(Case newCase) {
         this.caseID = newCase.getHeader().getCaseID();
         this.records = newCase.getProceedings().getRecords();
-        this.actionCode = newCase.getProceedings().getActionCode();
-        if( newCase.getCaseBasic()!=null) {
-            this.evidence = newCase.getCaseBasic().getEvidence();
-            this.fact = newCase.getCaseBasic().getFacts();
-        }
         this.refereeAnalysisProcess = newCase.getRefereeAnalysisProcess();
         this.handlingCourt = newCase.getHeader().getHandlingCourt();
-        this.actionCause = newCase.getProceedings().getActionCause();
         this.nameOfDocument = newCase.getHeader().getNameOfDocument();
     }
 
@@ -94,12 +88,8 @@ public class RecommendCase {
         this.caseID = proceedings.getCaseID();
 
         this.records = proceedings.getRecords();
-        this.actionCode = proceedings.getActionCode();
-        this.actionCause = proceedings.getActionCause();
 
         if (caseBasic != null) {
-            this.evidence = caseBasic.getEvidence();
-            this.fact = caseBasic.getFacts();
         }
 
         if (header != null) {

@@ -18,14 +18,14 @@ public class LegalArticle implements Serializable{
     /**
      * 条目
      */
-    private List<Entry> legalEntry;
+    private List<T_Entry> legalTEntry;
 
     public LegalArticle() {
     }
 
-    public LegalArticle(String lawName, List<Entry> legalEntry) {
+    public LegalArticle(String lawName, List<T_Entry> legalTEntry) {
         this.lawName = lawName;
-        this.legalEntry = legalEntry;
+        this.legalTEntry = legalTEntry;
     }
 
     public String getLawName() {
@@ -36,11 +36,11 @@ public class LegalArticle implements Serializable{
         this.lawName = lawName;
     }
 
-    public List<Entry> getLegalEntry() {
-        return legalEntry;
+    public List<T_Entry> getLegalTEntry() {
+        return legalTEntry;
     }
 
-    public void setLegalEntry(List<Entry> legalEntry) {
-        this.legalEntry = legalEntry;
+    public void setLegalTEntry(List<T_Entry> legalTEntry) {
+        this.legalTEntry = legalTEntry;
     }
 }

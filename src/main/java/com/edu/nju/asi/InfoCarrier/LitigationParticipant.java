@@ -18,14 +18,14 @@ public class LitigationParticipant implements Serializable {
     private String name;
 
     /**
-     * 当事人类别
+     * 当事人类别 （原告、被告）
      */
     private LitigantType litigantType;
 
     /**
-     * 当事人类型
+     * 当事人类型 (应诉方、起诉方)
      */
-//    private PartiesType partiesType;
+    private String partiesType;
 
     /**
      * 性别
@@ -55,12 +55,12 @@ public class LitigationParticipant implements Serializable {
     /**
      * 国籍
      */
-//    private String nationality;
+    private String nationality;
 
     /**
      * 到庭情况
      */
-//    private boolean hasAppearInCourt;
+    private boolean hasAppearInCourt;
 
     /**
      * 是否再婚
@@ -68,30 +68,6 @@ public class LitigationParticipant implements Serializable {
     private boolean isRemarriage;
 
     public LitigationParticipant() {
-    }
-
-    public LitigationParticipant(String name, PartiesType partiesType, Gender gender, String nation, LocalDate birth, String degree, String post, String nationality, boolean hasAppearInCourt, boolean isRemarriage) {
-        this.name = name;
-//        this.partiesType = partiesType;
-        this.gender = gender;
-        this.nation = nation;
-//        this.birth = birth;
-        this.degree = degree;
-        this.post = post;
-//        this.nationality = nationality;
-//        this.hasAppearInCourt = hasAppearInCourt;
-        this.isRemarriage = isRemarriage;
-    }
-
-    public LitigationParticipant(String name, LitigantType litigantType, Gender gender, String nation, LocalDate birth, String degree, String post, boolean isRemarriage) {
-        this.name = name;
-        this.litigantType = litigantType;
-        this.gender = gender;
-        this.nation = nation;
-        this.birth = birth;
-        this.degree = degree;
-        this.post = post;
-        this.isRemarriage = isRemarriage;
     }
 
     public LitigantType getLitigantType() {
@@ -110,15 +86,15 @@ public class LitigationParticipant implements Serializable {
         this.name = name;
     }
 
-//    public PartiesType getPartiesType() {
-//        return partiesType;
-//    }
-//
-//    public void setPartiesType(PartiesType partiesType) {
-//        this.partiesType = partiesType;
-//    }
+        public String getPartiesType() {
+        return partiesType;
+    }
 
-    public Gender getGender() {
+    public void setPartiesType(String partiesType) {
+        this.partiesType = partiesType;
+    }
+
+        public Gender getGender() {
         return gender;
     }
 
@@ -158,21 +134,21 @@ public class LitigationParticipant implements Serializable {
         this.post = post;
     }
 
-//    public String getNationality() {
-//        return nationality;
-//    }
-//
-//    public void setNationality(String nationality) {
-//        this.nationality = nationality;
-//    }
-//
-//    public boolean isHasAppearInCourt() {
-//        return hasAppearInCourt;
-//    }
-//
-//    public void setHasAppearInCourt(boolean hasAppearInCourt) {
-//        this.hasAppearInCourt = hasAppearInCourt;
-//    }
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public boolean isHasAppearInCourt() {
+        return hasAppearInCourt;
+    }
+
+    public void setHasAppearInCourt(boolean hasAppearInCourt) {
+        this.hasAppearInCourt = hasAppearInCourt;
+    }
 
     public boolean isRemarriage() {
         return isRemarriage;

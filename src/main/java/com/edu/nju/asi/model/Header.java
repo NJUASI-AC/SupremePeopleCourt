@@ -36,12 +36,12 @@ public class Header implements Serializable {
     /**
      * 法院级别
      */
-//    private String courtLevel;
+    private String courtLevel;
 
     /**
      * 行政区划（省）
      */
-//    private String administrativeDivision;
+    private String administrativeDivision;
 
     /**
      * 文书名称
@@ -51,17 +51,17 @@ public class Header implements Serializable {
     /**
      * 立案年度
      */
-//    private int filingYear;
+    private int filingYear;
 
     /**
      * 案件性质
      */
-//    private CaseType natureOfCase;
+    private CaseType natureOfCase;
 
     /**
      * 文书种类
      */
-//    private DocumentType documentType;
+    private DocumentType documentType;
 
     /**
      * 审判程序

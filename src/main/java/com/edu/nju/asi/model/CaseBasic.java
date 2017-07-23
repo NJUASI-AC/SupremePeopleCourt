@@ -22,54 +22,19 @@ public class CaseBasic implements Serializable {
     private String caseID;
 
     /**
-     * 原告诉称段
-     * 注：还包含诉讼金额等，但暂时数据库中未包含【如：（2008）东民初字第3902号】
+     * 本审审理段
      */
-    private String plaintiffClaim;
-
-    /*
-     * 事故详情
-     */
-    /**
-     * 事故时间
-     */
-//    private LocalDateTime accidentTime;
+    private String paragraphThisTrial;
 
     /**
-     * 事故地点
+     * 检查机关意见
      */
-//    private String accidentAddress;
+    private String inspectionOpinion;
 
     /**
-     * 机动车所有人
-     * 注：不知道是个啥，似乎是被告
+     * 上诉申诉辩护意见
      */
-//    private String defendant;
-
-    /**
-     * 受害人居住地
-     */
-//    private String aggrievedAddress;
-
-    /**
-     * 受害人职业
-     */
-//    private String aggrievedJob;
-
-    /**
-     * 被告辩称段
-     */
-    private String defendantArgue;
-
-    /**
-     * 证据段
-     */
-    private List<String> evidence;
-
-    /**
-     * 查明事实段
-     */
-    private List<String> facts;
+    private String defenceOpinion;
 
     public CaseBasic() {
     }
@@ -82,35 +47,27 @@ public class CaseBasic implements Serializable {
         this.caseID = caseID;
     }
 
-    public String getPlaintiffClaim() {
-        return plaintiffClaim;
+    public String getParagraphThisTrial() {
+        return paragraphThisTrial;
     }
 
-    public void setPlaintiffClaim(String plaintiffClaim) {
-        this.plaintiffClaim = plaintiffClaim;
+    public void setParagraphThisTrial(String paragraphThisTrial) {
+        this.paragraphThisTrial = paragraphThisTrial;
     }
 
-    public String getDefendantArgue() {
-        return defendantArgue;
+    public String getInspectionOpinion() {
+        return inspectionOpinion;
     }
 
-    public void setDefendantArgue(String defendantArgue) {
-        this.defendantArgue = defendantArgue;
+    public void setInspectionOpinion(String inspectionOpinion) {
+        this.inspectionOpinion = inspectionOpinion;
     }
 
-    public List<String> getEvidence() {
-        return evidence;
+    public String getDefenceOpinion() {
+        return defenceOpinion;
     }
 
-    public void setEvidence(List<String> evidence) {
-        this.evidence = evidence;
-    }
-
-    public List<String> getFacts() {
-        return facts;
-    }
-
-    public void setFacts(List<String> facts) {
-        this.facts = facts;
+    public void setDefenceOpinion(String defenceOpinion) {
+        this.defenceOpinion = defenceOpinion;
     }
 }

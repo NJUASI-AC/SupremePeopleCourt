@@ -1,17 +1,9 @@
 package com.edu.nju.asi.service.serviceImpl;
 
-import com.edu.nju.asi.InfoCarrier.Case;
-import com.edu.nju.asi.InfoCarrier.Entry;
-import com.edu.nju.asi.InfoCarrier.LegalArticle;
-import com.edu.nju.asi.InfoCarrier.LitigationParticipant;
-import com.edu.nju.asi.dao.DaoManager;
+import com.edu.nju.asi.InfoCarrier.*;
 import com.edu.nju.asi.model.*;
 import com.edu.nju.asi.service.XMLService;
-import com.edu.nju.asi.utilities.NumberConvert;
-import com.edu.nju.asi.utilities.enums.DocumentName;
-import com.edu.nju.asi.utilities.enums.Gender;
-import com.edu.nju.asi.utilities.enums.LitigantType;
-import com.edu.nju.asi.utilities.enums.TrialProcedure;
+import com.edu.nju.asi.utilities.enums.*;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -23,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -62,172 +53,188 @@ public class XMLServiceImpl implements XMLService {
         try {
             document = reader.read(new File(url));
         } catch (DocumentException e) {
-            Logger.getLogger(XMLServiceImpl.class).error(e.getMessage()+"--指定url的文件不存在");
+            Logger.getLogger(XMLServiceImpl.class).error(e.getMessage() + "--指定url的文件不存在");
         }
 
         File file = new File(url);
         System.out.println(url);
-        String caseID = file.getName().substring(0, file.getName().indexOf("."));
+
+        Element root = document.getRootElement().element("QW");
+
+        //先从文首中拿到CaseID
+        String caseID = "";
+        Node caseNum = findSingleNode("AH");
+        assert caseNum != null : "案号为空了";
+        Node nameOfDocument = findSingleNode("WSMC");
+        assert nameOfDocument != null;
+        caseID = caseNum.valueOf("@value") + nameOfDocument.valueOf("@value");
 
         //全文
         FullText fullText = null;
         Node text = findSingleNode("QW");
-        if (text != null){fullText = new FullText(caseID, text.valueOf("@value"));}
+        if (text != null) {
+            fullText = new FullText(caseID, text.valueOf("@value"));
+        }
 
 
         //文首
-        Header header = null;
+        Header header = new Header();;
 
-        String caseNum = file.getName().substring(0, file.getName().indexOf("号"));
-        assert caseNum != null : "案号为空";
         Node handlingCourt = findSingleNode("JBFY");
-        Node nameOfDocument = findSingleNode("WSMC");
         Node trialProcedure = findSingleNode("SPCX");
 
-        if(handlingCourt!=null || nameOfDocument!=null || trialProcedure!=null){
-            header = new Header();
-            header.setCaseID(caseID);
-            header.setCaseNum(caseNum);
-            if(handlingCourt != null) {header.setHandlingCourt(handlingCourt.valueOf("@value"));}
-            if(nameOfDocument != null) {header.setNameOfDocument(DocumentName.getEnum(nameOfDocument.valueOf("@value")));}
-            if(trialProcedure != null) {header.setTrialProcedure(TrialProcedure.getEnum(trialProcedure.valueOf("@value")));}
+        header.setCaseID(caseID);
+        header.setCaseNum(caseNum.valueOf("@value"));
+
+        if (handlingCourt != null) {
+            header.setHandlingCourt(handlingCourt.valueOf("@value"));
+        }
+        header.setNameOfDocument(DocumentName.getEnum(nameOfDocument.valueOf("@value")));
+        if (trialProcedure != null) {
+            header.setTrialProcedure(TrialProcedure.getEnum(trialProcedure.valueOf("@value")));
         }
 
-
-        //诉讼参与人全集
+        //当事人
+        Element participants = root.element("DSR");
         List<LitigationParticipant> litigants = new ArrayList<>();
-        Element litigantsElement = document.getRootElement().element("SSCYRQJ");
-        if (litigantsElement != null) {
-            Iterator<Element> litigantElementsIterator = document.getRootElement().element("SSCYRQJ").elementIterator("SSCYR");
-            while (litigantElementsIterator.hasNext()) {
-                Element litigant = litigantElementsIterator.next();
-
-                Element name = litigant.element("SSCYRMC");
-                Element litigantType = litigant.element("SSSF");
-                Element gender = litigant.element("XB");
-                Element nation = litigant.element("MZ");
-                Element degree = litigant.element("WHCD");
-                Element post = litigant.element("DWZWFZ");
-                Element remarriage = litigant.element("DSRSFZH");
-                Element birth = litigant.element("CSRQ");
-
-                LitigationParticipant participant = new LitigationParticipant();
-                if (name != null) participant.setName(name.valueOf("@value"));
-                if (litigantType != null) participant.setLitigantType(LitigantType.getEnum(litigantType.valueOf("@value")));
-                if (gender != null) participant.setGender(Gender.getEnum(gender.valueOf("@value")));
-                if (nation != null) participant.setNation(nation.valueOf("@value"));
-                if (degree != null) participant.setDegree(degree.valueOf("@value"));
-                if (post != null) {if(post.element("ZW") != null) participant.setPost(post.valueOf("@value"));}
-                if (remarriage != null){ if(remarriage.valueOf("@value").equals("是")) participant.setRemarriage(true);}
-                if (birth != null){
-                    
-                    NumberConvert numberConvert = new NumberConvert();
-
-                    String year = numberConvert.convert(birth.element("Year").valueOf("@value"));
-                    String month = numberConvert.convert(birth.element("Month").valueOf("@value"));
-                    String day = numberConvert.convert(birth.element("Day").valueOf("@value"));
-
-                    if(day.length()>=3){
-                        day = day.substring(day.length()-2,day.length());
-                    }
-
-                    if(!year.equals("")&&!month.equals("")&&!day.equals("")) {
-                        participant.setBirth(LocalDate.of(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(day)));
-                    }
-                }
-                litigants.add(participant);
-            }
+        if(participants != null){
+            //起诉方
+            litigants.addAll(findLitigantsOneSide(participants, "QSF"));
+            //应诉方
+            litigants.addAll(findLitigantsOneSide(participants, "YSF"));
         }
 
         LitigationParticipants litigationParticipants = null;
-        if(litigants.size() > 0){
+        if (litigants.size() > 0) {
             litigationParticipants = new LitigationParticipants(caseID, litigants);
         }
 
         //诉讼记录
-        Proceedings proceedings = null;
-        Node records = document.getRootElement().element("SSJL");
+        Proceedings proceedings = new Proceedings();
+        proceedings.setCaseID(caseID);
+
+        Element records = root.element("SSJL");
         if (records != null) {
             proceedings = new Proceedings();
+            //起诉主案由
+            Element mainActionCause = records.element("QSZAY");
+            if(mainActionCause != null){
+                ActionCause actionCause = new ActionCause();
+                actionCause.setActionName(mainActionCause.element("WZZM").valueOf("@value"));
+                actionCause.setActionCode(mainActionCause.element("ZMDM").valueOf("@value"));
+                proceedings.setMainActionCause(actionCause);
+            }
 
-            Node actionCause = findSingleNode("AY");
-            Node actionCode = findSingleNode("AYDM");
-
-            proceedings.setCaseID(caseID);
-            proceedings.setRecords(records.valueOf("@value"));
-            if(actionCause != null) {proceedings.setActionCause(actionCause.valueOf("@value"));}
-            if(actionCode != null) {proceedings.setActionCode(actionCode.valueOf("@value"));}
+            //其它起诉案由
+            Iterator<Element> extraActionCauses = records.element("QTQSAY").elementIterator("QSAY");
+            if(extraActionCauses != null){
+                List<ActionCause> extraCauses = new ArrayList<>();
+                while(extraActionCauses.hasNext()){
+                    Element extraActionCause = extraActionCauses.next();
+                    ActionCause actionCause = new ActionCause();
+                    actionCause.setActionName(extraActionCause.element("WZZM").valueOf("@value"));
+                    actionCause.setActionCode(extraActionCause.element("ZMDM").valueOf("@value"));
+                    extraCauses.add(actionCause);
+                }
+                proceedings.setExtraActionCause(extraCauses);
+            }
         }
 
 
         //案件基本情况
-        CaseBasic caseBasic = null;
-        Element basicElement = document.getRootElement().element("AJJBQK");
+        CaseBasic caseBasic = new CaseBasic();
+        caseBasic.setCaseID(caseID);
+
+        Element basicElement = root.element("AJJBQK");
         if (basicElement != null) {
-            // TODO 被告称诉段不是都有，比如 婚姻无效纠纷/(2016)津0115民初3692号民事判决书（一审民事案件用）.doc.xml
-            caseBasic = new CaseBasic();
 
-            Node plaintiffClaim = findSingleNode("YGSCD");
-            Node defendantArgue = findSingleNode("BGBCD");
-            List<Node> factNodes = document.selectNodes("//CMSSD");
-            List<String> facts = new ArrayList<>();
-            for(Node node : factNodes){
-                facts.add(node.valueOf("@value"));
-            }
-            List<Node> evidenceNodes = document.selectNodes("//ZJD");
-            List<String> evidence = new ArrayList<>();
-            for (Node node : evidenceNodes){
-                evidence.add(node.valueOf("@value"));
-            }
+            Node paragraphThisTrial = findSingleNode("BSSLD");
+            Node inspectionOpinion = findSingleNode("JCJGYJ");
+            Node defenceOpinion = findSingleNode("SSSSBHYJ");
 
-            caseBasic.setCaseID(caseID);
-            if(plaintiffClaim != null) {caseBasic.setPlaintiffClaim(plaintiffClaim.valueOf("@value"));}
-            if(defendantArgue != null) {caseBasic.setDefendantArgue(defendantArgue.valueOf("@value"));}
-            if(facts.size() != 0) {caseBasic.setFacts(facts);}
-            if(evidence.size() != 0) {caseBasic.setEvidence(evidence);}
+            if(paragraphThisTrial != null) caseBasic.setParagraphThisTrial(paragraphThisTrial.valueOf("@value"));
+            if(inspectionOpinion != null) caseBasic.setInspectionOpinion(inspectionOpinion.valueOf("@value"));
+            if(defenceOpinion != null) caseBasic.setDefenceOpinion(defenceOpinion.valueOf("@value"));
         }
 
         //裁判分析过程
         RefereeAnalysisProcess refereeAnalysisProcess = null;
-        Element analysisElement = document.getRootElement().element("CPFXGC");
+        Element analysisElement = root.element("CPFXGC").element("FLFTYY");
         if (analysisElement != null) {
-            Node closeCaseType = findSingleNode("JAFSLX");
+
             List<LegalArticle> legalArticles = new ArrayList<>();
-            Element cpfxgc = document.getRootElement().element("CPFXGC");
-            for (Iterator<Element> laws = cpfxgc.elementIterator("FLFTMC"); laws.hasNext();){
+            for (Iterator<Element> laws = analysisElement.elementIterator("FLFTFZ"); laws.hasNext(); ) {
                 Element law = laws.next();
-                String lawName = law.valueOf("@value");
-                List<Entry> entries = new ArrayList<>();
-                for (Iterator<Element> items = law.elementIterator("TM"); items.hasNext();){
-                    Element item = items.next();
-                    List<String> k_entries = new ArrayList<>();
-                    for(Iterator<Element> k_items = item.elementIterator("KM"); k_items.hasNext();){
+                String lawName = law.element("MC").valueOf("@value");
+                List<T_Entry> t_entries = new ArrayList<>();
+                for (Iterator<Element> t_items = law.elementIterator("T"); t_items.hasNext(); ) {
+                    Element t_item = t_items.next();
+                    List<K_Entry> k_entries = new ArrayList<>();
+                    for (Iterator<Element> k_items = t_item.elementIterator("K"); k_items.hasNext(); ) {
                         Element k_item = k_items.next();
-                        String k_itemName = k_item.valueOf("@value");
-                        k_entries.add(k_itemName);
+                        List<String> x_entries = new ArrayList<>();
+                        for(Iterator<Element> x_items = k_item.elementIterator("X"); x_items.hasNext(); ){
+                            x_entries.add(x_items.next().valueOf("@value"));
+                        }
+
+                        K_Entry k_entry = new K_Entry();
+                        k_entry.setName(k_item.valueOf("@value"));
+                        if(x_entries.size() != 0) k_entry.setX_entries(x_entries);
+                        k_entries.add(k_entry);
                     }
 
-                    Entry entry = new Entry();
-                    entry.setName(item.valueOf("@value"));
-                    if(k_entries.size() != 0) {entry.setEntries(k_entries);}
+                    T_Entry t_entry = new T_Entry();
+                    t_entry.setName(t_item.valueOf("@value"));
+                    if (k_entries.size() != 0) {
+                        t_entry.setK_entries(k_entries);
+                    }
 
-                    entries.add(entry);
+                    t_entries.add(t_entry);
                 }
-                legalArticles.add(new LegalArticle(lawName, entries));
+                legalArticles.add(new LegalArticle(lawName, t_entries));
             }
 
             refereeAnalysisProcess = new RefereeAnalysisProcess();
             refereeAnalysisProcess.setCaseID(caseID);
-            if(closeCaseType != null) {refereeAnalysisProcess.setCloseCaseType(closeCaseType.valueOf("@value"));}
-            if(legalArticles.size() != 0) {refereeAnalysisProcess.setLegalArticles(legalArticles);}
+
+            if (legalArticles.size() != 0) {
+                refereeAnalysisProcess.setLegalArticles(legalArticles);
+            }
 
         }
 
-        //裁判结果
-        Node result = findSingleNode("CPJG");
+        //判决结果
+        Node result = findSingleNode("PJJG");
         JudgementResult judgementResult = null;
-        if(result != null){judgementResult = new JudgementResult(caseID, result.valueOf("@value"));}
+        if (result != null) {
+            judgementResult = new JudgementResult(caseID, result.valueOf("@value"));
+        }
 
         return new Case(fullText, header, litigationParticipants, proceedings, caseBasic, refereeAnalysisProcess, judgementResult, new Tailor());
+    }
+
+    /**
+     *
+     * @param parent 父节点
+     * @param side 起诉方、应诉方
+     * @return
+     */
+    private List<LitigationParticipant> findLitigantsOneSide(Element parent, String side){
+        List<LitigationParticipant> litigants = new ArrayList<>();
+
+        Iterator<Element> children = parent.elementIterator(side);
+
+        while(children.hasNext()){
+            Element child = children.next();
+            Element name = child.element("SSCYR");
+            Element partiesType = child.element("SSSF");
+
+            LitigationParticipant participant = new LitigationParticipant();
+            if (name != null) participant.setName(name.valueOf("@value"));
+            if (partiesType != null)
+                participant.setPartiesType(partiesType.valueOf("@value"));
+            litigants.add(participant);
+        }
+        return litigants;
     }
 }

@@ -5,7 +5,6 @@ import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.service.XMLService;
-import com.edu.nju.asi.utilities.enums.DocumentName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -115,12 +114,12 @@ public class RecommendServiceImpl implements RecommendService {
             List<String> laws2 = new ArrayList<>();
             for (int i = 0; i < legals1.size(); i++) {
                 String legal1 = legals1.get(i).getLawName();
-                legal1 += lawToString(legals1.get(i).getLegalEntry());
+                legal1 += lawToString(legals1.get(i).getLegalTEntry());
                 laws1.add(legal1);
             }
             for (int j = 0; j < legals2.size(); j++) {
                 String legal2 = legals2.get(j).getLawName();
-                legal2 += lawToString(legals2.get(j).getLegalEntry());
+                legal2 += lawToString(legals2.get(j).getLegalTEntry());
                 laws2.add(legal2);
             }
             weightOfLegal += listSimilar(laws1, laws2, baseWeight);
@@ -132,7 +131,7 @@ public class RecommendServiceImpl implements RecommendService {
         return weightOfLegal;
     }
 
-    private String lawToString(List<Entry> entries) {
+    private String lawToString(List<T_Entry> entries) {
         String str = "";
         if (entries != null) {
             for (int j = 0; j < entries.size(); j++) {
