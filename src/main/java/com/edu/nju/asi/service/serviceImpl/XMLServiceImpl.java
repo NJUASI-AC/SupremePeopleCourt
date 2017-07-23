@@ -120,8 +120,13 @@ public class XMLServiceImpl implements XMLService {
             Element mainActionCause = records.element("QSZAY");
             if(mainActionCause != null){
                 ActionCause actionCause = new ActionCause();
-                actionCause.setActionName(mainActionCause.element("WZZM").valueOf("@value"));
-                actionCause.setActionCode(mainActionCause.element("ZMDM").valueOf("@value"));
+                actionCause.setActionCause(mainActionCause.valueOf("@value"));
+
+                Element zmdm = mainActionCause.element("ZMDM");
+                Element wzzm = mainActionCause.element("WZZM");
+
+                if (zmdm != null)actionCause.setActionName(zmdm.valueOf("@value"));
+                if (wzzm != null) actionCause.setActionCode(wzzm.valueOf("@value"));
                 proceedings.setMainActionCause(actionCause);
             }
 
@@ -134,8 +139,12 @@ public class XMLServiceImpl implements XMLService {
                     while(extraActionCauses.hasNext()){
                         Element extraActionCause = extraActionCauses.next();
                         ActionCause actionCause = new ActionCause();
-                        actionCause.setActionName(extraActionCause.element("WZZM").valueOf("@value"));
-                        actionCause.setActionCode(extraActionCause.element("ZMDM").valueOf("@value"));
+                        actionCause.setActionCause(extraActionCause.valueOf("@value"));
+
+                        Element zmdm = extraActionCause.element("ZMDM");
+                        Element wzzm = extraActionCause.element("WZZM");
+                        if (zmdm != null)actionCause.setActionName(zmdm.valueOf("@value"));
+                        if (wzzm != null) actionCause.setActionCode(wzzm.valueOf("@value"));
                         extraCauses.add(actionCause);
                     }
                     proceedings.setExtraActionCause(extraCauses);

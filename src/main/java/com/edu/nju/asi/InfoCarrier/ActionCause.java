@@ -8,12 +8,17 @@ import java.io.Serializable;
 public class ActionCause implements Serializable{
 
     /**
-     * 案由名称
+     * 起诉案由
+     */
+    String actionCause;
+
+    /**
+     * 完整罪名
      */
     String actionName;
 
     /**
-     * 案由代码
+     * 罪名代码
      */
     String actionCode;
 
@@ -34,5 +39,13 @@ public class ActionCause implements Serializable{
 
     public void setActionCode(String actionCode) {
         this.actionCode = actionCode;
+    }
+
+    public String getActionCause() {
+        return actionCause;
+    }
+
+    public void setActionCause(String actionCause) {
+        this.actionCause = actionCause;
     }
 }
