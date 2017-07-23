@@ -63,7 +63,7 @@ public class XMLServiceImpl implements XMLService {
 
         //先从文首中拿到CaseID
         String qw = root.valueOf("@value");
-        String caseID = qw.substring(0, qw.indexOf('。'));
+        String caseID = qw.substring(findFirstLetter(qw), qw.indexOf('院', qw.indexOf('院')+1)+1);
 
 
         //全文
@@ -231,6 +231,17 @@ public class XMLServiceImpl implements XMLService {
         }
 
         return new Case(fullText, header, litigationParticipants, proceedings, caseBasic, refereeAnalysisProcess, judgementResult, new Tailor());
+    }
+
+    private int findFirstLetter(String qw) {
+
+        int i = 0;
+        char c = qw.charAt(i);
+        while(c == '。' || c == ' ' ){
+            i++;
+            c = qw.charAt(i);
+        }
+        return i;
     }
 
     /**
