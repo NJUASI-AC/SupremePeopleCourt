@@ -29,19 +29,21 @@ public class RecommendCase {
     private String records;
 
     /**
-     * 案由代码
+     * 主案由
      */
-    private String actionCode;
+    private ActionCause mainActionCause;
 
     /**
-     * 证据段
+     * 其它案由
      */
-    private List<String> evidence;
+    private List<ActionCause>  extraActionCause;
+
 
     /**
-     * 查明事实段
+     * 本审审理段
      */
-    private List<String> fact;
+    private String paragraphThisTrial;
+
 
     /**
      * 裁判分析过程
@@ -54,34 +56,33 @@ public class RecommendCase {
     private String handlingCourt;
 
     /**
-     * 案由
-     */
-    private String actionCause;
-
-    /**
      * 文书名称
      */
     private DocumentName nameOfDocument;
 
-    public RecommendCase(String caseID, String records, String actionCode, List<String> evidence, List<String> fact, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, String actionCause, DocumentName nameOfDocument) {
+    public RecommendCase(String caseID, String records, ActionCause mainActionCause, List<ActionCause> extraActionCause, String paragraphThisTrial, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, DocumentName nameOfDocument) {
         this.caseID = caseID;
         this.records = records;
-        this.actionCode = actionCode;
-        this.evidence = evidence;
-        this.fact = fact;
+        this.mainActionCause = mainActionCause;
+        this.extraActionCause = extraActionCause;
+        this.paragraphThisTrial = paragraphThisTrial;
         this.refereeAnalysisProcess = refereeAnalysisProcess;
         this.handlingCourt = handlingCourt;
-        this.actionCause = actionCause;
         this.nameOfDocument = nameOfDocument;
     }
 
     public RecommendCase(Case newCase) {
         this.caseID = newCase.getHeader().getCaseID();
         this.records = newCase.getProceedings().getRecords();
+        this.mainActionCause = newCase.getProceedings().getMainActionCause();
+        this.extraActionCause = newCase.getProceedings().getExtraActionCause();
+        this.paragraphThisTrial = newCase.getCaseBasic().getParagraphThisTrial();
         this.refereeAnalysisProcess = newCase.getRefereeAnalysisProcess();
         this.handlingCourt = newCase.getHeader().getHandlingCourt();
         this.nameOfDocument = newCase.getHeader().getNameOfDocument();
     }
+
+    //TODO 董金玉，你这个是不是也得改改
 
     public RecommendCase(CaseBasic caseBasic, Proceedings proceedings, RefereeAnalysisProcess refereeAnalysisProcess, Header header) {
 
@@ -100,6 +101,7 @@ public class RecommendCase {
         this.refereeAnalysisProcess = refereeAnalysisProcess;
     }
 
+
     public String getCaseID() {
         return caseID;
     }
@@ -116,28 +118,28 @@ public class RecommendCase {
         this.records = records;
     }
 
-    public String getActionCode() {
-        return actionCode;
+    public ActionCause getMainActionCause() {
+        return mainActionCause;
     }
 
-    public void setActionCode(String actionCode) {
-        this.actionCode = actionCode;
+    public void setMainActionCause(ActionCause mainActionCause) {
+        this.mainActionCause = mainActionCause;
     }
 
-    public List<String> getEvidence() {
-        return evidence;
+    public List<ActionCause> getExtraActionCause() {
+        return extraActionCause;
     }
 
-    public void setEvidence(List<String> evidence) {
-        this.evidence = evidence;
+    public void setExtraActionCause(List<ActionCause> extraActionCause) {
+        this.extraActionCause = extraActionCause;
     }
 
-    public List<String> getFact() {
-        return fact;
+    public String getParagraphThisTrial() {
+        return paragraphThisTrial;
     }
 
-    public void setFact(List<String> fact) {
-        this.fact = fact;
+    public void setParagraphThisTrial(String paragraphThisTrial) {
+        this.paragraphThisTrial = paragraphThisTrial;
     }
 
     public RefereeAnalysisProcess getRefereeAnalysisProcess() {
@@ -156,14 +158,6 @@ public class RecommendCase {
         this.handlingCourt = handlingCourt;
     }
 
-    public String getActionCause() {
-        return actionCause;
-    }
-
-    public void setActionCause(String actionCause) {
-        this.actionCause = actionCause;
-    }
-
     public DocumentName getNameOfDocument() {
         return nameOfDocument;
     }
@@ -171,5 +165,6 @@ public class RecommendCase {
     public void setNameOfDocument(DocumentName nameOfDocument) {
         this.nameOfDocument = nameOfDocument;
     }
+
 
 }
