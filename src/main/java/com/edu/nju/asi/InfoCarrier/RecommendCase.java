@@ -92,14 +92,15 @@ public class RecommendCase {
 
     public RecommendCase(CaseBasic caseBasic, Proceedings proceedings, RefereeAnalysisProcess refereeAnalysisProcess, Header header) {
 
-        this.caseID = header.getCaseID();
-        this.handlingCourt = header.getHandlingCourt();
-        this.nameOfDocument = header.getNameOfDocument();
+        this.caseID = proceedings.getCaseID();
+        this.records = proceedings.getRecords();
+        this.mainActionCause = proceedings.getMainActionCause();
+        this.extraActionCause = proceedings.getExtraActionCause();
 
-        if(proceedings!=null){
-            this.records = proceedings.getRecords();
-            this.mainActionCause = proceedings.getMainActionCause();
-            this.extraActionCause = proceedings.getExtraActionCause();
+        if(header!=null){
+            this.caseNum = header.getCaseNum();
+            this.handlingCourt = header.getHandlingCourt();
+            this.nameOfDocument = header.getNameOfDocument();
         }
 
         if (caseBasic != null) {

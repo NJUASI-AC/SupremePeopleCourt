@@ -1,5 +1,6 @@
 package com.edu.nju.asi.dao;
 
+import com.edu.nju.asi.model.Header;
 import com.edu.nju.asi.model.Proceedings;
 
 import java.util.List;
@@ -26,10 +27,11 @@ public interface ProceedingsDao {
 
     /**
      * 根据条件查找一个
-     * @param codeIDs 案件ID集合
-     * @return   Map<String,Proceedings>
+     * @param actionCode 案件名称
+     * @return  Map<String, Proceedings>
      */
-    Map<String,Proceedings> findAll(Set<String> codeIDs);
+    Map<String, Proceedings> findAll(String actionCode);
+
 
     /**
      * 批量插入数据

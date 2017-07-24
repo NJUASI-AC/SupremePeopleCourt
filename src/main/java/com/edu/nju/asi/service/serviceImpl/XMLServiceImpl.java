@@ -128,8 +128,8 @@ public class XMLServiceImpl implements XMLService {
                 Element zmdm = mainActionCause.element("ZMDM");
                 Element wzzm = mainActionCause.element("WZZM");
 
-                if (zmdm != null)actionCause.setActionName(zmdm.valueOf("@value"));
-                if (wzzm != null) actionCause.setActionCode(wzzm.valueOf("@value"));
+                if (zmdm != null)actionCause.setActionName(wzzm.valueOf("@value"));
+                if (wzzm != null) actionCause.setActionCode(zmdm.valueOf("@value"));
                 proceedings.setMainActionCause(actionCause);
             }
 
@@ -146,8 +146,8 @@ public class XMLServiceImpl implements XMLService {
 
                         Element zmdm = extraActionCause.element("ZMDM");
                         Element wzzm = extraActionCause.element("WZZM");
-                        if (zmdm != null)actionCause.setActionName(zmdm.valueOf("@value"));
-                        if (wzzm != null) actionCause.setActionCode(wzzm.valueOf("@value"));
+                        if (wzzm != null)actionCause.setActionName(wzzm.valueOf("@value"));
+                        if (zmdm != null) actionCause.setActionCode(zmdm.valueOf("@value"));
                         extraCauses.add(actionCause);
                     }
                     proceedings.setExtraActionCause(extraCauses);
