@@ -49,22 +49,19 @@ public class ProceedingsDaoImpl implements ProceedingsDao {
     /**
      * 根据条件查找一个
      *
-     * @param caseIDs 案件ID集合
-     * @return Map<String,Proceedings>
+     * @param actionCode 案件名称
+     * @return Map<String, Header>
      */
     @Override
-    public Map<String, Proceedings> findAll(Set<String> caseIDs) {
+    public Map<String, Proceedings> findAll(String actionCode) {
+        Query query = new Query(Criteria.where("mainActionCause.actionCode").is(actionCode));
+        List<Proceedings> proceedingsList = mongoTemplate.find(query, Proceedings.class, collectionName);
         Map<String, Proceedings> map = new HashMap<>();
-        for(String caseID: caseIDs){
-            Query query = new Query(Criteria.where("caseID").is(caseID));
-            Proceedings proceedings = mongoTemplate.findOne(query, Proceedings.class, collectionName);
-            if(proceedings!=null) {
-                map.put(caseID, proceedings);
-            }
+        for(Proceedings proceedings:proceedingsList){
+            map.put(proceedings.getCaseID(), proceedings);
         }
         return map;
     }
-
 
     /**
      * 批量插入数据

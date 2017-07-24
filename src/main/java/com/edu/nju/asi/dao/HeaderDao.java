@@ -26,10 +26,10 @@ public interface HeaderDao {
 
     /**
      * 根据条件查找一个
-     * @param actionCode 案件名称
-     * @return  Map<String, Header>
+     * @param codeIDs 案件ID集合
+     * @return   Map<String,Header>
      */
-    Map<String, Header> findAll(String actionCode);
+    Map<String,Header> findAll(Set<String> codeIDs);
 
     /**
      * 批量插入数据

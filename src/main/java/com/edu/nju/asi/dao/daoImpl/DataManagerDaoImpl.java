@@ -65,17 +65,17 @@ public class DataManagerDaoImpl implements DataManagerDao {
      */
     private List<RecommendCase> getOneRecommendCase(String actionCode){
         List<RecommendCase> recommendCases =  new ArrayList<>();
-        Map<String, Header> map = DaoManager.headerDao.findAll(actionCode);
+        Map<String, Proceedings> map = DaoManager.proceedingsDao.findAll(actionCode);
         if(!map.isEmpty()) {
-            Map<String, Proceedings> proceedingses=  DaoManager.proceedingsDao.findAll(map.keySet());
+            Map<String, Header> headerMap=  DaoManager.headerDao.findAll(map.keySet());
             Map<String, CaseBasic> caseBasics = DaoManager.caseBasicDao.findAll(map.keySet());
             Map<String, RefereeAnalysisProcess> refereeAnalysisProcesses = DaoManager.refereeAnalysisProcessDao.findAll(map.keySet());
 
             for (String caseID : map.keySet()) {
-                Proceedings proceedings = proceedingses.get(caseID);
+                Header header = headerMap.get(caseID);
                 CaseBasic caseBasic = caseBasics.get(caseID);
                 RefereeAnalysisProcess refereeAnalysisProcess = refereeAnalysisProcesses.get(caseID);
-                recommendCases.add(new RecommendCase(caseBasic,proceedings,refereeAnalysisProcess,map.get(caseID)));
+                recommendCases.add(new RecommendCase(caseBasic,map.get(caseID),refereeAnalysisProcess,header));
             }
         }
         return recommendCases;
