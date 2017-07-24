@@ -59,10 +59,8 @@
                     <ul>
                         <li>案号：<span>${caseInfo.header.caseNum}</span></li>
                         <li>法院：<span>${caseInfo.header.handlingCourt}</span></li>
-                        <li>法院级别：<span>${caseInfo.header.courtLevel}</span></li>
-                        <li>行政区划（省）：<span>${caseInfo.header.administrativeDivision}</span></li>
+                        <li>案由：<span>${caseInfo.proceedings.mainActionCause.actionCause}</span></li>
                         <li>文书名称：<span>${caseInfo.header.nameOfDocument}</span></li>
-                        <li>立案年度：<span>${caseInfo.header.filingYear}</span></li>
                         <li>程序：<span>${caseInfo.header.trialProcedure.repre}</span></li>
                     </ul>
                 </li>
@@ -71,7 +69,7 @@
                     <h4>Litigation Participants</h4>
                     <ul>
                         <c:forEach var="item" items="${caseInfo.litigationParticipants.litigants}">
-                            <li>${item.litigantType.repre}：
+                            <li>${item.partiesType}：
                                 <span>${item.name}</span></li>
                         </c:forEach>
                     </ul>
