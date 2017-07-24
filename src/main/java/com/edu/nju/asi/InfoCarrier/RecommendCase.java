@@ -64,9 +64,9 @@ public class RecommendCase {
     /**
      * 文书名称
      */
-    private DocumentName nameOfDocument;
+    private String nameOfDocument;
 
-    public RecommendCase(String caseID, String caseNum, String records, ActionCause mainActionCause, List<ActionCause> extraActionCause, String paragraphThisTrial, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, DocumentName nameOfDocument) {
+    public RecommendCase(String caseID, String caseNum, String records, ActionCause mainActionCause, List<ActionCause> extraActionCause, String paragraphThisTrial, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, String nameOfDocument) {
         this.caseID = caseID;
         this.caseNum = caseNum;
         this.records = records;
@@ -166,11 +166,11 @@ public class RecommendCase {
         this.handlingCourt = handlingCourt;
     }
 
-    public DocumentName getNameOfDocument() {
+    public String getNameOfDocument() {
         return nameOfDocument;
     }
 
-    public void setNameOfDocument(DocumentName nameOfDocument) {
+    public void setNameOfDocument(String nameOfDocument) {
         this.nameOfDocument = nameOfDocument;
     }
 
