@@ -21,24 +21,14 @@ public class DataManagerDaoImpl implements DataManagerDao {
      * 获取推荐案例信息
      *
      *
-     * @param actionCode 案号
+     * @param actionCodes 案号列表
      * @return RecommendCase
      */
     @Override
-    public List<RecommendCase> getRecommendCase(String actionCode) {
+    public List<RecommendCase> getRecommendCase(List<String> actionCodes) {
         List<RecommendCase> recommendCases =  new ArrayList<>();
-        Map<String, Header> map = DaoManager.headerDao.findAll(actionCode);
-        if(!map.isEmpty()) {
-            Map<String, Proceedings> proceedingses=  DaoManager.proceedingsDao.findAll(map.keySet());
-            Map<String, CaseBasic> caseBasics = DaoManager.caseBasicDao.findAll(map.keySet());
-            Map<String, RefereeAnalysisProcess> refereeAnalysisProcesses = DaoManager.refereeAnalysisProcessDao.findAll(map.keySet());
-
-            for (String caseID : map.keySet()) {
-                Proceedings proceedings = proceedingses.get(caseID);
-                CaseBasic caseBasic = caseBasics.get(caseID);
-                RefereeAnalysisProcess refereeAnalysisProcess = refereeAnalysisProcesses.get(caseID);
-                recommendCases.add(new RecommendCase(caseBasic,proceedings,refereeAnalysisProcess,map.get(caseID)));
-            }
+        for(String actionCode: actionCodes){
+            recommendCases.addAll(this.getOneRecommendCase(actionCode));
         }
         return recommendCases;
     }
@@ -64,5 +54,30 @@ public class DataManagerDaoImpl implements DataManagerDao {
             cases.add(case_need);
         }
         return cases;
+    }
+
+    /**
+     * 获取单个推荐案例信息
+     *
+     *
+     * @param actionCode 案号
+     * @return RecommendCase
+     */
+    private List<RecommendCase> getOneRecommendCase(String actionCode){
+        List<RecommendCase> recommendCases =  new ArrayList<>();
+        Map<String, Header> map = DaoManager.headerDao.findAll(actionCode);
+        if(!map.isEmpty()) {
+            Map<String, Proceedings> proceedingses=  DaoManager.proceedingsDao.findAll(map.keySet());
+            Map<String, CaseBasic> caseBasics = DaoManager.caseBasicDao.findAll(map.keySet());
+            Map<String, RefereeAnalysisProcess> refereeAnalysisProcesses = DaoManager.refereeAnalysisProcessDao.findAll(map.keySet());
+
+            for (String caseID : map.keySet()) {
+                Proceedings proceedings = proceedingses.get(caseID);
+                CaseBasic caseBasic = caseBasics.get(caseID);
+                RefereeAnalysisProcess refereeAnalysisProcess = refereeAnalysisProcesses.get(caseID);
+                recommendCases.add(new RecommendCase(caseBasic,proceedings,refereeAnalysisProcess,map.get(caseID)));
+            }
+        }
+        return recommendCases;
     }
 }

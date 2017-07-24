@@ -14,10 +14,10 @@ public interface DataManagerDao {
      *
      * 获取推荐案例信息
      *
-     * @param actionCode 案号
+     * @param actionCodes 案号
      * @return List<RecommendCase>
      */
-    List<RecommendCase> getRecommendCase(String actionCode);
+    List<RecommendCase> getRecommendCase(List<String> actionCodes);
 
     /**
      *
