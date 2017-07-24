@@ -88,6 +88,47 @@ public class Header implements Serializable {
         this.nameOfDocument = nameOfDocument;
     }
 
+    public void setCourtLevel(String courtLevel) {
+        this.courtLevel = courtLevel;
+    }
+
+    public void setAdministrativeDivision(String administrativeDivision) {
+        this.administrativeDivision = administrativeDivision;
+    }
+
+    public void setFilingYear(int filingYear) {
+        this.filingYear = filingYear;
+    }
+
+    public void setNatureOfCase(CaseType natureOfCase) {
+        this.natureOfCase = natureOfCase;
+    }
+
+    public void setDocumentType(DocumentType documentType) {
+        this.documentType = documentType;
+    }
+
+    public String getCourtLevel() {
+
+        return courtLevel;
+    }
+
+    public String getAdministrativeDivision() {
+        return administrativeDivision;
+    }
+
+    public int getFilingYear() {
+        return filingYear;
+    }
+
+    public CaseType getNatureOfCase() {
+        return natureOfCase;
+    }
+
+    public DocumentType getDocumentType() {
+        return documentType;
+    }
+
     public TrialProcedure getTrialProcedure() {
         return trialProcedure;
     }
