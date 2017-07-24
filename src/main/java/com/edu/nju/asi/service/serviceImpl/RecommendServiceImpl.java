@@ -31,20 +31,21 @@ public class RecommendServiceImpl implements RecommendService {
     private int weights[] = {10, 20, 30, 30};
 
     public RecommendServiceImpl() {
+        xmlService = new XMLServiceImpl();
     }
 
 
     @Override
     public List<RecommendWeight> recommend(String caseID) {
         File parentFile = new File(System.getProperty("user.dir"));
-        for (String nowFilePath: parentFile.list()) {
+        for (File nowFile: parentFile.listFiles()) {
             // 转储的文件名与要查看的文件名匹配
-            if (nowFilePath.substring(0, nowFilePath.indexOf(".")).equals(caseID)) {
+            if (nowFile.getName().split("\\.")[0].equals(caseID)) {
 
-                RecommendCase recommendCase = new RecommendCase(xmlService.parseXML(nowFilePath));
+                RecommendCase recommendCase = new RecommendCase(xmlService.parseXML(nowFile.getAbsolutePath()));
 
                 // 删除上传的文件
-                boolean deleteResult = new File(nowFilePath).delete();
+                boolean deleteResult = nowFile.delete();
                 assert deleteResult: "上传的文件未被删除";
 
                 return recommend(recommendCase);
@@ -228,8 +229,7 @@ public class RecommendServiceImpl implements RecommendService {
     private List<RecommendCase> getAllData(RecommendCase newCase) {
         List<String> codes = new ArrayList<>();
         codes.add(newCase.getMainActionCause().getActionCode());
-//        return DaoManager.dataManagerDao.getRecommendCase(codes);
-        return null;
+        return DaoManager.caseDao.getRecommendCase(codes);
     }
 
     /**
