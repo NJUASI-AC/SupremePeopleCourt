@@ -109,7 +109,6 @@ public class RecommendCase {
         this.refereeAnalysisProcess = refereeAnalysisProcess;
     }
 
-
     public String getCaseID() {
         return caseID;
     }
@@ -181,6 +180,4 @@ public class RecommendCase {
     public void setCaseNum(String caseNum) {
         this.caseNum = caseNum;
     }
-
-
 }

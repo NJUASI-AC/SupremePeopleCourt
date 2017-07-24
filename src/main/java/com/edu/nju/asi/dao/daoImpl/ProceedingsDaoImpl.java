@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -48,19 +49,22 @@ public class ProceedingsDaoImpl implements ProceedingsDao {
     /**
      * 根据条件查找一个
      *
-     * @param actionCode 案件名称
-     * @return Map<String, Proceedings>
+     * @param caseIDs 案件ID集合
+     * @return Map<String,Proceedings>
      */
     @Override
-    public Map<String, Proceedings> findAll(String actionCode) {
-        Query query = new Query(Criteria.where("actionCode").is(actionCode));
-        List<Proceedings> proceedingsList = mongoTemplate.find(query, Proceedings.class, collectionName);
+    public Map<String, Proceedings> findAll(Set<String> caseIDs) {
         Map<String, Proceedings> map = new HashMap<>();
-        for(Proceedings proceedings:proceedingsList){
-            map.put(proceedings.getCaseID(), proceedings);
+        for(String caseID: caseIDs){
+            Query query = new Query(Criteria.where("caseID").is(caseID));
+            Proceedings proceedings = mongoTemplate.findOne(query, Proceedings.class, collectionName);
+            if(proceedings!=null) {
+                map.put(caseID, proceedings);
+            }
         }
         return map;
     }
+
 
     /**
      * 批量插入数据

@@ -4,6 +4,7 @@ import com.edu.nju.asi.model.Proceedings;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Byron Dong on 2017/7/17.
@@ -25,10 +26,10 @@ public interface ProceedingsDao {
 
     /**
      * 根据条件查找一个
-     * @param actionCode 案件名称
-     * @return  Map<String, Proceedings>
+     * @param codeIDs 案件ID集合
+     * @return   Map<String,Proceedings>
      */
-    Map<String, Proceedings> findAll(String actionCode);
+    Map<String,Proceedings> findAll(Set<String> codeIDs);
 
     /**
      * 批量插入数据

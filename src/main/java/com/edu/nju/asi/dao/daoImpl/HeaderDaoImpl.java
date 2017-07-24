@@ -49,20 +49,18 @@ public class HeaderDaoImpl implements HeaderDao {
     /**
      * 根据条件查找一个
      *
-     * @param caseIDs 案件ID集合
-     * @return Map<String,Header>
+     * @param actionCode 案件名称
+     * @return Map<String, Header>
      */
     @Override
-    public Map<String, Header> findAll(Set<String> caseIDs) {
-        Map<String, Header> headers = new HashMap<>();
-        for(String caseID: caseIDs){
-            Query query = new Query(Criteria.where("caseID").is(caseID));
-            Header header = mongoTemplate.findOne(query, Header.class, collectionName);
-            if(header!=null) {
-                headers.put(caseID, header);
-            }
+    public Map<String, Header> findAll(String actionCode) {
+        Query query = new Query(Criteria.where("actionCode").is(actionCode));
+        List<Header> headerList = mongoTemplate.find(query, Header.class, collectionName);
+        Map<String, Header> map = new HashMap<>();
+        for(Header header:headerList){
+            map.put(header.getCaseID(), header);
         }
-        return headers;
+        return map;
     }
 
     /**
