@@ -2,7 +2,8 @@ package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.InfoCarrier.*;
 import com.edu.nju.asi.dao.DaoManager;
-import com.edu.nju.asi.model.RefereeAnalysisProcess;
+import com.edu.nju.asi.model.Case;
+import com.edu.nju.asi.InfoCarrier.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.service.XMLService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,8 @@ public class RecommendServiceImpl implements RecommendService {
         for(RecommendWeight weight : weights) {
             caseIDs.add(weight.getCaseID());
         }
-        return DaoManager.dataManagerDao.getCase(caseIDs);
+//        return DaoManager.dataManagerDao.getCase(caseIDs);
+        return null;
     }
 
     private List<RecommendWeight> recommend(RecommendCase newCase) {
@@ -226,12 +228,8 @@ public class RecommendServiceImpl implements RecommendService {
     private List<RecommendCase> getAllData(RecommendCase newCase) {
         List<String> codes = new ArrayList<>();
         codes.add(newCase.getMainActionCause().getActionCode());
-        if (newCase.getExtraActionCause()!=null){
-            for (int i = 0; i < newCase.getExtraActionCause().size(); i++){
-                codes.add(newCase.getExtraActionCause().get(i).getActionCode());
-            }
-        }
-        return DaoManager.dataManagerDao.getRecommendCase(codes);
+//        return DaoManager.dataManagerDao.getRecommendCase(codes);
+        return null;
     }
 
     /**

@@ -2,9 +2,9 @@ package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.InfoCarrier.*;
 import com.edu.nju.asi.dao.DaoManager;
-import com.edu.nju.asi.model.RefereeAnalysisProcess;
+import com.edu.nju.asi.model.Case;
+import com.edu.nju.asi.InfoCarrier.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
-import com.edu.nju.asi.utilities.enums.DocumentName;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -83,9 +83,9 @@ public class RecommendServiceImplTest {
     public void testGetAll() {
         List<String> caseIDs = new ArrayList<>();
         caseIDs.add("(2016)津0225民初1440号民事裁定书（准许或不准许撤诉用）");
-        List<Case> caseList = DaoManager.dataManagerDao.getCase(caseIDs);
+//        List<Case> caseList = DaoManager.dataManagerDao.getCase(caseIDs);
 
-        assert caseList != null;
+//        assert caseList != null;
     }
 
 }

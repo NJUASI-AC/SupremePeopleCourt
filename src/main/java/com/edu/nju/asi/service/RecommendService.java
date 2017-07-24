@@ -1,7 +1,6 @@
 package com.edu.nju.asi.service;
 
-import com.edu.nju.asi.InfoCarrier.Case;
-import com.edu.nju.asi.InfoCarrier.RecommendCase;
+import com.edu.nju.asi.model.Case;
 import com.edu.nju.asi.InfoCarrier.RecommendWeight;
 
 import java.util.List;

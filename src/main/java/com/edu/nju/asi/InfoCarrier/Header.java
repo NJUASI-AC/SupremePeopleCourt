@@ -1,4 +1,4 @@
-package com.edu.nju.asi.model;
+package com.edu.nju.asi.InfoCarrier;
 
 import com.edu.nju.asi.utilities.enums.CaseType;
 import com.edu.nju.asi.utilities.enums.DocumentName;

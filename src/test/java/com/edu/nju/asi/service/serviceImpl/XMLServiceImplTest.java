@@ -1,8 +1,6 @@
 package com.edu.nju.asi.service.serviceImpl;
 
-import com.edu.nju.asi.InfoCarrier.Case;
 import com.edu.nju.asi.service.XMLService;
-import com.edu.nju.asi.service.serviceImpl.XMLServiceImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

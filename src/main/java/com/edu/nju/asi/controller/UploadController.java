@@ -1,7 +1,7 @@
 package com.edu.nju.asi.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.edu.nju.asi.InfoCarrier.Case;
+import com.edu.nju.asi.model.Case;
 import com.edu.nju.asi.InfoCarrier.RecommendWeight;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.service.XMLService;

@@ -1,6 +1,6 @@
 package com.edu.nju.asi.service;
 
-import com.edu.nju.asi.InfoCarrier.Case;
+import com.edu.nju.asi.model.Case;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

@@ -1,7 +1,9 @@
-package com.edu.nju.asi.InfoCarrier;
+package com.edu.nju.asi.model;
 
-import com.edu.nju.asi.model.*;
+import com.edu.nju.asi.InfoCarrier.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -14,10 +16,10 @@ import java.io.Serializable;
 @Document
 public class Case implements Serializable{
 
-    @Id
     /**
      * caseID
      */
+    @Id
     private String caseID;
 
     /**
@@ -59,6 +61,9 @@ public class Case implements Serializable{
      * 文尾
      */
     private Tailor tailor;
+
+    public Case() {
+    }
 
     public Case(FullText fullText, Header header, LitigationParticipants litigationParticipants, Proceedings proceedings, CaseBasic caseBasic, RefereeAnalysisProcess refereeAnalysisProcess, JudgementResult judgementResult) {
         this.fullText = fullText;

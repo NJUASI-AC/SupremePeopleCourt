@@ -1,8 +1,6 @@
 package com.edu.nju.asi.InfoCarrier;
 
 import com.edu.nju.asi.model.*;
-import com.edu.nju.asi.utilities.enums.DocumentName;
-import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
@@ -79,33 +77,26 @@ public class RecommendCase {
     }
 
     public RecommendCase(Case newCase) {
-        this.caseNum = newCase.getHeader().getCaseNum();
-        this.records = newCase.getProceedings().getRecords();
-        this.mainActionCause = newCase.getProceedings().getMainActionCause();
-        this.extraActionCause = newCase.getProceedings().getExtraActionCause();
-        this.paragraphThisTrial = newCase.getCaseBasic().getParagraphThisTrial();
+
+        this.caseID = newCase.getCaseID();
+
+        if(newCase.getHeader()!=null){
+            this.caseNum = newCase.getHeader().getCaseNum();
+            this.handlingCourt = newCase.getHeader().getHandlingCourt();
+            this.nameOfDocument = newCase.getHeader().getNameOfDocument();
+        }
+
+        if(newCase.getProceedings()!=null){
+            this.records = newCase.getProceedings().getRecords();
+            this.mainActionCause = newCase.getProceedings().getMainActionCause();
+            this.extraActionCause = newCase.getProceedings().getExtraActionCause();
+        }
+        if(newCase.getCaseBasic()!=null){
+            this.paragraphThisTrial = newCase.getCaseBasic().getParagraphThisTrial();
+        }
+
         this.refereeAnalysisProcess = newCase.getRefereeAnalysisProcess();
-        this.handlingCourt = newCase.getHeader().getHandlingCourt();
-        this.nameOfDocument = newCase.getHeader().getNameOfDocument();
-    }
 
-    public RecommendCase(CaseBasic caseBasic, Proceedings proceedings, RefereeAnalysisProcess refereeAnalysisProcess, Header header) {
-
-        this.records = proceedings.getRecords();
-        this.mainActionCause = proceedings.getMainActionCause();
-        this.extraActionCause = proceedings.getExtraActionCause();
-
-        if(header!=null){
-            this.caseNum = header.getCaseNum();
-            this.handlingCourt = header.getHandlingCourt();
-            this.nameOfDocument = header.getNameOfDocument();
-        }
-
-        if (caseBasic != null) {
-            this.paragraphThisTrial = caseBasic.getParagraphThisTrial();
-        }
-
-        this.refereeAnalysisProcess = refereeAnalysisProcess;
     }
 
     public String getCaseID() {
