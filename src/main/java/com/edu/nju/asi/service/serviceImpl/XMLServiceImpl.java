@@ -94,7 +94,7 @@ public class XMLServiceImpl implements XMLService {
             header.setTrialProcedure(TrialProcedure.getEnum(trialProcedure.valueOf("@value")));
         }
         if (caseNum != null) header.setCaseNum(caseNum.valueOf("@value"));
-        if (nameOfDocument != null) header.setNameOfDocument(DocumentName.getEnum(nameOfDocument.valueOf("@value")));
+        if (nameOfDocument != null) header.setNameOfDocument(nameOfDocument.valueOf("@value"));
 
 
         //当事人

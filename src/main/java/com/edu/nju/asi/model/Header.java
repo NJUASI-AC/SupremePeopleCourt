@@ -46,7 +46,7 @@ public class Header implements Serializable {
     /**
      * 文书名称
      */
-    private DocumentName nameOfDocument;
+    private String nameOfDocument;
 
     /**
      * 立案年度
@@ -95,11 +95,11 @@ public class Header implements Serializable {
         this.handlingCourt = handlingCourt;
     }
 
-    public DocumentName getNameOfDocument() {
+    public String getNameOfDocument() {
         return nameOfDocument;
     }
 
-    public void setNameOfDocument(DocumentName nameOfDocument) {
+    public void setNameOfDocument(String nameOfDocument) {
         this.nameOfDocument = nameOfDocument;
     }
 
