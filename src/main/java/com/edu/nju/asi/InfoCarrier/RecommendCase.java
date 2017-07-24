@@ -19,9 +19,14 @@ public class RecommendCase {
 
 
     /**
+     *  案件ID
+     * */
+    private String caseID;
+
+    /**
      * 案号
      */
-    private String caseID;
+    private String caseNum;
 
     /**
      * 诉讼记录
@@ -32,6 +37,7 @@ public class RecommendCase {
      * 主案由
      */
     private ActionCause mainActionCause;
+
 
     /**
      * 其它案由
@@ -60,8 +66,9 @@ public class RecommendCase {
      */
     private DocumentName nameOfDocument;
 
-    public RecommendCase(String caseID, String records, ActionCause mainActionCause, List<ActionCause> extraActionCause, String paragraphThisTrial, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, DocumentName nameOfDocument) {
+    public RecommendCase(String caseID, String caseNum,String records, ActionCause mainActionCause, List<ActionCause> extraActionCause, String paragraphThisTrial, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, DocumentName nameOfDocument) {
         this.caseID = caseID;
+        this.caseNum = caseNum;
         this.records = records;
         this.mainActionCause = mainActionCause;
         this.extraActionCause = extraActionCause;
@@ -73,6 +80,7 @@ public class RecommendCase {
 
     public RecommendCase(Case newCase) {
         this.caseID = newCase.getHeader().getCaseID();
+        this.caseNum = newCase.getHeader().getCaseNum();
         this.records = newCase.getProceedings().getRecords();
         this.mainActionCause = newCase.getProceedings().getMainActionCause();
         this.extraActionCause = newCase.getProceedings().getExtraActionCause();
@@ -82,20 +90,20 @@ public class RecommendCase {
         this.nameOfDocument = newCase.getHeader().getNameOfDocument();
     }
 
-    //TODO 董金玉，你这个是不是也得改改
-
     public RecommendCase(CaseBasic caseBasic, Proceedings proceedings, RefereeAnalysisProcess refereeAnalysisProcess, Header header) {
 
-        this.caseID = proceedings.getCaseID();
+        this.caseID = header.getCaseID();
+        this.handlingCourt = header.getHandlingCourt();
+        this.nameOfDocument = header.getNameOfDocument();
 
-        this.records = proceedings.getRecords();
-
-        if (caseBasic != null) {
+        if(proceedings!=null){
+            this.records = proceedings.getRecords();
+            this.mainActionCause = proceedings.getMainActionCause();
+            this.extraActionCause = proceedings.getExtraActionCause();
         }
 
-        if (header != null) {
-            this.handlingCourt = header.getHandlingCourt();
-            this.nameOfDocument = header.getNameOfDocument();
+        if (caseBasic != null) {
+            this.paragraphThisTrial = caseBasic.getParagraphThisTrial();
         }
 
         this.refereeAnalysisProcess = refereeAnalysisProcess;
@@ -164,6 +172,14 @@ public class RecommendCase {
 
     public void setNameOfDocument(DocumentName nameOfDocument) {
         this.nameOfDocument = nameOfDocument;
+    }
+
+    public String getCaseNum() {
+        return caseNum;
+    }
+
+    public void setCaseNum(String caseNum) {
+        this.caseNum = caseNum;
     }
 
 
