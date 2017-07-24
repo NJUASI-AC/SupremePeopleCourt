@@ -14,14 +14,7 @@ import java.io.Serializable;
  *
  * 文首
  */
-@Document
 public class Header implements Serializable {
-
-    /**
-     * 案件ID（文件名唯一）
-     */
-    @Id
-    private String caseID;
 
     /**
      * 案号
@@ -69,14 +62,6 @@ public class Header implements Serializable {
     private TrialProcedure trialProcedure;
 
     public Header() {
-    }
-
-    public String getCaseID() {
-        return caseID;
-    }
-
-    public void setCaseID(String caseID) {
-        this.caseID = caseID;
     }
 
     public String getCaseNum() {

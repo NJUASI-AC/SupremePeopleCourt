@@ -36,12 +36,12 @@ public class ProceedingsDaoImplTest {
         long start = System.currentTimeMillis();
         Set<String> codes = new HashSet<>();
         codes.add("9042");
-        Map<String, Proceedings> map = proceedingsDao.findAll(codes);
+//        Map<String, Proceedings> map = proceedingsDao.findAll(codes);
         System.out.println(System.currentTimeMillis()-start);
-        System.out.println(map.size());
-        for(String code: map.keySet()){
-            System.out.println(code);
-        }
+//        System.out.println(map.size());
+//        for(String code: map.keySet()){
+//            System.out.println(code);
+//        }
     }
 
 }

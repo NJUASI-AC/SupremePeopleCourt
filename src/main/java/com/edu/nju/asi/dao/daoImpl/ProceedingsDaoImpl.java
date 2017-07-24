@@ -58,7 +58,7 @@ public class ProceedingsDaoImpl implements ProceedingsDao {
         List<Proceedings> proceedingsList = mongoTemplate.find(query, Proceedings.class, collectionName);
         Map<String, Proceedings> map = new HashMap<>();
         for(Proceedings proceedings:proceedingsList){
-            map.put(proceedings.getCaseID(), proceedings);
+//            map.put(proceedings.getCaseID(), proceedings);
         }
         return map;
     }

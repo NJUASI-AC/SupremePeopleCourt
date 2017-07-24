@@ -13,14 +13,7 @@ import java.util.List;
  *
  * 诉讼记录
  */
-@Document
 public class Proceedings implements Serializable {
-
-    /**
-     * 案件ID（文件名唯一）
-     */
-    @Id
-    private String caseID;
 
     /**
      * 诉讼记录
@@ -73,14 +66,6 @@ public class Proceedings implements Serializable {
     private boolean isEasyTransfer;
 
     public Proceedings() {
-    }
-
-    public String getCaseID() {
-        return caseID;
-    }
-
-    public void setCaseID(String caseID) {
-        this.caseID = caseID;
     }
 
     public String getRecords() {

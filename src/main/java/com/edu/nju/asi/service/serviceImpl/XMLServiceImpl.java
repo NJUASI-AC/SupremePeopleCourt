@@ -70,7 +70,7 @@ public class XMLServiceImpl implements XMLService {
         FullText fullText = null;
         Node text = findSingleNode("QW");
         if (text != null) {
-            fullText = new FullText(caseID, text.valueOf("@value"));
+            fullText = new FullText(text.valueOf("@value"));
         }
 
 
@@ -82,14 +82,12 @@ public class XMLServiceImpl implements XMLService {
         Node caseNum = findSingleNode("AH");
         Node nameOfDocument = findSingleNode("WSMC");
 
-
-        header.setCaseID(caseID);
         header.setCaseNum(caseNum.valueOf("@value"));
 
         if (handlingCourt != null) {
             header.setHandlingCourt(handlingCourt.valueOf("@value"));
         }
-        header.setNameOfDocument(DocumentName.getEnum(nameOfDocument.valueOf("@value")));
+        header.setNameOfDocument(nameOfDocument.valueOf("@value"));
         if (trialProcedure != null) {
             header.setTrialProcedure(TrialProcedure.getEnum(trialProcedure.valueOf("@value")));
         }
@@ -109,7 +107,7 @@ public class XMLServiceImpl implements XMLService {
 
         LitigationParticipants litigationParticipants = null;
         if (litigants.size() > 0) {
-            litigationParticipants = new LitigationParticipants(caseID, litigants);
+            litigationParticipants = new LitigationParticipants(litigants);
         }
 
         //诉讼记录
@@ -118,7 +116,6 @@ public class XMLServiceImpl implements XMLService {
         Element records = root.element("SSJL");
         if (records != null) {
             proceedings = new Proceedings();
-            proceedings.setCaseID(caseID);
             //起诉主案由
             Element mainActionCause = records.element("QSZAY");
             if(mainActionCause != null){
@@ -158,7 +155,6 @@ public class XMLServiceImpl implements XMLService {
 
         //案件基本情况
         CaseBasic caseBasic = new CaseBasic();
-        caseBasic.setCaseID(caseID);
 
         Element basicElement = root.element("AJJBQK");
         if (basicElement != null) {
@@ -214,7 +210,6 @@ public class XMLServiceImpl implements XMLService {
                 }
 
                 refereeAnalysisProcess = new RefereeAnalysisProcess();
-                refereeAnalysisProcess.setCaseID(caseID);
 
                 if (legalArticles.size() != 0) {
                     refereeAnalysisProcess.setLegalArticles(legalArticles);
@@ -227,10 +222,10 @@ public class XMLServiceImpl implements XMLService {
         Node result = findSingleNode("PJJG");
         JudgementResult judgementResult = null;
         if (result != null) {
-            judgementResult = new JudgementResult(caseID, result.valueOf("@value"));
+            judgementResult = new JudgementResult(result.valueOf("@value"));
         }
 
-        return new Case(fullText, header, litigationParticipants, proceedings, caseBasic, refereeAnalysisProcess, judgementResult, new Tailor());
+        return new Case(caseID ,fullText, header, litigationParticipants, proceedings, caseBasic, refereeAnalysisProcess, judgementResult, new Tailor());
     }
 
     private int findFirstLetter(String qw) {

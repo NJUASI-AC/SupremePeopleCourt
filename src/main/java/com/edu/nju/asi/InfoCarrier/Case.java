@@ -1,13 +1,24 @@
 package com.edu.nju.asi.InfoCarrier;
 
 import com.edu.nju.asi.model.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
 
 /**
  * Created by cuihua on 2017/7/17.
  *
  * 案件的整体信息
  */
-public class Case {
+@Document
+public class Case implements Serializable{
+
+    @Id
+    /**
+     * caseID
+     */
+    private String caseID;
 
     /**
      * 全文
@@ -59,7 +70,8 @@ public class Case {
         this.judgementResult = judgementResult;
     }
 
-    public Case(FullText fullText, Header header, LitigationParticipants litigationParticipants, Proceedings proceedings, CaseBasic caseBasic, RefereeAnalysisProcess refereeAnalysisProcess, JudgementResult judgementResult, Tailor tailor) {
+    public Case(String caseID, FullText fullText, Header header, LitigationParticipants litigationParticipants, Proceedings proceedings, CaseBasic caseBasic, RefereeAnalysisProcess refereeAnalysisProcess, JudgementResult judgementResult, Tailor tailor) {
+        this.caseID = caseID;
         this.fullText = fullText;
         this.header = header;
         this.litigationParticipants = litigationParticipants;
@@ -68,6 +80,14 @@ public class Case {
         this.refereeAnalysisProcess = refereeAnalysisProcess;
         this.judgementResult = judgementResult;
         this.tailor = tailor;
+    }
+
+    public String getCaseID() {
+        return caseID;
+    }
+
+    public void setCaseID(String caseID) {
+        this.caseID = caseID;
     }
 
     public FullText getFullText() {

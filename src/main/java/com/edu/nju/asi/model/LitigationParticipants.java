@@ -12,14 +12,7 @@ import java.util.List;
  *
  * 诉讼参与人
  */
-@Document
 public class LitigationParticipants implements Serializable {
-
-    /**
-     * 案件ID（文件名唯一）
-     */
-    @Id
-    private String caseID;
 
     /**
      * 当事人
@@ -29,17 +22,8 @@ public class LitigationParticipants implements Serializable {
     public LitigationParticipants() {
     }
 
-    public LitigationParticipants(String caseID, List<LitigationParticipant> litigants) {
-        this.caseID = caseID;
+    public LitigationParticipants(List<LitigationParticipant> litigants) {
         this.litigants = litigants;
-    }
-
-    public String getCaseID() {
-        return caseID;
-    }
-
-    public void setCaseID(String caseID) {
-        this.caseID = caseID;
     }
 
     public List<LitigationParticipant> getLitigants() {

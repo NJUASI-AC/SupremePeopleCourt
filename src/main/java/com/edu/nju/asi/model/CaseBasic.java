@@ -12,14 +12,7 @@ import java.util.List;
  *
  * 案件基本情况
  */
-@Document
 public class CaseBasic implements Serializable {
-
-    /**
-     * 案件ID（文件名唯一）
-     */
-    @Id
-    private String caseID;
 
     /**
      * 本审审理段
@@ -37,14 +30,6 @@ public class CaseBasic implements Serializable {
     private String defenceOpinion;
 
     public CaseBasic() {
-    }
-
-    public String getCaseID() {
-        return caseID;
-    }
-
-    public void setCaseID(String caseID) {
-        this.caseID = caseID;
     }
 
     public String getParagraphThisTrial() {

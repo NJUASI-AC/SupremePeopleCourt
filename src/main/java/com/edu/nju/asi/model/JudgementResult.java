@@ -12,14 +12,7 @@ import java.util.List;
  *
  * 裁判结果
  */
-@Document
 public class JudgementResult implements Serializable{
-
-    /**
-     * 案件ID（文件名唯一）
-     */
-    @Id
-    private String caseID;
 
     /**
      * 裁判结果
@@ -70,17 +63,8 @@ public class JudgementResult implements Serializable{
     public JudgementResult() {
     }
 
-    public JudgementResult(String caseID, String result) {
-        this.caseID = caseID;
+    public JudgementResult(String result) {
         this.result = result;
-    }
-
-    public String getCaseID() {
-        return caseID;
-    }
-
-    public void setCaseID(String caseID) {
-        this.caseID = caseID;
     }
 
 }

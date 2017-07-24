@@ -86,7 +86,6 @@ public class DataTest {
             Logger.getLogger("url").fine("---------------start " + url + "---------------");
 
             System.out.println(url);
-            System.out.println(case_temp.getFullText().getCaseID());
             System.out.println("----------------------------------");
 
             if (count % 30 == 0) {

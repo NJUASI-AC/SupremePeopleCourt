@@ -12,20 +12,12 @@ import java.util.List;
  *
  * 裁判分析过程
  */
-@Document
 public class RefereeAnalysisProcess implements Serializable {
 
-    public RefereeAnalysisProcess(String caseID, String closeCaseType, List<LegalArticle> legalArticles) {
-        this.caseID = caseID;
+    public RefereeAnalysisProcess(String closeCaseType, List<LegalArticle> legalArticles) {
         this.closeCaseType = closeCaseType;
         this.legalArticles = legalArticles;
     }
-
-    /**
-     * 案件ID（文件名唯一）
-     */
-    @Id
-    private String caseID;
 
     /**
      * 结案方式类型
@@ -38,14 +30,6 @@ public class RefereeAnalysisProcess implements Serializable {
     private List<LegalArticle> legalArticles;
 
     public RefereeAnalysisProcess() {
-    }
-
-    public String getCaseID() {
-        return caseID;
-    }
-
-    public void setCaseID(String caseID) {
-        this.caseID = caseID;
     }
 
     public String getCloseCaseType() {

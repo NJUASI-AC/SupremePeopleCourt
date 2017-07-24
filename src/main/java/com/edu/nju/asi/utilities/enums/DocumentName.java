@@ -26,8 +26,8 @@ public enum DocumentName {
         return repre;
     }
 
-    public static String getEnum(String str){
-        for (String nowEnum : DocumentName.values()) {
+    public static DocumentName getEnum(String str){
+        for (DocumentName nowEnum : DocumentName.values()) {
             if (nowEnum.getRepre().equals(str)){
                 return nowEnum;
             }

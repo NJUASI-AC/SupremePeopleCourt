@@ -12,14 +12,7 @@ import java.util.Map;
  * <p>
  * 文尾实体类
  */
-@Document
 public class Tailor implements Serializable {
-
-        /**
-     * 案号
-     */
-    @Id
-    private String caseID;
 
     /**
      * 审判员
@@ -34,18 +27,9 @@ public class Tailor implements Serializable {
     public Tailor() {
     }
 
-    public Tailor(String caseID, Map<String, String> judges, String judgeTime) {
-        this.caseID = caseID;
+    public Tailor(Map<String, String> judges, String judgeTime) {
         this.judges = judges;
         this.judgeTime = judgeTime;
-    }
-
-    public String getCaseID() {
-        return caseID;
-    }
-
-    public void setCaseID(String caseNum) {
-        this.caseID = caseNum;
     }
 
     public Map<String, String> getJudges() {

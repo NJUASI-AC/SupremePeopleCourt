@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class RecommendWeight {
 
-    public RecommendWeight(String caseID, double weight, String handlingCourt, String actionCause, DocumentName nameOfDocument) {
+    public RecommendWeight(String caseID, double weight, String handlingCourt, String actionCause, String nameOfDocument) {
         this.caseID = caseID;
         this.weight = weight;
         this.handlingCourt = handlingCourt;
@@ -42,7 +42,7 @@ public class RecommendWeight {
     /**
      * 文书名称
      */
-    private DocumentName nameOfDocument;
+    private String nameOfDocument;
 
 
 
@@ -78,11 +78,11 @@ public class RecommendWeight {
         this.actionCause = actionCause;
     }
 
-    public DocumentName getNameOfDocument() {
+    public String getNameOfDocument() {
         return nameOfDocument;
     }
 
-    public void setNameOfDocument(DocumentName nameOfDocument) {
+    public void setNameOfDocument(String nameOfDocument) {
         this.nameOfDocument = nameOfDocument;
     }
 }
