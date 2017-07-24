@@ -27,7 +27,7 @@ public class RecommendServiceImpl implements RecommendService {
     //推荐案例的数目
     private int recommendNum = 5;
     //各个比较值的权重
-    private int weights[] = {10, 20, 30, 10, 30};
+    private int weights[] = {10, 20, 30, 30};
 
     public RecommendServiceImpl() {
     }
@@ -79,19 +79,17 @@ public class RecommendServiceImpl implements RecommendService {
     private RecommendWeight calculateWeight(RecommendCase newCase, RecommendCase theCase) {
         double theWeight = 0;
         //文件名的相似度
-        theWeight += nameSimilar(newCase.getCaseID(), theCase.getCaseID(), weights[0]);
+        theWeight += nameSimilar(newCase, theCase, weights[0]);
         //诉讼记录的相似度
         theWeight += recordSimilar(newCase.getRecords(), theCase.getRecords(), weights[1]);
-        //证据段的相似度
-        theWeight += listSimilar(newCase.getEvidence(), theCase.getEvidence(), weights[2]);
-        //查明事实段的相似度
-        theWeight += listSimilar(newCase.getFact(), theCase.getFact(), weights[3]);
+        //审理段的相似度
+        theWeight += recordSimilar(newCase.getParagraphThisTrial(), theCase.getParagraphThisTrial(), weights[2]);
         //裁决过程的相似度
-        theWeight += refereeAnalysisProcessSimilar(newCase.getRefereeAnalysisProcess(), theCase.getRefereeAnalysisProcess(), weights[4]);
+        theWeight += refereeAnalysisProcessSimilar(newCase.getRefereeAnalysisProcess(), theCase.getRefereeAnalysisProcess(), weights[3]);
 
         theWeight = (int) (theWeight * 10) * 1.0 / 10;
 
-        return new RecommendWeight(theCase.getCaseID(), theWeight, theCase.getHandlingCourt(), theCase.getActionCause(), theCase.getNameOfDocument());
+        return new RecommendWeight(theCase.getCaseID(), theWeight, theCase.getHandlingCourt(), theCase.getMainActionCause().getActionName(), theCase.getNameOfDocument());
     }
 
     /**
@@ -147,23 +145,12 @@ public class RecommendServiceImpl implements RecommendService {
      *
      * @return 计算出来的权重
      */
-    private double nameSimilar(String name1, String name2, double baseWeight) {
+    private double nameSimilar(RecommendCase newCase, RecommendCase theCase, double baseWeight) {
         double weightOfName = 0;
         try {
-            String str1 = name1.split("号")[0];
-            String str2 = name2.split("号")[0];
-            if (str1.equals(str2)) {
-                weightOfName += baseWeight * 0.7;
+            if (newCase.getCaseNum().equals(theCase.getCaseNum())&&newCase.getHandlingCourt().equals(newCase.getHandlingCourt())) {
+                weightOfName += baseWeight;
             }
-        } catch (Exception e) {
-
-        }
-
-        try {
-            String str1 = name1.split("（")[1].split("）")[0];
-            String str2 = name1.split("（")[1].split("）")[0];
-            cardSimilar(str1, str2);
-            weightOfName += baseWeight * 0.3 * cardSimilar(str1, str2);
         } catch (Exception e) {
 
         }
@@ -237,7 +224,14 @@ public class RecommendServiceImpl implements RecommendService {
      * @return 计算出来的权重
      */
     private List<RecommendCase> getAllData(RecommendCase newCase) {
-        return DaoManager.dataManagerDao.getRecommendCase(newCase.getActionCode());
+        List<String> codes = new ArrayList<>();
+        codes.add(newCase.getMainActionCause().getActionCode());
+        if (newCase.getExtraActionCause()!=null){
+            for (int i = 0; i < newCase.getExtraActionCause().size(); i++){
+                codes.add(newCase.getExtraActionCause().get(i).getActionCode());
+            }
+        }
+        return DaoManager.dataManagerDao.getRecommendCase(codes);
     }
 
     /**

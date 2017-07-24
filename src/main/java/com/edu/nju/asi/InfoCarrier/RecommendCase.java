@@ -66,7 +66,7 @@ public class RecommendCase {
      */
     private DocumentName nameOfDocument;
 
-    public RecommendCase(String caseID, String caseNum,String records, ActionCause mainActionCause, List<ActionCause> extraActionCause, String paragraphThisTrial, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, DocumentName nameOfDocument) {
+    public RecommendCase(String caseID, String caseNum, String records, ActionCause mainActionCause, List<ActionCause> extraActionCause, String paragraphThisTrial, RefereeAnalysisProcess refereeAnalysisProcess, String handlingCourt, DocumentName nameOfDocument) {
         this.caseID = caseID;
         this.caseNum = caseNum;
         this.records = records;
@@ -133,7 +133,7 @@ public class RecommendCase {
         this.mainActionCause = mainActionCause;
     }
 
-    public List<ActionCause> getExtraActionCause() {
+    public List<ActionCause>  getExtraActionCause() {
         return extraActionCause;
     }
 

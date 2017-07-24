@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -34,7 +34,9 @@ public class ProceedingsDaoImplTest {
     @Test
     public void findAll() throws Exception {
         long start = System.currentTimeMillis();
-        Map<String, Proceedings> map = proceedingsDao.findAll("9042");
+        Set<String> codes = new HashSet<>();
+        codes.add("9042");
+        Map<String, Proceedings> map = proceedingsDao.findAll(codes);
         System.out.println(System.currentTimeMillis()-start);
         System.out.println(map.size());
         for(String code: map.keySet()){

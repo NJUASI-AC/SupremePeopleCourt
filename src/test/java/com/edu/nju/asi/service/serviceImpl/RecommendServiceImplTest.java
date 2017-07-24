@@ -34,18 +34,39 @@ public class RecommendServiceImplTest {
 
     @Test
     public void testRecommend() throws Exception {
-        List<String> evidence = new ArrayList<>();
-        evidence.add("上述事实，有当事人当庭陈述、天津市南开区人民政府学府街道办事处照湖里居民委员会书证证明及本院（1999）南民初字第4638号民事判决书佐证在案，本院予以确认。");
-        List<String> facts = new ArrayList<>();
-        String fact = "经审理查明，原、被告原系夫妻，1999年12月17日业经本院（1999）南民初字第4638号民事判决书判决双方离婚，并同时确定双方之女陈祎来由被告孙莉抚养，原告陈建强每月给付子女抚养费260元。嗣后，双方均能依该判决行使权利并履行义务。最近，由于被告迁移新址，导致原告未能及时探视女儿，引起原告不满。另，被告工作期间确将女儿交由其母照看，其母确曾练过“法轮功”。";
-        facts.add(fact);
+
+        ActionCause mainAction = new ActionCause("抢劫罪","抢劫罪","200");
+
+        List<ActionCause> exeAction = new ArrayList<>();
+        ActionCause action = new ActionCause("盗窃罪","盗窃罪","201");
+        exeAction.add(action);
+
         List<LegalArticle> legalArticles = new ArrayList<>();
         List<T_Entry> legalTEntry = new ArrayList<>();
         List<K_Entry> entries = new ArrayList<>();
-        legalTEntry.add(new T_Entry("三十六", entries));
-        legalArticles.add(new LegalArticle("中华人民共和国婚姻法", legalTEntry));
+        legalTEntry.add(new T_Entry("第二百六十三条", entries));
+        legalTEntry.add(new T_Entry("第二百六十四条", entries));
+        legalTEntry.add(new T_Entry("第二十三条", entries));
+        legalTEntry.add(new T_Entry("第二十六条", entries));
+        legalTEntry.add(new T_Entry("第四十八条", entries));
+        legalTEntry.add(new T_Entry("第五十七条", entries));
+        legalTEntry.add(new T_Entry("第五十六条", entries));
+        legalTEntry.add(new T_Entry("第五十五条", entries));
+        legalTEntry.add(new T_Entry("第六十七条", entries));
+        legalTEntry.add(new T_Entry("第六十九条", entries));
+        legalArticles.add(new LegalArticle("《中华人民共和国刑法》", legalTEntry));
+
+
+        legalTEntry = new ArrayList<>();
+        entries = new ArrayList<>();
+        legalTEntry.add(new T_Entry("第二百二十五条", entries));
+        legalArticles.add(new LegalArticle("《中华人民共和国刑事诉讼法》", legalTEntry));
+
+
         RefereeAnalysisProcess refereeAnalysisProcess = new RefereeAnalysisProcess("(2001)南民初字第5905号民事判决书（一审民事案件用）", "判决", legalArticles);
-        myCase = new RecommendCase("(2001)南民初字第5905号民事判决书（一审民事案件用）", "原告陈建强与被告孙莉变更抚养关系纠纷一案，本院受理后，依法由审判员兰鸿月独任审判，公开开庭进行了审理。原、被告到庭参加诉讼。本案现已审理终结。", "9026", evidence, facts, refereeAnalysisProcess, "12", "13", DocumentName.CIVIL_JUDGMENT);
+
+        String res= "123";
+        myCase = new RecommendCase("(2001)南民初字第5905号民事判决书（一审民事案件用）","（2014）粤高法刑四终字第24号"," 广东省东莞市中级人民法院审理广东省东莞市人民检察院指控原审被告人蒙国现、韦呈祥、黄加弟、陆世德、赵永芳、韦勤腾犯抢劫罪、盗窃罪，原审附带民事诉讼原告人肖某某、谢某某、宁某某、肖某、肖某甲、卢某某、周某某、卢某甲、周某甲、杨某某、刘某某、黄某某、肖某乙、刘某甲提起附带民事诉讼一案，于2013年6月15日作出（2012）东中法刑一初字第459号刑事附带民事判决。宣判后，双方当事人均未对附带民事判决提出上诉，该附带民事判决已发生法律效力。原审被告人蒙国现、韦勤腾、黄加弟不服刑事判决，提出上诉。本院依法组成合议庭，经阅卷和讯问上诉人蒙国现、韦勤腾、黄加弟，听取辩护人意见，认为本案事实清楚，决定以不开庭方式进行审理。现已审理终结。", mainAction,exeAction, res, refereeAnalysisProcess, "13", DocumentName.CIVIL_JUDGMENT);
 
         try {
             Method method = RecommendServiceImpl.class.getDeclaredMethod("recommend", RecommendCase.class);

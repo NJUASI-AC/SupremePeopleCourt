@@ -27,7 +27,9 @@ public class DataManagerDaoImplTest {
     @Ignore
     @Test
     public void getRecommendCase() throws Exception {
-        dataManagerDao.getRecommendCase("9018");
+        List<String> code = new ArrayList<>();
+        code.add("9018");
+        dataManagerDao.getRecommendCase(code);
     }
 
     @Ignore

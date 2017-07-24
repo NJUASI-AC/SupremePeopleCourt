@@ -7,6 +7,12 @@ import java.io.Serializable;
  */
 public class ActionCause implements Serializable{
 
+    public ActionCause(String actionCause, String actionName, String actionCode) {
+        this.actionCause = actionCause;
+        this.actionName = actionName;
+        this.actionCode = actionCode;
+    }
+
     /**
      * 起诉案由
      */
