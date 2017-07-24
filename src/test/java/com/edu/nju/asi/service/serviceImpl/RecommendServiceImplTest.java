@@ -32,7 +32,7 @@ public class RecommendServiceImplTest {
     public void after() throws Exception {
     }
 
-//    @Ignore
+
     @Test
     public void testRecommend() throws Exception {
 
@@ -68,6 +68,7 @@ public class RecommendServiceImplTest {
 
         String res= "123";
         myCase = new RecommendCase("（2014）粤高法刑四终字第24号","（2014）粤高法刑四终字第24号"," 广东省东莞市中级人民法院审理广东省东莞市人民检察院指控原审被告人蒙国现、韦呈祥、黄加弟、陆世德、赵永芳、韦勤腾犯抢劫罪、盗窃罪，原审附带民事诉讼原告人肖某某、谢某某、宁某某、肖某、肖某甲、卢某某、周某某、卢某甲、周某甲、杨某某、刘某某、黄某某、肖某乙、刘某甲提起附带民事诉讼一案，于2013年6月15日作出（2012）东中法刑一初字第459号刑事附带民事判决。宣判后，双方当事人均未对附带民事判决提出上诉，该附带民事判决已发生法律效力。原审被告人蒙国现、韦勤腾、黄加弟不服刑事判决，提出上诉。本院依法组成合议庭，经阅卷和讯问上诉人蒙国现、韦勤腾、黄加弟，听取辩护人意见，认为本案事实清楚，决定以不开庭方式进行审理。现已审理终结。", mainAction,exeAction, res, refereeAnalysisProcess,"12","12");
+
 
         try {
             Method method = RecommendServiceImpl.class.getDeclaredMethod("recommend", RecommendCase.class);

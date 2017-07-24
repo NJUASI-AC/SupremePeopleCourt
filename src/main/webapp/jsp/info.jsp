@@ -39,7 +39,7 @@
         <section id="content">
             <article>
                 <div>
-                    <h3>${caseInfo.header.caseID}</h3>
+                    <h3>${caseInfo.caseID}</h3>
                 </div>
 
                 <div class="seperator" style="background-color: #535354; width: 100%;"></div>
@@ -59,8 +59,8 @@
                     <ul>
                         <li>案号：<span>${caseInfo.header.caseNum}</span></li>
                         <li>法院：<span>${caseInfo.header.handlingCourt}</span></li>
-                        <li>案由：<span>${caseInfo.proceedings.actionCause}</span></li>
-                        <li>类型：<span>${caseInfo.header.nameOfDocument.repre}</span></li>
+                        <li>案由：<span>${caseInfo.proceedings.mainActionCause.actionCause}</span></li>
+                        <li>文书名称：<span>${caseInfo.header.nameOfDocument}</span></li>
                         <li>程序：<span>${caseInfo.header.trialProcedure.repre}</span></li>
                     </ul>
                 </li>
@@ -69,7 +69,7 @@
                     <h4>Litigation Participants</h4>
                     <ul>
                         <c:forEach var="item" items="${caseInfo.litigationParticipants.litigants}">
-                            <li>${item.litigantType.repre}：
+                            <li>${item.partiesType}：
                                 <span>${item.name}</span></li>
                         </c:forEach>
                     </ul>
@@ -186,7 +186,7 @@
             url: "/reqRecommendation",
             contentType: "charset=UTF-8",
             data: {
-                "caseID": "${caseInfo.fullText.caseID}"
+                "caseID": "${caseInfo.caseID}"
             },
 
             success: function (result) {
@@ -216,10 +216,11 @@
                         "</table>" +
                         "</div>" +
                         "<div style='display:none' name='details' value='0'>" +
-                        "<p>" +detailMessages[i]["caseBasic"]["plaintiffClaim"]+ "</p>" +
-                        "<p>" +detailMessages[i]["caseBasic"]["defendantArgue"]+ "</p>" +
-                        "<p>" +detailMessages[i]["caseBasic"]["evidence"]+ "</p>" +
-                        "<p>" +detailMessages[i]["caseBasic"]["facts"]+ "</p>" +
+                        "<p>" +detailMessages[i]["caseBasic"]["paragraphThisTrial"]+ "</p>" +
+                        "<p>" +detailMessages[i]["caseBasic"]["inspectionOpinion"]+ "</p>" +
+                        "<p>" +detailMessages[i]["caseBasic"]["defenceOpinion"]+ "</p>" +
+                        "<p>" +detailMessages[i]["refereeAnalysisProcess"]["closeCaseType"]+ "</p>" +
+                        "<p>" +detailMessages[i]["judgementResult"]["result"]+ "</p>" +
                         "</div>");
                 }
             },
