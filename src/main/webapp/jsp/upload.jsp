@@ -43,19 +43,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="input-group input">
-                    <input id="filename" type="text" class="form-control input-lg" placeholder="上传文件名">
-                    <span id="selectFile" class="input-group-addon" aria-hidden="true">
-                        <span class="glyphicon glyphicon-align-left"></span>
-                    </span>
-                    <input type="file" style="display: none" accept="text/xml" id="fileInput" />
-                    <span class="input-group-btn">
-                        <button id="upload" class="btn btn-lg" type="button">上传文件</button>
-                    </span>
-                    <%--<span class="glyphicon glyphicon-star input-group-addon" aria-hidden="true">--%>
-                    <%--<input type="file" accept="text/xml" name="file" id="file">--%>
-                    <%--</span>--%>
-                </div><!-- /input-group -->
+                <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return NoFile()">
+                    <div class="input-group input">
+                        <input id="filename" type="text" class="form-control input-lg" placeholder="上传文件名">
+                        <span id="selectFile" class="input-group-addon" aria-hidden="true">
+                            <span class="glyphicon glyphicon-align-left"></span>
+                        </span>
+                        <input type="file" style="display: none" accept="text/xml" id="fileInput" />
+                        <span class="input-group-btn">
+                            <button id="upload" class="btn btn-lg" type="submit">上传文件</button>
+                        </span>
+                        <%--<span class="glyphicon glyphicon-star input-group-addon" aria-hidden="true">--%>
+                        <%--<input type="file" accept="text/xml" name="file" id="file">--%>
+                        <%--</span>--%>
+                    </div><!-- /input-group -->
+                </form>
             </div><!-- /.col-md-6 -->
         </div>
     </div>
