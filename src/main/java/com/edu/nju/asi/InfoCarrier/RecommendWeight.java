@@ -12,7 +12,7 @@ public class RecommendWeight {
 
     public RecommendWeight(String caseID, String caseNum,double weight, String handlingCourt, String actionCause, String nameOfDocument) {
         this.caseID = caseID;
-        this.caseNum = caseNum
+        this.caseNum = caseNum;
         this.weight = weight;
         this.handlingCourt = handlingCourt;
         this.actionCause = actionCause;

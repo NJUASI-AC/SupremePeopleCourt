@@ -39,7 +39,7 @@
         <section id="content">
             <article>
                 <div>
-                    <h3>${caseInfo.caseID}</h3>
+                    <h3>${caseInfo.header.caseNum}${caseInfo.header.nameOfDocument}</h3>
                 </div>
 
                 <div class="seperator" style="background-color: #535354; width: 100%;"></div>
@@ -199,7 +199,7 @@
                 $("#list").empty();
                 for (let i = 0; i < detailMessages.length; i++) {
                     $("#list").append("<div class='recommend-single-wrap' name='cases' onclick='showDetail("+i+")'>" +
-                        "<h4 style='color: #00A0EB'>" + weight[i]["caseID"] + "</h4>" +
+                        "<h4 style='color: #00A0EB'>" + weight[i]["caseNum"]+weight[i]["nameOfDocument"] + "</h4>" +
                         "<table style='width: 100%;padding: 3px; text-align: center;' align='center' class='single-info'>" +
                         "<tr>" +
                         "<td>指数</td>" +
