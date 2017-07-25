@@ -299,9 +299,11 @@ header h2 {
 }
 
 nav {
-	background-color: #222;
-	border-bottom: 5px solid #00A0EB;
-	height: 45px;
+	background-color: #E0E0E0;
+	/*border-bottom: 5px solid #00A0EB;*/
+	height: 30px;
+	width: 1200px;
+	margin: 0 auto;
 }
 
 nav ul {
@@ -318,12 +320,12 @@ nav ul li {
 
 
 nav ul li a {
-    color: #999;
+    color: #00A0EB;
     display: block;
-    font-family: 'Pontano Sans',Arial,sans-serif;
-    font-size: 13px;
+    font-family: 'Microsoft Sans Serif',Arial,sans-serif;
+    font-size: 15px;
     letter-spacing: 0;
-   margin: 0;
+   	margin: 0;
     padding: 15px 17px;
     text-decoration: none;
     text-transform: uppercase;
@@ -444,7 +446,20 @@ article .article-info a {
 	color: #FF6D29;
 }
 
+#upload2 {
+	text-decoration: none;
+	color: #5B5B5B;
+	border: 2px solid #00A0EB;
+	border-radius: 4px;
+	padding: 4px 12px;
+	background: #F0F0F0;
 
+}
+
+#upload2:hover {
+	text-decoration: none;
+	color: #7B7B7B;
+}
 
 
 .clear {

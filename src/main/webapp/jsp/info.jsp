@@ -22,18 +22,12 @@
 <div id="container">
     <header>
         <div class="width">
-            <h1>Supreme People Court<span>-AC</span></h1>
+            <h1>司法案例推荐</h1>
             <h2>Nanjing University&nbsp;南京大学</h2>
         </div>
     </header>
-    <nav>
-        <div class="width">
-            <ul>
-                <li class=""><a href="../jsp/upload.jsp">Upload</a></li>
-            </ul>
-        </div>
-    </nav>
 
+    <div style="height: 5px; width: 1200px; margin: 0 auto; background-color: #00A0EB"></div>
 
     <div id="body" class="width">
         <section id="content">
@@ -55,7 +49,12 @@
         <aside class="sidebar">
             <ul>
                 <li>
-                    <h4>Case Information</h4>
+                    <h4 style="border-bottom: none">
+                        <a href="../jsp/upload.jsp" id="upload2">上传新的案例</a>
+                    </h4>
+                </li>
+                <li>
+                    <h4>案例信息</h4>
                     <ul>
                         <li>案号：<span>${caseInfo.header.caseNum}</span></li>
                         <li>法院：<span>${caseInfo.header.handlingCourt}</span></li>
@@ -66,7 +65,7 @@
                 </li>
 
                 <li>
-                    <h4>Litigation Participants</h4>
+                    <h4>诉讼参与者</h4>
                     <ul>
                         <c:forEach var="item" items="${caseInfo.litigationParticipants.litigants}">
                             <li>${item.partiesType}：
@@ -76,7 +75,7 @@
                 </li>
 
                 <li>
-                    <h4>Helpful Links</h4>
+                    <h4>帮助链接</h4>
                     <ul>
                         <li><a href="http://wenshu.court.gov.cn" title="web hosting">中国裁判文书网</a></li>
                         <li>
