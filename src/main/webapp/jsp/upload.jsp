@@ -49,7 +49,7 @@
                         <span id="selectFile" class="input-group-addon" aria-hidden="true">
                             <span class="glyphicon glyphicon-align-left"></span>
                         </span>
-                        <input type="file" style="display: none" accept="text/xml" id="fileInput" />
+                        <input type="file" style="display: none" accept="text/xml" name="file"  id="file" />
                         <span class="input-group-btn">
                             <button id="upload" class="btn btn-lg" type="submit">上传文件</button>
                         </span>
@@ -91,7 +91,7 @@
 <script src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#fileInput").change(function () {
+        $("#file").change(function () {
             let filepath = $(this).val();
             let filename = filepath.substr(filepath.lastIndexOf("\\") + 1);
             $("#filename").val(filename);
@@ -107,7 +107,7 @@
 
         $("#selectFile").on("click", function () {
             console.log("点击了");
-            $("#fileInput").trigger("click");
+            $("#file").trigger("click");
         });
     });
 </script>
