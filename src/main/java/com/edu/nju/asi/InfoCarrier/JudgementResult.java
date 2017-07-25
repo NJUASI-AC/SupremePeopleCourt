@@ -67,4 +67,39 @@ public class JudgementResult implements Serializable{
         this.result = result;
     }
 
+    public String getResult() {
+        return result;
+    }
+
+    public String getCaseSettlement() {
+        return caseSettlement;
+    }
+
+    public String getCompensationOrder() {
+        return compensationOrder;
+    }
+
+    public List<String> getSpecificRefereeSection() {
+        return specificRefereeSection;
+    }
+
+    public List<LitigationCost> getLitigationCostList() {
+        return litigationCostList;
+    }
+
+    public boolean isReview() {
+        return isReview;
+    }
+
+    public String getUpTo() {
+        return upTo;
+    }
+
+    public int getUpPeriod() {
+        return upPeriod;
+    }
+
+    public boolean isHasConsultJurisdictionObjection() {
+        return hasConsultJurisdictionObjection;
+    }
 }

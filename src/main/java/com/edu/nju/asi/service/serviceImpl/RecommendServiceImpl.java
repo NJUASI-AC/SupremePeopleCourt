@@ -60,8 +60,8 @@ public class RecommendServiceImpl implements RecommendService {
         for(RecommendWeight weight : weights) {
             caseIDs.add(weight.getCaseID());
         }
-//        return DaoManager.dataManagerDao.getCase(caseIDs);
-        return null;
+        return DaoManager.caseDao.getCase(caseIDs);
+//        return null;
     }
 
     private List<RecommendWeight> recommend(RecommendCase newCase) {
