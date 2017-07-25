@@ -92,7 +92,7 @@ public class RecommendServiceImpl implements RecommendService {
 
         theWeight = (int) (theWeight * 10) * 1.0 / 10;
 
-        return new RecommendWeight(theCase.getCaseID(), theWeight, theCase.getHandlingCourt(), theCase.getMainActionCause().getActionName(), theCase.getNameOfDocument());
+        return new RecommendWeight(theCase.getCaseID(),theCase.getCaseNum(), theWeight, theCase.getHandlingCourt(), theCase.getMainActionCause().getActionName(), theCase.getNameOfDocument());
     }
 
     /**
