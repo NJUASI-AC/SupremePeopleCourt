@@ -77,34 +77,7 @@
         <%--<div class="clear"></div>--%>
     <%--</div>--%>
 
-    <footer class="navbar-fixed-bottom">
-        <div class="footer-content">
-            <div class="container">
-                <div class="row">
-                    <ul class="role col-md-4">
-                        <li><h4>Product Owner</h4></li>
-                        <li>
-                            <th>冯俊杰</th>
-                        </li>
-                    </ul>
-                    <ul class="role col-md-4">
-                        <li><h4>Scrum Master</h4></li>
-                        <li>
-                            <th>龚尘淼</th>
-                        </li>
-                    </ul>
-                    <ul class="role col-md-4">
-                        <li><h4>Team Member</h4></li>
-                        <li>
-                            <th>董金玉&nbsp;&nbsp;</th>
-                            <th>高源&nbsp;&nbsp;</th>
-                            <th>顾恺嘉&nbsp;&nbsp;</th>
-                            <th>顾逸飞&nbsp;&nbsp;</th>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <footer class="navbar-fixed-bottom" style="border-top-width:0px ">
         <div class="footer-bottom">
             <p>&copy; ASI-AC 2017. <a href="/">Supreme People Court</a> by Tyga</p>
         </div>
