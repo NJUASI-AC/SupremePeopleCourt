@@ -44,9 +44,9 @@
 
                 <div class="seperator" style="background-color: #535354; width: 100%;"></div>
                 <div>
-                    <%request.setAttribute("vEnter", "\r\n");%>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    ${fn:replace(caseInfo.fullText.text,vEnter,'<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;')}
+                    <%request.setAttribute("vEnter", " ");%>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    ${fn:replace(caseInfo.fullText.text,vEnter,'<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')}
                 </div>
             </article>
 
@@ -217,9 +217,7 @@
                         "</div>" +
                         "<div style='display:none' name='details' value='0'>" +
                         "<p>" +detailMessages[i]["caseBasic"]["paragraphThisTrial"]+ "</p>" +
-                        "<p>" +detailMessages[i]["caseBasic"]["inspectionOpinion"]+ "</p>" +
                         "<p>" +detailMessages[i]["caseBasic"]["defenceOpinion"]+ "</p>" +
-                        "<p>" +detailMessages[i]["refereeAnalysisProcess"]["closeCaseType"]+ "</p>" +
                         "<p>" +detailMessages[i]["judgementResult"]["result"]+ "</p>" +
                         "</div>");
                 }
