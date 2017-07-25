@@ -94,79 +94,14 @@
             <h3>推荐案例</h3>
             <div class="seperator" style="width: 100%;background-color: black"></div>
             <div id="list"></div>
-            <%--<c:choose>--%>
-            <%--<c:when test="${analyseInfo.size()!=0}">--%>
-            <%--<div>--%>
-            <%--<c:forEach step="1" begin="0" end="4" let="i">--%>
-            <%--<div class="recommend-single-wrap" onclick="showDetail(${i})">--%>
-            <%--<h4 style="color: #00A0EB">${analyseInfo.get(i).caseID}</h4>--%>
-            <%--<table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">--%>
-            <%--<tr>--%>
-            <%--<td>指数</td>--%>
-            <%--<td>${analyseInfo.get(i).weight}</td>--%>
-            <%--<td>法院</td>--%>
-            <%--<td>${analyseInfo.get(i).handlingCourt}</td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-            <%--<td>案由</td>--%>
-            <%--<td>${analyseInfo.get(i).actionCause}</td>--%>
-            <%--<td>类型</td>--%>
-            <%--<td>${analyseInfo.get(i).nameOfDocument.repre}</td>--%>
-            <%--</tr>--%>
-            <%--</table>--%>
-            <%--</div>--%>
-            <%--<div style="display: none" name="details" value="0">--%>
-            <%--<p>${detail.get(i).caseBasic.plaintiffClaim}</p>--%>
-            <%--<p>${detail.get(i).caseBasic.defendantArgue}</p>--%>
-            <%--<c:forEach let="item" items="${detail.get(i).caseBasic.evidence}">--%>
-            <%--<p>${item}</p>--%>
-            <%--</c:forEach>--%>
-            <%--<c:forEach let="item2" items="${detail.get(i).caseBasic.facts}">--%>
-            <%--<p>${item2}</p>--%>
-            <%--</c:forEach>--%>
-            <%--</div>--%>
-            <%--</c:forEach>--%>
-            <%--</div>--%>
 
-            <%--</c:when>--%>
-            <%--<c:when test="${list.size()==0}">--%>
-            <%--<div>--%>
-            <%--未搜索到推荐案例--%>
-            <%--</div>--%>
-            <%--</c:when>--%>
-            <%--</c:choose>--%>
         </div>
     </div>
 
 
-    <footer>
-        <div class="footer-content width">
-            <ul>
-                <li><h4>Product Owner</h4></li>
-                <li>
-                    <th>冯俊杰</th>
-                </li>
-            </ul>
-            <ul>
-                <li><h4>Scrum Master</h4></li>
-                <li>
-                    <th>龚尘淼</th>
-                </li>
-            </ul>
-            <ul class="endfooter">
-                <li><h4>Team Member</h4></li>
-                <li>
-                    <th>董金玉&nbsp;&nbsp;</th>
-                    <th>高源&nbsp;&nbsp;</th>
-                    <th>顾恺嘉&nbsp;&nbsp;</th>
-                    <th>顾逸飞&nbsp;&nbsp;</th>
-                </li>
-            </ul>
-
-            <div class="clear"></div>
-        </div>
+    <footer class="navbar-fixed-bottom" style="border-top-width:0px ">
         <div class="footer-bottom">
-            <p>&copy; ASI-AC 2017. <a href="index.html">Supreme People Court</a> by Tyga</p>
+            <p>&copy; ASI-AC 2017. <a href="/">Supreme People Court</a> by Tyga</p>
         </div>
     </footer>
 </div>
