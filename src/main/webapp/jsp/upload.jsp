@@ -11,9 +11,48 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>ASI-AC-upload</title>
     <link rel="stylesheet" href="../css/styles.css" type="text/css"/>
-    <%--<link rel="stylesheet" href="../css/sweet-alert.css" type="text/css"/>--%>
+    <link rel="stylesheet" href="../css/sweet-alert.css" type="text/css"/>
     <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/sweet-alert.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#file").change(function () {
+                let filepath = $(this).val();
+                let filename = filepath.substr(filepath.lastIndexOf("\\")+1);
+                $("#filename").val(filename);
+            });
+
+            $("#upload").click(function() {
+                let file = document.getElementById("file").files[0];
+                let filename = $("#file").val();
+                if (filename === "" || filename.substr(filename.lastIndexOf("."), filename.length) != ".xml") {
+                    swal("Oops...", "No File!", "error");
+                }else {
+                    console.log("Here");
+                    $.ajax({
+                        url: "/upload",
+                        type: "POST",
+                        data: {
+                            file: file
+                        },
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+
+                        }
+                    })
+                }
+            });
+
+            $("#selectFile").on("click", function () {
+                $("#file").trigger("click");
+            });
+        });
+    </script>
 </head>
 <style rel="stylesheet" type="text/css">
 
@@ -43,21 +82,19 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return NoFile()">
-                    <div class="input-group input">
-                        <input id="filename" type="text" class="form-control input-lg" placeholder="上传文件名">
-                        <span id="selectFile" class="input-group-addon" aria-hidden="true">
-                            <span class="glyphicon glyphicon-align-left"></span>
-                        </span>
-                        <input type="file" style="display: none" accept="text/xml" name="file"  id="file" />
-                        <span class="input-group-btn">
-                            <button id="upload" class="btn btn-lg" type="submit">上传文件</button>
-                        </span>
-                        <%--<span class="glyphicon glyphicon-star input-group-addon" aria-hidden="true">--%>
-                        <%--<input type="file" accept="text/xml" name="file" id="file">--%>
-                        <%--</span>--%>
-                    </div><!-- /input-group -->
-                </form>
+                <div class="input-group input">
+                    <input id="filename" type="text" class="form-control input-lg" placeholder="上传文件名">
+                    <span id="selectFile" class="input-group-addon" aria-hidden="true">
+                        <span class="glyphicon glyphicon-align-left"></span>
+                    </span>
+                    <input type="file" style="display: none" accept="text/xml" name="file"  id="file" />
+                    <span class="input-group-btn">
+                        <button id="upload" class="btn btn-lg">上传文件</button>
+                    </span>
+                    <%--<span class="glyphicon glyphicon-star input-group-addon" aria-hidden="true">--%>
+                    <%--<input type="file" accept="text/xml" name="file" id="file">--%>
+                    <%--</span>--%>
+                </div><!-- /input-group -->
             </div><!-- /.col-md-6 -->
         </div>
     </div>
@@ -86,29 +123,4 @@
     </footer>
 </div>
 </body>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<%--<script src="../js/sweet-alert.js"></script>--%>
-<script src="../js/bootstrap.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#file").change(function () {
-            let filepath = $(this).val();
-            let filename = filepath.substr(filepath.lastIndexOf("\\") + 1);
-            $("#filename").val(filename);
-        });
-        function NoFile() {
-            let filename = $("#file").val();
-            if (filename === "") {
-                swal("Oops...", "No File!", "error");
-                return false;
-            }
-            return true;
-        }
-
-        $("#selectFile").on("click", function () {
-            console.log("点击了");
-            $("#file").trigger("click");
-        });
-    });
-</script>
 </html>
