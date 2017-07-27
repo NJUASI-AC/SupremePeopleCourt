@@ -29,6 +29,7 @@
 		<property name="sourceList">
 			<list>
 				<value>com.edu.nju.asi.model.Case</value>
+				<value>com.edu.nju.asi.model.User</value>
 			</list>
 		</property>
 	</bean>

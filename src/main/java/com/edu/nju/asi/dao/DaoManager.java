@@ -13,12 +13,18 @@ public class DaoManager {
      */
     public final static CaseDao caseDao;
 
+    /**
+     *  用户Dao
+     */
+    public final static UserDao userDao;
+
     private DaoManager() {
     }
 
     static {
         ApplicationContext applicationContext = ApplicationContextHelper.getApplicationContext();
         caseDao = applicationContext.getBean(CaseDao.class);
+        userDao = applicationContext.getBean(UserDao.class);
     }
 
 }

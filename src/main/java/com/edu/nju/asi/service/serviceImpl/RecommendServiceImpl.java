@@ -60,6 +60,7 @@ public class RecommendServiceImpl implements RecommendService {
         for(RecommendWeight weight : weights) {
             caseIDs.add(weight.getCaseID());
         }
+        System.out.println("3333333333333333333333333333");
         return DaoManager.caseDao.getCase(caseIDs);
 //        return null;
     }
@@ -67,8 +68,10 @@ public class RecommendServiceImpl implements RecommendService {
     private List<RecommendWeight> recommend(RecommendCase newCase) {
         List<RecommendCase> recommendCases = getAllData(newCase);
         RecommendWeight recommendWeight;
+        System.out.println("11111111111111111111111111111111111");
         for (RecommendCase theCase : recommendCases) {
                 recommendWeight = calculateWeight(newCase, theCase);
+                System.out.println("22222222222222222222");
                 addRecommend(recommendWeight);
         }
         return recommendWeights;
@@ -127,7 +130,7 @@ public class RecommendServiceImpl implements RecommendService {
 
 
         } catch (Exception e) {
-
+            System.out.println("44444444444444");
         }
         return weightOfLegal;
     }
@@ -155,7 +158,7 @@ public class RecommendServiceImpl implements RecommendService {
                 weightOfName += baseWeight;
             }
         } catch (Exception e) {
-
+            System.out.println("66666666666666666666");
         }
         return weightOfName;
     }
@@ -168,9 +171,12 @@ public class RecommendServiceImpl implements RecommendService {
     private double recordSimilar(String record1, String record2, double baseWeight) {
         double weightOfRecord = 0;
         try {
+            if (record1 == null || record2 == null) {
+                return weightOfRecord;
+            }
             weightOfRecord += cardSimilar(record1, record2) * baseWeight;
         } catch (Exception e) {
-
+            System.out.println("555555555555555555555");
         }
         return weightOfRecord;
     }
@@ -197,7 +203,7 @@ public class RecommendServiceImpl implements RecommendService {
 
             }
         } catch (Exception e) {
-
+            System.out.println("77777777777777777777777");
         }
         return weightOfList * baseWeight;
     }
