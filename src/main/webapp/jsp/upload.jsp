@@ -70,7 +70,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return judge();">
+                <form method="post" action="/upload" enctype="multipart/form-data">
                     <div class="input-group input">
                         <input id="filename" type="text" class="form-control input-lg" placeholder="上传文件名">
                         <span id="selectFile" class="input-group-addon" aria-hidden="true">
