@@ -56,7 +56,9 @@ public class RecommendServiceImpl implements RecommendService {
 
     @Override
     public List<Case> getWholeMessage(List<RecommendWeight> weights){
+        System.out.println("12345678");
         List<String> caseIDs = new ArrayList<>();
+
         for(RecommendWeight weight : weights) {
             caseIDs.add(weight.getCaseID());
         }
@@ -67,6 +69,7 @@ public class RecommendServiceImpl implements RecommendService {
 
     private List<RecommendWeight> recommend(RecommendCase newCase) {
         List<RecommendCase> recommendCases = getAllData(newCase);
+        System.out.println(recommendCases.size());
         RecommendWeight recommendWeight;
         System.out.println("11111111111111111111111111111111111");
         for (RecommendCase theCase : recommendCases) {
@@ -74,6 +77,7 @@ public class RecommendServiceImpl implements RecommendService {
                 System.out.println("22222222222222222222");
                 addRecommend(recommendWeight);
         }
+        System.out.println("12345678912345678");
         return recommendWeights;
     }
 

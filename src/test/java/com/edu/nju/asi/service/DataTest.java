@@ -31,7 +31,7 @@ public class DataTest {
     @Ignore
     @Test
     public void saveData() throws Exception {
-        List<String> urls = getUrl("C:\\Users\\Byron Dong\\Desktop\\暑期实践\\1组\\测试集\\");
+        List<String> urls = getUrl("C:\\Users\\61990\\Desktop\\测试集\\测试集\\");
         List<Case> cases = new ArrayList<>();
         int count = 1;
         for (String url : urls) {
