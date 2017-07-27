@@ -43,6 +43,7 @@ public class CaseDaoImplTest {
         System.out.println(recommendCases.size());
     }
 
+    @Ignore
     @Test
     public void getRecommendCase() throws Exception {
         List<String> codes = new ArrayList<>();
@@ -52,6 +53,7 @@ public class CaseDaoImplTest {
         System.out.println(System.currentTimeMillis()-start);
     }
 
+    @Ignore
     @Test
     public void getCase() throws Exception {
     }
