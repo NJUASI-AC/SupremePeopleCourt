@@ -19,33 +19,21 @@
     <script src="../js/sweet-alert.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
+        function judge() {
+            let filename = $("#file").val();
+            if (filename === "" || filename.substr(filename.lastIndexOf("."), filename.length) != ".xml") {
+                swal("Oops...", "No File or Filename Wrong!", "error");
+                return false;
+            }else {
+                document.forms[0].submit();
+            }
+        }
+
         $(document).ready(function () {
             $("#file").change(function () {
                 let filepath = $(this).val();
                 let filename = filepath.substr(filepath.lastIndexOf("\\")+1);
                 $("#filename").val(filename);
-            });
-
-            $("#upload").click(function() {
-                let file = document.getElementById("file").files[0];
-                let filename = $("#file").val();
-                if (filename === "" || filename.substr(filename.lastIndexOf("."), filename.length) != ".xml") {
-                    swal("Oops...", "No File!", "error");
-                }else {
-                    console.log("Here");
-                    $.ajax({
-                        url: "/upload",
-                        type: "POST",
-                        data: {
-                            file: file
-                        },
-                        contentType: false,
-                        processData: false,
-                        success: function (data) {
-
-                        }
-                    })
-                }
             });
 
             $("#selectFile").on("click", function () {
@@ -82,19 +70,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="input-group input">
-                    <input id="filename" type="text" class="form-control input-lg" placeholder="上传文件名">
-                    <span id="selectFile" class="input-group-addon" aria-hidden="true">
-                        <span class="glyphicon glyphicon-align-left"></span>
-                    </span>
-                    <input type="file" style="display: none" accept="text/xml" name="file"  id="file" />
-                    <span class="input-group-btn">
-                        <button id="upload" class="btn btn-lg">上传文件</button>
-                    </span>
-                    <%--<span class="glyphicon glyphicon-star input-group-addon" aria-hidden="true">--%>
-                    <%--<input type="file" accept="text/xml" name="file" id="file">--%>
-                    <%--</span>--%>
-                </div><!-- /input-group -->
+                <form method="post" action="/upload" enctype="multipart/form-data" onsubmit="return judge();">
+                    <div class="input-group input">
+                        <input id="filename" type="text" class="form-control input-lg" placeholder="上传文件名">
+                        <span id="selectFile" class="input-group-addon" aria-hidden="true">
+                            <span class="glyphicon glyphicon-align-left"></span>
+                        </span>
+                        <input type="file" style="display: none" accept="text/xml" name="file" id="file" />
+                        <span class="input-group-btn">
+                            <button id="upload" class="btn btn-lg" type="button" onclick="judge()">上传文件</button>
+                        </span>
+                        <%--<span class="glyphicon glyphicon-star input-group-addon" aria-hidden="true">--%>
+                        <%--<input type="file" accept="text/xml" name="file" id="file">--%>
+                        <%--</span>--%>
+                    </div><!-- /input-group -->
+                </form>
             </div><!-- /.col-md-6 -->
         </div>
     </div>
