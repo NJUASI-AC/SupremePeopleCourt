@@ -5,6 +5,7 @@ import com.edu.nju.asi.model.Case;
 import com.edu.nju.asi.InfoCarrier.RecommendWeight;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.service.XMLService;
+import com.edu.nju.asi.service.serviceImpl.RecommendServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,12 +33,18 @@ public class UploadController {
     @Autowired
     RecommendService recommendService;
 
+
+    private static int id = 0;
+
     /**
      * 上传文件并可视化显示分析结果
      */
     @PostMapping(value = "upload")
     public ModelAndView upload(@RequestParam("file") MultipartFile uploadedFile, HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Connect!!!");
+
+        id++;
+
 
         HttpSession session = request.getSession(false);
         if (session == null) {
@@ -79,7 +86,7 @@ public class UploadController {
     @GetMapping(value = "reqRecommendation", produces = "text/html;charset=UTF-8")
     public @ResponseBody
     String reqRecommendation(@RequestParam("caseID") String caseID) {
-
+        recommendService = new RecommendServiceImpl();
         List<RecommendWeight> weight = recommendService.recommend(caseID);
         List<Case> detailMessages = recommendService.getWholeMessage(weight);
 
