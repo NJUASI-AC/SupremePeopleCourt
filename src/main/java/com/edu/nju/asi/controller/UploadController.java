@@ -34,6 +34,8 @@ public class UploadController {
     RecommendService recommendService;
 
 
+    private static Logger logger = Logger.getLogger(UploadController.class);
+
     private static int id = 0;
 
     /**
@@ -51,7 +53,7 @@ public class UploadController {
             try {
                 response.sendRedirect("/welcome");
             } catch (IOException e) {
-                Logger.getLogger(UploadController.class.getName()).error(e.getMessage());
+                logger.error(e.getMessage());
             }
         }
 
@@ -60,7 +62,7 @@ public class UploadController {
         try {
             wantedCase = xmlService.uploadOnline(uploadedFile);
         } catch (IOException e) {
-            Logger.getLogger(UploadController.class.getName()).error(e.getMessage());
+            logger.error(e.getMessage());
             mv.addObject("errorCode", -1);
             mv.setViewName("errorPage");
         }

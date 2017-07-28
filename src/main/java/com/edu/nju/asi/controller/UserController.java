@@ -31,12 +31,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    private static Logger logger = Logger.getLogger(UserController.class);
+
 
     /**
-     * @param workID
-     * @param request
-     * @param response
-     * @return
+     * @return mv: 正常的界面
+     * errorPage: 错误界面（错误码-2）
      */
     @GetMapping("/welcome")
     public ModelAndView welcome(@RequestParam("workID") String workID, HttpServletRequest request, HttpServletResponse response) {
@@ -45,7 +45,7 @@ public class UserController {
             try {
                 response.sendRedirect("/welcome");
             } catch (IOException e) {
-                Logger.getLogger(UserController.class.getName()).error(e.getMessage());
+                logger.error(e.getMessage());
             }
         }
 
@@ -58,7 +58,7 @@ public class UserController {
             mv.addObject("user", wantedUser);
 
         } catch (UserNotExistedException e) {
-            Logger.getLogger(UserController.class.getName()).error(e.getMessage());
+            logger.error(e.getMessage());
             mv.addObject("errorCode", -2);
             mv.setViewName("errorPage");
         }
@@ -94,7 +94,7 @@ public class UserController {
             saveCurUser(workID, request);
 
         } catch (UserExistedException e) {
-            Logger.getLogger(UserController.class).error(e.getMessage());
+            logger.error(e.getMessage());
             return "2";
         }
 
@@ -123,10 +123,10 @@ public class UserController {
             saveCurUser(workID, request);
 
         } catch (UserNotExistedException e) {
-            Logger.getLogger(UserController.class).error(e.getMessage());
+            logger.error(e.getMessage());
             return "2";
         } catch (PasswordWrongException e) {
-            Logger.getLogger(UserController.class).error(e.getMessage());
+            logger.error(e.getMessage());
             return "3";
         }
 
@@ -150,7 +150,7 @@ public class UserController {
             try {
                 response.sendRedirect("/welcome");
             } catch (IOException e) {
-                Logger.getLogger(UserController.class.getName()).error(e.getMessage());
+                logger.error(e.getMessage());
             }
         }
 
