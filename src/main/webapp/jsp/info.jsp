@@ -175,7 +175,7 @@
 
     function showDetail(i) {
         if($(".details").eq(i).is(":hidden")){
-            $(".details").toggle(false)
+            $(".details").toggle(false);
             $(".details").eq(i).slideToggle();
         }else{
             $(".details").eq(i).slideToggle();
