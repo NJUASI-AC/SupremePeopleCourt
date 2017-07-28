@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Byron Dong on 2017/7/27.
@@ -23,16 +25,27 @@ public class User implements Serializable {
     private String name;
 
     /**
+     * 密码
+     * */
+    private String password;
+
+    /**
      * 隶属法院
      */
     private String subordinationCourt;
 
+    /**
+     * 上传caseID列表
+     * */
+    private List<String> caseIDs = new ArrayList<>();
+
     public User() {
     }
 
-    public User(String workID, String name, String subordinationCourt) {
+    public User(String workID, String name, String password, String subordinationCourt) {
         this.workID = workID;
         this.name = name;
+        this.password = password;
         this.subordinationCourt = subordinationCourt;
     }
 
@@ -46,6 +59,14 @@ public class User implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setName(String name) {
