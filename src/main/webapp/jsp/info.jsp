@@ -14,6 +14,7 @@
     <title>ASI-AC</title>
     <link rel="stylesheet" href="../css/styles.css" type="text/css"/>
     <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/spinner.css" type="text/css"/>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -92,6 +93,13 @@
         <div>
             <h3>推荐案例</h3>
             <div class="seperator" style="width: 100%;background-color: black"></div>
+            <div class="spinner" id="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
             <div id="list"></div>
 
         </div>
@@ -125,6 +133,8 @@
 
             success: function (result) {
                 // 动态加入推荐案例信息
+
+                $("#spinner").style="display:none";
 
                 let array = result.split(";");
                 let size = eval("(" + array[0] + ")");
