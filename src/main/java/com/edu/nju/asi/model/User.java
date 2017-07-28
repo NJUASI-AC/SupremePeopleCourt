@@ -80,4 +80,12 @@ public class User implements Serializable {
     public void setSubordinationCourt(String subordinationCourt) {
         this.subordinationCourt = subordinationCourt;
     }
+
+    public List<String> getCaseIDs() {
+        return caseIDs;
+    }
+
+    public void setCaseIDs(List<String> caseIDs) {
+        this.caseIDs = caseIDs;
+    }
 }
