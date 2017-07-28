@@ -36,17 +36,12 @@ public class UploadController {
 
     private static Logger logger = Logger.getLogger(UploadController.class);
 
-    private static int id = 0;
-
     /**
      * 上传文件并可视化显示分析结果
      */
     @PostMapping(value = "upload")
     public ModelAndView upload(@RequestParam("file") MultipartFile uploadedFile, HttpServletRequest request, HttpServletResponse response) {
         System.out.println("Connect!!!");
-
-        id++;
-
 
         HttpSession session = request.getSession(false);
         if (session == null) {
@@ -92,7 +87,7 @@ public class UploadController {
         List<RecommendWeight> weight = recommendService.recommend(caseID);
         List<Case> detailMessages = recommendService.getWholeMessage(weight);
 
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         if (detailMessages != null) {
             result.append(detailMessages.size()).append(";");
             result.append(JSON.toJSONString(weight)).append(";");
