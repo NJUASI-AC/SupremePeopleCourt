@@ -134,7 +134,7 @@
             success: function (result) {
                 // 动态加入推荐案例信息
 
-                $("#spinner").style="display:none";
+                $("#spinner").css("display","none");
 
                 let array = result.split(";");
                 let size = eval("(" + array[0] + ")");
@@ -159,7 +159,7 @@
                         "</tr>" +
                         "</table>" +
                         "</div>" +
-                        "<div style='display:none' name='details' value='0'>" +
+                        "<div style='display:none' name='details' class='details' value='0'>" +
                         "<p>" +detailMessages[i]["caseBasic"]["paragraphThisTrial"]+ "</p>" +
                         "<p>" +detailMessages[i]["caseBasic"]["defenceOpinion"]+ "</p>" +
                         "<p>" +detailMessages[i]["judgementResult"]["result"]+ "</p>" +
@@ -174,21 +174,12 @@
 
 
     function showDetail(i) {
-        let details = document.getElementsByName('details');
-        for (let j = 0; j < 5; j++) {
-            if (j == i) {
-                if (details[j].value == 1) {
-                    details[j].style = 'display:none';
-                    details[j].value = 0;
-                } else {
-                    details[j].style = 'display:';
-                    details[j].value = 1;
-                }
-            } else {
-                details[j].style = 'display:none';
-            }
+        if($(".details").eq(i).is(":hidden")){
+            $(".details").toggle(false)
+            $(".details").eq(i).slideToggle();
+        }else{
+            $(".details").eq(i).slideToggle();
         }
-
     }
 </script>
 </html>
