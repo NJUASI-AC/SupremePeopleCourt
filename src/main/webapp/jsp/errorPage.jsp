@@ -7,8 +7,9 @@
 --%>
 
 <%-- 错误码：
-    -1； IO错误
-    0；  返回null值
+    0:      返回null值
+    -1:     IO错误
+    -2:     用户未注册，不存在
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
