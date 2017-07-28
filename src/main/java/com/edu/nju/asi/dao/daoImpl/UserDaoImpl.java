@@ -108,8 +108,9 @@ public class UserDaoImpl implements UserDao {
             throw new RedundancyCaseException();
         }
 
+        caseIDs.add(case_need.getCaseID());
         Query query = new Query(Criteria.where("workID").is(user.getWorkID()));
-        Update update = Update.update("caseIDs", user.getCaseIDs());
+        Update update = Update.update("caseIDs",caseIDs);
         mongoTemplate.upsert(query, update, User.class, collectionName);
 
         UploadCase uploadCase = new UploadCase(new UploadCaseID(workID,case_need.getCaseID()),case_need);
