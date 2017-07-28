@@ -159,7 +159,7 @@
                         "</tr>" +
                         "</table>" +
                         "</div>" +
-                        "<div style='display:none' name='details' class='details' value='0'>" +
+                        "<div style='display:none' class='details'>" +
                         "<p>" +detailMessages[i]["caseBasic"]["paragraphThisTrial"]+ "</p>" +
                         "<p>" +detailMessages[i]["caseBasic"]["defenceOpinion"]+ "</p>" +
                         "<p>" +detailMessages[i]["judgementResult"]["result"]+ "</p>" +
