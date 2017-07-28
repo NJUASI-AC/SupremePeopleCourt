@@ -30,6 +30,7 @@
 			<list>
 				<value>com.edu.nju.asi.model.Case</value>
 				<value>com.edu.nju.asi.model.User</value>
+				<value>com.edu.nju.asi.model.UploadCase</value>
 			</list>
 		</property>
 	</bean>
