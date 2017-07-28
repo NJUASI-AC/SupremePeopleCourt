@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: cuihua
@@ -55,10 +56,30 @@
         padding: 0;
     }
 
+    #menu li {
+        list-style:none; /* 将默认的列表符号去掉 */
+        float:left; /* 往左浮动 */
+    }
+
 </style>
 
 <body>
+
 <div id="container">
+    <%--<c:choose>--%>
+        <div class="row">
+            <ul id="menu" style="margin-top: 10px">
+                <%--<c:when test="${sessionScope.user!=null}">--%>
+                    <%--<li><a href="/user/welcome">查看信息</a></li>--%>
+                    <%--<li><a onclick="logout()">退出</a></li>--%>
+                <%--</c:when>--%>
+                <%--<c:otherwise>--%>
+                    <li class="col-md-offset-10"><a href="#" data-toggle="modal" data-target="#login">登录</a></li>
+                    <li style="margin-left:20px "><a href="#" data-toggle="modal" data-target="#register">注册</a></li>
+                <%--</c:otherwise>--%>
+            </ul>
+        </div>
+    <%--</c:choose>--%>
     <header>
         <div class="width" style="text-align: center; margin-top: 8%">
             <img src="../img/国徽.jpg" style="height: 60px; width: 60px"/>
@@ -111,6 +132,9 @@
             <p>&copy; ASI-AC 2017. <a href="/">Supreme People Court</a> by Tyga</p>
         </div>
     </footer>
+
+    <!-- 登录模态框（Modal） -->
+    <%@ include file="logIn.jsp" %>
 </div>
 </body>
 </html>
