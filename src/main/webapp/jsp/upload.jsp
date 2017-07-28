@@ -41,7 +41,65 @@
                 $("#file").trigger("click");
             });
         });
+
+
+        /**
+         * 登出
+         */
+        function logout() {
+            // alert("aaaa");
+            $.ajax({
+                type: "post",
+                async: true,
+                url: "/req_log_out",
+
+                success: function (result) {
+                    if (result == "1"){
+                        window.location.href='/';
+                    }
+                },
+                error: function (result) {
+                    alert("错误" + result);
+                }
+            });
+        }
+
+        function login() {
+            var userName = $("#login_username").val();
+            var password = $("#login_password").val();
+
+            var jsonData = {
+                "userName": userName,
+                "password": password
+            };
+
+            $.ajax({
+                type: "post",
+                async: true,
+                url: "/req_log_in",
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify(jsonData),
+
+                success: function (result) {
+
+                    var array = result.split(";");
+
+                    if (array[0] == "1") {
+                        window.location.reload();
+                    } else if (array[0] == "-1") {
+                        $("#errorMessageField").html("您的用户名或密码错误");
+                    } else {
+                        $("#errorMessageField").html("您的用户名或密码错误");
+                    }
+                },
+                error: function (result) {
+                    alert("错误" + result);
+                }
+            });
+        }
     </script>
+
+
 </head>
 <style rel="stylesheet" type="text/css">
 
@@ -66,17 +124,17 @@
 <body>
 
 <div id="container">
-    <%--<c:choose>--%>
+    <c:choose>
         <div class="row">
             <ul id="menu" style="margin-top: 10px">
-                <%--<c:when test="${sessionScope.user!=null}">--%>
-                    <%--<li><a href="/user/welcome">查看信息</a></li>--%>
-                    <%--<li><a onclick="logout()">退出</a></li>--%>
-                <%--</c:when>--%>
-                <%--<c:otherwise>--%>
+                <c:when test="${sessionScope.user!=null}">
+                    <li><a href="/user/welcome">查看信息</a></li>
+                    <li><a onclick="logout()">退出</a></li>
+                </c:when>
+                <c:otherwise>
                     <li class="col-md-offset-10"><a href="#" data-toggle="modal" data-target="#login">登录</a></li>
                     <li style="margin-left:20px "><a href="#" data-toggle="modal" data-target="#register">注册</a></li>
-                <%--</c:otherwise>--%>
+                </c:otherwise>
             </ul>
         </div>
     <%--</c:choose>--%>

@@ -66,7 +66,7 @@ public class UserController {
         mv.addObject("user", wantedUser);
 
         // TODO 返回的界面
-        mv.setViewName("");
+        mv.setViewName("user");
         return mv;
 
     }
