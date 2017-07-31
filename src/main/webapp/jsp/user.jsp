@@ -14,6 +14,9 @@
     <title>ASI-AC</title>
     <link rel="stylesheet" href="../css/styles.css" type="text/css"/>
     <link rel="stylesheet" href="../css/normalize.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -31,33 +34,55 @@
 
     <div id="body" class="width">
         <c:set var="perPage" value="7" scope="page"/>
-        <c:set var="totalPage" value="${(list.size()-(list.size()%perPage))/perPage}"/>
+        <c:set var="totalPage" value="${(cases.size()-(cases.size()%perPage))/perPage}"/>
         <c:choose>
-            <c:when test="${list.size()!=0}">
+            <c:when test="${cases.size()!=0}">
                 <c:forEach begin="0" end="${totalPage}" var="i">
                     <div class="page${i==0?" active":""}" id="page${i+1}">
                         <c:forEach begin="0" end="${perPage-1}" var="j">
-                            <c:if test="${list.size()>i*perPage+j}">
+                            <c:if test="${cases.size()>i*perPage+j}">
                                 <div class="recommend-single-wrap">
-                                    <h4 style='color: #00A0EB'></h4>
+                                    <h4 style='color: #00A0EB'>${cases.get(i*perPage+j).header.caseNum}${cases.get(i*perPage+j).header.nameOfDocument}</h4>
                                     <table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">
                                         <tr>
-                                            </tr>
-                                        <tr>
-                                            </tr>
+                                            <td>法院</td>
+                                            <td>${cases.get(i*perPage+j).header.handlingCourt}</td>
+                                            <td>案由</td>
+                                            <td>${cases.get(i*perPage+j).proceedings.mainActionCause.actionCause}</td>
+                                            <td>类型</td>
+                                            <td>${cases.get(i*perPage+j).header.nameOfDocument}</td>
+                                        </tr>
                                     </table>
+                                </div>
+                                <div style='display:none' class='details'>
+
                                 </div>
                             </c:if>
                         </c:forEach>
                     </div>
                 </c:forEach>
             </c:when>
-            <c:when test="${list.size()==0}">
+            <c:when test="${cases.size()==0}">
                 <div>
                     无上传案件文档
                 </div>
             </c:when>
         </c:choose>
+        <c:if test="${totalPage>0}">
+            <ul class="pagination" id="pagination">
+                <c:forEach var="i" begin="1" end="${totalPage+1}">
+                    <li class="${i==1?"active":""}"><a href="#page${i}" >${i}</a></li>
+                </c:forEach>
+
+            </ul>
+            <script type="text/javascript" language="JavaScript">
+                jQuery("#pagination a").click(function(){
+                    jQuery(this).tab("show");
+                    return false;
+                });
+            </script>
+
+        </c:if>
     </div>
 
 

@@ -67,7 +67,7 @@ public class UserController {
             mv.setViewName("errorPage");
         }
 
-        mv.addObject("user", wantedUser);
+//        mv.addObject("user", wantedUser);
 
         // TODO 返回的界面
         mv.setViewName("user");

@@ -568,3 +568,14 @@ footer .footer-bottom p, footer .footer-bottom p a {
     box-shadow: 0 0 50px rgba(100,100,100,0.3);
     top: -3px;
 }
+
+.page{
+	display: none;
+}
+.page.active{
+	display: block;
+}
+.page a{
+	text-underline: none;
+	text-decoration: none !important;
+}
