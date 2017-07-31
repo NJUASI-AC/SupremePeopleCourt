@@ -20,7 +20,15 @@ public class T_Entry implements Serializable{
      */
     private List<K_Entry> k_entries;
 
+    /**
+     * 实体必须要求空构造器
+     */
     public T_Entry() {
+    }
+
+    public T_Entry(String name, List<K_Entry> k_entries) {
+        this.name = name;
+        this.k_entries = k_entries;
     }
 
     public String getName() {
@@ -36,11 +44,6 @@ public class T_Entry implements Serializable{
     }
 
     public void setK_entries(List<K_Entry> k_entries) {
-        this.k_entries = k_entries;
-    }
-
-    public T_Entry(String name, List<K_Entry> k_entries) {
-        this.name = name;
         this.k_entries = k_entries;
     }
 }

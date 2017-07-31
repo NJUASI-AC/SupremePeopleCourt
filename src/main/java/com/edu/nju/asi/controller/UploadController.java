@@ -58,8 +58,10 @@ public class UploadController {
         Case wantedCase = null;
         try {
             wantedCase = xmlService.uploadOnline(uploadedFile);
-            if(session.getAttribute("user")!=null) {
-                xmlService.saveCase(wantedCase, session.getAttribute("user").toString());
+            if(session!=null) {
+                if (session.getAttribute("user") != null) {
+                    xmlService.saveCase(wantedCase, session.getAttribute("user").toString());
+                }
             }
         } catch (IOException e) {
             logger.error(e.getMessage());

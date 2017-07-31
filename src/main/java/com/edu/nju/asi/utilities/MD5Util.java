@@ -11,6 +11,9 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5Util {
 
+    private MD5Util() {
+    }
+
     /**
      * 使用MD5加密，MD5加密后不能解密
      *
@@ -24,7 +27,7 @@ public class MD5Util {
         try {
             md5 = MessageDigest.getInstance("MD5");
             byte[] md5Bytes = md5.digest(info.getBytes("UTF-8"));
-            StringBuffer hexValue = new StringBuffer();
+            StringBuilder hexValue = new StringBuilder();
 
             for (byte md5Byte : md5Bytes) {
                 int temp = ((int) md5Byte) & 0xff;
