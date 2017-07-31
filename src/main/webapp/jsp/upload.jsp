@@ -124,17 +124,17 @@
 <body>
 
 <div id="container">
-    <c:choose>
+    <%--<c:choose>--%>
         <div class="row">
             <ul id="menu" style="margin-top: 10px">
-                <c:when test="${sessionScope.user!=null}">
-                    <li><a href="/user/welcome">查看信息</a></li>
-                    <li><a onclick="logout()">退出</a></li>
-                </c:when>
-                <c:otherwise>
+                <%--<c:when test="${sessionScope.user!=null}">--%>
+                    <%--<li><a href="/user/welcome">查看信息</a></li>--%>
+                    <%--<li><a onclick="logout()">退出</a></li>--%>
+                <%--</c:when>--%>
+                <%--<c:otherwise>--%>
                     <li class="col-md-offset-10"><a href="#" data-toggle="modal" data-target="#login">登录</a></li>
                     <li style="margin-left:20px "><a href="#" data-toggle="modal" data-target="#register">注册</a></li>
-                </c:otherwise>
+                <%--</c:otherwise>--%>
             </ul>
         </div>
     <%--</c:choose>--%>

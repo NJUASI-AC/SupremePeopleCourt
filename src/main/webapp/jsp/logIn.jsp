@@ -47,7 +47,7 @@
             <div class="modal-body" style="margin-left: 40px">
                 <form id="registerForm" class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="reg_username" style="padding-left: 0">用户昵称：</label>
+                        <label class="col-md-3 control-label" for="reg_username" style="padding-left: 0">工作编号：</label>
                         <div class="col-md-7">
                             <input type="text" class="form-control" id="reg_username" name="reg_username" placeholder="请输入用户名">
                         </div>
@@ -65,9 +65,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="reg_password2" style="padding-left: 0">电子邮箱：</label>
+                        <label class="col-md-3 control-label" for="name" style="padding-left: 0">法官姓名：</label>
                         <div class="col-md-7">
-                            <input type="text" class="form-control" id="e_mail" name="e_mail" placeholder="请输入邮箱">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="请输入邮箱">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="court" style="padding-left: 0">工作法院：</label>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" id="court" name="court" placeholder="请输入邮箱">
                         </div>
                     </div>
                     <strong class="col-md-offset-4" style="color:red;" id="errorMessageField2"></strong>
