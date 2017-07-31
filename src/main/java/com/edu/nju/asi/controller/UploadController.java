@@ -141,9 +141,20 @@ public class UploadController {
      */
     @GetMapping(value = "reqRecommendation", produces = "text/html;charset=UTF-8")
     public @ResponseBody
-    String reqRecommendation(@RequestParam("caseID") String caseID) {
+    String reqRecommendation(@RequestParam("caseID") String caseID,HttpServletRequest request, HttpServletResponse response) {
         recommendService = new RecommendServiceImpl();
-        List<RecommendWeight> weight = recommendService.recommend(caseID);
+        List<RecommendWeight> weight = null;
+        System.out.println(caseID+"111111111111111");
+        HttpSession session = request.getSession(false);
+        Case wantedCase= null;
+        if (session.getAttribute("user")!=null){
+            wantedCase = getMyCase(session.getAttribute("user").toString(),caseID);
+        }
+        if(wantedCase == null ) {
+            weight = recommendService.recommend(caseID);
+        }else{
+            weight = recommendService.recommend(wantedCase);
+        }
         List<Case> detailMessages = recommendService.getWholeMessage(weight);
 
         StringBuilder result = new StringBuilder();
@@ -152,7 +163,6 @@ public class UploadController {
             result.append(JSON.toJSONString(weight)).append(";");
             result.append(JSON.toJSONString(detailMessages)).append(";");
         }
-
         return result.toString();
     }
 //    String reqRecommendation(@RequestParam("caseID") String caseID,HttpServletRequest request, HttpServletResponse response) {
