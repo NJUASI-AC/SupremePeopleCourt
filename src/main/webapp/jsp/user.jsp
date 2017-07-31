@@ -69,24 +69,24 @@
             </c:when>
         </c:choose>
         <c:if test="${totalPage>0}">
-            <ul class="pagination" id="pagination">
-                <c:forEach var="i" begin="1" end="${totalPage+1}">
-                    <li class="${i==1?"active":""}"><a href="#page${i}" >${i}</a></li>
-                </c:forEach>
+            <div>
+                <ul class="pagination" id="pageination">
+                    <c:forEach var="i" begin="1" end="${totalPage+1}">
+                        <li class="${i==1?"active":""}"><a href="#page${i}" >${i}</a></li>
+                    </c:forEach>
 
-            </ul>
-            <script type="text/javascript" language="JavaScript">
-                jQuery("#pagination a").click(function(){
-                    jQuery(this).tab("show");
-                    return false;
-                });
-            </script>
-
+                </ul>
+                <script type="text/javascript" language="JavaScript">
+                    $("#pageination a").click(function(){
+                        $(this).tab("show");
+                    });
+                </script>
+            </div>
         </c:if>
     </div>
 
 
-    <footer class="navbar-fixed-bottom" style="border-top-width:0px ">
+    <footer class="navbar-fixed-bottom" style="border-top-width:0px ;margin-top: 20px;position: relative">
         <div class="footer-bottom">
             <p>&copy; ASI-AC 2017. <a href="/">Supreme People Court</a> by Tyga</p>
         </div>
@@ -97,16 +97,8 @@
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script>
     function showDetail(i) {
-        alert(${cases.get(i).caseID});
-        var caseID = ${cases.get(i).caseID};
+        var caseID = "${cases.get(i).caseID}";
         window.location.href="/view/"+caseID;
-
-//        if($(".details").eq(i).is(":hidden")){
-//            $(".details").toggle(false);
-//            $(".details").eq(i).slideToggle();
-//        }else{
-//            $(".details").eq(i).slideToggle();
-//        }
 
     }
 </script>
