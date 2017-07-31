@@ -46,6 +46,7 @@
                         <c:forEach begin="0" end="${perPage-1}" var="j">
                             <c:if test="${cases.size()>i*perPage+j}">
                                 <div class="recommend-single-wrap" onclick="showDetail(${i*perPage+j})">
+                                    <input style="display: none;" name="items" value="${cases.get(i*perPage+j).caseID}">
                                     <h4 style='color: #00A0EB'>${cases.get(i*perPage+j).header.caseNum}${cases.get(i*perPage+j).header.nameOfDocument}</h4>
                                     <table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">
                                         <tr>
@@ -57,9 +58,6 @@
                                             <td>${cases.get(i*perPage+j).header.nameOfDocument}</td>
                                         </tr>
                                     </table>
-                                </div>
-                                <div style='display:none' class='details'>
-
                                 </div>
                             </c:if>
                         </c:forEach>
@@ -80,16 +78,6 @@
                     </c:forEach>
 
                 </ul>
-                <script type="text/javascript" language="JavaScript">
-                    $("#pageination a").click(function(){
-                        if($(".pagination").eq(i).is(":hidden")){
-                            $(".pagination").toggle(false);
-                            $(".pagination").eq(i).slideToggle();
-                        }else{
-
-                        }
-                    });
-                </script>
             </div>
         </c:if>
     </div>
@@ -106,9 +94,9 @@
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script>
     function showDetail(i) {
-        var caseID = "${cases.get(i).caseID}";
+        let items=document.getElementsByName("items");
+        let caseID = items[i].value;
         window.location.href="/view/"+caseID;
-
     }
 </script>
 </html>
