@@ -2,6 +2,7 @@ package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.dao.UserDao;
+import com.edu.nju.asi.model.Case;
 import com.edu.nju.asi.model.User;
 import com.edu.nju.asi.service.UserService;
 import com.edu.nju.asi.utilities.MD5Util;
@@ -9,6 +10,8 @@ import com.edu.nju.asi.utilities.exception.PasswordWrongException;
 import com.edu.nju.asi.utilities.exception.UserExistedException;
 import com.edu.nju.asi.utilities.exception.UserNotExistedException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by cuihua on 2017/7/28.
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(User user) throws UserExistedException {
-        if (userDao.find(user.getWorkID()) == null) {
+        if (userDao.find(user.getWorkID()) != null) {
             throw new UserExistedException();
         }
 
@@ -50,6 +53,10 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public List<Case> getAllCase(String workID) throws UserNotExistedException{
+        return userDao.getAllCase(workID);
+    }
     /*
     是否做不可重复登录等功能，再议
      */

@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="login_password">密码：</label>
                         <div class="col-md-7">
-                            <input type="password" class="form-control" id="login_password" placeholder="请输入密码">
+                            <input type="password" class="form-control" id="login_password" id="login_password" placeholder="请输入密码">
                         </div>
                     </div>
                     <strong class="col-md-offset-4" style="color:red;" id="errorMessageField"></strong>
@@ -67,13 +67,13 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="name" style="padding-left: 0">法官姓名：</label>
                         <div class="col-md-7">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="请输入邮箱">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="请输入姓名">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="court" style="padding-left: 0">工作法院：</label>
                         <div class="col-md-7">
-                            <input type="text" class="form-control" id="court" name="court" placeholder="请输入邮箱">
+                            <input type="text" class="form-control" id="court" name="court" placeholder="请输入工作单位">
                         </div>
                     </div>
                     <strong class="col-md-offset-4" style="color:red;" id="errorMessageField2"></strong>
@@ -94,3 +94,77 @@
     <div class="loader-section section-left"></div>
     <div class="loader-section section-right"></div>
 </div>
+
+<script type="text/javascript">
+    /**
+     * 登出
+     */
+
+    function login() {
+        var userName = $("#login_username").val();
+        var password = $("#login_password").val();
+
+
+        $.ajax({
+            type: "post",
+            async: true,
+            url: "/req_log_in",
+//            contentType: 'application/json;charset=UTF-8',
+            data: {
+                "workID": userName,
+                "password": password
+            },
+
+            success: function (result) {
+
+                var array = result.split(";");
+
+                if (array[0] == "1") {
+                    window.location.reload();
+                } else if (array[0] == "-1") {
+                    $("#errorMessageField").html("您的用户名或密码错误");
+                } else {
+                    $("#errorMessageField").html("您的用户名或密码错误");
+                }
+            },
+            error: function (result) {
+                alert("错误" + result);
+            }
+        });
+    }
+    function register() {
+        var userName = $("#reg_username").val();
+        var password1 = $("#reg_password").val();
+        var password2 = $("#reg_password2").val();
+        var name = $("#name").val();
+        var court = $("#court").val();
+
+        $.ajax({
+            type: "post",
+            async: true,
+            url: "/req_register",
+            data: {
+                "workID":userName,
+                "password": password1,
+                "name": name,
+                "subordinationCourt": court
+            },
+
+            success: function (result) {
+                var array = result.split(";");
+
+                if (array[0] == "1") {
+                    window.location.reload();
+                } else if (array[0] == "-1") {
+                    // 提示错误信息
+                    $("#errorMessageField2").html(array[1]);
+                } else {
+                    $("#errorMessageField2").html("请再次确定输入信息");
+                }
+            },
+            error: function (result) {
+                alert("错误" + result);
+            }
+        });
+    }
+</script>

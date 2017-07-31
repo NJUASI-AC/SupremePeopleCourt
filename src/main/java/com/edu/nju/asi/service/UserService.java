@@ -1,9 +1,12 @@
 package com.edu.nju.asi.service;
 
+import com.edu.nju.asi.model.Case;
 import com.edu.nju.asi.model.User;
 import com.edu.nju.asi.utilities.exception.PasswordWrongException;
 import com.edu.nju.asi.utilities.exception.UserExistedException;
 import com.edu.nju.asi.utilities.exception.UserNotExistedException;
+
+import java.util.List;
 
 /**
  * Created by cuihua on 2017/7/28.
@@ -36,4 +39,12 @@ public interface UserService {
      * @return 该用户的全部信息
      */
     User getOne(String workID) throws UserNotExistedException;
+
+
+    /**
+     *
+     * @param workID 法官ID
+     * @return 返回登陆用户的所有Case
+     */
+    List<Case> getAllCase(String workID) throws UserNotExistedException;
 }

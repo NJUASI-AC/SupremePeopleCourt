@@ -1,5 +1,6 @@
 package com.edu.nju.asi.controller;
 
+import com.edu.nju.asi.model.Case;
 import com.edu.nju.asi.model.User;
 import com.edu.nju.asi.service.UserService;
 import com.edu.nju.asi.utilities.exception.PasswordWrongException;
@@ -39,8 +40,8 @@ public class UserController {
      * errorPage: 错误界面（错误码-2）
      */
     @GetMapping("/welcome")
-    public ModelAndView welcome(@RequestParam("workID") String workID, HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession(false);
+    public ModelAndView welcome( HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(true);
         if (session == null) {
             try {
                 response.sendRedirect("/welcome");
@@ -53,10 +54,13 @@ public class UserController {
         ModelAndView mv = new ModelAndView();
 
         User wantedUser = null;
+        List<Case> cases = null;
+        String workID = session.getAttribute("user").toString();
         try {
             wantedUser = userService.getOne(workID);
+            cases = userService.getAllCase(workID);
             mv.addObject("user", wantedUser);
-
+            mv.addObject("cases",cases);
         } catch (UserNotExistedException e) {
             logger.error(e.getMessage());
             mv.addObject("errorCode", -2);
@@ -91,7 +95,9 @@ public class UserController {
             result = userService.register(thisUser);
 
             // 保存了已登陆用户的ID，用途再议
-            saveCurUser(workID, request);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user",workID);
+
 
         } catch (UserExistedException e) {
             logger.error(e.getMessage());
@@ -120,7 +126,8 @@ public class UserController {
             result = userService.logIn(workID, password);
 
             // 保存了已登陆用户的ID，用途再议
-            saveCurUser(workID, request);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user",workID);
 
         } catch (UserNotExistedException e) {
             logger.error(e.getMessage());
@@ -143,40 +150,20 @@ public class UserController {
      */
     @PostMapping(value = "/req_log_out", produces = "text/html;charset=UTF-8;")
     public @ResponseBody
-    String reqLogOut(@RequestParam("workID") String workID, HttpServletRequest request, HttpServletResponse response) {
-        // 限制进入
+    String reqLogOut(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-        if (session == null) {
-            try {
-                response.sendRedirect("/welcome");
-            } catch (IOException e) {
-                logger.error(e.getMessage());
-            }
-        }
+//        String thisUser = (String)request.getSession().getAttribute("user");
+//        if (session == null || thisUser == null) {
+//            System.out.println("未登录");
+//            return "-1";
+//        }
+        session.setAttribute("user", null);
 
-        boolean result = userService.logOut(workID);
-        delCurUser(workID, request);
-
-        if (result) return "1";
-        else return "4";
+        System.out.println("成功登出");
+        return "1";
     }
 
 
-    /**
-     * 保存了已登陆用户的ID，用途再议
-     */
-    private void saveCurUser(String workID, HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
-        List<String> userIDs;
-        if (session.getAttribute("users") != null) {
-            userIDs = (List<String>) session.getAttribute("users");
-            userIDs.add(workID);
-        } else {
-            userIDs = new LinkedList<>();
-            userIDs.add(workID);
-        }
-        session.setAttribute("users", userIDs);
-    }
 
     /**
      * 移除已登陆用户的ID，用途再议
