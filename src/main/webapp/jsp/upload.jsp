@@ -91,7 +91,7 @@
             <ul id="menu" style="margin-top: 10px">
                 <c:if test="${sessionScope.user!=null}">
                 <%--<c:when test="${sessionScope.user!=null}">--%>
-                    <li class="col-md-offset-10"><a href="/user/welcome">查看信息</a></li>
+                    <li class="col-md-offset-10"><a href="/welcome" >查看信息</a></li>
                     <li style="margin-left:20px "><a href="" onclick="logout()">退出</a></li>
                 <%--</c:when>--%>
                 </c:if>
