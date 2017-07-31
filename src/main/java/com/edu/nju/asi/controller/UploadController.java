@@ -144,8 +144,10 @@ public class UploadController {
         List<RecommendWeight> weight = null;
         HttpSession session = request.getSession(false);
         Case wantedCase= null;
-        if (session.getAttribute("user")!=null){
-            wantedCase = getMyCase(session.getAttribute("user").toString(),caseID);
+        if(session!=null) {
+            if (session.getAttribute("user") != null) {
+                wantedCase = getMyCase(session.getAttribute("user").toString(), caseID);
+            }
         }
         if(wantedCase == null ) {
             weight = recommendService.recommend(caseID);
