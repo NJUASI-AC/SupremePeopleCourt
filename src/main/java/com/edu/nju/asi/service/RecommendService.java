@@ -16,6 +16,12 @@ public interface RecommendService {
     List<RecommendWeight> recommend(String caseID);
 
     /**
+     * @param caseID 要寻求推荐案例的原案例ID
+     * @return 推荐的案例列表
+     */
+    List<RecommendWeight> recommend(Case theCase);
+
+    /**
      * @param weights 需要全部推荐信息的case
      */
     List<Case> getWholeMessage(List<RecommendWeight> weights);

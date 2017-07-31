@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.edu.nju.asi.model.Case;
 import com.edu.nju.asi.InfoCarrier.RecommendWeight;
 import com.edu.nju.asi.service.RecommendService;
+import com.edu.nju.asi.service.UserService;
 import com.edu.nju.asi.service.XMLService;
 import com.edu.nju.asi.service.serviceImpl.RecommendServiceImpl;
 import com.edu.nju.asi.utilities.exception.RedundancyCaseException;
@@ -34,6 +35,8 @@ public class UploadController {
     XMLService xmlService;
     @Autowired
     RecommendService recommendService;
+    @Autowired
+    UserService userService;
 
 
     private static Logger logger = Logger.getLogger(UploadController.class);
@@ -86,15 +89,72 @@ public class UploadController {
 
 
     /**
+     * 查看历史上传文件 显示分析结果
+     */
+    @PostMapping(value = "view_my_case")
+    public ModelAndView viewCase(@RequestParam("caseID") String caseID ,HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("Connect!!!");
+
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            try {
+                response.sendRedirect("/welcome");
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+            }
+        }
+
+        ModelAndView mv = new ModelAndView();
+
+        Case wantedCase = null;
+        try {
+            String workID = session.getAttribute("user").toString();
+            List<Case> cases=userService.getAllCase(workID);
+            for (Case theCase : cases){
+                if (theCase.getCaseID().equals(caseID)){
+                    wantedCase = theCase;
+                }
+            }
+        }catch (UserNotExistedException e1){
+            logger.error(e1.getMessage());
+            mv.addObject("errorCode", -1);
+            mv.setViewName("errorPage");
+        }
+
+
+        if (wantedCase != null) {
+            mv.addObject("caseInfo", wantedCase);
+            mv.setViewName("info");
+        } else {
+            mv.addObject("errorCode", 0);
+            mv.setViewName("errorPage");
+        }
+
+        return mv;
+    }
+
+
+    /**
      * 异步展示案例的推荐
      * @param caseID 上传的案例ID，要查看对其的推荐
      * @return 推荐案例的JSON字符串
      */
     @GetMapping(value = "reqRecommendation", produces = "text/html;charset=UTF-8")
     public @ResponseBody
-    String reqRecommendation(@RequestParam("caseID") String caseID) {
+    String reqRecommendation(@RequestParam("caseID") String caseID,HttpServletRequest request, HttpServletResponse response) {
         recommendService = new RecommendServiceImpl();
-        List<RecommendWeight> weight = recommendService.recommend(caseID);
+        List<RecommendWeight> weight = null;
+        System.out.println(caseID+"111111111111111");
+        HttpSession session = request.getSession(false);
+        Case wantedCase= null;
+        if (session.getAttribute("user")!=null){
+            wantedCase = getMyCase(session.getAttribute("user").toString(),caseID);
+        }
+        if(wantedCase == null ) {
+            weight = recommendService.recommend(caseID);
+        }else{
+            weight = recommendService.recommend(wantedCase);
+        }
         List<Case> detailMessages = recommendService.getWholeMessage(weight);
 
         StringBuilder result = new StringBuilder();
@@ -103,7 +163,45 @@ public class UploadController {
             result.append(JSON.toJSONString(weight)).append(";");
             result.append(JSON.toJSONString(detailMessages)).append(";");
         }
-
         return result.toString();
+    }
+//    String reqRecommendation(@RequestParam("caseID") String caseID,HttpServletRequest request, HttpServletResponse response) {
+//        recommendService = new RecommendServiceImpl();
+//        List<RecommendWeight> weight = null;
+//        System.out.println(caseID+"111111111111111");
+//        HttpSession session = request.getSession(false);
+//        Case wantedCase= null;
+//        if (session.getAttribute("user")!=null){
+//            wantedCase = getMyCase(session.getAttribute("user").toString(),caseID);
+//        }
+//        if(wantedCase == null ) {
+//            weight = recommendService.recommend(caseID);
+//        }else{
+//            weight = recommendService.recommend(wantedCase);
+//        }
+//        List<Case> detailMessages = recommendService.getWholeMessage(weight);
+//
+//        StringBuilder result = new StringBuilder();
+//        if (detailMessages != null) {
+//            result.append(detailMessages.size()).append(";");
+//            result.append(JSON.toJSONString(weight)).append(";");
+//            result.append(JSON.toJSONString(detailMessages)).append(";");
+//        }
+//
+//        return result.toString();
+//    }
+    private Case getMyCase(String workID, String caseID){
+        Case wantedCase=null;
+        try{
+        List<Case> cases=userService.getAllCase(workID);
+            for (Case theCase : cases){
+                if (theCase.getCaseID().equals(caseID)){
+                    wantedCase = theCase;
+                }
+            }
+        }catch (Exception e){
+
+        }
+        return wantedCase;
     }
 }
