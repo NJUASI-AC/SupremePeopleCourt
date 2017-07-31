@@ -43,7 +43,6 @@ public class UploadController {
      */
     @PostMapping(value = "upload")
     public ModelAndView upload(@RequestParam("file") MultipartFile uploadedFile, HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("Connect!!!");
 
         HttpSession session = request.getSession(false);
         if (session == null) {
@@ -67,9 +66,9 @@ public class UploadController {
             mv.addObject("errorCode", -1);
             mv.setViewName("errorPage");
         }catch (UserNotExistedException e){
-
+            logger.error(e.getMessage());
         }catch (RedundancyCaseException e){
-
+            logger.error(e.getMessage());
         }
 
 
@@ -90,7 +89,6 @@ public class UploadController {
      */
     @GetMapping("/view/{caseID}")
     public ModelAndView viewCase(@PathVariable("caseID")  String caseID , HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("Connect!!!");
 
         HttpSession session = request.getSession(false);
         if (session == null) {
@@ -105,7 +103,10 @@ public class UploadController {
 
         Case wantedCase = null;
         try {
-            String workID = session.getAttribute("user").toString();
+            String workID = null;
+            if(session!=null){
+                workID = session.getAttribute("user").toString();
+            }
             List<Case> cases=userService.getAllCase(workID);
             for (Case theCase : cases){
                 if (theCase.getCaseID().equals(caseID)){
@@ -141,7 +142,6 @@ public class UploadController {
     String reqRecommendation(@RequestParam("caseID") String caseID,HttpServletRequest request, HttpServletResponse response) {
         recommendService = new RecommendServiceImpl();
         List<RecommendWeight> weight = null;
-        System.out.println(caseID+"111111111111111");
         HttpSession session = request.getSession(false);
         Case wantedCase= null;
         if (session.getAttribute("user")!=null){
@@ -162,31 +162,7 @@ public class UploadController {
         }
         return result.toString();
     }
-//    String reqRecommendation(@RequestParam("caseID") String caseID,HttpServletRequest request, HttpServletResponse response) {
-//        recommendService = new RecommendServiceImpl();
-//        List<RecommendWeight> weight = null;
-//        System.out.println(caseID+"111111111111111");
-//        HttpSession session = request.getSession(false);
-//        Case wantedCase= null;
-//        if (session.getAttribute("user")!=null){
-//            wantedCase = getMyCase(session.getAttribute("user").toString(),caseID);
-//        }
-//        if(wantedCase == null ) {
-//            weight = recommendService.recommend(caseID);
-//        }else{
-//            weight = recommendService.recommend(wantedCase);
-//        }
-//        List<Case> detailMessages = recommendService.getWholeMessage(weight);
-//
-//        StringBuilder result = new StringBuilder();
-//        if (detailMessages != null) {
-//            result.append(detailMessages.size()).append(";");
-//            result.append(JSON.toJSONString(weight)).append(";");
-//            result.append(JSON.toJSONString(detailMessages)).append(";");
-//        }
-//
-//        return result.toString();
-//    }
+
     private Case getMyCase(String workID, String caseID){
         Case wantedCase=null;
         try{
@@ -197,7 +173,7 @@ public class UploadController {
                 }
             }
         }catch (Exception e){
-
+            logger.error(e.getMessage());
         }
         return wantedCase;
     }

@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -50,12 +49,14 @@ public class UserController {
             }
         }
 
-        // TODO 用户界面需要的信息
         ModelAndView mv = new ModelAndView();
 
         User wantedUser = null;
         List<Case> cases = null;
-        String workID = session.getAttribute("user").toString();
+        String workID = null;
+        if(session!=null){
+            workID = session.getAttribute("user").toString();
+        }
         try {
             wantedUser = userService.getOne(workID);
             cases = userService.getAllCase(workID);
@@ -67,9 +68,6 @@ public class UserController {
             mv.setViewName("errorPage");
         }
 
-//        mv.addObject("user", wantedUser);
-
-        // TODO 返回的界面
         mv.setViewName("user");
         return mv;
 
@@ -87,8 +85,6 @@ public class UserController {
     String reqRegister(@RequestParam("workID") String workID, @RequestParam("name") String name,
                        @RequestParam("password") String password, @RequestParam("subordinationCourt") String subordinationCourt,
                        HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(workID + "  " + password);
-
         boolean result;
         try {
             User thisUser = new User(workID, name, password, subordinationCourt);
@@ -152,14 +148,7 @@ public class UserController {
     public @ResponseBody
     String reqLogOut(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(false);
-//        String thisUser = (String)request.getSession().getAttribute("user");
-//        if (session == null || thisUser == null) {
-//            System.out.println("未登录");
-//            return "-1";
-//        }
         session.setAttribute("user", null);
-
-        System.out.println("成功登出");
         return "1";
     }
 
