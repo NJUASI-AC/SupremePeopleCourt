@@ -55,6 +55,12 @@ public class RecommendServiceImpl implements RecommendService {
     }
 
     @Override
+    public List<RecommendWeight> recommend(Case theCase){
+        RecommendCase recommendCase = new RecommendCase(theCase);
+        return recommend(recommendCase);
+    }
+
+    @Override
     public List<Case> getWholeMessage(List<RecommendWeight> weights){
         System.out.println("12345678");
         List<String> caseIDs = new ArrayList<>();
