@@ -98,6 +98,9 @@
 <script>
     function showDetail(i) {
         alert(${cases.get(i).caseID});
+        var caseID = ${cases.get(i).caseID};
+        window.location.href="/view/"+caseID;
+
 //        if($(".details").eq(i).is(":hidden")){
 //            $(".details").toggle(false);
 //            $(".details").eq(i).slideToggle();
