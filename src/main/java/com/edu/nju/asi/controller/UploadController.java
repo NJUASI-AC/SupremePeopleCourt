@@ -6,6 +6,8 @@ import com.edu.nju.asi.InfoCarrier.RecommendWeight;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.service.XMLService;
 import com.edu.nju.asi.service.serviceImpl.RecommendServiceImpl;
+import com.edu.nju.asi.utilities.exception.RedundancyCaseException;
+import com.edu.nju.asi.utilities.exception.UserNotExistedException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,13 +55,21 @@ public class UploadController {
         }
 
         ModelAndView mv = new ModelAndView();
+
         Case wantedCase = null;
         try {
             wantedCase = xmlService.uploadOnline(uploadedFile);
+            if(session.getAttribute("user")!=null) {
+                xmlService.saveCase(wantedCase, session.getAttribute("user").toString());
+            }
         } catch (IOException e) {
             logger.error(e.getMessage());
             mv.addObject("errorCode", -1);
             mv.setViewName("errorPage");
+        }catch (UserNotExistedException e){
+
+        }catch (RedundancyCaseException e){
+
         }
 
 

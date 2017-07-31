@@ -1,9 +1,13 @@
 package com.edu.nju.asi.service.serviceImpl;
 
 import com.edu.nju.asi.InfoCarrier.*;
+import com.edu.nju.asi.dao.DaoManager;
+import com.edu.nju.asi.dao.UserDao;
 import com.edu.nju.asi.model.*;
 import com.edu.nju.asi.service.XMLService;
 import com.edu.nju.asi.utilities.enums.*;
+import com.edu.nju.asi.utilities.exception.RedundancyCaseException;
+import com.edu.nju.asi.utilities.exception.UserNotExistedException;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -25,9 +29,11 @@ import java.util.List;
 @Service("XMLService")
 public class XMLServiceImpl implements XMLService {
 
+    UserDao userDao;
     Document document;
 
     public XMLServiceImpl() {
+        userDao = DaoManager.userDao;
     }
 
     @Override
@@ -37,11 +43,18 @@ public class XMLServiceImpl implements XMLService {
         }
 
         // 先转储文件再解析，推荐完了之后再删除
+
+
         String thisPath = uploadedFile.getOriginalFilename();
         File thisFile = new File(thisPath);
 
         uploadedFile.transferTo(thisFile);
         return parseXML(thisPath);
+    }
+
+    @Override
+    public void saveCase(Case theCase,String workID) throws UserNotExistedException, RedundancyCaseException {
+        userDao.uploadCase(theCase,workID);
     }
 
     private Node findSingleNode(String node) {

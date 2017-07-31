@@ -1,6 +1,8 @@
 package com.edu.nju.asi.service;
 
 import com.edu.nju.asi.model.Case;
+import com.edu.nju.asi.utilities.exception.RedundancyCaseException;
+import com.edu.nju.asi.utilities.exception.UserNotExistedException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -17,5 +19,7 @@ public interface XMLService {
     Case uploadOnline(MultipartFile uploadedFile) throws IOException;
 
     Case parseXML(String url);
+
+    void saveCase(Case theCase,String workID)  throws UserNotExistedException, RedundancyCaseException;
 
 }
