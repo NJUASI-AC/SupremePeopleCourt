@@ -33,6 +33,10 @@
     <div style="height: 5px; width: 1200px; margin: 0 auto; background-color: #00A0EB"></div>
 
     <div id="body" class="width">
+
+        <h3>历史案例</h3>
+        <div class="seperator" style="width: 100%;background-color: black"></div>
+
         <c:set var="perPage" value="7" scope="page"/>
         <c:set var="totalPage" value="${(cases.size()-(cases.size()%perPage))/perPage}"/>
         <c:choose>
@@ -72,13 +76,18 @@
             <div>
                 <ul class="pagination" id="pageination">
                     <c:forEach var="i" begin="1" end="${totalPage+1}">
-                        <li class="${i==1?"active":""}"><a href="#page${i}" >${i}</a></li>
+                        <li class="${i==1?"active":""}"><a href="#page${i}" data-toggle="tab">${i}</a></li>
                     </c:forEach>
 
                 </ul>
                 <script type="text/javascript" language="JavaScript">
                     $("#pageination a").click(function(){
-                        $(this).tab("show");
+                        if($(".pagination").eq(i).is(":hidden")){
+                            $(".pagination").toggle(false);
+                            $(".pagination").eq(i).slideToggle();
+                        }else{
+
+                        }
                     });
                 </script>
             </div>
