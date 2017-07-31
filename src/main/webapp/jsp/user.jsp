@@ -41,7 +41,7 @@
                     <div class="page${i==0?" active":""}" id="page${i+1}">
                         <c:forEach begin="0" end="${perPage-1}" var="j">
                             <c:if test="${cases.size()>i*perPage+j}">
-                                <div class="recommend-single-wrap">
+                                <div class="recommend-single-wrap" onclick="showDetail(${i*perPage+j})">
                                     <h4 style='color: #00A0EB'>${cases.get(i*perPage+j).header.caseNum}${cases.get(i*perPage+j).header.nameOfDocument}</h4>
                                     <table style="width: 100%;padding: 3px; text-align: center;" align="center" class="single-info">
                                         <tr>
@@ -97,20 +97,13 @@
 <script src="../js/jquery-3.2.1.min.js"></script>
 <script>
     function showDetail(i) {
-        let details = document.getElementsByName('details');
-        for (let j = 0; j < 5; j++) {
-            if (j == i) {
-                if (details[j].value == 1) {
-                    details[j].style = 'display:none';
-                    details[j].value = 0;
-                } else {
-                    details[j].style = 'display:';
-                    details[j].value = 1;
-                }
-            } else {
-                details[j].style = 'display:none';
-            }
-        }
+        alert(${cases.get(i).caseID});
+//        if($(".details").eq(i).is(":hidden")){
+//            $(".details").toggle(false);
+//            $(".details").eq(i).slideToggle();
+//        }else{
+//            $(".details").eq(i).slideToggle();
+//        }
 
     }
 </script>
