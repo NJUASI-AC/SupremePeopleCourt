@@ -153,19 +153,4 @@ public class UserController {
     }
 
 
-
-    /**
-     * 移除已登陆用户的ID，用途再议
-     */
-    private void delCurUser(String workID, HttpServletRequest request) {
-        // 保存了已登陆用户的ID，用途再议
-        HttpSession session = request.getSession(true);
-        List<String> userIDs = null;
-        if (session.getAttribute("users") != null) {
-            userIDs = (List<String>) session.getAttribute("users");
-            userIDs.remove(workID);
-        }
-        session.setAttribute("users", userIDs);
-    }
-
 }
