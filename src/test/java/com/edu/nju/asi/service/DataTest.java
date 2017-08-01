@@ -28,7 +28,7 @@ public class DataTest {
         caseDao = DaoManager.caseDao;
     }
 
-//    @Ignore
+    @Ignore
     @Test
     public void saveData() throws Exception {
         List<String> urls = getUrl("/Users/cuihua/Desktop/测试集");
