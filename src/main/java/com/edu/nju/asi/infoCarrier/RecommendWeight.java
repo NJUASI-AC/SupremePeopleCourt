@@ -1,9 +1,4 @@
-package com.edu.nju.asi.InfoCarrier;
-
-import com.edu.nju.asi.utilities.enums.DocumentName;
-import org.springframework.data.annotation.Id;
-
-import java.util.List;
+package com.edu.nju.asi.infoCarrier;
 
 /**
  * Created by 61990 on 2017/7/18.

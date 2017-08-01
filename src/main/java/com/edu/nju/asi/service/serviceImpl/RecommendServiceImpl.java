@@ -1,9 +1,9 @@
 package com.edu.nju.asi.service.serviceImpl;
 
-import com.edu.nju.asi.InfoCarrier.*;
+import com.edu.nju.asi.infoCarrier.*;
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.Case;
-import com.edu.nju.asi.InfoCarrier.RefereeAnalysisProcess;
+import com.edu.nju.asi.infoCarrier.RefereeAnalysisProcess;
 import com.edu.nju.asi.service.RecommendService;
 import com.edu.nju.asi.service.XMLService;
 import org.springframework.beans.factory.annotation.Autowired;

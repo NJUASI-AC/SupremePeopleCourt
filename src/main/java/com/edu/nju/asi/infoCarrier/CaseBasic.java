@@ -1,11 +1,6 @@
-package com.edu.nju.asi.InfoCarrier;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.edu.nju.asi.infoCarrier;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/17 0017.

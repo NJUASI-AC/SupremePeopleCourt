@@ -1,4 +1,4 @@
-package com.edu.nju.asi.InfoCarrier;
+package com.edu.nju.asi.infoCarrier;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.edu.nju.asi.dao.daoImpl;
 
-import com.edu.nju.asi.InfoCarrier.RecommendCase;
+import com.edu.nju.asi.infoCarrier.RecommendCase;
 import com.edu.nju.asi.dao.CaseDao;
 import com.edu.nju.asi.dao.DaoManager;
 import com.edu.nju.asi.model.Case;
@@ -10,8 +10,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Byron Dong on 2017/7/24.

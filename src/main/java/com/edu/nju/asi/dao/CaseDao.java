@@ -1,10 +1,9 @@
 package com.edu.nju.asi.dao;
 
-import com.edu.nju.asi.InfoCarrier.RecommendCase;
+import com.edu.nju.asi.infoCarrier.RecommendCase;
 import com.edu.nju.asi.model.Case;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Byron Dong on 2017/7/24.

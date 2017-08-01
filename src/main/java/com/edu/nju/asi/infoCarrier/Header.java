@@ -1,11 +1,8 @@
-package com.edu.nju.asi.InfoCarrier;
+package com.edu.nju.asi.infoCarrier;
 
 import com.edu.nju.asi.utilities.enums.CaseType;
-import com.edu.nju.asi.utilities.enums.DocumentName;
 import com.edu.nju.asi.utilities.enums.DocumentType;
 import com.edu.nju.asi.utilities.enums.TrialProcedure;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 

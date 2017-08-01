@@ -28,10 +28,10 @@ public class DataTest {
         caseDao = DaoManager.caseDao;
     }
 
-    @Ignore
+//    @Ignore
     @Test
     public void saveData() throws Exception {
-        List<String> urls = getUrl("C:\\Users\\61990\\Desktop\\测试集\\测试集\\");
+        List<String> urls = getUrl("/Users/cuihua/Desktop/测试集");
         List<Case> cases = new ArrayList<>();
         int count = 1;
         for (String url : urls) {

@@ -1,8 +1,7 @@
-package com.edu.nju.asi.InfoCarrier;
+package com.edu.nju.asi.infoCarrier;
 
 import com.edu.nju.asi.utilities.enums.Gender;
 import com.edu.nju.asi.utilities.enums.LitigantType;
-import com.edu.nju.asi.utilities.enums.PartiesType;
 
 import java.io.Serializable;
 import java.time.LocalDate;

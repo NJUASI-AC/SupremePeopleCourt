@@ -1,6 +1,6 @@
 package com.edu.nju.asi.dao.daoImpl;
 
-import com.edu.nju.asi.InfoCarrier.RecommendCase;
+import com.edu.nju.asi.infoCarrier.RecommendCase;
 import com.edu.nju.asi.dao.CaseDao;
 import com.edu.nju.asi.model.Case;
 import com.mongodb.BasicDBObject;

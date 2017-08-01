@@ -1,9 +1,7 @@
 package com.edu.nju.asi.model;
 
-import com.edu.nju.asi.InfoCarrier.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.edu.nju.asi.infoCarrier.*;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;

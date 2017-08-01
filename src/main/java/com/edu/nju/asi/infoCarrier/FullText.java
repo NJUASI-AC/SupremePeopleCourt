@@ -1,7 +1,4 @@
-package com.edu.nju.asi.InfoCarrier;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package com.edu.nju.asi.infoCarrier;
 
 import java.io.Serializable;
 
